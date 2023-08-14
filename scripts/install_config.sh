@@ -194,15 +194,15 @@ FULL_DISK=purge
 PRIVACY_THRESHOLD=0
 
 ## RECORDING_LENGTH sets the length of the recording that BirdNET-Lite will
-## analyze.
+## analyze. Set to 15 for birds, 3 for bats
 
-RECORDING_LENGTH=15
+RECORDING_LENGTH=3
 
 ## EXTRACTION_LENGTH sets the length of the audio extractions that will be made
 ## from each BirdNET-Lite detection. An empty value will use the default of 6
-## seconds.
+## seconds. BAts e.g. 1
 
-EXTRACTION_LENGTH=
+EXTRACTION_LENGTH=1
 
 ## AUDIOFMT set the audio format that sox should use for the extractions.
 ## The default is mp3. Available formats are: 8svx aif aifc aiff aiffc al amb
@@ -241,6 +241,10 @@ RAW_SPECTROGRAM=0
 
 CUSTOM_IMAGE=
 CUSTOM_IMAGE_TITLE=""
+
+## Bat analysis settings in Hz and seconds for recording length
+SAMPLING_RATE=144000
+
 
 ## These are just for debugging
 LAST_RUN=
