@@ -201,7 +201,7 @@ def splitSignal(sig, rate, overlap, seconds=3.0, minlen=1.5):
     return sig_splits
 
 
-def readAudioData(path, overlap, sample_rate=48000):
+def readAudioData(path, overlap, sample_rate=144000):
 
     print('READING AUDIO DATA...', end=' ', flush=True)
 

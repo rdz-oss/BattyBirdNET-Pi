@@ -22,7 +22,7 @@ if [ ! -z $RTSP_STREAM ];then
   while true;do
 # Original loop
 #    for i in ${RTSP_STREAM//,/ };do
-#      ffmpeg -nostdin -i  ${i} -t ${RECORDING_LENGTH} -vn -acodec pcm_s16le -ac 2 -ar 48000 file:${RECS_DIR}/StreamData/$(date "+%F")-birdnet-$(date "+%H:%M:%S").wav
+#      ffmpeg -nostdin -i  ${i} -t ${RECORDING_LENGTH} -vn -acodec pcm_s16le -ac 2 -ar ${SAMPLING_RATE} file:${RECS_DIR}/StreamData/$(date "+%F")-birdnet-$(date "+%H:%M:%S").wav
 #    done
 
     # Initially start the count off at 1 - our very first stream
@@ -35,7 +35,7 @@ if [ ! -z $RTSP_STREAM ];then
       # Map id used to map input to output (first stream being 0), this is 0 based in ffmpeg so decrement our counter (which is more human readable) by 1
       MAP_ID=$((RTSP_STREAMS_STARTED_COUNT-1))
       # Build up the parameters to process the RSTP stream, including mapping for the output
-      FFMPEG_PARAMS+="-vn -thread_queue_size 512 -i ${i} -map ${MAP_ID}:a:0 -t ${RECORDING_LENGTH} -acodec pcm_s16le -ac 2 -ar 48000 file:${RECS_DIR}/StreamData/$(date "+%F")-birdnet-RTSP_${RTSP_STREAMS_STARTED_COUNT}-$(date "+%H:%M:%S").wav "
+      FFMPEG_PARAMS+="-vn -thread_queue_size 512 -i ${i} -map ${MAP_ID}:a:0 -t ${RECORDING_LENGTH} -acodec pcm_s16le -ac 2 -ar ${SAMPLING_RATE} file:${RECS_DIR}/StreamData/$(date "+%F")-birdnet-RTSP_${RTSP_STREAMS_STARTED_COUNT}-$(date "+%H:%M:%S").wav "
       # Increment counter
       ((RTSP_STREAMS_STARTED_COUNT += 1))
     done
@@ -55,10 +55,10 @@ else
       sleep 1
     done
     if [ -z ${REC_CARD} ];then
-      arecord -f S16_LE -c${CHANNELS} -r48000 -t wav --max-file-time ${RECORDING_LENGTH}\
+      arecord -f S16_LE -c${CHANNELS} -r${SAMPLING_RATE} -t wav --max-file-time ${RECORDING_LENGTH}\
 	      --use-strftime ${RECS_DIR}/%B-%Y/%d-%A/%F-birdnet-%H:%M:%S.wav
     else
-      arecord -f S16_LE -c${CHANNELS} -r48000 -t wav --max-file-time ${RECORDING_LENGTH}\
+      arecord -f S16_LE -c${CHANNELS} -r${SAMPLING_RATE} -t wav --max-file-time ${RECORDING_LENGTH}\
         -D "${REC_CARD}" --use-strftime \
 	${RECS_DIR}/%B-%Y/%d-%A/%F-birdnet-%H:%M:%S.wav
     fi
