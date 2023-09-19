@@ -59,6 +59,29 @@ EOF
   systemctl enable birdnet_analysis.service
 }
 
+install_batnet_analysis() {
+  cat << EOF > $HOME/BirdNET-Pi/templates/batnet_analysis.service
+[Unit]
+Description=BatNET Analysis
+After=birdnet_server.service
+Requires=birdnet_server.service
+[Service]
+RuntimeMaxSec=900
+Restart=always
+Type=simple
+RestartSec=2
+User=${USER}
+ExecStart=/usr/local/bin/batnet_analysis.sh
+[Install]
+WantedBy=multi-user.target
+EOF
+  ln -sf $HOME/BirdNET-Pi/templates/batnet_analysis.service /usr/lib/systemd/system
+  systemctl enable batnet_analysis.service
+}
+
+
+
+
 install_birdnet_server() {
   cat << EOF > $HOME/BirdNET-Pi/templates/birdnet_server.service
 [Unit]

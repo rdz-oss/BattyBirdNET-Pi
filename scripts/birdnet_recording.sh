@@ -12,7 +12,7 @@ if [ "$LOGGING_LEVEL" == "info" ] || [ "$LOGGING_LEVEL" == "debug" ];then
   set -x
 fi
 
-[ -z $RECORDING_LENGTH ] && RECORDING_LENGTH=15
+[ -z $RECORDING_LENGTH ] && RECORDING_LENGTH=2.8125
 
 if [ ! -z $RTSP_STREAM ];then
   [ -d $RECS_DIR/StreamData ] || mkdir -p $RECS_DIR/StreamData

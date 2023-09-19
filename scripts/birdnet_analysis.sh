@@ -99,7 +99,7 @@ run_analysis() {
   for i in "${files[@]}";do
     [ ! -f ${1}/${i} ] && continue
     echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
-    [ -z ${RECORDING_LENGTH} ] && RECORDING_LENGTH=15
+    [ -z ${RECORDING_LENGTH} ] && RECORDING_LENGTH=2.8125
     echo "RECORDING_LENGTH set to ${RECORDING_LENGTH}"
     itr=0
     until [ -z "$(lsof -t ${1}/${i})" ];do

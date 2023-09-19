@@ -9,7 +9,7 @@ set -e
 # Remove temporary file
 trap 'rm -f $TMPFILE' EXIT
 source /etc/birdnet/birdnet.conf
-[ -z ${RECORDING_LENGTH} ] && RECORDING_LENGTH=15
+[ -z ${RECORDING_LENGTH} ] && RECORDING_LENGTH=2.8125
 
 # Set Variables
 TMPFILE=$(mktemp)
@@ -122,14 +122,14 @@ for h in "${SCAN_DIRS[@]}";do
     # Check if RAW_SPECTROGRAM is 1
     if [ "$RAW_SPECTROGRAM" == "1" ]; then
       # If it is, add "-r" as an argument to the SOX command
-      sox -V1 "${NEWSPECIES_BYDATE}/${NEWFILE}" -n remix 1 rate 144k spectrogram \
+      sox -V1 "${NEWSPECIES_BYDATE}/${NEWFILE}" -n remix 1 rate 256k spectrogram \
         -t "${COMMON_NAME}" \
         -c "${NEWSPECIES_BYDATE//$HOME\/}/${NEWFILE}" \
         -o "${NEWSPECIES_BYDATE}/${NEWFILE}.png" \
         -r
     else
       # If it's not, run the SOX command without the "-r" argument
-      sox -V1 "${NEWSPECIES_BYDATE}/${NEWFILE}" -n remix 1 rate 144k spectrogram \
+      sox -V1 "${NEWSPECIES_BYDATE}/${NEWFILE}" -n remix 1 rate 256k spectrogram \
         -t "$(echo "${COMMON_NAME}" | iconv -f utf8 -t ascii//TRANSLIT)" \
         -c "${NEWSPECIES_BYDATE//$HOME\/}/${NEWFILE}" \
         -o "${NEWSPECIES_BYDATE}/${NEWFILE}.png"
