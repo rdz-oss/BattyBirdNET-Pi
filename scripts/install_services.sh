@@ -459,6 +459,7 @@ install_services() {
   install_scripts
   install_Caddyfile
   install_avahi_aliases
+  install_batnet_analysis
   install_birdnet_analysis
   install_birdnet_server
   install_birdnet_stats_service
