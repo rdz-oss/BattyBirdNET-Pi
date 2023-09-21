@@ -17,3 +17,4 @@ pytest-mock==3.7.0
 suntime
 altair<5
 tzlocal
+resampy
