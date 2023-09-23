@@ -439,6 +439,7 @@ install_weekly_cron() {
 
 chown_things() {
   chown -R $USER:$USER $HOME/Bird*
+  chown -R $USER:$USER $HOME/Bat*
 }
 
 increase_caddy_timeout() {

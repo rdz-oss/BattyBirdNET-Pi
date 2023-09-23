@@ -23,7 +23,7 @@ SERVER = "localhost"
 ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
-ANALYSIS_SERVER = "localhost" # "192.168.1.75"
+ANALYSIS_SERVER = "127.0.0.1" # "192.168.1.75"
 ANALYSIS_PORT = "7667"
 
 userDir = os.path.expanduser('~')
