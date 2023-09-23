@@ -8,6 +8,7 @@ my_dir=$HOME/BattyBirdNET-Analyzer
 start_service() {
   PYTHON_VIRTUAL_ENV="$HOME/BirdNET-Pi/birdnet/bin/python3"
   DIR="$HOME/BattyBirdNET-Analyzer"
+  cd $DIR || return
   sleep .5
   echo $PYTHON_VIRTUAL_ENV "$DIR/server.py"
   $PYTHON_VIRTUAL_ENV $DIR/server.py
