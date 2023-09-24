@@ -196,7 +196,7 @@ PRIVACY_THRESHOLD=0
 ## RECORDING_LENGTH sets the length of the recording that BirdNET-Lite will
 ## analyze. Set to 15 for birds, 5*sampling_length for bats
 
-RECORDING_LENGTH=2.8125
+RECORDING_LENGTH=3
 
 ## EXTRACTION_LENGTH sets the length of the audio extractions that will be made
 ## from each BirdNET-Lite detection. An empty value will use the default of 6
