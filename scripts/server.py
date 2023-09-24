@@ -83,6 +83,18 @@ def writeResultsToFile(detections, min_conf, path):
     print('DONE! WROTE', rcnt, 'RESULTS.')
     return
 
+def writeCSVResultsToFile(detections, path):
+
+    print('WRITING RESULTS TO', path, '...', end=' ')
+    rcnt = 0
+
+    with open(path, 'w') as rfile:
+        for detection in detections["results"]:
+            rfile.write(detection + '\n')
+            rcnt += 1
+
+    print('DONE! WROTE', rcnt, 'RESULTS.')
+    return
 
 def sendRequest(host, port, fpath, mdata):
     url = 'http://{}:{}/analyze'.format(host, port)
@@ -224,9 +236,9 @@ def handle_client(conn, addr):
                 detections = sendRequest(ANALYSIS_SERVER, ANALYSIS_PORT, args.i, json.dumps(mdata))
 
                 # Write detections to output file
-                min_conf = max(0.01, min(args.min_conf, 0.99))
-                writeResultsToFile(detections, min_conf, args.o)
-
+                # min_conf = max(0.01, min(args.min_conf, 0.99))
+                # writeResultsToFile(detections, min_conf, args.o)
+                writeCSVResultsToFile(detections, args.o)
             ###############################################################################
             ###############################################################################
 
