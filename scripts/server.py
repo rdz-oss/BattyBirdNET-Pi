@@ -90,7 +90,7 @@ def writeResultsToFile(detections,  path, min_conf=0.0):
         rfile.write('Start (s);End (s);Scientific name;Common name;Confidence\n')
         for d in detections:
             for entry in detections[d]:
-                if entry[1] >= min_conf and ((entry[0] in INCLUDE_LIST or len(INCLUDE_LIST) == 0)
+                if float(entry[1]) >= min_conf and ((entry[0] in INCLUDE_LIST or len(INCLUDE_LIST) == 0)
                                              and (entry[0] not in EXCLUDE_LIST or len(EXCLUDE_LIST) == 0)):
                     rfile.write(d + ';' + entry[0].replace('_', ';').split("/")[0] + ';' + str(entry[1]) + '\n')
                     rcnt += 1
@@ -267,7 +267,7 @@ def handle_client(conn, addr):
                     for d in detections["results"]:
                         species_apprised_this_run = []
                         for entry in detections["results"][d]:
-                            if entry[1] >= min_conf and ((entry[0] in INCLUDE_LIST or len(INCLUDE_LIST) == 0)
+                            if float(entry[1]) >= min_conf and ((entry[0] in INCLUDE_LIST or len(INCLUDE_LIST) == 0)
                                                          and (entry[0] not in EXCLUDE_LIST or len(EXCLUDE_LIST) == 0)):
                                 # Write to text file.
                                 rfile.write(str(current_date) + ';' + str(current_time) + ';' +
@@ -281,7 +281,7 @@ def handle_client(conn, addr):
                                 Time = str(current_time)
                                 species = entry[0].split("/")[0]
                                 Sci_Name, Com_Name = species.split('_')
-                                score = entry[1]
+                                score = float(entry[1])
                                 Confidence = str(round(score * 100))
                                 Lat = str(args.lat)
                                 Lon = str(args.lon)
