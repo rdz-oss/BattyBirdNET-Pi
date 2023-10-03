@@ -213,7 +213,7 @@ EXTRACTION_LENGTH=1.125
 ## ub ul uw vms voc vorbis vox w64 wav wavpcm wv wve xa xi
 ## Note: Most have not been tested.
 
-AUDIOFMT=mp3
+AUDIOFMT=wav
 
 ## DATABASE_LANG is the language used for the bird species database
 DATABASE_LANG=en
