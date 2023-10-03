@@ -98,10 +98,10 @@ for h in "${SCAN_DIRS[@]}";do
     # context. If EXTRACTION_LENGTH is 10, for instance, 3 seconds are removed
     # from that value and divided by 2, so that the 3 seconds of the call are
     # within 3.5 seconds of audio context before and after.
-    [ -z ${EXTRACTION_LENGTH} ] && EXTRACTION_LENGTH=6
-    SPACER=$(echo "scale=1;(${EXTRACTION_LENGTH} - 3 )/2" |bc -l) 
-    START=$(echo "scale=1;${START} - ${SPACER}"|bc -l)
-    END=$(echo "scale=1;${END} + ${SPACER}"|bc -l)
+    [ -z ${EXTRACTION_LENGTH} ] && EXTRACTION_LENGTH=3.5625
+    SPACER=$(echo "scale=4;(${EXTRACTION_LENGTH} - 3 )/2" |bc -l)
+    START=$(echo "scale=4;${START} - ${SPACER}"|bc -l)
+    END=$(echo "scale=4;${END} + ${SPACER}"|bc -l)
     
     # If the SPACER would have the START value less that 0, start at the
     # beginning of the audio file. If the SPACER would make the END value
