@@ -16,7 +16,6 @@ pytest==7.1.2
 pytest-mock==3.7.0
 suntime
 altair<5
-tzlocal
 resampy
 bottle==0.12.25
 gradio==3.41.0
@@ -24,3 +23,4 @@ matplotlib
 numpy
 Requests
 soundfile
+urllib3

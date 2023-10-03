@@ -13,9 +13,25 @@ import gzip
 
 from utils.notifications import sendAppriseNotifications
 from utils.parse_settings import config_to_settings
+from urllib3.connection import HTTPConnection
+
+HTTPConnection.default_socket_options = (
+    HTTPConnection.default_socket_options + [
+        (socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1),
+        (socket.SOL_TCP, socket.TCP_KEEPIDLE, 45),
+        (socket.SOL_TCP, socket.TCP_KEEPINTVL, 10),
+        (socket.SOL_TCP, socket.TCP_KEEPCNT, 6)
+    ]
+)
+
+
+
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
+
+
+
 
 HEADER = 64
 PORT = 5050
@@ -61,27 +77,6 @@ def loadCustomSpeciesList(path):
 
     return slist
 
-
-# def writeResultsToFile(detections, min_conf, path):
-#
-#     print('WRITING RESULTS TO', path, '...', end=' ')
-#     rcnt = 0
-#     with open(path, 'w') as rfile:
-#         rfile.write('Start (s);End (s);Scientific name;Common name;Confidence\n')
-#
-#         for interval in detections["results"]:
-#             for result in detections['results'][interval]:
-#                 species = result[0]  # Get the species name from the first element of the sublist
-#                 print("Species: " + species)
-#                 confidence = result[1]  # Get the confidence level from the second element of the sublist
-#                 print("Confidence: " + str(confidence))
-#                 if confidence >= min_conf and ((species in INCLUDE_LIST or len(INCLUDE_LIST) == 0) and (species not in EXCLUDE_LIST or len(EXCLUDE_LIST) == 0) ):
-#                     rfile.write(interval + ';' + species.replace('_', ';').split("/")[0] + ';' + str(confidence) + '\n')
-#                     rcnt += 1
-#
-#     print('DONE! WROTE', rcnt, 'RESULTS.')
-#     return
-
 def writeResultsToFile(detections,  path, min_conf=0.0):
 
     print('WRITING RESULTS TO', path, '...', end=' ')
@@ -97,19 +92,6 @@ def writeResultsToFile(detections,  path, min_conf=0.0):
                     rcnt += 1
     print('DONE! WROTE', rcnt, 'RESULTS.')
     return
-
-# def writeCSVResultsToFile(detections, path):
-#
-#     print('WRITING RESULTS TO', path, '...', end=' ')
-#     rcnt = 0
-#
-#     with open(path, 'w') as rfile:
-#         for detection in detections["results"]:
-#             rfile.write(detection + '\n')
-#             rcnt += 1
-#
-#     print('DONE! WROTE', rcnt, 'RESULTS.')
-#     return
 
 def sendRequest(host, port, fpath, mdata):
     url = 'http://{}:{}/analyze'.format(host, port)
