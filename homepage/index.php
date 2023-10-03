@@ -30,7 +30,7 @@ if ($sys_timezone !== "") {
     $config = parse_ini_file('./scripts/firstrun.ini');
   }
   if($config["SITE_NAME"] == "") {
-    $site_name = "BirdNET-Pi";
+    $site_name = "BattyBirdNET-Pi";
   } else {
     $site_name = $config['SITE_NAME'];
   }
