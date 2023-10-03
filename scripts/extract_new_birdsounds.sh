@@ -115,6 +115,9 @@ for h in "${SCAN_DIRS[@]}";do
       END=${RECORDING_LENGTH}
     fi
 
+    echo "Start: " "${START}"
+    echo "End: " "${END}"
+
     sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
       trim ="${START}" ="${END}"
 
