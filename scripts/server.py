@@ -92,7 +92,8 @@ def writeResultsToFile(detections,  path, min_conf=0.0):
             for entry in detections[d]:
                 if float(entry[1]) >= min_conf and ((entry[0] in INCLUDE_LIST or len(INCLUDE_LIST) == 0)
                                              and (entry[0] not in EXCLUDE_LIST or len(EXCLUDE_LIST) == 0)):
-                    rfile.write(d + ';' + entry[0].replace('_', ';').split("/")[0] + ';' + str(entry[1]) + '\n')
+                    start_stop = str(d).replace('-',';')
+                    rfile.write(start_stop + ';' + entry[0].replace('_', ';').split("/")[0] + ';' + str(entry[1]) + '\n')
                     rcnt += 1
     print('DONE! WROTE', rcnt, 'RESULTS.')
     return
