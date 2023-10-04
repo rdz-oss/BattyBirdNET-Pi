@@ -12,6 +12,7 @@ echo "Stopping services"
 sudo systemctl stop birdnet_recording.service
 sudo systemctl stop birdnet_analysis.service
 sudo systemctl stop birdnet_server.service
+sudo systemctl stop batdnet_server.service
 echo "Removing all data . . . "
 sudo rm -drf "${RECS_DIR}"
 sudo rm -f "${IDFILE}"

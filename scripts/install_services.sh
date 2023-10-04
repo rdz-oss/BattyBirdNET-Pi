@@ -59,28 +59,23 @@ EOF
   systemctl enable birdnet_analysis.service
 }
 
-install_batnet_analysis() {
-  cat << EOF > $HOME/BirdNET-Pi/templates/batnet_analysis.service
+install_batnet_server() {
+  cat << EOF > $HOME/BirdNET-Pi/templates/batnet_server.service
 [Unit]
-Description=BatNET Analysis
-After=birdnet_server.service
-Requires=birdnet_server.service
+Description=BatNET Server
+Before=birdnet_server.service
 [Service]
-RuntimeMaxSec=900
 Restart=always
 Type=simple
-RestartSec=2
+RestartSec=5
 User=${USER}
 ExecStart=/usr/local/bin/batnet_analysis.sh
 [Install]
 WantedBy=multi-user.target
 EOF
-  ln -sf $HOME/BirdNET-Pi/templates/batnet_analysis.service /usr/lib/systemd/system
-  systemctl enable batnet_analysis.service
+  ln -sf $HOME/BirdNET-Pi/templates/batnet_server.service /usr/lib/systemd/system
+  systemctl enable batnet_server.service
 }
-
-
-
 
 install_birdnet_server() {
   cat << EOF > $HOME/BirdNET-Pi/templates/birdnet_server.service
@@ -460,7 +455,7 @@ install_services() {
   install_scripts
   install_Caddyfile
   install_avahi_aliases
-  install_batnet_analysis
+  install_batnet_server
   install_birdnet_analysis
   install_birdnet_server
   install_birdnet_stats_service
