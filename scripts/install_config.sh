@@ -152,7 +152,7 @@ CONFIDENCE=0.9
 
 ## SENSITIVITY is the detection sensitivity from 0.5-1.5.
 
-SENSITIVITY=1.25
+SENSITIVITY=1
 
 ## Configuration of the frequency shifting feature, useful for earing impaired people.
 
@@ -176,7 +176,7 @@ FREQSHIFT_PITCH=-1500
 ## CHANNELS holds the variable that corresponds to the number of channels the
 ## sound card supports.
 
-CHANNELS=2
+CHANNELS=1
 
 ## FULL_DISK can be set to configure how the system reacts to a full disk
 ## purge = Remove the oldest day's worth of recordings
