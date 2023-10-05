@@ -17,7 +17,7 @@ Enjoy! Feel free to use BatNET-Pi for your acoustic analyses and research. If yo
 ``` bibtex
 @misc{Zinck2023,
   author = {Zinck, R.D.},
-  title = {BatNET-PI: Automated real-time bat detector},
+  title = {BatNET-Pi: Automated real-time bat detector},
   year = {2023},
   publisher = {GitHub},
   journal = {GitHub repository},
