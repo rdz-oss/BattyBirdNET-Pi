@@ -1,4 +1,4 @@
-# BatNET-Pi - Automated ultra-sonic audio processing and bat ID
+## BatNET-Pi - Automated ultra-sonic audio processing and bat ID
 
 **Note: The system is under heavy development and not (as yet) fit for production use. You are welcome to try it and send feedback.**
 ## Purpose
@@ -23,4 +23,8 @@ Also consider the references at the end of the page.
 
 
 ## Install
-
+You can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system. After that you will need to call
+the install script from this repository:
+```sh
+curl -s https://raw.githubusercontent.com/rdz-oss/BattyBirdNET-Pi/main/newinstaller.sh | bash
+```
