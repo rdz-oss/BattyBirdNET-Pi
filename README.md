@@ -6,7 +6,7 @@
 ## Features
 
 * Scans ultrasound with 256kHz sampling rate continuously 24/7 
-* Automated bat ID sing the companion https://github.com/rdz-oss/BatNET-Analyzer.
+* Automated bat ID using the companion https://github.com/rdz-oss/BatNET-Analyzer.
 * Inherits many great things from BirdNET-Pi
 * Right now only enabled for European bat species
 * US species will be added soon
@@ -66,3 +66,5 @@ https://www.chirovox.org/
 https://www.sciencebase.gov/catalog/item/627ed4b2d34e3bef0c9a2f30
 
 https://github.com/kahst/BirdNET-Analyzer
+
+https://github.com/mcguirepr89/BirdNET-Pi
