@@ -3,6 +3,11 @@
 **Note: The system is under heavy development and not (as yet) fit for production use. You are welcome to try it and send feedback.**
 ## Purpose
 
+## Features
+
+* Scans ultrasound with 256kHz sampling rate continuously 24/7 
+* Automated bat ID sing the companion https://github.com/rdz-oss/BatNET-Analyzer.
+* Inherits many great things from BirdNET-Pi
 
 ### License
 
@@ -21,8 +26,6 @@ Enjoy! Feel free to use BatNET-Pi for your acoustic analyses and research. If yo
 LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
 Also consider the references at the end of the page.
 
-* Scans ultrasound with 256kHz sampling rate continuously 24/7 
-* Automated bat ID sing the companion https://github.com/rdz-oss/BatNET-Analyzer.
 
 ## Install
 You can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system. After that you will need to call
