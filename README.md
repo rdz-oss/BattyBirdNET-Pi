@@ -30,8 +30,11 @@ curl -s https://raw.githubusercontent.com/rdz-oss/BattyBirdNET-Pi/main/newinstal
 ```
 
 ### Screenshot
-
+Overview page
 ![main page](homepage/images/BatNET-Pi-Screen.png "Main page")
+
+Including spectrograms to 128 kHz
+![main page](homepage/images/BatNET-Pi-Screen-2.png "Main page")
 
 ## References
 
