@@ -8,6 +8,8 @@
 * Scans ultrasound with 256kHz sampling rate continuously 24/7 
 * Automated bat ID sing the companion https://github.com/rdz-oss/BatNET-Analyzer.
 * Inherits many great things from BirdNET-Pi
+* Right now only enabled for European bat species
+* US species will be added soon
 
 ### License
 
