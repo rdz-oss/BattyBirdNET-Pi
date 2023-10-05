@@ -28,6 +28,11 @@ the install script from this repository:
 ```sh
 curl -s https://raw.githubusercontent.com/rdz-oss/BattyBirdNET-Pi/main/newinstaller.sh | bash
 ```
+
+### Screenshot
+
+![main page](./homepage/images/BatNet-Pi-Screen.png "Main page")
+
 ## References
 
 ### Papers
