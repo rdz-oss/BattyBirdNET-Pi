@@ -14,7 +14,7 @@ Enjoy! Feel free to use BatNET-Pi for your acoustic analyses and research. If yo
   year = {2023},
   publisher = {GitHub},
   journal = {GitHub repository},
-  howpublished = {\url{https://github.com/rdz-oss/BattyBirdNET-Pi }}
+  howpublished = {\url{https://github.com/rdz-oss/BatNET-Pi }}
 }
 ```
 
