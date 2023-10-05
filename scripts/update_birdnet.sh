@@ -56,6 +56,29 @@ sudo_with_user git -C $HOME/BirdNET-Pi switch -C $branch --track $remote/$branch
 # Prints out changes
 sudo_with_user git -C $HOME/BirdNET-Pi diff --stat $commit_hash HEAD
 
+#
+# BatNET start
+# assumes above step to work - maybe change in future to check remote
+
+# Get current HEAD hash
+commit_hash=$(sudo_with_user git -C $HOME/BattyBirdNET-Analyzer rev-parse HEAD)
+
+# Reset current HEAD to remove any local changes
+sudo_with_user git -C $HOME/BattyBirdNET-Analyzer reset --hard
+
+# Fetches latest changes
+sudo_with_user git -C $HOME/BattyBirdNET-Analyzer fetch $remote $branch
+
+# Switches git to specified branch
+sudo_with_user git -C $HOME/BattyBirdNET-Analyzer switch -C $branch --track $remote/$branch
+
+# Prints out changes
+sudo_with_user git -C $HOME/BattyBirdNET-Analyzer diff --stat $commit_hash HEAD
+
+#
+# BatNET end
+#
+
 sudo systemctl daemon-reload
 sudo ln -sf $my_dir/* /usr/local/bin/
 
