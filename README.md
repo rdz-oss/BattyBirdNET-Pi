@@ -31,7 +31,7 @@ curl -s https://raw.githubusercontent.com/rdz-oss/BattyBirdNET-Pi/main/newinstal
 
 ### Screenshot
 
-![main page](./homepage/images/BatNet-Pi-Screen.png "Main page")
+![main page](homepage/images/BatNet-Pi-Screen.png "Main page")
 
 ## References
 
