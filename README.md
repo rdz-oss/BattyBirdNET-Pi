@@ -28,7 +28,7 @@ your phone, email, messenger etc.
 of your facilities, managed areas or similar places. The interface can be opened to the internet.
 4. You want to have a global network of bat monitors like birdweather.com? We are on the way to that. Once the classifiers are
 good enough - lets do it! For that: can you donate bat call data? This will help making better classifiers.
-4. You enjoy making thinks? Why not become a contributor ? There is need for testing, housing development,
+4. You enjoy making things? Why not become a contributor ? There is need for testing, housing development,
 integration of ML components, data collection, software development and more.
 
 
