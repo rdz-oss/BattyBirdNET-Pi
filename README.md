@@ -22,6 +22,8 @@ Open to the core:
 * Open data from GER, UK, FR, SE, USA, ... used to train the machine learning component
 * Open source machine learning project for bat call identification
 
+only limitation: you cannot use it to build a commercial system.
+
 ### Screenshot
 Overview page
 ![main page](homepage/images/BatNET-Pi-Screen.png "Main page")
