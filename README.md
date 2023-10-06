@@ -24,6 +24,21 @@ Open to the core:
 
 only limitation: you cannot use it to build a commercial system.
 
+### Usage scenarios
+1. You are a person who is interested in nature, including bats, and are not afraid of a little setup work. 
+Put it in your garden or other place of interest and get recordings of the bat calls at night. 
+See a daily and even yearly statistic of activity. If the classifier is not always right, so what?
+2. You are looking for a bat logger. This solution will be triggered by bats, filters out most triggers by 
+noise including cars and crickets. You can ignore the classifier results, download the data to your machine and use any software you like to 
+determine the species. You will have a nice interface to work with inherited from BirdNET including system contols
+as well as WIFI connectivity. If placed within an existing WIFI networks, you can get all type of alarms you like to 
+your phone, email, messenger etc.
+3. You are a nature conservancy or education group, a national park or the like? Offer a 24/7 live view into the bat life 
+of your facilities, managed areas or similar. The interface can be opened to the internet.
+4. You enjoy making thinks? Why not become a contributor ? There is need for testing, housing development,
+integration of ML components, data collection, software development.
+
+
 ### License
 
 Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
