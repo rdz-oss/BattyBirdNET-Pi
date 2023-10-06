@@ -4,7 +4,7 @@
 It is fully functional, however. You are welcome to try it and send feedback.**
 
 Careful: the noise emitted by the power source of the RasPi currently triggers the detector!
-Working to reduce that. Try to shield the microphone from the power converter!
+Use a power bank!
 
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
@@ -82,7 +82,12 @@ Including stats and spectrograms to 128 kHz
 * Optional: You can use a power bank to run the system as long as the power lasts at any location. 
 You might want to add some form of rain protection.
 
-If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
+Some hints:
+
+* If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
+* The DC/AC power converter of the RasPi produces a lot of ultrasound noise that triggers the classifier. As there are many
+versions out there the classifier cannot be trained on the noise of all to avoid that. Also, you will have the noise in the recordings.
+Until another solution is found **it is recommended to run the system with a power bank.**
 
 It is easily assembled
 ![main page](homepage/images/System-1.png "Main page")
