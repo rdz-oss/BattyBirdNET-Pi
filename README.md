@@ -31,6 +31,13 @@ good enough - lets do it! For that: can you donate bat call data? This will help
 4. You enjoy making things? Why not become a contributor ? There is need for testing, housing development,
 integration of ML components, data collection, software development and more.
 
+### Location and setup hints
+1. Find a place with low noise from crickets, machinery (cars), or electrical appliances and outlets. They
+tend to produce ultra sonic noise. Be aware that the RaspberryPi itself and its power source generate considerate ultra sound noise.
+2. Place it in the bats flight path (elevated if you can) or point it to the flight paths.
+3. Place it away from reflective surfaces or other sources of echo. It does work (in Munich) between buildings, 
+but there is an echo effect as well as the bats adapting to the situation (calls shift a bit).
+
 
 ### License
 
