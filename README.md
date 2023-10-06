@@ -1,15 +1,39 @@
 ## BatNET-Pi - Automated real-time bat detector
 
 **Note: The system is under heavy development and not (as yet) fit for production use. You are welcome to try it and send feedback.**
-## Purpose
+### Purpose
 
-## Features
+
+### Features
 
 * Scans ultrasound with 256kHz sampling rate continuously 24/7 
 * Automated bat ID using the companion https://github.com/rdz-oss/BatNET-Analyzer.
 * Inherits many great things from BirdNET-Pi
 * Right now only enabled for European bat species
 * US species will be added soon
+
+### Screenshot
+Overview page
+![main page](homepage/images/BatNET-Pi-Screen.png "Main page")
+
+Including spectrograms to 128 kHz
+![main page](homepage/images/BatNET-Pi-Screen-2.png "Main page")
+
+### System components
+
+* A Raspi 4B with 4GB or more, likely also Pi 5 will work
+* Power supply for the Raspi and an sd card - choose a large one 64 Gb +
+* A USB microphone for ultra sound: tested on audiomoth 1.2 and wildlife acoustics echo meter touch 2
+* USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
+
+If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
+
+### Install
+You can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system ([see here](./README-BirdNET-Pi.md)). After that you will need to call
+the install script from this repository:
+```sh
+curl -s https://raw.githubusercontent.com/rdz-oss/BatNET-Pi/main/newinstaller.sh | bash
+```
 
 ### License
 
@@ -28,29 +52,7 @@ Enjoy! Feel free to use BatNET-Pi for your acoustic analyses and research. If yo
 LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
 Also consider the references at the end of the page.
 
-## System components
-
-* A Raspi 4B with 4GB or more, likely also Pi 5 will work
-* Power supply for the Raspi and an sd card - choose a large one 64 Gb +
-* A USB microphone for ultra sound: tested on audiomoth 1.2 and wildlife acoustics echo meter touch 2
-* USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
-
-If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
-## Install
-You can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system ([see here](./README-BirdNET-Pi.md)). After that you will need to call
-the install script from this repository:
-```sh
-curl -s https://raw.githubusercontent.com/rdz-oss/BatNET-Pi/main/newinstaller.sh | bash
-```
-
-### Screenshot
-Overview page
-![main page](homepage/images/BatNET-Pi-Screen.png "Main page")
-
-Including spectrograms to 128 kHz
-![main page](homepage/images/BatNET-Pi-Screen-2.png "Main page")
-
-## References
+### References
 
 ### Papers
 
