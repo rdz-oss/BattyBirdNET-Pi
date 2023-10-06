@@ -87,7 +87,8 @@ Some hints:
 * If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
 * The DC/AC power converter of the RasPi produces a lot of ultrasound noise that triggers the classifier. As there are many
 versions out there the classifier cannot be trained on the noise of all to avoid that. Also, you will have the noise in the recordings.
-Until another solution is found **it is recommended to run the system with a power bank.**
+Until another solution is found **it is recommended to run the system with a power bank.**. This way, you will only have some noise from the RasPi which
+is not as bad and consistent among setups.
 
 It is easily assembled
 ![main page](homepage/images/System-1.png "Main page")
