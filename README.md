@@ -43,10 +43,10 @@ Also consider the references at the end of the page.
 
 ### Screenshot
 Overview page
-![main page](homepage/images/BattyBirdNET-Pi-Screen.png "Main page")
+![main page](homepage/images/BatNET-Pi-Screen.png "Main page")
 
 Including stats and spectrograms to 128 kHz
-![main page](homepage/images/BattyBirdNET-Pi-Screen-3.png "Main page")
+![main page](homepage/images/BatNET-Pi-Screen-3.png "Main page")
 
 ### System components
 
