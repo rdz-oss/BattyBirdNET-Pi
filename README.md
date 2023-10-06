@@ -3,6 +3,9 @@
 **Note: The system is under heavy development and not (as yet) fit for production use. 
 It is fully functional, however. You are welcome to try it and send feedback.**
 
+Careful: the noise emitted by the power source of the RasPi currently triggers the detector!
+Working to reduce that. Try to shield the microphone from the power converter!
+
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
 night-life around you. Can also be placed remotely with a power source.
