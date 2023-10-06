@@ -69,6 +69,11 @@ Enjoy! Feel free to use BatNET-Pi for your acoustic analyses and research. If yo
 LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
 Also consider the references at the end of the page.
 
+### Acknowledgements
+* This project would not have been possible without the developers of BirdNET and BirdNET-Pi. 
+By choosing to share under an OSS license, you have enabled us to make this possible for bats.
+* Thank you community for tips and testing! Your help is much appreciated!
+
 ### References
 
 ### Papers
