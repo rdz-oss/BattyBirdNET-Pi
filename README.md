@@ -15,15 +15,6 @@ night-life around you. Can also be placed remotely with a power source.
 * Right now only enabled for European bat species
 * US species will be added soon
 
-Open to the core:
-* Can be assembled fully on open hardware (RaspberryPi, Audiomoth) 
-* Open source operating system 
-* Open source software runs it 
-* Open data from GER, UK, FR, SE, USA, ... used to train the machine learning component
-* Open source machine learning project for bat call identification
-
-only limitation: you cannot use it to build a commercial system.
-
 ### Usage scenarios
 1. You are a person who is interested in nature, including bats, and are not afraid of a little setup work. 
 Put it in your garden or other place of interest and get recordings of the bat calls at night. 
@@ -54,7 +45,14 @@ Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research.
   howpublished = {\url{https://github.com/rdz-oss/BattyBirdNET-Pi }}
 }
 ```
+Open to the core:
+* Can be assembled fully on open hardware (RaspberryPi, Audiomoth) 
+* Open source operating system 
+* Open source software runs it 
+* Open data from GER, UK, FR, SE, USA, ... used to train the machine learning component
+* Open source machine learning project for bat call identification
 
+only limitation: you cannot use it to build a commercial system.
 LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
 Also consider the references at the end of the page.
 
