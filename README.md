@@ -79,7 +79,7 @@ list all the devices in your network. The BatNET-Pi should show up.
 That depends on your purpose. Use your judgement, no guarantees or liability. I would not currently use it for fully automated biomonitoring. That said,
 in test runs in Munich (October) the error rate was approximately (rough estimate, no science):
 * Wrong 3% for every bat species flying plus 8% on noise falsely detected as bats 
-* So at that location  4 bats species would currently lead to approximately:  12%+8% = 20% wrong assessments on species level
+* So at that location 4 bats species flying simultaneously would currently lead to approximately:  12%+8% = 20% wrong assessments on species level
 per night (not counting false noise detections during daytime).
 This may differ for other locations and background noises. 
 * Under development - moving target 
