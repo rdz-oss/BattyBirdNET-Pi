@@ -24,6 +24,23 @@ Open to the core:
 
 only limitation: you cannot use it to build a commercial system.
 
+### License
+
+Enjoy! Feel free to use BatNET-Pi for your acoustic analyses and research. If you do, please cite as:
+``` bibtex
+@misc{Zinck2023,
+  author = {Zinck, R.D.},
+  title = {BatNET-Pi: Automated real-time bat detector},
+  year = {2023},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/rdz-oss/BatNET-Pi }}
+}
+```
+
+LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
+Also consider the references at the end of the page.
+
 ### Screenshot
 Overview page
 ![main page](homepage/images/BatNET-Pi-Screen.png "Main page")
@@ -51,23 +68,6 @@ the install script from this repository:
 ```sh
 curl -s https://raw.githubusercontent.com/rdz-oss/BatNET-Pi/main/newinstaller.sh | bash
 ```
-
-### License
-
-Enjoy! Feel free to use BatNET-Pi for your acoustic analyses and research. If you do, please cite as:
-``` bibtex
-@misc{Zinck2023,
-  author = {Zinck, R.D.},
-  title = {BatNET-Pi: Automated real-time bat detector},
-  year = {2023},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/rdz-oss/BatNET-Pi }}
-}
-```
-
-LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
-Also consider the references at the end of the page.
 
 ### Acknowledgements
 * This project would not have been possible without the developers of BirdNET and BirdNET-Pi. 
