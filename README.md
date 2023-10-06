@@ -26,6 +26,8 @@ Including spectrograms to 128 kHz
 * Power supply for the Raspi and an sd card - choose a large one 64 Gb +
 * A USB microphone for ultra sound: tested on audiomoth 1.2 and wildlife acoustics echo meter touch 2
 * USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
+* Optional: You can use a power bank to run the system as long as the power lasts at any location. 
+You might want to add some form of rain protection.
 
 If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
 
