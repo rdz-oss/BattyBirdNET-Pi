@@ -75,6 +75,16 @@ This sometimes does not work depending on your router configuration. You can loo
 in your router and call that directly from the browser, e.g. http://192.168.178.XX . Alternatively, tools like Ning (https://f-droid.org/packages/de.csicar.ning/) on your smartphone will
 list all the devices in your network. The BatNET-Pi should show up.
 
+### Is it good enough?
+That depends on your purpose. Use your judgement, no guarantees or liability. I would not currently use it for fully automated biomonitoring. That said,
+in test runs in Munich (October) the error rate was approximately (rough estimate, no science):
+* Wrong 3% for every bat species flying plus 8% on noise falsely detected as bats 
+* So at that location  4 bats species would currently lead to approximately:  12%+8% = 20% wrong assessments on species level
+per night (not counting false noise detections during daytime).
+This may differ for other locations and background noises. 
+* Under development - moving target 
+
+
 ### Acknowledgements
 * This project would not have been possible without the developers of BirdNET and BirdNET-Pi. 
 By choosing to share under an OSS license, you have enabled us to make this possible for bats.
