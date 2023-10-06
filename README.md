@@ -85,13 +85,25 @@ You might want to add some form of rain protection.
 Some hints:
 
 * If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
-* The DC/AC power converter of the RasPi produces a lot of ultrasound noise that triggers the classifier. As there are many
-versions out there the classifier cannot be trained on the noise of all to avoid that. Also, you will have the noise in the recordings.
-Until another solution is found **it is recommended to run the system with a power bank.**. This way, you will only have some noise from the RasPi which
-is not as bad and consistent among setups.
+
 
 It is easily assembled
 ![main page](homepage/images/System-1.png "Main page")
+
+#### Use as a station
+You can run the station continuously if you like, e.g. at your home.
+However, note that the DC/AC power converter of the RasPi (the 'plug') produces a lot of ultrasound noise that triggers the classifier. As there are many
+versions out there the classifier cannot be trained on the noise of all to avoid that. Also, you will have the noise in the recordings.
+So use as long a cable to get away from the power source as far as you can. Shield it if you have a way to do that e.g. by a wall.
+Until another solution is found **it is recommended to run the system with a power bank.**. This way, you will only have some noise from the RasPi which
+is not as bad and consistent among setups.
+
+#### Use on the go
+You can plug the RasPi into a power bank, put the entire thing in your backpack and take a walk. Use a 1.2m usb cable for this
+and point the microphone to where you want.
+Also, you can connect the RasPi to the WIFI hotspot on your phone. To do that, rename your phone WIFI hotspot
+to the name and password expected by the RasPi ( the one you configured during installation). You got yourself a nice
+bat detector for your adventures on foot. Live spectrogram included. 
 
 ### Install
 * Install Raspbian OS 64 bit lite on the sd card. Set a system user, name and configure your WIFI. If you have not done this before, 
