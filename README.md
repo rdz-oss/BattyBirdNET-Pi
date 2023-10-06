@@ -2,8 +2,10 @@
 
 **Note: The system is under heavy development and not (as yet) fit for production use. 
 It is fully functional, however. You are welcome to try it and send feedback.**
-### Purpose
 
+### Purpose
+Ever wondered which bat is flying in your yard and when? BatNET-Pi is readily assembled and will help you getting to know the 
+night-life around you. Can also be placed remotely with a power source.
 
 ### Features
 
@@ -12,6 +14,13 @@ It is fully functional, however. You are welcome to try it and send feedback.**
 * Inherits many great things from BirdNET-Pi
 * Right now only enabled for European bat species
 * US species will be added soon
+
+Open to the core:
+* Can be assembled fully on open hardware (RaspberryPi, Audiomoth) 
+* Open source operating system 
+* Open source software runs it 
+* Open data from GER, UK, FR, SE, USA, ... used to train the machine learning component
+* Open source machine learning project for bat call identification
 
 ### Screenshot
 Overview page
