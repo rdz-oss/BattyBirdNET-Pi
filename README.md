@@ -52,7 +52,7 @@ Open to the core:
 * Open data from GER, UK, FR, SE, USA, ... used to train the machine learning component
 * Open source machine learning project for bat call identification
 
-only limitation: you cannot use it to build a commercial system.
+Only limitation: you cannot use it to build a commercial system.
 LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
 Also consider the references at the end of the page.
 
