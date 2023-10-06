@@ -21,7 +21,7 @@ Including spectrograms to 128 kHz
 
 ### System components
 
-* A Raspi 4B with 4GB or more, likely also Pi 5 will work
+* A Raspi 4B with 4GB or more, likely also Pi 5 will work. Use some form of passive or active cooling!
 * Power supply for the Raspi and an sd card - choose a large one 64 Gb +
 * A USB microphone for ultra sound: tested on audiomoth 1.2 and wildlife acoustics echo meter touch 2
 * USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
