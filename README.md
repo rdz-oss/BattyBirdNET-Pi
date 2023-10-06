@@ -1,16 +1,16 @@
-## BatNET-Pi  Automated real-time bat detector
+## BattyBirdNET-Pi  Automated real-time bat detector
 
 **Note: The system is under heavy development and not (as yet) fit for production use. 
 It is fully functional, however. You are welcome to try it and send feedback.**
 
 ### Purpose
-Ever wondered which bat is flying in your yard and when? BatNET-Pi is readily assembled and will help you getting to know the 
+Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
 night-life around you. Can also be placed remotely with a power source.
 
 ### Features
 
 * Scans ultrasound with 256kHz sampling rate continuously 24/7 
-* Automated bat ID using the companion https://github.com/rdz-oss/BatNET-Analyzer.
+* Automated bat ID using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer.
 * Inherits many great things from BirdNET-Pi
 * Right now only enabled for European bat species
 * US species will be added soon
@@ -26,15 +26,15 @@ only limitation: you cannot use it to build a commercial system.
 
 ### License
 
-Enjoy! Feel free to use BatNET-Pi for your acoustic analyses and research. If you do, please cite as:
+Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
 ``` bibtex
 @misc{Zinck2023,
   author = {Zinck, R.D.},
-  title = {BatNET-Pi: Automated real-time bat detector},
+  title = {BattyBirdNET-Pi: Automated real-time bat detector},
   year = {2023},
   publisher = {GitHub},
   journal = {GitHub repository},
-  howpublished = {\url{https://github.com/rdz-oss/BatNET-Pi }}
+  howpublished = {\url{https://github.com/rdz-oss/BattyBirdNET-Pi }}
 }
 ```
 
@@ -43,10 +43,10 @@ Also consider the references at the end of the page.
 
 ### Screenshot
 Overview page
-![main page](homepage/images/BatNET-Pi-Screen.png "Main page")
+![main page](homepage/images/BattyBirdNET-Pi-Screen.png "Main page")
 
 Including stats and spectrograms to 128 kHz
-![main page](homepage/images/BatNET-Pi-Screen-3.png "Main page")
+![main page](homepage/images/BattyBirdNET-Pi-Screen-3.png "Main page")
 
 ### System components
 
@@ -68,12 +68,12 @@ you can follow the instructions for installing BirdNET-Pi to the point of flashi
 * After that you will log in to the RasPi with your username and password via ssh (it should be in your wireles LAN after booting)
 * You call the install script from this repository (not from BirdNEt-Pi - unless that is what you want to install):
 ```sh
-curl -s https://raw.githubusercontent.com/rdz-oss/BatNET-Pi/main/newinstaller.sh | bash
+curl -s https://raw.githubusercontent.com/rdz-oss/BattyBirdNET-Pi/main/newinstaller.sh | bash
 ```
 Done. You can connect to the WebUI via your browser if you are in the same WIFI network. It should show up under http://name-you-gave-it.local .
-This sometimes does not work depending on your router configuration. You can look up the ip address given to the BatNET-Pi
+This sometimes does not work depending on your router configuration. You can look up the ip address given to the BattyBirdNET-Pi
 in your router and call that directly from the browser, e.g. http://192.168.178.XX . Alternatively, tools like Ning (https://f-droid.org/packages/de.csicar.ning/) on your smartphone will
-list all the devices in your network. The BatNET-Pi should show up.
+list all the devices in your network. The BattyBirdNET-Pi should show up.
 
 ### Is it good enough?
 That depends on your purpose. Use your judgement, no guarantees or liability. I would not currently use it for fully automated biomonitoring. That said,
