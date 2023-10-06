@@ -1,4 +1,4 @@
-## BatNET-Pi - Automated real-time bat detector
+## BatNET-Pi  Automated real-time bat detector
 
 **Note: The system is under heavy development and not (as yet) fit for production use. 
 It is fully functional, however. You are welcome to try it and send feedback.**
