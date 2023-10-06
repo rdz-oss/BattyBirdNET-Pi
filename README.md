@@ -28,6 +28,9 @@ Including spectrograms to 128 kHz
 
 If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
 
+It is easily assembled
+![main page](homepage/images/System-1.png "Main page")
+
 ### Install
 You can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system ([see here](./README-BirdNET-Pi.md)). After that you will need to call
 the install script from this repository:
