@@ -75,7 +75,7 @@ Done.
 ### Acknowledgements
 * This project would not have been possible without the developers of BirdNET and BirdNET-Pi. 
 By choosing to share under an OSS license, you have enabled us to make this possible for bats.
-* Thanks to the Animal Sound Archive Berlin, ChiroVox and XenoXanto databases and individual data donors:
+* Thanks to the Animal Sound Archive Berlin, ChiroVox, NABAT and XenoXanto databases and individual data donors:
 Kelvin R. (UK), Guillaume M. (FR), Svardsten L. (SE), Zinck R. (GER).
 * Thank you for your great work at testing Kelvin!
 * Thank you community for tips and testing! Your help is much appreciated!
