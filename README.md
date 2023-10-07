@@ -18,22 +18,6 @@ night-life around you. Can also be placed remotely with a power source.
 * Right now only enabled for European bat species
 * US species will be added soon
 
-### Usage scenarios
-1. You are a person who is interested in nature, including bats, and are not afraid of a little setup work?
-Put it in your garden or other place of interest and get recordings of the bat calls at night. 
-See a daily and even yearly statistic of activity. If the classifier is not always right, so what?
-2. You are looking for a bat logger? This solution will be triggered by bats, filters out most triggers by 
-noise including cars and crickets. You can ignore the classifier results, download the data to your machine and use any software you like to 
-determine the species. You will have a nice interface to work with inherited from BirdNET including system controls
-as well as WIFI connectivity. If placed within an existing WIFI networks, you can get all type of alarms you like to 
-your phone, email, messenger etc.
-3. You are a nature conservancy or education group, a national park or the like? Offer a 24/7 live view into the bat life 
-of your facilities, managed areas or similar places. The interface can be opened to the internet.
-4. You want to have a global network of bat monitors like birdweather.com? We are on the way to that. Once the classifiers are
-good enough - lets do it! For that: can you donate bat call data? This will help making better classifiers. Contact me!
-4. You enjoy making things? Why not become a contributor ? There is need for testing, housing development,
-integration of ML components, data collection, software development and more.
-
 ### Location and setup hints
 1. Find a place with low noise from crickets, machinery (cars), or electrical appliances and outlets. They
 tend to produce ultra sonic noise. Be aware that the RaspberryPi itself and its power source generate considerate ultra sound noise.
@@ -109,7 +93,6 @@ in your router and call that directly from the browser, e.g. http://192.168.178.
 list all the devices in your network. The BattyBirdNET-Pi should show up.
 
 ### License
-
 Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
 ``` bibtex
 @misc{Zinck2023,
@@ -121,20 +104,12 @@ Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research.
   howpublished = {\url{https://github.com/rdz-oss/BattyBirdNET-Pi }}
 }
 ```
-Open to the core:
-* Can be assembled fully on open hardware (RaspberryPi, Audiomoth) 
-* Open source operating system 
-* Open source software runs it 
-* Open data from GER, UK, FR, SE, USA, ... used to train the machine learning component
-* Open source machine learning project for bat call identification
-
-Only limitation: you cannot use it to build a commercial system.
+Be aware there is a  limitation: you cannot use it to build a commercial system.
 LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
 Also consider the references at the end of the page.
 
 ### Acknowledgements
-* This project would not have been possible without the developers of BirdNET and BirdNET-Pi. 
-By choosing to share under an OSS license, you have enabled us to make this possible for bats.
+* This project would not have been possible without the developers of BirdNET and BirdNET-Pi.
 * Thanks to the Animal Sound Archive Berlin, ChiroVox, NABAT and XenoXanto databases and individual data donors:
 Kelvin R. (UK), Guillaume M. (FR), Svardsten L. (SE), Zinck R. (GER).
 * Thank you for your great work at testing Kelvin!
