@@ -100,7 +100,10 @@ you can follow the instructions for installing BirdNET-Pi to the point of flashi
 ```sh
 curl -s https://raw.githubusercontent.com/rdz-oss/BattyBirdNET-Pi/main/newinstaller.sh | bash
 ```
-Done. You can connect to the WebUI via your browser if you are in the same WIFI network. It should show up under http://name-you-gave-it.local .
+The operating system is now updated, two repositories are pulled from github, files are copied for the automation of services, the webserver setup etc.
+Might take a few minutes. When done, it will reboot. 
+
+You can connect to the WebUI via your browser if you are in the same WIFI network. It should show up under http://name-you-gave-it.local .
 This sometimes does not work depending on your router configuration. You can look up the ip address given to the BattyBirdNET-Pi
 in your router and call that directly from the browser, e.g. http://192.168.178.XX . Alternatively, tools like Ning (https://f-droid.org/packages/de.csicar.ning/) on your smartphone will
 list all the devices in your network. The BattyBirdNET-Pi should show up.
