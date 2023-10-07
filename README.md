@@ -90,7 +90,7 @@ Some hints:
 
 It is easily assembled
 
-<img src="homepage/images/System-1.png" width="800" />
+<img src="homepage/images/System-1.png" width="400" />
 
 ### Install
 * Install Raspbian OS 64 bit lite on the sd card. Set a system user, name and configure your WIFI. If you have not done this before, 
