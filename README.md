@@ -41,6 +41,69 @@ tend to produce ultra sonic noise. Be aware that the RaspberryPi itself and its 
 3. Place it away from reflective surfaces or other sources of echo. It does work (in Munich) between buildings, 
 but there is an echo effect as well as the bats adapting to the situation (calls shift a bit).
 
+#### Use as a station
+You can run the station continuously if you like, e.g. at your home.
+However, note that the DC/AC power converter of the RasPi (the 'plug') produces a lot of ultrasound noise that triggers the classifier. As there are many
+versions out there the classifier cannot be trained on the noise of all to avoid that. Also, you will have the noise in the recordings.
+So use as long a cable to get away from the power source as far as you can. Shield it if you have a way to do that e.g. by a wall.
+Until another solution is found **it is recommended to run the system with a power bank.**. This way, you will only have some noise from the RasPi which
+is not as bad and consistent among setups.
+
+#### Use on the go
+You can plug the RasPi into a power bank, put the entire thing in your backpack and take a walk. Use a 1.2m usb cable for this
+and point the microphone to where you want.
+Also, you can connect the RasPi to the WIFI hotspot on your phone. To do that, rename your phone WIFI hotspot
+to the name and password expected by the RasPi ( the one you configured during installation). You got yourself a nice
+bat detector for your adventures on foot. Live spectrogram included. 
+
+### Is it good enough?
+That depends on your purpose. Use your judgement, no guarantees or liability. I would not currently use it for fully automated biomonitoring. That said,
+in test runs in Munich (October) the error rate was approximately (rough estimate, no science):
+* Wrong 3% for every bat species flying plus 8% on noise falsely detected as bats 
+* So at that location 4 bats species flying simultaneously would currently lead to approximately:  12%+8% = 20% wrong assessments on species level
+per night (not counting false noise detections during daytime).
+This may differ for other locations and background noises. 
+* Under development - moving target 
+
+### Screenshots
+Overview page
+
+<img src="homepage/images/BatNET-Pi-Screen.png" width="800" />
+
+Including stats and spectrograms to 128 kHz
+
+<img src="homepage/images/BatNET-Pi-Screen-3.png" width="800" />
+
+### System components
+
+* A RasPi 4B with 4GB or more, likely also Pi 5 will work. Use some form of passive or active cooling!
+* Power supply for the Raspi and an sd card - choose a large one 64 Gb +
+* A USB microphone for ultra sound: tested on audiomoth 1.2 and wildlife acoustics echo meter touch 2
+* USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
+* Optional: You can use a power bank to run the system as long as the power lasts at any location. 
+You might want to add some form of rain protection.
+
+Some hints:
+
+* If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
+
+
+It is easily assembled
+
+<img src="homepage/images/System-1.png" width="800" />
+
+### Install
+* Install Raspbian OS 64 bit lite on the sd card. Set a system user, name and configure your WIFI. If you have not done this before, 
+you can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system ([see here](./README-BirdNET-Pi.md)). 
+* After that you will log in to the RasPi with your username and password via ssh (it should be in your wireles LAN after booting)
+* You call the install script from this repository (not from BirdNEt-Pi - unless that is what you want to install):
+```sh
+curl -s https://raw.githubusercontent.com/rdz-oss/BattyBirdNET-Pi/main/newinstaller.sh | bash
+```
+Done. You can connect to the WebUI via your browser if you are in the same WIFI network. It should show up under http://name-you-gave-it.local .
+This sometimes does not work depending on your router configuration. You can look up the ip address given to the BattyBirdNET-Pi
+in your router and call that directly from the browser, e.g. http://192.168.178.XX . Alternatively, tools like Ning (https://f-droid.org/packages/de.csicar.ning/) on your smartphone will
+list all the devices in your network. The BattyBirdNET-Pi should show up.
 
 ### License
 
@@ -65,68 +128,6 @@ Open to the core:
 Only limitation: you cannot use it to build a commercial system.
 LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
 Also consider the references at the end of the page.
-
-### Screenshot
-Overview page
-![main page](homepage/images/BatNET-Pi-Screen.png "Main page")
-
-Including stats and spectrograms to 128 kHz
-![main page](homepage/images/BatNET-Pi-Screen-3.png "Main page")
-
-### System components
-
-* A RasPi 4B with 4GB or more, likely also Pi 5 will work. Use some form of passive or active cooling!
-* Power supply for the Raspi and an sd card - choose a large one 64 Gb +
-* A USB microphone for ultra sound: tested on audiomoth 1.2 and wildlife acoustics echo meter touch 2
-* USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
-* Optional: You can use a power bank to run the system as long as the power lasts at any location. 
-You might want to add some form of rain protection.
-
-Some hints:
-
-* If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
-
-
-It is easily assembled
-![main page](homepage/images/System-1.png "Main page")
-
-#### Use as a station
-You can run the station continuously if you like, e.g. at your home.
-However, note that the DC/AC power converter of the RasPi (the 'plug') produces a lot of ultrasound noise that triggers the classifier. As there are many
-versions out there the classifier cannot be trained on the noise of all to avoid that. Also, you will have the noise in the recordings.
-So use as long a cable to get away from the power source as far as you can. Shield it if you have a way to do that e.g. by a wall.
-Until another solution is found **it is recommended to run the system with a power bank.**. This way, you will only have some noise from the RasPi which
-is not as bad and consistent among setups.
-
-#### Use on the go
-You can plug the RasPi into a power bank, put the entire thing in your backpack and take a walk. Use a 1.2m usb cable for this
-and point the microphone to where you want.
-Also, you can connect the RasPi to the WIFI hotspot on your phone. To do that, rename your phone WIFI hotspot
-to the name and password expected by the RasPi ( the one you configured during installation). You got yourself a nice
-bat detector for your adventures on foot. Live spectrogram included. 
-
-### Install
-* Install Raspbian OS 64 bit lite on the sd card. Set a system user, name and configure your WIFI. If you have not done this before, 
-you can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system ([see here](./README-BirdNET-Pi.md)). 
-* After that you will log in to the RasPi with your username and password via ssh (it should be in your wireles LAN after booting)
-* You call the install script from this repository (not from BirdNEt-Pi - unless that is what you want to install):
-```sh
-curl -s https://raw.githubusercontent.com/rdz-oss/BattyBirdNET-Pi/main/newinstaller.sh | bash
-```
-Done. You can connect to the WebUI via your browser if you are in the same WIFI network. It should show up under http://name-you-gave-it.local .
-This sometimes does not work depending on your router configuration. You can look up the ip address given to the BattyBirdNET-Pi
-in your router and call that directly from the browser, e.g. http://192.168.178.XX . Alternatively, tools like Ning (https://f-droid.org/packages/de.csicar.ning/) on your smartphone will
-list all the devices in your network. The BattyBirdNET-Pi should show up.
-
-### Is it good enough?
-That depends on your purpose. Use your judgement, no guarantees or liability. I would not currently use it for fully automated biomonitoring. That said,
-in test runs in Munich (October) the error rate was approximately (rough estimate, no science):
-* Wrong 3% for every bat species flying plus 8% on noise falsely detected as bats 
-* So at that location 4 bats species flying simultaneously would currently lead to approximately:  12%+8% = 20% wrong assessments on species level
-per night (not counting false noise detections during daytime).
-This may differ for other locations and background noises. 
-* Under development - moving target 
-
 
 ### Acknowledgements
 * This project would not have been possible without the developers of BirdNET and BirdNET-Pi. 
