@@ -371,7 +371,7 @@ function initialize() {
   const W = CVS.width = window.innerWidth;
   const H = CVS.height = window.innerHeight;
 
-  ACTX = new AudioContext();
+  ACTX = new AudioContext(sampleRate=256000);
   ANALYSER = ACTX.createAnalyser();
 
   ANALYSER.fftSize = 2048;  
