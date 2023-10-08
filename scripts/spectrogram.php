@@ -127,6 +127,11 @@ const ctx = null;
 let fps =[];
 let avgfps;
 let requestTime;
+// LEGACY activated to make sure ths scales are visible
+// This is not an elegant solution and may need to change in future
+// should be set in a config file. did not find the option
+// technical debt
+var legacy = true
 
 <?php 
 if(isset($_GET['legacy']) && $_GET['legacy'] == "true") {
@@ -370,8 +375,8 @@ function initialize() {
   CTX = CVS.getContext('2d');
   const W = CVS.width = window.innerWidth;
   const H = CVS.height = window.innerHeight;
-
-  ACTX = new AudioContext({ sampleRate: 256000 });
+  //  { sampleRate: 256000 }
+  ACTX = new AudioContext();
   ANALYSER = ACTX.createAnalyser();
 
   ANALYSER.fftSize = 2048;  
