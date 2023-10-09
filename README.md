@@ -49,6 +49,8 @@ per night (not counting false noise detections during daytime).
 This may differ for other locations and background noises. 
 * Under development - moving target 
 
+Read the notes on how to interpret the results () [Interpret results](doc/How-to-interpret-results.md) )
+
 ### Screenshots
 Overview page
 
