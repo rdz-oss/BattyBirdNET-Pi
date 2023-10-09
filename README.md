@@ -24,6 +24,8 @@ tend to produce ultra sonic noise. Be aware that the RaspberryPi itself and its 
 2. Place it in the bats flight path (elevated if you can) or point it to the flight paths.
 3. Place it away from reflective surfaces or other sources of echo. It does work (in Munich) between buildings, 
 but there is an echo effect as well as the bats adapting to the situation (calls shift a bit).
+4. Shield your power converter with acoustic padding or use a long power cable to avoid the ultra sound noise
+in your recordings as well as false detections. Less such issues if run from  a power bank.
 
 #### Use as a station
 You can run the station continuously if you like, e.g. at your home.
@@ -49,7 +51,8 @@ per night (not counting false noise detections during daytime).
 This may differ for other locations and background noises. 
 * Under development - moving target 
 
-Read the notes on how to interpret the results () [Interpret results](doc/How-to-interpret-results.md) )
+### There are odd detections during the day/false positives
+Especially if not run off a power bank. Read the notes on how to interpret the results ( [Interpret results](doc/How-to-interpret-results.md) )
 
 ### Screenshots
 Overview page

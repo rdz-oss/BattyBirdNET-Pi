@@ -1,7 +1,8 @@
 ## Intrepreting the classifications
 
 
-In order to get the most out of the system it helps to be aware of a few things. In short, they include
+In order to get the most out of the system it helps to be aware of a few things. Unfortunately you cannot just assume that a detection is always due to a bat.
+In short,
 
 * Noise can trigger the classifier: This can be reduced by not entirely avoided. Look at the spectrogram visualization and decide if this is a noise trigger. This is very likely the case during daytime, and it does happen at night. Expect that this happens.
 There are many sources of such noise:
@@ -20,6 +21,7 @@ Bats in Europe which have similar calls include, but are not limited to:
   - Pipistrellus nathusii and Pipistrellus kuhlii
   - Pipistrellus pipistrellus and Pipistrellus pygmaeus
   - Nyctalus leisleri, Eptisecus serotinus, Vespertilio murinus
+  - Plecotus auritus and Plecotus austriacus  are both under Plecotus auritus in the classifier
 
 so expect that there is a certain degree of overlap between the species. Essentially, a classification is
 a suggestion that it is one of these similar groups. Often right - but also expect mismatches in
