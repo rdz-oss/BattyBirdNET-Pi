@@ -10,8 +10,12 @@ start_service() {
   DIR="$HOME/BattyBirdNET-Analyzer"
   cd $DIR || return
   sleep .5
-  echo $PYTHON_VIRTUAL_ENV "$DIR/server.py"
-  $PYTHON_VIRTUAL_ENV $DIR/server.py
+  if [ -z ${BAT_CLASSIFIER} ];then
+    BAT_CLASSIFIER="Bavaria"
+    echo "No classifier for bats set. Using default Bavaria classifier!"
+  fi
+  echo $PYTHON_VIRTUAL_ENV "$DIR/server.py --area ${BAT_CLASSIFIER}"
+  $PYTHON_VIRTUAL_ENV $DIR/server.py --area $BAT_CLASSIFIER
   echo "Started BattyBirdNET-Analyzer service."
 }
 

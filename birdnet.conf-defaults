@@ -219,3 +219,6 @@ CUSTOM_IMAGE_TITLE=""
 LAST_RUN=
 THIS_RUN=
 IDFILE=$HOME/BirdNET-Pi/IdentifiedSoFar.txt
+
+## Region for bat classifier to set in USA, EU
+BAT_CLASSIFIER="Bavaria"

@@ -242,9 +242,9 @@ RAW_SPECTROGRAM=0
 CUSTOM_IMAGE=
 CUSTOM_IMAGE_TITLE=""
 
-## Bat analysis settings in Hz and seconds for recording length
+## Bat analysis settings in Hz and seconds for recording length as well as area setting for the classifier service
 SAMPLING_RATE=256000
-
+BAT_CLASSIFIER="Bavaria"
 
 ## These are just for debugging
 LAST_RUN=

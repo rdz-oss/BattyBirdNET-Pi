@@ -225,6 +225,22 @@ if(isset($_GET['submit'])) {
     }
   }
 
+  if(isset($_GET["bat_classifier"])) {
+    $bat_classifier = $_GET["bat_classifier"];
+    if(strcmp($bat_classifier,$config['BAT_CLASSIFIER']) !== 0) {
+      $contents = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents);
+      $contents2 = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents2);
+
+	  $fh = fopen("/etc/birdnet/birdnet.conf", "w");
+	  $fh2 = fopen("./scripts/thisrun.txt", "w");
+	  fwrite($fh, $contents);
+	  fwrite($fh2, $contents2);
+	  sleep(1);
+	  exec("sudo systemctl restart batnet_server.service");
+    }
+  }
+
+
   if(isset($_GET["audiofmt"])) {
     $audiofmt = $_GET["audiofmt"];
     if(strcmp($audiofmt,$config['AUDIOFMT']) !== 0) {
@@ -423,6 +439,25 @@ if (file_exists('./scripts/thisrun.txt')) {
       </td></tr></table><br>
       <table class="settingstable"><tr><td>
 
+{/*       <h2>Bat Classifier Settings</h2>
+      <label for="bat_classifier">
+      <input name="bat_classifier" type="radio" id="Bavaria" value="Bavaria" <?php if (strcmp($newconfig['BAT_CLASSIFIER'], "Bavaria") == 0) { echo "checked"; }?>>Bavaria</label>
+      <label for="usa">
+      <input name="usa" type="radio" id="usa" value="USA" <?php if (strcmp($newconfig['BAT_CLASSIFIER'], "USA") == 0) { echo "checked"; }?>>USA</label>
+      <p> Set US classifier.</p> */}
+
+      <h2>Bat Classifier Settings</h2>
+      <label for="bat_classifier">Bat Classifier</label>
+      <select name="bat_classifier">
+      <option selected="<?php print($newconfig['BAT_CLASSIFIER']);?>"><?php print($newconfig['BAT_CLASSIFIER']);?></option>
+
+<?php
+  $formats = array("Bavaria", "USA");
+foreach($formats as $format){
+  echo "<option value='$format'>$format</option>";
+}
+
+
       <h2>Audio Settings</h2>
       <label for="rec_card">Audio Card: </label>
       <input name="rec_card" type="text" value="<?php print($newconfig['REC_CARD']);?>" required/><br>
@@ -439,6 +474,7 @@ if (file_exists('./scripts/thisrun.txt')) {
       <label for="audiofmt">Extractions Audio Format</label>
       <select name="audiofmt">
       <option selected="<?php print($newconfig['AUDIOFMT']);?>"><?php print($newconfig['AUDIOFMT']);?></option>
+
 <?php
   $formats = array("8svx", "aif", "aifc", "aiff", "aiffc", "al", "amb", "amr-nb", "amr-wb", "anb", "au", "avr", "awb", "caf", "cdda", "cdr", "cvs", "cvsd", "cvu", "dat", "dvms", "f32", "f4", "f64", "f8", "fap", "flac", "fssd", "gsm", "gsrt", "hcom", "htk", "ima", "ircam", "la", "lpc", "lpc10", "lu", "mat", "mat4", "mat5", "maud", "mp2", "mp3", "nist", "ogg", "paf", "prc", "pvf", "raw", "s1", "s16", "s2", "s24", "s3", "s32", "s4", "s8", "sb", "sd2", "sds", "sf", "sl", "sln", "smp", "snd", "sndfile", "sndr", "sndt", "sou", "sox", "sph", "sw", "txw", "u1", "u16", "u2", "u24", "u3", "u32", "u4", "u8", "ub", "ul", "uw", "vms", "voc", "vorbis", "vox", "w64", "wav", "wavpcm", "wv", "wve", "xa", "xi");
 foreach($formats as $format){
