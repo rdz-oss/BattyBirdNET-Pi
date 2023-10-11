@@ -15,6 +15,22 @@ night-life around you. Can also be placed remotely with a power source.
 * Enabled for European and North American species
 
 
+### License
+Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
+``` bibtex
+@misc{Zinck2023,
+  author = {Zinck, R.D.},
+  title = {BattyBirdNET-Pi: Automated real-time bat detector},
+  year = {2023},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/rdz-oss/BattyBirdNET-Pi }}
+}
+```
+Be aware there is a  limitation: you cannot use it to build a commercial system.
+LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
+Also consider the references at the end of the page.
+
 ### Location and setup hints
 1. Find a place with low noise from crickets, machinery (cars), or electrical appliances and outlets. They
 tend to produce ultra sonic noise. Be aware that the RaspberryPi itself and its power source generate considerate ultra sound noise.
@@ -103,22 +119,6 @@ To use the North American version:
 * the system will reboot, wait two minutes refresh browser
 
 
-
-### License
-Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
-``` bibtex
-@misc{Zinck2023,
-  author = {Zinck, R.D.},
-  title = {BattyBirdNET-Pi: Automated real-time bat detector},
-  year = {2023},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/rdz-oss/BattyBirdNET-Pi }}
-}
-```
-Be aware there is a  limitation: you cannot use it to build a commercial system.
-LICENSE: http://creativecommons.org/licenses/by-nc-sa/4.0/  
-Also consider the references at the end of the page.
 
 ### Acknowledgements
 * This project would not have been possible without the developers of BirdNET and BirdNET-Pi.
