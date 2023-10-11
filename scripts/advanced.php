@@ -456,7 +456,7 @@ if (file_exists('./scripts/thisrun.txt')) {
 foreach($formats as $format){
   echo "<option value='$format'>$format</option>";
 }
-
+?>
 
       <h2>Audio Settings</h2>
       <label for="rec_card">Audio Card: </label>
