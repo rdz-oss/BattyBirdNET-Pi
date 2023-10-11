@@ -2,7 +2,7 @@
 # Runs BattyBirdNET-Analyzer
 #set -x
 
-
+source /etc/birdnet/birdnet.conf
 my_dir=$HOME/BattyBirdNET-Analyzer
 
 start_service() {
