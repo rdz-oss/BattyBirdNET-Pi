@@ -199,7 +199,7 @@ while($results=$result3->fetchArray(SQLITE3_ASSOC)){
   <b>Occurrences: </b>$count<br>
   <b>Max Confidence: </b>$maxconf<br>
   <b>Best Recording: </b>$date $time<br>
-  <a href=\"https://allaboutbirds.org/guide/$comname\" target=\"top\"/>All About Birds</a><br>
+  <!-- <a href=\"https://allaboutbirds.org/guide/$comname\" target=\"top\"/>All About Birds</a><br> -->
   <video onplay='setLiveStreamVolume(0)' onended='setLiveStreamVolume(1)' onpause='setLiveStreamVolume(1)' controls poster=\"$filename.png\" title=\"$filename\"><source src=\"$filename\"></video></td>
   </tr>
     </table>

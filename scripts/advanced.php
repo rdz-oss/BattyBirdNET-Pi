@@ -225,22 +225,6 @@ if(isset($_GET['submit'])) {
     }
   }
 
-  if(isset($_GET["bat_classifier"])) {
-    $bat_classifier = $_GET["bat_classifier"];
-    if(strcmp($bat_classifier,$config['BAT_CLASSIFIER']) !== 0) {
-      $contents = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents);
-      $contents2 = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents2);
-
-	  $fh = fopen("/etc/birdnet/birdnet.conf", "w");
-	  $fh2 = fopen("./scripts/thisrun.txt", "w");
-	  fwrite($fh, $contents);
-	  fwrite($fh2, $contents2);
-	  sleep(1);
-	  exec('restart_services.sh');
-    }
-  }
-
-
   if(isset($_GET["audiofmt"])) {
     $audiofmt = $_GET["audiofmt"];
     if(strcmp($audiofmt,$config['AUDIOFMT']) !== 0) {
@@ -379,6 +363,21 @@ if(isset($_GET['submit'])) {
 			exec("sudo systemctl restart livestream.service && sudo systemctl restart icecast2.service");
 		}
 	}
+	
+    if(isset($_GET["bat_classifier"])) {
+      $bat_classifier = $_GET["bat_classifier"];
+      if(strcmp($bat_classifier,$config['BAT_CLASSIFIER']) !== 0) {
+        $contents = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents);
+        $contents2 = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents2);
+
+	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
+	    $fh2 = fopen("./scripts/thisrun.txt", "w");
+	    fwrite($fh, $contents);
+	    fwrite($fh2, $contents2);
+	    sleep(1);
+	    exec('sudo reboot');
+      }
+    }
 
 	//Finally write the data out. some sections do this themselves in order to have the new settings ready for the services that will be restarted
 	//but will doubly ensure the settings are saved after any modification
@@ -465,7 +464,7 @@ foreach($formats as $format){
       <input name="recording_length" oninput="document.getElementsByName('extraction_length')[0].setAttribute('max', this.value);" type="number" min="1" max="6" step="1" value="<?php print($newconfig['RECORDING_LENGTH']);?>" required/><br>
       <p>Set Recording Length in seconds between 1 and 6. Multiples of 1 are recommended.</p>
       <label for="extraction_length">Extraction Length: </label>
-      <input name="extraction_length" oninput="this.setAttribute('max', document.getElementsByName('recording_length')[0].value);" type="number" min="0.5625" step="0.001" value="<?php print($newconfig['EXTRACTION_LENGTH']);?>" /><br>
+      <input name="extraction_length" oninput="this.setAttribute('max', document.getElementsByName('recording_length')[0].value);" type="number" min="0.5625" value="<?php print($newconfig['EXTRACTION_LENGTH']);?>" /><br>
       <p>Set Extraction Length to something less than your Recording Length. Min=0.5625 Max=Recording Length</p>
       <label for="audiofmt">Extractions Audio Format</label>
       <select name="audiofmt">
