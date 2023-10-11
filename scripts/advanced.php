@@ -439,13 +439,6 @@ if (file_exists('./scripts/thisrun.txt')) {
       </td></tr></table><br>
       <table class="settingstable"><tr><td>
 
-{/*       <h2>Bat Classifier Settings</h2>
-      <label for="bat_classifier">
-      <input name="bat_classifier" type="radio" id="Bavaria" value="Bavaria" <?php if (strcmp($newconfig['BAT_CLASSIFIER'], "Bavaria") == 0) { echo "checked"; }?>>Bavaria</label>
-      <label for="usa">
-      <input name="usa" type="radio" id="usa" value="USA" <?php if (strcmp($newconfig['BAT_CLASSIFIER'], "USA") == 0) { echo "checked"; }?>>USA</label>
-      <p> Set US classifier.</p> */}
-
       <h2>Bat Classifier Settings</h2>
       <label for="bat_classifier">Bat Classifier</label>
       <select name="bat_classifier">
