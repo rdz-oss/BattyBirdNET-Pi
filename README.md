@@ -3,9 +3,6 @@
 **Note: The system is under heavy development and not (as yet) fit for production use. 
 It is fully functional, however. You are welcome to try it and send feedback.**
 
-Careful: the noise emitted by the power source of the RasPi currently triggers the detector!
-Use a power bank!
-
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
 night-life around you. Can also be placed remotely with a power source.
@@ -15,8 +12,8 @@ night-life around you. Can also be placed remotely with a power source.
 * Scans ultrasound with 256kHz sampling rate continuously 24/7 
 * Automated bat ID using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer.
 * Inherits many great things from BirdNET-Pi
-* Right now only enabled for European bat species
-* US species will be added soon
+* Enabled for European and North American species
+
 
 ### Location and setup hints
 1. Find a place with low noise from crickets, machinery (cars), or electrical appliances and outlets. They
@@ -96,6 +93,16 @@ You can connect to the WebUI via your browser if you are in the same WIFI networ
 This sometimes does not work depending on your router configuration. You can look up the ip address given to the BattyBirdNET-Pi
 in your router and call that directly from the browser, e.g. http://192.168.178.XX . Alternatively, tools like Ning (https://f-droid.org/packages/de.csicar.ning/) on your smartphone will
 list all the devices in your network. The BattyBirdNET-Pi should show up.
+
+To use the North American version:
+
+* install as below, 
+* go to the tools setting
+* log in as user 'birdnet', leave password empty
+* Settings -> Advanced Settings -> Bat Classifier (use USA)
+* the system will reboot, wait two minutes refresh browser
+
+
 
 ### License
 Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
