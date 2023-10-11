@@ -236,7 +236,7 @@ if(isset($_GET['submit'])) {
 	  fwrite($fh, $contents);
 	  fwrite($fh2, $contents2);
 	  sleep(1);
-	  exec("sudo systemctl restart batnet_server.service");
+	  exec('restart_services.sh');
     }
   }
 
