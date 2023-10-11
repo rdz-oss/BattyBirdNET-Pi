@@ -428,17 +428,9 @@ if (file_exists('./scripts/thisrun.txt')) {
       </script>
       <p>If a Human is predicted anywhere among the top <span id="predictionCount"><?php echo $newconfig['PRIVACY_THRESHOLD'] == 0 ? "threshold % of" : intval(($newconfig['PRIVACY_THRESHOLD'] * $count)/100); ?></span> predictions, the sample will be considered of human origin and no data will be collected. Start with 1% and move up as needed.</p>
       </td></tr></table><br>
-      
-      <table class="settingstable"><tr><td>
-      <h2>Full Disk Behaviour</h2>
-      <label for="purge">
-      <input name="full_disk" type="radio" id="purge" value="purge" <?php if (strcmp($newconfig['FULL_DISK'], "purge") == 0) { echo "checked"; }?>>Purge</label>
-      <label for="keep">
-      <input name="full_disk" type="radio" id="keep" value="keep" <?php if (strcmp($newconfig['FULL_DISK'], "keep") == 0) { echo "checked"; }?>>Keep</label>
-      <p>When the disk becomes full, you can choose to 'purge' old files to make room for new ones or 'keep' your data and stop all services instead.<br>Note: you can exclude specific files from 'purge' on the Recordings page.</p>
-      </td></tr></table><br>
-      <table class="settingstable"><tr><td>
 
+
+      <table class="settingstable"><tr><td>
       <h2>Bat Classifier Settings</h2>
       <label for="bat_classifier">Bat Classifier</label>
       <select name="bat_classifier">
@@ -450,6 +442,17 @@ foreach($formats as $format){
   echo "<option value='$format'>$format</option>";
 }
 ?>
+      </td></tr></table><br>
+
+      <table class="settingstable"><tr><td>
+      <h2>Full Disk Behaviour</h2>
+      <label for="purge">
+      <input name="full_disk" type="radio" id="purge" value="purge" <?php if (strcmp($newconfig['FULL_DISK'], "purge") == 0) { echo "checked"; }?>>Purge</label>
+      <label for="keep">
+      <input name="full_disk" type="radio" id="keep" value="keep" <?php if (strcmp($newconfig['FULL_DISK'], "keep") == 0) { echo "checked"; }?>>Keep</label>
+      <p>When the disk becomes full, you can choose to 'purge' old files to make room for new ones or 'keep' your data and stop all services instead.<br>Note: you can exclude specific files from 'purge' on the Recordings page.</p>
+      </td></tr></table><br>
+      <table class="settingstable"><tr><td>
 
       <h2>Audio Settings</h2>
       <label for="rec_card">Audio Card: </label>
