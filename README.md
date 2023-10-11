@@ -96,7 +96,7 @@ list all the devices in your network. The BattyBirdNET-Pi should show up.
 
 To use the North American version:
 
-* install as below, 
+* install as above, 
 * go to the tools setting
 * log in as user 'birdnet', leave password empty
 * Settings -> Advanced Settings -> Bat Classifier (use USA)
