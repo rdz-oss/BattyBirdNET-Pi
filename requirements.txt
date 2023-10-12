@@ -1,7 +1,7 @@
 pip
 wheel
 setuptools
-tflite_runtime-2.6.0-cp39-none-linux_aarch64.whl
+tensorflow
 colorama==0.4.4
 librosa
 pytz
