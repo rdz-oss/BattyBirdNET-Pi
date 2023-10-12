@@ -650,9 +650,9 @@ foreach($formats as $format){
         Using ffmpeg:
         e.g. origin=6000, target=4000, performs a shift of 2000 Hz down.<br>
         <label for="freqshift_hi">Origin [Hz]: </label>
-        <input name="freqshift_hi" type="number" min="0" max="20000" step="1" value="<?php print($newconfig['FREQSHIFT_HI']);?>" required/><br>
+        <input name="freqshift_hi" type="number" min="0" max="120000" step="1" value="<?php print($newconfig['FREQSHIFT_HI']);?>" required/><br>
         <label for="freqshift_lo">Target [Hz]: </label>
-        <input name="freqshift_lo" type="number" min="0" max="20000" step="1" value="<?php print($newconfig['FREQSHIFT_LO']);?>" required/>
+        <input name="freqshift_lo" type="number" min="0" max="120000" step="1" value="<?php print($newconfig['FREQSHIFT_LO']);?>" required/>
         </p>
         <p style="margin-left: 40px">
         <label for="freqshift_reconnect_delay">Livestream reconnection delay (in ms): </label>
@@ -663,7 +663,7 @@ foreach($formats as $format){
         Using sox:
         e.g. shiftPitch=-1200 performs a shift of 1 octave down. This value is in 100ths of a semitone.<br>
         <label for="freqshift_pitch">Pitch shift: </label>
-        <input name="freqshift_pitch" type="number" min="-4000" max="4000" step="1" value="<?php print($newconfig['FREQSHIFT_PITCH']);?>" required/><br>
+        <input name="freqshift_pitch" type="number" min="-8000" max="8000" step="1" value="<?php print($newconfig['FREQSHIFT_PITCH']);?>" required/><br>
         </p>
 		</td></tr></table><br>
 
