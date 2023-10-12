@@ -32,7 +32,7 @@ if [[ ! -z $PACKAGES_MISSING ]] ; then
   sudo apt -y install $PACKAGES_MISSING
 fi
 
-branch=main
+branch=tensorflow
 branch_classifier=main
 
 git clone -b $branch --depth=1 https://github.com/rdz-oss/BattyBirdNET-Pi.git ${HOME}/BirdNET-Pi &&
