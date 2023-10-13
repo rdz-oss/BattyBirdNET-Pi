@@ -98,12 +98,12 @@ It is easily assembled
 * Install Raspbian OS 64 bit lite on the sd card. Set a system user, name and configure your WIFI. If you have not done this before, 
 you can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system ([see here](./README-BirdNET-Pi.md)). 
 * After that you will log in to the RasPi with your username and password via ssh (it should be in your wireles LAN after booting)
-* You call the install script from this repository (not from BirdNEt-Pi - unless that is what you want to install):
+* You call the install script from this repository (i.e.. this is where you deviate from the instructions found for BirdNET-Pi)
 ```sh
 curl -s https://raw.githubusercontent.com/rdz-oss/BattyBirdNET-Pi/main/newinstaller.sh | bash
 ```
 The operating system is now updated, two repositories are pulled from github, files are copied for the automation of services, the webserver setup etc.
-Might take a few minutes. When done, it will reboot. 
+Might take a few minutes. When done, it will reboot. If you see a bat flying in the middle of the WbUI - you have installed battyBirdNET-Pi.
 
 You can connect to the WebUI via your browser if you are in the same WIFI network. It should show up under http://name-you-gave-it.local .
 This sometimes does not work depending on your router configuration. You can look up the ip address given to the BattyBirdNET-Pi
