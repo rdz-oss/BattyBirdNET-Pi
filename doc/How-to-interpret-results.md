@@ -54,7 +54,7 @@ Echolocation frequency (max energy) | Common name           | Species         |
 32 kHz  | Eptisecus nilssoni    | Northern bat    | 
 32 kHz | Barbastelle           | Barbastella barbastellus | 
 39 kHz | Nathusius pipistrelle | Pipistrellus nathusii | 
-39 kHz | Kuhls pipistrelle     | Pioistrellus kuhlii | 
+36-40 kHz | Kuhls pipistrelle     | Pioistrellus kuhlii | 
 43-46 kHz | Alcathoe              | Myotis alcathoe | 
 45 kHz | Common pipistrelle    | Pipistrellus pipistrellus | 
 45 kHz | Whiskered             | Myotis mystacinus | 
