@@ -236,7 +236,7 @@ if daily is False:
 
     if resample_time != '1D':
         specie = st.selectbox(
-            'Which bird would you like to explore for the dates '
+            'Which bat would you like to explore for the dates '
             + str(start_date) + ' to ' + str(end_date) + '?',
             species,
             index=0)
@@ -403,7 +403,7 @@ if daily is False:
 
     else:
 
-        specie = st.selectbox('Which bird would you like to explore for the dates '
+        specie = st.selectbox('Which bat would you like to explore for the dates '
                               + str(start_date) + ' to ' + str(end_date) + '?',
                               species[1:],
                               index=0)
