@@ -45,25 +45,28 @@ so expect that there is a certain degree of overlap between the species.
 A quick overview for a first orientation. Bats shift up or downwards depending also on each others presence and 
 the environment.
 
-Echolocation frequency (max energy) | Common name | Species                   | 
-|-----------------|---------|---------------------------|
-20-25 kHz | Noctule  | Nyctalus noctula          | 
-25 kHz | Leislers | Nyctalus leisleri         | 
-27 kHz | Serotine | Eptisecus serotinus       | 
-32 kHz | Barbastelle | Barbastella barbastellus  | 
-39 kHz | Nathusius pipistrelle | Pipistrellus nathusii     | 
-39 kHz | Kuhls pipistrelle | Pioistrellus kuhlii       | 
-43-46 kHz | Alcathoe | Myotis alcathoe           | 
-45 kHz | Common pipistrelle | Pipistrellus pipistrellus | 
-45 kHz | Whiskered | Myotis mystacinus         | 
-45 kHz | Brandts | Myotis brandtii           | 
-45-50 kHz | Daubentons | Myotis daubentonii        | 
-45-50 kHz | Brown long-eared | Plecotus auritus          | 
-50 kHz | Natterers | Myotis natteri            | 
-50 kHz | Bechsteins | Myotis bechsteinii        | 
-55 kHz | Soprano pipistrelle | Pipistrellus pygmaeus     | 
-80 kHz | Greater Horseshoe | Rhinolophus ferrumequinum | 
-108 kHz | Lesser Horseshoe | Rhinolophus hipposideros  | 
+Echolocation frequency (max energy) | Common name           | Species         | 
+|-----------------|-----------------------|-----------------|
+20-25 kHz | Noctule               | Nyctalus noctula | 
+25 kHz | Leislers              | Nyctalus leisleri | 
+27 kHz | Serotine              | Eptisecus serotinus | 
+28 kHz  | Vespertilio murinus   | Part-coloured bat | 
+32 kHz  | Eptisecus nilssoni    | Northern bat    | 
+32 kHz | Barbastelle           | Barbastella barbastellus | 
+39 kHz | Nathusius pipistrelle | Pipistrellus nathusii | 
+39 kHz | Kuhls pipistrelle     | Pioistrellus kuhlii | 
+43-46 kHz | Alcathoe              | Myotis alcathoe | 
+45 kHz | Common pipistrelle    | Pipistrellus pipistrellus | 
+45 kHz | Whiskered             | Myotis mystacinus | 
+45 kHz | Brandts               | Myotis brandtii | 
+45 kHz | Daubentons            | Myotis daubentonii | 
+45-50 kHz | Brown long-eared      | Plecotus auritus | 
+45-50 kHz | Grey long-eared       | Plecotus austriacus |
+50 kHz | Natterers             | Myotis natteri  | 
+50 kHz | Bechsteins            | Myotis bechsteinii | 
+55 kHz | Soprano pipistrelle   | Pipistrellus pygmaeus | 
+80 kHz | Greater Horseshoe     | Rhinolophus ferrumequinum | 
+108 kHz | Lesser Horseshoe      | Rhinolophus hipposideros | 
 
 
 
