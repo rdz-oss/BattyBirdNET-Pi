@@ -2,6 +2,11 @@
 
 
 In order to get the most out of the system it helps to be aware of a few things. Unfortunately you cannot just assume that a detection is always due to a bat.
+Essentially, a classification is a suggestion that it is one of these similar groups. Often right - but also expect mismatches in
+the above categories.
+
+You can use local knowledge to find the most likely species together with the classifier suggestion.
+Also, you can consult handbooks on bat call identification.
 
 ### Noise can trigger the classifier
 
@@ -29,13 +34,39 @@ Bats in Europe which have similar calls include, but are not limited to:
 
 so expect that there is a certain degree of overlap between the species. 
 
-### Conclusion
+### Typical end call frequencies of European bats
 
-Essentially, a classification is a suggestion that it is one of these similar groups. Often right - but also expect mismatches in
-the above categories.
+* Calls are very variable and affected by the bats surroundings
+* In woodland there are many obstacles to avoid and bat sound become more similar
+* It is not always possible to ID a bat just from echolocation calls
+* There are echo location calls as well as social calls. Social calls can be on very different frequencies.
 
-You can use local knowledge to find the most likely species together with the classifier suggestion.
-Also, you can consult handbooks on bat call identification.
+### Echolocation frequency
+A quick overview for a first orientation. Bats shift up or downwards depending also on each others presence and 
+the environment.
+
+Echolocation frequency (max energy) | Common name | Species                   | 
+|-----------------|---------|---------------------------|
+20-25 kHz | Noctule  | Nyctalus noctula          | 
+25 kHz | Leislers | Nyctalus leisleri         | 
+27 kHz | Serotine | Eptisecus serotinus       | 
+32 kHz | Barbastelle | Barbastella barbastellus  | 
+39 kHz | Nathusius pipistrelle | Pipistrellus nathusii     | 
+39 kHz | Kuhls pipistrelle | Pioistrellus kuhlii       | 
+43-46 kHz | Alcathoe | Myotis alcathoe           | 
+45 kHz | Common pipistrelle | Pipistrellus pipistrellus | 
+45 kHz | Whiskered | Myotis mystacinus         | 
+45 kHz | Brandts | Myotis brandtii           | 
+45-50 kHz | Daubentons | Myotis daubentonii        | 
+45-50 kHz | Brown long-eared | Plecotus auritus          | 
+50 kHz | Natterers | Myotis natteri            | 
+50 kHz | Bechsteins | Myotis bechsteinii        | 
+55 kHz | Soprano pipistrelle | Pipistrellus pygmaeus     | 
+80 kHz | Greater Horseshoe | Rhinolophus ferrumequinum | 
+108 kHz | Lesser Horseshoe | Rhinolophus hipposideros  | 
+
+
+
 
 
 
