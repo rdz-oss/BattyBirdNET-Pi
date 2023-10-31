@@ -139,6 +139,11 @@ sudo sed -i.bak -e 's|<!-- <bind-address>.*|<bind-address>127.0.0.1</bind-addres
 if ! grep FREQSHIFT_TOOL /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u$USER echo "FREQSHIFT_TOOL=sox" >> /etc/birdnet/birdnet.conf
 fi
+
+if ! grep SOX_SPEED /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u$USER echo "SOX_SPEED=0.1" >> /etc/birdnet/birdnet.conf
+fi
+
 if ! grep FREQSHIFT_HI /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u$USER echo "FREQSHIFT_HI=6000" >> /etc/birdnet/birdnet.conf
 fi

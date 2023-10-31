@@ -158,7 +158,9 @@ SENSITIVITY=1
 
 ## FREQSHIFT_TOOL
 
-FREQSHIFT_TOOL=ffmpeg
+FREQSHIFT_TOOL=sox
+
+SOX_SPEED=0.1
 
 ## If the tool is ffmpeg, you have to define a freq. shift from HI to LO:
 ## FREQSHIFT_HI
