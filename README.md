@@ -13,7 +13,7 @@ night-life around you. Can also be placed remotely with a power source.
 * Not designed for biodiversity assessments - recreational use at this point.
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
-citizen science, acoustic biomonitoring, audiomoth
+citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats
 
 ### License
 Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
