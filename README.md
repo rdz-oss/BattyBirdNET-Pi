@@ -1,10 +1,13 @@
 ## BattyBirdNET-Pi  Automated real-time bat detection & id
 
-Fully functional fork of BirdNET-Pi for bats.
+Fully functional and extended fork of BirdNET-Pi for bats.
 
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
 night-life around you. Can also be placed remotely with a power source.
+
+Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
+citizen science, acoustic biomonitoring, audiomoth
 
 ### Features
 
