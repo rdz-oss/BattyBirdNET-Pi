@@ -6,16 +6,14 @@ Fully functional and extended fork of BirdNET-Pi for bats.
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
 night-life around you. Can also be placed remotely with a power source.
 
-Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
-citizen science, acoustic biomonitoring, audiomoth
-
-### Features
-
 * Scans ultrasound with 256kHz sampling rate continuously 24/7 
 * Automated bat ID using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer.
 * Inherits many great things from BirdNET-Pi - including notifications on detection
 * Enabled for European, UK and North American species
 * Not designed for biodiversity assessments - recreational use at this point.
+
+Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
+citizen science, acoustic biomonitoring, audiomoth
 
 ### License
 Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
@@ -185,8 +183,6 @@ list all the devices in your network. The BattyBirdNET-Pi should show up.
 * log in as user 'birdnet', leave password empty
 * Settings -> Advanced Settings -> Bat Classifier (use USA or UK)
 * the system will reboot, wait two minutes refresh browser
-
-
 
 ### Acknowledgements
 * This project would not have been possible without the developers of BirdNET and BirdNET-Pi.
