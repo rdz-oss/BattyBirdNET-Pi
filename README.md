@@ -178,12 +178,12 @@ This sometimes does not work depending on your router configuration. You can loo
 in your router and call that directly from the browser, e.g. http://192.168.178.XX . Alternatively, tools like Ning (https://f-droid.org/packages/de.csicar.ning/) on your smartphone will
 list all the devices in your network. The BattyBirdNET-Pi should show up.
 
-### To use the North American version:
+### To use the North American/UK version:
 
 * install as above, 
 * go to the tools setting
 * log in as user 'birdnet', leave password empty
-* Settings -> Advanced Settings -> Bat Classifier (use USA)
+* Settings -> Advanced Settings -> Bat Classifier (use USA or UK)
 * the system will reboot, wait two minutes refresh browser
 
 
