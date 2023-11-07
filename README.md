@@ -51,8 +51,10 @@ You might want to add some form of rain protection.
 
 Some hints:
 
+* The echo meter touch 2 pro appears not to work in this setup
 * If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
-
+* https://www.openacousticdevices.info/audiomoth  (Usb or battery version with usb microphone configuration)
+* https://www.wildlifeacoustics.com/products/echo-meter-touch-2-android-2
 
 It is easily assembled
 
