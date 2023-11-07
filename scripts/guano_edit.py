@@ -87,7 +87,7 @@ def main():
     inputs = []  # files and folders we're operating on
     dry_run = False
 
-    for arg in sys.argv[1:len(sys.argv)-2]:
+    for arg in sys.argv[1:len(sys.argv)-1]:
         if arg == '--dry-run':
             dry_run = True
         elif ':' in arg:
