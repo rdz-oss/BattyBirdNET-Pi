@@ -247,6 +247,9 @@ CUSTOM_IMAGE_TITLE=""
 ## Bat analysis settings in Hz and seconds for recording length as well as area setting for the classifier service
 SAMPLING_RATE=256000
 BAT_CLASSIFIER="Bavaria"
+BAT_TIMER=false
+BAT_DUSK="18:00"
+BAT_DAWN="06:00"
 
 ## These are just for debugging
 LAST_RUN=

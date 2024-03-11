@@ -95,6 +95,24 @@ EOF
   systemctl enable birdnet_server.service
 }
 
+install_batnet_timer_server() {
+  cat << EOF > $HOME/BirdNET-Pi/templates/batnet_timer_server.service
+[Unit]
+Description=BatNET Dusk/Dawn Starter Server
+[Service]
+Restart=always
+Type=simple
+RestartSec=5
+User=${USER}
+ExecStart=/usr/local/bin/batnet_timer.sh
+[Install]
+WantedBy=multi-user.target
+EOF
+  ln -sf $HOME/BirdNET-Pi/templates/batnet_timer_server.service /usr/lib/systemd/system
+  systemctl enable batnet_timer_server.service
+}
+
+
 install_extraction_service() {
   cat << EOF > $HOME/BirdNET-Pi/templates/extraction.service
 [Unit]
@@ -470,6 +488,7 @@ install_services() {
   install_cleanup_cron
   install_weekly_cron
   increase_caddy_timeout
+  install_batnet_timer_server
 
   create_necessary_dirs
   generate_BirdDB
