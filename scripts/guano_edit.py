@@ -97,7 +97,7 @@ def main():
             inputs.append(arg)
     inputs.append(sys.argv[len(sys.argv)-1])
 
-    print(md)
+    # print(md)
 
     for input in inputs:
         for gfile in locate_files(input):

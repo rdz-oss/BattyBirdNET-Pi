@@ -117,7 +117,7 @@ for h in "${SCAN_DIRS[@]}";do
 
     sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
       trim ="${START}" ="${END}"
-    # Add guano meta data
+    # Add guano meta data  "Timestamp: ${DATE}"
     guano_edit.py "GUANO|Version: 1.0" "Samplerate: 256000" "Loc Position: ${LATITUDE} ${LONGITUDE}" "Species Auto ID: ${SCIENTIFIC_NAME}" "Note: BattyBirdNET-Pi" "${NEWSPECIES_BYDATE}/${NEWFILE}"
 
     RAW_SPECTROGRAM=${RAW_SPECTROGRAM}

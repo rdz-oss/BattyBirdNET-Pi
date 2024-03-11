@@ -10,7 +10,8 @@ night-life around you. Can also be placed remotely with a power source.
 * Automated bat ID using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer.
 * Inherits many great things from BirdNET-Pi - including notifications on detection
 * Enabled for European, UK and North American species
-* Not designed for biodiversity assessments - recreational use at this point.
+* Not designed for automated biodiversity assessments - recreational use at this point.
+* Adds meta-data in GUANO format to the recordings
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
 citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET
