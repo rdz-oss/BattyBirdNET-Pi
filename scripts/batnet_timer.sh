@@ -1,12 +1,12 @@
 #!/usr/bin/env -S --default-signal=PIPE bash
 # Runs a start/stop timer for BattyBirdNET-Pi
-#set -x
+set -x
 
 source /etc/birdnet/birdnet.conf
 #/usr/local/bin
-my_dir=$HOME/BirdNET-Pi/scripts
+# my_dir=$HOME/BirdNET-Pi/scripts
 #export my_dir=$my_dir
-cd "$my_dir" || exit 1
+# cd "$my_dir" || exit 1
 
 start_service() {
   echo "Starting BattyBirdNET timer (dusk - dawn) service."
@@ -32,7 +32,7 @@ start_service() {
     source /etc/birdnet/birdnet.conf
 
     if [[ $BAT_TIMER == false ]];then
-      sleep 240
+      sleep 60
       continue
     fi
 
@@ -40,12 +40,12 @@ start_service() {
 
     if [[ "$currenttime" > "$BAT_DUSK" ]] || [[ "$currenttime" < "$BAT_DAWN" ]];then
       if [[ $running == false ]];then
-        ./restart_services.sh
+        /usr/local/bin/restart_services.sh
         running=true
       fi
     else
       if [[ $running == true ]];then
-        ./stop_core_services.sh
+        /usr/local/bin/stop_core_services.sh
         running=false
       fi
     fi
