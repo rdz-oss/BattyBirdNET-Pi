@@ -1,4 +1,4 @@
-#!/usr/bin/env -S --default-signal=PIPE bash
+#!/usr/bin/env bash
 # Runs a start/stop timer for BattyBirdNET-Pi
 set -x
 
@@ -40,12 +40,12 @@ start_service() {
 
     if [[ "$currenttime" > "$BAT_DUSK" ]] || [[ "$currenttime" < "$BAT_DAWN" ]];then
       if [[ $running == false ]];then
-        /usr/local/bin/restart_services.sh
+        sudo /usr/local/bin/restart_services.sh
         running=true
       fi
     else
       if [[ $running == true ]];then
-        /usr/local/bin/stop_core_services.sh
+        sudo /usr/local/bin/stop_core_services.sh
         running=false
       fi
     fi

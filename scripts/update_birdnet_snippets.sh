@@ -19,7 +19,7 @@ find $HOME/BirdNET-Pi -path "$HOME/BirdNET-Pi/birdnet" -prune -o -type f ! -perm
 chmod -R o-w ~/BirdNET-Pi/templates/*
 
 chmod +x ~/BirdNET-Pi/scripts/guano_edit.py
-
+chmod +x ~/BirdNET-Pi/scripts/batnet_timer.sh
 
 # Create blank sitename as it's optional. First time install will use $HOSTNAME.
 if ! grep SITE_NAME /etc/birdnet/birdnet.conf &>/dev/null;then
