@@ -365,21 +365,6 @@ if(isset($_GET['submit'])) {
 		}
 	}
 
-    if(isset($_GET["bat_classifier"])) {
-      $bat_classifier = $_GET["bat_classifier"];
-      if(strcmp($bat_classifier,$config['BAT_CLASSIFIER']) !== 0) {
-        $contents = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents);
-        $contents2 = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents2);
-
-	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
-	    $fh2 = fopen("./scripts/thisrun.txt", "w");
-	    fwrite($fh, $contents);
-	    fwrite($fh2, $contents2);
-	    sleep(1);
-	    exec('sudo reboot');
-	  }
-    }
-
     if(isset($_GET["bat_timer"])) {
       $bat_timer = "true";
       if(strcmp($bat_timer,$config['BAT_TIMER']) !== 0) {
@@ -426,8 +411,21 @@ if(isset($_GET['submit'])) {
 	fwrite($fh2, $contents2);
 	}
 
+    if(isset($_GET["bat_classifier"])) {
+      $bat_classifier = $_GET["bat_classifier"];
+      if(strcmp($bat_classifier,$config['BAT_CLASSIFIER']) !== 0) {
+        $contents = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents);
+        $contents2 = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents2);
 
-
+	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
+	    $fh2 = fopen("./scripts/thisrun.txt", "w");
+	    fwrite($fh, $contents);
+	    fwrite($fh2, $contents2);
+	    sleep(1);
+	    exec('restart_services.sh');
+	    # exec('sudo reboot');
+	  }
+    }
 
 $user = trim(shell_exec("awk -F: '/1000/{print $1}' /etc/passwd"));
 $home = trim(shell_exec("awk -F: '/1000/{print $6}' /etc/passwd"));
