@@ -368,8 +368,8 @@ if(isset($_GET['submit'])) {
     if(isset($_GET["bat_timer"])) {
       $bat_timer = "true";
       if(strcmp($bat_timer,$config['BAT_TIMER']) !== 0) {
-        $contents = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=true", $contents);
-        $contents2 = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=true", $contents2);
+        $contents = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=\"true\"", $contents);
+        $contents2 = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=\"true\"", $contents2);
       }
     } else {
       $contents = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=false", $contents);
