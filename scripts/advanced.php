@@ -473,6 +473,10 @@ if (file_exists('./scripts/thisrun.txt')) {
 
       <table class="settingstable"><tr><td>
       <h2>Bat Classifier Settings</h2>
+       <label for="bat_timer">Use the Dusk to Dawn timer: </label>
+      <input type="checkbox" name="bat_timer" <?php if($newconfig['BAT_TIMER'] == "true") { echo "checked"; };?> ><br>
+      <p> Use the Dusk to Dawn timer.</p>
+
       <label for="bat_classifier">Bat Classifier</label>
       <select name="bat_classifier">
       <option selected="<?php print($newconfig['BAT_CLASSIFIER']);?>"><?php print($newconfig['BAT_CLASSIFIER']);?></option>
@@ -482,10 +486,7 @@ if (file_exists('./scripts/thisrun.txt')) {
 foreach($formats as $format){
   echo "<option value='$format'>$format</option>";
 }
-?>     <h2>Options</h2>
-       <label for="bat_timer">Use the Dusk to Dawn timer: </label>
-      <input type="checkbox" name="bat_timer" <?php if($newconfig['BAT_TIMER'] == "true") { echo "checked"; };?> ><br>
-      <p> Use the</p>
+?>
       </td></tr></table><br>
 
       <table class="settingstable"><tr><td>
