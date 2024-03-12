@@ -474,8 +474,10 @@ if (file_exists('./scripts/thisrun.txt')) {
       <table class="settingstable"><tr><td>
       <h2>Bat Classifier Settings</h2>
        <label for="bat_timer">Use the Dusk to Dawn timer: </label>
-      <input type="checkbox" name="bat_timer" <?php if($newconfig['BAT_TIMER'] == "true") { echo "checked"; };?> ><br>
+      <input type="checkbox" name="bat_timer" <?php if($newconfig['BAT_TIMER'] ) { echo "checked"; };?> ><br>
       <p> Use the Dusk to Dawn timer.</p>
+
+
 
       <label for="bat_classifier">Bat Classifier</label>
       <select name="bat_classifier">
