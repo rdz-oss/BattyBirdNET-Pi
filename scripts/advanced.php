@@ -379,8 +379,8 @@ if(isset($_GET['submit'])) {
     if(isset($_GET["bat_dusk"])) {
       $bat_dusk = $_GET["bat_dusk"];
       if(strcmp($bat_dusk,$config['BAT_DUSK']) !== 0) {
-        $contents = preg_replace("/BAT_DUSK=.*/", "BAT_DUSK=$bat_dusk", $contents);
-        $contents2 = preg_replace("/BAT_DUSK=.*/", "BAT_DUSK=$bat_dusk", $contents2);
+        $contents = preg_replace("/BAT_DUSK=.*/", "BAT_DUSK=\"$bat_dusk\"", $contents);
+        $contents2 = preg_replace("/BAT_DUSK=.*/", "BAT_DUSK=\"$bat_dusk\"", $contents2);
 
 	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
 	    $fh2 = fopen("./scripts/thisrun.txt", "w");
@@ -393,8 +393,8 @@ if(isset($_GET['submit'])) {
     if(isset($_GET["bat_dawn"])) {
       $bat_dawn = $_GET["bat_dawn"];
       if(strcmp($bat_dawn,$config['BAT_DAWN']) !== 0) {
-        $contents = preg_replace("/BAT_DAWN=.*/", "BAT_DAWN=$bat_dawn", $contents);
-        $contents2 = preg_replace("/BAT_DAWN=.*/", "BAT_DAWN=$bat_dawn", $contents2);
+        $contents = preg_replace("/BAT_DAWN=.*/", "BAT_DAWN=\"$bat_dawn\"", $contents);
+        $contents2 = preg_replace("/BAT_DAWN=.*/", "BAT_DAWN=\"$bat_dawn\"", $contents2);
 
 	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
 	    $fh2 = fopen("./scripts/thisrun.txt", "w");
