@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Runs a start/stop timer for BattyBirdNET-Pi
-set -x
+#set -x
 
 source /etc/birdnet/birdnet.conf
 #/usr/local/bin
