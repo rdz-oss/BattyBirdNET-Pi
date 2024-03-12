@@ -482,7 +482,7 @@ if (file_exists('./scripts/thisrun.txt')) {
 foreach($formats as $format){
   echo "<option value='$format'>$format</option>";
 }
-?>
+?>     <h2>Options</h2>
        <label for="bat_timer">Use the Dusk to Dawn timer: </label>
       <input type="checkbox" name="bat_timer" <?php if($newconfig['BAT_TIMER'] == "true") { echo "checked"; };?> ><br>
       <p> Use the</p>
