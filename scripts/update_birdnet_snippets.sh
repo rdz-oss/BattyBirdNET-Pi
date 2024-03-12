@@ -21,11 +21,30 @@ chmod -R o-w ~/BirdNET-Pi/templates/*
 chmod +x ~/BirdNET-Pi/scripts/guano_edit.py
 chmod +x ~/BirdNET-Pi/scripts/batnet_timer.sh
 
+install_batnet_timer_server() {
+  cat << EOF > $HOME/BirdNET-Pi/templates/batnet_timer_server.service
+[Unit]
+Description=BatNET Dusk/Dawn Starter Server
+[Service]
+Restart=always
+Type=simple
+RestartSec=5
+User=${USER}
+ExecStart=/usr/local/bin/batnet_timer.sh
+[Install]
+WantedBy=multi-user.target
+EOF
+  ln -sf $HOME/BirdNET-Pi/templates/batnet_timer_server.service /usr/lib/systemd/system
+  systemctl enable batnet_timer_server.service
+}
+
 if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u$USER echo "BAT_TIMER=\"false\"" >> /etc/birdnet/birdnet.conf
   sudo -u$USER echo "BAT_DUSK=\"18:00\"" >> /etc/birdnet/birdnet.conf
   sudo -u$USER echo "BAT_DAWN=\"06:00\"" >> /etc/birdnet/birdnet.conf
+  install_batnet_timer_server
 fi
+
 
 
 # Create blank sitename as it's optional. First time install will use $HOSTNAME.
