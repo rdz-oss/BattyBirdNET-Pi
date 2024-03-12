@@ -20,6 +20,12 @@ chmod -R o-w ~/BirdNET-Pi/templates/*
 
 chmod +x ~/BirdNET-Pi/scripts/guano_edit.py
 chmod +x ~/BirdNET-Pi/scripts/batnet_timer.sh
+if ! grep SITE_NAME /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u$USER echo "BAT_TIMER=false" >> /etc/birdnet/birdnet.conf
+  sudo -u$USER echo "BAT_DUSK=\"18:00\"" >> /etc/birdnet/birdnet.conf
+  sudo -u$USER echo "BAT_DAWN=\"06:00\"" >> /etc/birdnet/birdnet.conf
+fi
+
 
 # Create blank sitename as it's optional. First time install will use $HOSTNAME.
 if ! grep SITE_NAME /etc/birdnet/birdnet.conf &>/dev/null;then
