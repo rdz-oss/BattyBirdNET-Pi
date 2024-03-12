@@ -475,9 +475,15 @@ if (file_exists('./scripts/thisrun.txt')) {
       <h2>Bat Classifier Settings</h2>
        <label for="bat_timer">Use the Dusk to Dawn timer: </label>
       <input type="checkbox" name="bat_timer" <?php if($newconfig['BAT_TIMER'] ) { echo "checked"; };?> ><br>
-      <p> Use the Dusk to Dawn timer.</p>
+      <p> Stops detection during the day (between dusk and dawn).</p>
 
+      <label for="bat_dusk">Dusk (HH:MM) </label>
+      <input name="bat_dusk" type="text"  value="<?php print($newconfig['BAT_DUSK']);?>" /><br>
+      <p>Start detecting at e.g. 18:00 hours (Dusk)</p>
 
+      <label for="bat_dawn">Dawn (HH:MM) </label>
+      <input name="bat_dawn" type="text"  value="<?php print($newconfig['BAT_DAWN']);?>" /><br>
+      <p>Stop detecting at e.g. 06:00 hours (Dawn)</p>
 
       <label for="bat_classifier">Bat Classifier</label>
       <select name="bat_classifier">
