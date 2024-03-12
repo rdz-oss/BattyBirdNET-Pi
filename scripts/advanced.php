@@ -270,35 +270,36 @@ if(isset($_GET['submit'])) {
     }
   }
 
-	if (isset($_GET["LogLevel_BirdnetRecordingService"])) {
-		$birdnet_recording_service_log_level = trim($_GET["LogLevel_BirdnetRecordingService"]);
+  if (isset($_GET["LogLevel_BirdnetRecordingService"])) {
+    $birdnet_recording_service_log_level = trim($_GET["LogLevel_BirdnetRecordingService"]);
 
-		//If setting exists change it's value
-		if (array_key_exists('LogLevel_BirdnetRecordingService', $config)) {
-			//Setting exists already, see if the value changed
-			if (strcmp($birdnet_recording_service_log_level, $config['LogLevel_BirdnetRecordingService']) !== 0) {
-				$contents = preg_replace("/LogLevel_BirdnetRecordingService=.*/", "LogLevel_BirdnetRecordingService=\"$birdnet_recording_service_log_level\"", $contents);
-				$contents2 = preg_replace("/LogLevel_BirdnetRecordingService=.*/", "LogLevel_BirdnetRecordingService=\"$birdnet_recording_service_log_level\"", $contents2);
-				$fh = fopen("/etc/birdnet/birdnet.conf", "w");
-				$fh2 = fopen("./scripts/thisrun.txt", "w");
-				fwrite($fh, $contents);
-				fwrite($fh2, $contents2);
-				sleep(1);
-				exec("sudo systemctl restart birdnet_recording.service");
-			}
-		} else {
-			//Create the setting in the setting file - same as what update_birdnet_snippets.sh does but will take the users selected log level as the value
-			shell_exec('sudo echo "LogLevel_BirdnetRecordingService=\"' . $birdnet_recording_service_log_level . '\"" >> /etc/birdnet/birdnet.conf');
-			//also update this run txt file
-			shell_exec('sudo echo "LogLevel_BirdnetRecordingService=\"' . $birdnet_recording_service_log_level . '\"" >> ./scripts/thisrun.txt');
+    //If setting exists change it's value
+    if (array_key_exists('LogLevel_BirdnetRecordingService', $config)) {
+      //Setting exists already, see if the value changed
+      if (strcmp($birdnet_recording_service_log_level, $config['LogLevel_BirdnetRecordingService']) !== 0) {
+        $contents = preg_replace("/LogLevel_BirdnetRecordingService=.*/", "LogLevel_BirdnetRecordingService=\"$birdnet_recording_service_log_level\"", $contents);
+        $contents2 = preg_replace("/LogLevel_BirdnetRecordingService=.*/", "LogLevel_BirdnetRecordingService=\"$birdnet_recording_service_log_level\"", $contents2);
+        $fh = fopen("/etc/birdnet/birdnet.conf", "w");
+        $fh2 = fopen("./scripts/thisrun.txt", "w");
+        fwrite($fh, $contents);
+        fwrite($fh2, $contents2);
+        sleep(1);
+        exec("sudo systemctl restart birdnet_recording.service");
+      }
+	} else
+	{
+	  //Create the setting in the setting file - same as what update_birdnet_snippets.sh does but will take the users selected log level as the value
+	  shell_exec('sudo echo "LogLevel_BirdnetRecordingService=\"' . $birdnet_recording_service_log_level . '\"" >> /etc/birdnet/birdnet.conf');
+	  //also update this run txt file
+	  shell_exec('sudo echo "LogLevel_BirdnetRecordingService=\"' . $birdnet_recording_service_log_level . '\"" >> ./scripts/thisrun.txt');
 
-			//Reload the config files as we've changed the contents, we need to make sure the contents of the existing variables reflects contents of the config file
-			sleep(1);
-			$contents = file_get_contents('/etc/birdnet/birdnet.conf');
-			$contents2 = file_get_contents('./scripts/thisrun.txt');
+	  //Reload the config files as we've changed the contents, we need to make sure the contents of the existing variables reflects contents of the config file
+	  sleep(1);
+	  $contents = file_get_contents('/etc/birdnet/birdnet.conf');
+	  $contents2 = file_get_contents('./scripts/thisrun.txt');
 
-			exec("sudo systemctl restart birdnet_recording.service");
-		}
+	  exec("sudo systemctl restart birdnet_recording.service");
+	  }
 	}
 
 	if (isset($_GET["LogLevel_SpectrogramViewerService"])) {
@@ -376,16 +377,57 @@ if(isset($_GET['submit'])) {
 	    fwrite($fh2, $contents2);
 	    sleep(1);
 	    exec('sudo reboot');
+	  }
+    }
+
+    if(isset($_GET["bat_timer"])) {
+      $bat_timer = "true";
+      if(strcmp($bat_timer,$config['BAT_TIMER']) !== 0) {
+        $contents = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=true", $contents);
+        $contents2 = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=true", $contents2);
+      }
+    } else {
+      $contents = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=false", $contents);
+      $contents2 = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=false", $contents2);
+    }
+
+    if(isset($_GET["bat_dusk"])) {
+      $bat_dusk = $_GET["bat_dusk"];
+      if(strcmp($bat_dusk,$config['BAT_DUSK']) !== 0) {
+        $contents = preg_replace("/BAT_DUSK=.*/", "BAT_DUSK=$bat_dusk", $contents);
+        $contents2 = preg_replace("/BAT_DUSK=.*/", "BAT_DUSK=$bat_dusk", $contents2);
+
+	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
+	    $fh2 = fopen("./scripts/thisrun.txt", "w");
+	    fwrite($fh, $contents);
+	    fwrite($fh2, $contents2);
+	    sleep(1);
       }
     }
 
+    if(isset($_GET["bat_dawn"])) {
+      $bat_dawn = $_GET["bat_dawn"];
+      if(strcmp($bat_dawn,$config['BAT_DAWN']) !== 0) {
+        $contents = preg_replace("/BAT_DAWN=.*/", "BAT_DAWN=$bat_dawn", $contents);
+        $contents2 = preg_replace("/BAT_DAWN=.*/", "BAT_DAWN=$bat_dawn", $contents2);
+
+	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
+	    $fh2 = fopen("./scripts/thisrun.txt", "w");
+	    fwrite($fh, $contents);
+	    fwrite($fh2, $contents2);
+	    sleep(1);
+      }
+    }
 	//Finally write the data out. some sections do this themselves in order to have the new settings ready for the services that will be restarted
 	//but will doubly ensure the settings are saved after any modification
 	$fh = fopen('/etc/birdnet/birdnet.conf', "w");
 	$fh2 = fopen("./scripts/thisrun.txt", "w");
 	fwrite($fh, $contents);
 	fwrite($fh2, $contents2);
-}
+	}
+
+
+
 
 $user = trim(shell_exec("awk -F: '/1000/{print $1}' /etc/passwd"));
 $home = trim(shell_exec("awk -F: '/1000/{print $6}' /etc/passwd"));
