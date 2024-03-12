@@ -32,6 +32,10 @@ start_service() {
     source /etc/birdnet/birdnet.conf
 
     if [[ $BAT_TIMER == false ]];then
+      if [[ $running == false ]];then
+        sudo /usr/local/bin/restart_services.sh
+        running=true
+      fi
       sleep 60
       continue
     fi
