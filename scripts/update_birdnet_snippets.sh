@@ -46,8 +46,6 @@ if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo systemctl start batnet_timer_server.service
 fi
 
-
-
 # Create blank sitename as it's optional. First time install will use $HOSTNAME.
 if ! grep SITE_NAME /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u$USER echo "SITE_NAME=\"\"" >> /etc/birdnet/birdnet.conf
