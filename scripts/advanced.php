@@ -541,8 +541,8 @@ if (file_exists('./scripts/thisrun.txt')) {
             echo "<option value='$format'>$format</option>";
         }
       ?>
-      </select><br>
-
+      </select>
+      <br><br>
 
       <label for="bat_classifier">Bat Classifier</label>
       <select name="bat_classifier">
@@ -554,7 +554,7 @@ if (file_exists('./scripts/thisrun.txt')) {
         }
       ?>
       </select>
-
+      <br><br>
 
       </td></tr></table><br>
 
@@ -584,7 +584,6 @@ if (file_exists('./scripts/thisrun.txt')) {
       <label for="audiofmt">Extractions Audio Format</label>
       <select name="audiofmt">
       <option selected="<?php print($newconfig['AUDIOFMT']);?>"><?php print($newconfig['AUDIOFMT']);?></option>
-
 <?php
   $formats = array("8svx", "aif", "aifc", "aiff", "aiffc", "al", "amb", "amr-nb", "amr-wb", "anb", "au", "avr", "awb", "caf", "cdda", "cdr", "cvs", "cvsd", "cvu", "dat", "dvms", "f32", "f4", "f64", "f8", "fap", "flac", "fssd", "gsm", "gsrt", "hcom", "htk", "ima", "ircam", "la", "lpc", "lpc10", "lu", "mat", "mat4", "mat5", "maud", "mp2", "mp3", "nist", "ogg", "paf", "prc", "pvf", "raw", "s1", "s16", "s2", "s24", "s3", "s32", "s4", "s8", "sb", "sd2", "sds", "sf", "sl", "sln", "smp", "snd", "sndfile", "sndr", "sndt", "sou", "sox", "sph", "sw", "txw", "u1", "u16", "u2", "u24", "u3", "u32", "u4", "u8", "ub", "ul", "uw", "vms", "voc", "vorbis", "vox", "w64", "wav", "wavpcm", "wv", "wve", "xa", "xi");
 foreach($formats as $format){
