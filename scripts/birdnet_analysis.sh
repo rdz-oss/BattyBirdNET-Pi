@@ -64,7 +64,7 @@ get_files() {
 
 noisered_files() {
   for i in "${files[@]}";do
-    sox "${1}/${i}" "${1}/${i}.out" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out" "${1}/${i}"
+    sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"
   done
 }
 
