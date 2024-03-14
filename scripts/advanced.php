@@ -541,6 +541,7 @@ if (file_exists('./scripts/thisrun.txt')) {
             echo "<option value='$format'>$format</option>";
         }
       ?>
+      </select>
 
 
       <label for="bat_classifier">Bat Classifier</label>
@@ -552,6 +553,7 @@ if (file_exists('./scripts/thisrun.txt')) {
             echo "<option value='$format'>$format</option>";
         }
       ?>
+      </select>
 
 
       </td></tr></table><br>
