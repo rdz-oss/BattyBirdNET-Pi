@@ -10,7 +10,7 @@ pandas
 seaborn
 streamlit==1.19.0
 plotly
-apprise==1.2.1
+apprise==1.6.0
 paho-mqtt
 pytest==7.1.2
 pytest-mock==3.7.0

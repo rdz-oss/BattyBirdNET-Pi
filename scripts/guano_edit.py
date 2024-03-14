@@ -36,7 +36,7 @@ from string import Template
 import guano
 
 
-MAKE_BACKUPS = True
+MAKE_BACKUPS = False
 
 
 class GuanoTemplate(Template):

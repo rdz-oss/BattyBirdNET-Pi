@@ -35,7 +35,7 @@ ExecStart=/usr/local/bin/batnet_timer.sh
 WantedBy=multi-user.target
 EOF
   ln -sf $HOME/BirdNET-Pi/templates/batnet_timer_server.service /usr/lib/systemd/system
-  systemctl enable batnet_timer_server.service
+  sudo systemctl enable batnet_timer_server.service
 }
 
 if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then
@@ -43,6 +43,7 @@ if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u$USER echo "BAT_DUSK=\"18:00\"" >> /etc/birdnet/birdnet.conf
   sudo -u$USER echo "BAT_DAWN=\"06:00\"" >> /etc/birdnet/birdnet.conf
   install_batnet_timer_server
+  sudo systemctl start batnet_timer_server.service
 fi
 
 

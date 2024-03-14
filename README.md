@@ -6,12 +6,12 @@ Fully functional and extended fork of BirdNET-Pi for bats.
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
 night-life around you. Can also be placed remotely with a power source.
 
-* Scans ultrasound with 256kHz sampling rate continuously 24/7 
+* Scans ultrasound with 256kHz sampling rate continuously from dusk to dawn (timer function) 
 * Automated bat ID using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer.
 * Inherits many great things from BirdNET-Pi - including notifications on detection
 * Enabled for European, UK and North American species
 * Not designed for automated biodiversity assessments - recreational use at this point.
-* Adds meta-data in GUANO format to the recordings
+* Adds some meta-data in GUANO format to the recordings
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
 citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET
@@ -43,18 +43,19 @@ Including stats and spectrograms to 128 kHz
 
 ### System components
 
-* A RasPi 4B with 4GB or more, likely also Pi 5 will work. Use some form of passive or active cooling!
+* A RasPi 4B with 4GB or more, currently Pi 5 will not work (similar to BirdNET-PI). Use some form of passive or active cooling!
 * Power supply for the Raspi and an sd card - choose a large one 64 Gb +
-* A USB microphone for ultra sound: tested on audiomoth 1.2 and wildlife acoustics echo meter touch 2
+* A USB microphone for ultra sound: tested on audiomoth usb 1.2 and wildlife acoustics echo meter touch 2 (2 and 2 pro)
 * USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
 * Optional: You can use a power bank to run the system as long as the power lasts at any location. 
 You might want to add some form of rain protection.
 
 Some hints:
 
-* The echo meter touch 2 pro appears not to work in this setup
-* If you use the audiomoth, you will have to set the sampling frequency to 256kHz or the system will overload after a few hours.
-* https://www.openacousticdevices.info/audiomoth  (Usb or battery version with usb microphone configuration)
+* The echo meter touch 2 pro works for my setup but not for some. Unkown reason at this point.
+* If you use the audiomoth, you will have to set the sampling frequency to 250kHz or the system will overload after a few hours.
+* https://www.openacousticdevices.info/audiomoth  (Usb or battery version with usb microphone configuration). 
+You will need a USB A male to micro USB cable to connect this one.
 * https://www.wildlifeacoustics.com/products/echo-meter-touch-2-android-2
 
 It is easily assembled
@@ -65,7 +66,7 @@ It is easily assembled
 ### Location and setup hints
 1. Find a place with low noise from crickets, machinery (cars), or electrical appliances and outlets. They
 tend to produce ultra sonic noise. Be aware that the RaspberryPi itself and its power source generate considerate ultra sound noise.
-2. Place it in the bats flight path (elevated if you can) or point it to the flight paths.
+2. Place it in the bats flight path (elevated e.g. 3m if you can) or point it to the flight paths.
 3. Place it away from reflective surfaces or other sources of echo. It does work (in Munich) between buildings, 
 but there is an echo effect as well as the bats adapting to the situation (calls shift a bit).
 4. Shield your power converter with acoustic padding or use a long power cable to avoid the ultra sound noise
@@ -93,7 +94,7 @@ in test runs in Munich (October) the error rate was approximately (rough estimat
 * So at that location 4 bats species flying simultaneously would currently lead to approximately:  12%+8% = 20% wrong assessments on species level
 per night (not counting false noise detections during daytime).
 This may differ for other locations and background noises. 
-* Under development - moving target 
+* Under development - moving target. You can contribute by writing me when things are not working well.
 
 ## Interpreting the classifications
 In order to get the most out of the system it helps to be aware of a few things. Unfortunately you cannot just assume that a detection is always due to a bat.
@@ -112,7 +113,7 @@ There are many sources of such noise:
   to use noise cancelling foam around it or to get as big a distance between the power plug and the microphone.
   Or use a power bank.
   - Bush crickets can confuse the classifier. The classifier is trained to ignore them on samples from GER and SE, but not all types.
-  - Cars while operating, parcking etc. Also, sometimes they have ultrasound based deterrrents for martens.
+  - Cars while operating, parking etc. Also, sometimes they have ultrasound based deterrents for martens.
   - There are often two or more species flying at the same time. 
 
 ### Some bats have near identical calls
@@ -164,15 +165,15 @@ Echolocation frequency (max energy) | Common name           | Species         |
 108 kHz | Lesser Horseshoe      | Rhinolophus hipposideros | 
 
 ### Install
-* Install Raspbian OS 64 bit lite on the sd card. Set a system user, name and configure your WIFI. If you have not done this before, 
+* Install Raspbian OS 64 bit lite on the sd card. **Use the legacy version (Bullseye based)**. Set a system user, name and configure your WIFI. If you have not done this before, 
 you can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system ([see here](./README-BirdNET-Pi.md)). 
-* After that you will log in to the RasPi with your username and password via ssh (it should be in your wireles LAN after booting)
+* After that you will log in to the RasPi with your username and password via ssh (it should be in your wireless LAN after booting)
 * You call the install script from this repository (i.e.. this is where you deviate from the instructions found for BirdNET-Pi)
 ```sh
 curl -s https://raw.githubusercontent.com/rdz-oss/BattyBirdNET-Pi/main/newinstaller.sh | bash
 ```
 The operating system is now updated, two repositories are pulled from github, files are copied for the automation of services, the webserver setup etc.
-Might take a few minutes. When done, it will reboot. If you see a bat flying in the middle of the WbUI - you have installed battyBirdNET-Pi.
+Might take a few minutes. When done, it will reboot. **If you see a bat flying in the middle of the WbUI - you have installed BattyBirdNET-Pi**.
 
 You can connect to the WebUI via your browser if you are in the same WIFI network. It should show up under http://name-you-gave-it.local .
 This sometimes does not work depending on your router configuration. You can look up the ip address given to the BattyBirdNET-Pi
@@ -181,11 +182,11 @@ list all the devices in your network. The BattyBirdNET-Pi should show up.
 
 ### To use the North American/UK version:
 
-* install as above, 
-* go to the tools setting
-* log in as user 'birdnet', leave password empty
+* Install as above, 
+* Go to the Tools setting
+* Log in as user 'birdnet', leave password empty
 * Settings -> Advanced Settings -> Bat Classifier (use USA or UK)
-* the system will reboot, wait two minutes refresh browser
+* The system will reboot, wait two minutes refresh browser
 
 ### Acknowledgements
 * This project would not have been possible without the developers of BirdNET and BirdNET-Pi.
