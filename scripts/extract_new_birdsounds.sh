@@ -115,8 +115,15 @@ for h in "${SCAN_DIRS[@]}";do
       END=${RECORDING_LENGTH}
     fi
 
-    sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
+    if [[ $NOISERED == true ]];then
+      sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
+      trim ="${START}" ="${END}" noisered "${HOME}/${NOISE_PROF}" "${NOISE_PROF_FACTOR}"
+    else
+      sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
       trim ="${START}" ="${END}"
+    fi
+
+
     # Add guano meta data  "Timestamp: ${DATE}"
     guano_edit.py "GUANO|Version: 1.0" "Samplerate: 256000" "Loc Position: ${LATITUDE} ${LONGITUDE}" "Species Auto ID: ${SCIENTIFIC_NAME}" "Note: BattyBirdNET-Pi" "${NEWSPECIES_BYDATE}/${NEWFILE}"
 

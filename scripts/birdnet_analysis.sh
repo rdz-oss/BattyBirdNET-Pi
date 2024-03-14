@@ -187,9 +187,9 @@ run_birdnet() {
   get_files "${1}"
   [ -z ${NOISERED} ] && NOISERED=false
 
-  if [[ $NOISERED == true ]];then
-    noisered_files "${1}"
-  fi
+#  if [[ $NOISERED == true ]];then
+#    noisered_files "${1}"
+#  fi
 
   move_analyzed "${1}"
   run_analysis "${1}"

@@ -251,7 +251,7 @@ BAT_TIMER=false
 BAT_DUSK="18:00"
 BAT_DAWN="06:00"
 NOISERED=false
-NOISE_PROF="BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/noise-audiomoth-1-2.prof"
+NOISE_PROF="BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/audiomoth_usa.prof"
 NOISE_PROF_FACTOR=0.2
 
 
