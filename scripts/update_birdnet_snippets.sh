@@ -46,7 +46,11 @@ if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo systemctl start batnet_timer_server.service
 fi
 
-
+if ! grep NOISERED /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u$USER echo "NOISERED=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u$USER echo "NOISE_PROF=\"BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/noise-audiomoth-1-2.prof\"" >> /etc/birdnet/birdnet.conf
+  sudo -u$USER echo "NOISE_PROF_FACTOR=\"0.2\"" >> /etc/birdnet/birdnet.conf
+fi
 
 # Create blank sitename as it's optional. First time install will use $HOSTNAME.
 if ! grep SITE_NAME /etc/birdnet/birdnet.conf &>/dev/null;then
