@@ -252,7 +252,7 @@ BAT_DUSK="18:00"
 BAT_DAWN="06:00"
 NOISERED=false
 NOISE_PROF="BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/audiomoth_usa.prof"
-NOISE_PROF_FACTOR=0.2
+NOISE_PROF_FACTOR=0.5
 
 
 ## These are just for debugging

@@ -61,6 +61,7 @@ get_files() {
 # Run after get_files()
 # Takes one argument:
 #   - {DIRECTORY}
+# not in use but working
 
 noisered_files() {
   for i in "${files[@]}";do

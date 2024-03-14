@@ -49,7 +49,7 @@ fi
 if ! grep NOISERED /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u$USER echo "NOISERED=\"false\"" >> /etc/birdnet/birdnet.conf
   sudo -u$USER echo "NOISE_PROF=\"BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/audiomoth_usa.prof\"" >> /etc/birdnet/birdnet.conf
-  sudo -u$USER echo "NOISE_PROF_FACTOR=\"0.2\"" >> /etc/birdnet/birdnet.conf
+  sudo -u$USER echo "NOISE_PROF_FACTOR=\"0.5\"" >> /etc/birdnet/birdnet.conf
 fi
 
 # Create blank sitename as it's optional. First time install will use $HOSTNAME.
