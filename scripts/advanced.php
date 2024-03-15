@@ -403,6 +403,46 @@ if(isset($_GET['submit'])) {
 	    sleep(1);
       }
     }
+
+    if(isset($_GET["bat_noisered"])) {
+      $bat_noisered = "true";
+      if(strcmp($bat_noisered,$config['NOISERED']) !== 0) {
+        $contents = preg_replace("/NOISERED=.*/", "NOISERED=\"true\"", $contents);
+        $contents2 = preg_replace("/NOISERED=.*/", "NOISERED=\"true\"", $contents2);
+      }
+    } else {
+      $contents = preg_replace("/NOISERED=.*/", "NOISERED=false", $contents);
+      $contents2 = preg_replace("/NOISERED=.*/", "NOISERED=false", $contents2);
+    }
+
+    if(isset($_GET["noiseprof_factor"])) {
+      $noiseprof_factor = $_GET["noiseprof_factor"];
+      if(strcmp($noiseprof_factor,$config['NOISE_PROF_FACTOR']) !== 0) {
+        $contents = preg_replace("/NOISE_PROF_FACTOR=.*/", "NOISE_PROF_FACTOR=\"$noiseprof_factor\"", $contents);
+        $contents2 = preg_replace("/NOISE_PROF_FACTOR=.*/", "NOISE_PROF_FACTOR=\"$noiseprof_factor\"", $contents2);
+
+	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
+	    $fh2 = fopen("./scripts/thisrun.txt", "w");
+	    fwrite($fh, $contents);
+	    fwrite($fh2, $contents2);
+	    sleep(1);
+      }
+    }
+
+    if(isset($_GET["noiseprof_prof"])) {
+      $noiseprof_prof = $_GET["noiseprof_prof"];
+      if(strcmp($noiseprof_prof,$config['NOISE_PROF']) !== 0) {
+        $contents = preg_replace("/NOISE_PROF=.*/", "NOISE_PROF=\"BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/$noiseprof_prof\"", $contents);
+        $contents2 = preg_replace("/NOISE_PROF=.*/", "NOISE_PROF=\"BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/$noiseprof_prof\"", $contents2);
+
+	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
+	    $fh2 = fopen("./scripts/thisrun.txt", "w");
+	    fwrite($fh, $contents);
+	    fwrite($fh2, $contents2);
+	    sleep(1);
+      }
+    }
+
 	//Finally write the data out. some sections do this themselves in order to have the new settings ready for the services that will be restarted
 	//but will doubly ensure the settings are saved after any modification
 	$fh = fopen('/etc/birdnet/birdnet.conf', "w");
@@ -471,9 +511,10 @@ if (file_exists('./scripts/thisrun.txt')) {
 
       <table class="settingstable"><tr><td>
       <h2>Bat Classifier Settings</h2>
-       <label for="bat_timer">Use the Dusk to Dawn timer: </label>
+
+      <label for="bat_timer">Use the Dusk to Dawn timer: </label>
       <input type="checkbox" name="bat_timer" <?php if($newconfig['BAT_TIMER'] ) { echo "checked"; };?> ><br>
-      <p> Stops detection during the day (between dusk and dawn).</p>
+      <p> Stops detection during the day (detects between dusk and dawn).</p>
 
       <label for="bat_dusk">Dusk (HH:MM) </label>
       <input name="bat_dusk" type="text"  value="<?php print($newconfig['BAT_DUSK']);?>" /><br>
@@ -483,16 +524,38 @@ if (file_exists('./scripts/thisrun.txt')) {
       <input name="bat_dawn" type="text"  value="<?php print($newconfig['BAT_DAWN']);?>" /><br>
       <p>Stop detecting at e.g. 06:00 hours (Dawn)</p>
 
+      <label for="bat_noisered">Use the microfone noise reducer: </label>
+      <input type="checkbox" name="bat_noisered" <?php if($newconfig['NOISERED'] ) { echo "checked"; };?> ><br>
+      <p> Takes out most of microphone related noise in recordings with detections.</p>
+
+      <label for="noiseprof_factor">Noise reduction factor  </label>
+      <input name="noiseprof_factor" type="text"  value="<?php print($newconfig['NOISE_PROF_FACTOR']);?>" /><br>
+      <p>Between 0 and 1, e.g. 0.5 . Larger values increase risk of information loss. </p>
+
+      <label for="noiseprof_prof">Microphone noise profile</label>
+      <select name="noiseprof_prof">
+      <option selected="<?php print($newconfig['NOISE_PROF']);?>"><?php print($newconfig['NOISE_PROF']);?></option>
+      <?php
+        $formats = array("audiomoth_v12.prof");
+            foreach($formats as $format){
+            echo "<option value='$format'>$format</option>";
+        }
+      ?>
+      </select>
+      <br><br>
+
       <label for="bat_classifier">Bat Classifier</label>
       <select name="bat_classifier">
       <option selected="<?php print($newconfig['BAT_CLASSIFIER']);?>"><?php print($newconfig['BAT_CLASSIFIER']);?></option>
+      <?php
+        $formats = array("Bavaria", "USA", "USA-EAST","USA-WEST","UK");
+            foreach($formats as $format){
+            echo "<option value='$format'>$format</option>";
+        }
+      ?>
+      </select>
+      <br><br>
 
-<?php
-  $formats = array("Bavaria", "USA", "UK");
-foreach($formats as $format){
-  echo "<option value='$format'>$format</option>";
-}
-?>
       </td></tr></table><br>
 
       <table class="settingstable"><tr><td>
@@ -521,7 +584,6 @@ foreach($formats as $format){
       <label for="audiofmt">Extractions Audio Format</label>
       <select name="audiofmt">
       <option selected="<?php print($newconfig['AUDIOFMT']);?>"><?php print($newconfig['AUDIOFMT']);?></option>
-
 <?php
   $formats = array("8svx", "aif", "aifc", "aiff", "aiffc", "al", "amb", "amr-nb", "amr-wb", "anb", "au", "avr", "awb", "caf", "cdda", "cdr", "cvs", "cvsd", "cvu", "dat", "dvms", "f32", "f4", "f64", "f8", "fap", "flac", "fssd", "gsm", "gsrt", "hcom", "htk", "ima", "ircam", "la", "lpc", "lpc10", "lu", "mat", "mat4", "mat5", "maud", "mp2", "mp3", "nist", "ogg", "paf", "prc", "pvf", "raw", "s1", "s16", "s2", "s24", "s3", "s32", "s4", "s8", "sb", "sd2", "sds", "sf", "sl", "sln", "smp", "snd", "sndfile", "sndr", "sndt", "sou", "sox", "sph", "sw", "txw", "u1", "u16", "u2", "u24", "u3", "u32", "u4", "u8", "ub", "ul", "uw", "vms", "voc", "vorbis", "vox", "w64", "wav", "wavpcm", "wv", "wve", "xa", "xi");
 foreach($formats as $format){

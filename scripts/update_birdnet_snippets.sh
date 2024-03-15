@@ -46,6 +46,12 @@ if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo systemctl start batnet_timer_server.service
 fi
 
+if ! grep NOISERED /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u$USER echo "NOISERED=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u$USER echo "NOISE_PROF=\"BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/audiomoth_v12.prof\"" >> /etc/birdnet/birdnet.conf
+  sudo -u$USER echo "NOISE_PROF_FACTOR=\"0.22\"" >> /etc/birdnet/birdnet.conf
+fi
+
 # Create blank sitename as it's optional. First time install will use $HOSTNAME.
 if ! grep SITE_NAME /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u$USER echo "SITE_NAME=\"\"" >> /etc/birdnet/birdnet.conf
@@ -102,7 +108,7 @@ fi
 apprise_installation_status=$(~/BirdNET-Pi/birdnet/bin/python3 -c 'import pkgutil; print("installed" if pkgutil.find_loader("apprise") else "not installed")')
 if [[ "$apprise_installation_status" = "not installed" ]];then
   $HOME/BirdNET-Pi/birdnet/bin/pip3 install -U pip
-  $HOME/BirdNET-Pi/birdnet/bin/pip3 install apprise==1.2.1
+  $HOME/BirdNET-Pi/birdnet/bin/pip3 install apprise==1.6.0
 fi
 [ -f $HOME/BirdNET-Pi/apprise.txt ] || sudo -E -ucaddy touch $HOME/BirdNET-Pi/apprise.txt
 if ! which lsof &>/dev/null;then
@@ -206,7 +212,7 @@ EOF
 apprise_version=$($HOME/BirdNET-Pi/birdnet/bin/python3 -c "import apprise; print(apprise.__version__)")
 streamlit_version=$($HOME/BirdNET-Pi/birdnet/bin/pip3 show streamlit 2>/dev/null | grep Version | awk '{print $2}')
 
-[[ $apprise_version != "1.2.1" ]] && $HOME/BirdNET-Pi/birdnet/bin/pip3 install apprise==1.2.1
+[[ $apprise_version != "1.6.0" ]] && $HOME/BirdNET-Pi/birdnet/bin/pip3 install apprise==1.6.0
 [[ $streamlit_version != "1.19.0" ]] && $HOME/BirdNET-Pi/birdnet/bin/pip3 install streamlit==1.19.0
 
 if ! grep -q 'RuntimeMaxSec=' "$HOME/BirdNET-Pi/templates/birdnet_analysis.service"&>/dev/null; then

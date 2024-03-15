@@ -250,6 +250,10 @@ BAT_CLASSIFIER="Bavaria"
 BAT_TIMER=false
 BAT_DUSK="18:00"
 BAT_DAWN="06:00"
+NOISERED=false
+NOISE_PROF="BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/audiomoth_v12.prof"
+NOISE_PROF_FACTOR=0.22
+
 
 ## These are just for debugging
 LAST_RUN=

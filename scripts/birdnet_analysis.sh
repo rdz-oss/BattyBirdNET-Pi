@@ -57,6 +57,19 @@ get_files() {
   [ -n "${files[1]}" ] && echo "Files loaded"
 }
 
+# denoise the files collected in get_files()
+# Run after get_files()
+# Takes one argument:
+#   - {DIRECTORY}
+# not in use but working
+
+noisered_files() {
+  for i in "${files[@]}";do
+    sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"
+  done
+}
+
+
 # Move all files that have been analyzed already into newly created "Analyzed"
 # directory
 # Takes one argument:
@@ -147,6 +160,7 @@ run_analysis() {
 ${INCLUDEPARAM} \
 ${EXCLUDEPARAM} \
 ${BIRDWEATHER_ID_LOG}
+
     $PYTHON_VIRTUAL_ENV $DIR/analyze.py \
       --i "${1}/${i}" \
       --o "${1}/${i}.csv" \
@@ -172,6 +186,12 @@ ${BIRDWEATHER_ID_LOG}
 #   - {DIRECTORY}
 run_birdnet() {
   get_files "${1}"
+  [ -z ${NOISERED} ] && NOISERED=false
+
+#  if [[ $NOISERED == true ]];then
+#    noisered_files "${1}"
+#  fi
+
   move_analyzed "${1}"
   run_analysis "${1}"
 }
