@@ -293,3 +293,4 @@ fi
 
 sudo systemctl daemon-reload
 restart_services.sh
+sudo systemctl restart batnet_timer_server.service

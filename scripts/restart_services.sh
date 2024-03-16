@@ -4,7 +4,7 @@ source /etc/birdnet/birdnet.conf
 set -x
 my_dir=$HOME/BirdNET-Pi/scripts
 
-sudo systemctl stop batnet_timer_server.service
+# sudo systemctl stop batnet_timer_server.service
 sudo systemctl stop birdnet_server.service
 sudo systemctl stop batnet_server.service
 sudo systemctl stop birdnet_recording.service
@@ -82,4 +82,4 @@ fi
 
 # Finally start the birdnet_analysis.service
 sudo systemctl restart birdnet_analysis.service
-sudo systemctl restart batnet_timer_server.service
+# sudo systemctl restart batnet_timer_server.service
