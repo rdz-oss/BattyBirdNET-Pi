@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="homepage/images/bnp.png" width="320" />
+</p>
+
 ## BattyBirdNET-Pi  Automated real-time bat detection & id
 
 Fully functional and extended fork of BirdNET-Pi for bats.
