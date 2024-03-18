@@ -213,6 +213,7 @@ list all the devices in your network. The BattyBirdNET-Pi should show up.
 * Thanks to the Animal Sound Archive Berlin, ChiroVox, NABAT and XenoXanto databases and individual data donors:
 Kelvin R. (UK), Guillaume M. (FR), Svardsten L. (SE), Zinck R. (GER).
 * Thank you for your great work at testing Kelvin!
+* Thank you @spambake and Bill from Pixcams Inc for your support in getting the US version up to shape!
 * Thank you community for tips and testing! Your help is much appreciated!
 
 ### References
