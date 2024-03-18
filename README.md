@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="homepage/images/bnp.png" width="420" />
+  <img src="homepage/images/bnp.png" width="320" />
 </p>
 
 ## BattyBirdNET-Pi  Automated real-time bat detection & id
