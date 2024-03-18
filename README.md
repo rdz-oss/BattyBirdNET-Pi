@@ -63,9 +63,9 @@ You will need a USB A male to micro USB cable to connect this one.
 * https://www.wildlifeacoustics.com/products/echo-meter-touch-2-android-2
 
 It is easily assembled
-
-<img src="homepage/images/System-1.png" width="400" />
-
+<p align="center">
+  <img src="homepage/images/System-1.png" width="400" />
+</p>
 
 ### Location and setup hints
 1. Find a place with low noise from crickets, machinery (cars), or electrical appliances and outlets. They
