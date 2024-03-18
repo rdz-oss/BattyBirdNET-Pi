@@ -227,6 +227,11 @@ Echolocation frequency (max energy) | Common name                     | Species 
 53 kHz | California myotis               | Myotis californicus       | 
 55 kHz | Yuma myotis                     | Myotis yumanensis         | 
 
+</br></br>
+
+<p align="center">
+  <img src="doc/images/Bat_found_in_summer_of_2021_and_currently_unidentified.jpg" width="320" />
+</p>
 
 ### Install
 * Install Raspbian OS 64 bit lite on the sd card. **Use the legacy version (Bullseye based)**. Set a system user, name and configure your WIFI. If you have not done this before, 
