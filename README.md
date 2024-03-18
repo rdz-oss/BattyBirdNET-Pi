@@ -21,6 +21,14 @@ night-life around you. Can also be placed remotely with a power source.
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
 citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET
 
+### Installations around the world
+There are several installations in the US, Germany and the UK that I am aware of. One of my dev stations can be checked out.
+Keep in mind it is a development station - testing things and potentially unstable or unavailable. But likely here:
+
+http://battybirdnet.duckdns.org:6734/
+
+Bats tend to fly at dusk GER time from 18:30 on. Kuhls Pipistrelle and Nyctalus Noctula likely.
+
 ### License
 Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
 ``` bibtex
