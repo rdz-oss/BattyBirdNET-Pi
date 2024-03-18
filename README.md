@@ -129,6 +129,9 @@ Bats in Europe which have similar calls include, but are not limited to:
   - Plecotus auritus and Plecotus austriacus  are both under Plecotus auritus in the classifier
 
 so expect that there is a certain degree of overlap between the species. 
+<p align="center">
+  <img src="doc/images/320px-Haeckel_Chiroptera_Plecotus_auritus_2.jpg" width="320" />
+</p>
 
 ### Typical end call frequencies of European bats
 
@@ -163,6 +166,10 @@ Echolocation frequency (max energy) | Common name           | Species         |
 55 kHz | Soprano pipistrelle   | Pipistrellus pygmaeus | 
 80 kHz | Greater Horseshoe     | Rhinolophus ferrumequinum | 
 108 kHz | Lesser Horseshoe      | Rhinolophus hipposideros | 
+
+### Typical end call frequencies of 
+
+
 
 ### Install
 * Install Raspbian OS 64 bit lite on the sd card. **Use the legacy version (Bullseye based)**. Set a system user, name and configure your WIFI. If you have not done this before, 
