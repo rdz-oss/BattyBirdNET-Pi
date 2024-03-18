@@ -142,6 +142,9 @@ Bats in Europe which have similar calls include, but are not limited to:
   - Plecotus auritus and Plecotus austriacus  are both under Plecotus auritus in the classifier
 
 so expect that there is a certain degree of overlap between the species. 
+
+</br></br>
+
 <p align="center">
   <img src="doc/images/320px-Haeckel_Chiroptera_Plecotus_auritus_2.jpg" width="320" />
 </p>
