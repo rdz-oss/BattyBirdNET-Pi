@@ -27,7 +27,9 @@ Keep in mind it is a development station - testing things and potentially unstab
 
 http://battybirdnet.duckdns.org:6734/
 
-Bats tend to fly at dusk GER time from 18:30 on. Kuhls Pipistrelle and Nyctalus Noctula likely.
+Bats tend to fly at dusk GER time from 18:30 on. Kuhls Pipistrelle and Nyctalus Noctula likely. Check the weather before.
+Ideal if warmer than 12C and no rain. Rain and environmental noise can trigger the classifier (false detections). More info below on
+how to interpret the recordings.
 
 ### License
 Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
