@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="homepage/images/bnp.png" width="320" />
+  <img src="homepage/images/bnp.png" width="420" />
 </p>
 
 ## BattyBirdNET-Pi  Automated real-time bat detection & id
@@ -112,7 +112,7 @@ This may differ for other locations and background noises.
 </br></br>
 
 <p align="center">
-  <img src="doc/images/Stamp_of_Ukraine_s1978.jpg" width="320" />
+  <img src="doc/images/Stamp_of_Ukraine_s1978.jpg" width="250" />
 </p>
 
 ## Interpreting the classifications
