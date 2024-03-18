@@ -184,27 +184,48 @@ Echolocation frequency (max energy) | Common name           | Species         |
 108 kHz | Lesser Horseshoe      | Rhinolophus hipposideros | 
 
 ### Eastern US Species
-Echolocation frequency (max energy) | Common name                  | Species                   | 
-|-----------------|------------------------------|---------------------------|
-21 kHz | Hoary bat                    | Lasiurus cinereus         | 
-28 kHz | Free–tailed bat              | Tadarida  brasiliensis    | 
-29 kHz | Northern yellow bat          | Lasiurus intermedius      | 
-29 kHz | Silver–haired bat            | Lasionycteris noctivagans | 
-30 kHz | Big brown bat                | Eptesicus fuscus          | 
-31 kHz | Townsend’s big–eared bat     | Corynorhinus townsendii   | 
-33 kHz | Rafinesque’s big–eared bat   | Cornorhinus rafinesquii   | 
-40 kHz | Evening bat                  | Nycticeius humeralis      | 
-43 kHz | Seminole bat                 | Lasiurus seminolus        | 
-43 kHz | Little brown bat             | Myotis lucifugus          | 
-44 kHz | Tri-colored bat              | Perimyotis subflavus      | 
-44 kHz | EasternRed Bat               | Lasiurus borealis         | 
-44 kHz | Indiana bat                  | Myotis sodalis            | 
-46 kHz | South-eastern myotis         | Myotis austroriparius     | 
-48 kHz | Gray bat                     | Myotis grisescens         | 
-49 kHz | Eastern small– footed myotis | Myotis leibii             |
-51 kHz | Northern long-eared myotis   | Myotis septentrionalis    | 
+Echolocation frequency (max energy) | Common name                 | Species                   | 
+|-----------------|-----------------------------|---------------------------|
+21 kHz | Hoary bat                   | Lasiurus cinereus         | 
+28 kHz | Free–tailed bat             | Tadarida  brasiliensis    | 
+29 kHz | Northern yellow bat         | Lasiurus intermedius      | 
+29 kHz | Silver–haired bat           | Lasionycteris noctivagans | 
+32 kHz | Big brown bat               | Eptesicus fuscus          | 
+31 kHz | Townsend’s big–eared bat    | Corynorhinus townsendii   | 
+33 kHz | Rafinesque’s big–eared bat  | Cornorhinus rafinesquii   | 
+40 kHz | Evening bat                 | Nycticeius humeralis      | 
+43 kHz | Seminole bat                | Lasiurus seminolus        | 
+44 kHz | Little brown bat            | Myotis lucifugus          | 
+44 kHz | Tri-colored bat             | Perimyotis subflavus      | 
+44 kHz | EasternRed Bat              | Lasiurus borealis         | 
+44 kHz | Indiana bat                 | Myotis sodalis            | 
+46 kHz | South-eastern myotis        | Myotis austroriparius     | 
+48 kHz | Gray bat                    | Myotis grisescens         | 
+49 kHz | Eastern small–footed myotis | Myotis leibii             |
+51 kHz | Northern long-eared myotis  | Myotis septentrionalis    | 
 
-
+### Western US Species
+Echolocation frequency (max energy) | Common name                     | Species                   | 
+|-----------------|---------------------------------|---------------------------|
+12.5 kHz | Spotted bat                     | Euderma maculatum         |
+13 kHz | Mastiff bat                     | Eumops perotis            |
+22 kHz | Hoary bat                       | Lasiurus cinereus         |
+25 kHz | Big freetailed / pocketed bats  | Nyctinomops spp.          |
+28 kHz | free–tailed bat                 | Tadarida brasiliensis     |
+29 kHz | Silver–haired bat               | Lasionycteris noctivagans |
+30 kHz | Fringed myotis                  | Myotis thysanodes         |
+31 kHz | Townsend’s big–eared bat        | Corynorhinus townsendii   |
+32 kHz | Pallid bat                      | Antrozous pallidus        |
+32 kHz | Big brown bat                   | Eptesicus fuscus          |
+37 kHz | Western yellow bat              | Lasiurus xanthinus        | 
+39 kHz | Long–eared myotis               | Myotis evotis             | 
+42 kHz | Western red bat                 | Lasiurus blossevillii     | 
+44 kHz | Little brown bat                | Myotis lucifugus          | 
+48 kHz | Hairy–winged myotis             | Myotis volans             | 
+48 kHz | Canyon bat (western pip.)       | Parastrellus hesperus     |
+49 kHz | Small–footed myotis             | Myotis ciliolabrum        | 
+53 kHz | California myotis               | Myotis californicus       | 
+55 kHz | Yuma myotis                     | Myotis yumanensis         | 
 
 
 ### Install
