@@ -257,6 +257,12 @@ list all the devices in your network. The BattyBirdNET-Pi should show up.
 * Settings -> Advanced Settings -> Bat Classifier (use USA or UK)
 * The system will reboot, wait two minutes refresh browser
 
+</br></br>
+
+<p align="center">
+  <img src="doc/images/Hipposideros_cervinus_-_Gould.jpg" width="320" />
+</p>
+
 ### Acknowledgements
 * This project would not have been possible without the developers of BirdNET and BirdNET-Pi.
 * Thanks to the Animal Sound Archive Berlin, ChiroVox, NABAT and XenoXanto databases and individual data donors:
