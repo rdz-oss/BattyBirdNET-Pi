@@ -16,6 +16,7 @@ night-life around you. Can also be placed remotely with a power source.
 * Enabled for European, UK and North American species
 * Not designed for automated biodiversity assessments - recreational use at this point.
 * Adds some meta-data in GUANO format to the recordings
+* Requires either audiomoth 1.2 (very cool open hardware) or wildlife acoustics echo meter touch 2 microphones
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
 citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET
@@ -137,14 +138,14 @@ so expect that there is a certain degree of overlap between the species.
   <img src="doc/images/320px-Haeckel_Chiroptera_Plecotus_auritus_2.jpg" width="320" />
 </p>
 
-### Typical end call frequencies of European bats
+### Typical call frequencies of European bats
 
 * Calls are very variable and affected by the bats surroundings
 * In woodland there are many obstacles to avoid and bat sound become more similar
 * It is not always possible to ID a bat just from echolocation calls
 * There are echo location calls as well as social calls. Social calls can be on very different frequencies.
 
-### Echolocation frequency
+### Echolocation frequency (max energy)
 A quick overview for a first orientation. Bats shift up or downwards depending also on each others presence and 
 the environment.
 
@@ -170,9 +171,6 @@ Echolocation frequency (max energy) | Common name           | Species         |
 55 kHz | Soprano pipistrelle   | Pipistrellus pygmaeus | 
 80 kHz | Greater Horseshoe     | Rhinolophus ferrumequinum | 
 108 kHz | Lesser Horseshoe      | Rhinolophus hipposideros | 
-
-### Typical end call frequencies of 
-
 
 
 ### Install
