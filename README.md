@@ -109,6 +109,12 @@ per night (not counting false noise detections during daytime).
 This may differ for other locations and background noises. 
 * Under development - moving target. You can contribute by writing me when things are not working well.
 
+</br></br>
+
+<p align="center">
+  <img src="doc/images/Stamp_of_Ukraine_s1978.jpg" width="320" />
+</p>
+
 ## Interpreting the classifications
 In order to get the most out of the system it helps to be aware of a few things. Unfortunately you cannot just assume that a detection is always due to a bat.
 Essentially, a classification is a suggestion that it is one of these similar groups. Often right - but also expect mismatches in
