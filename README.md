@@ -16,7 +16,7 @@ night-life around you. Can also be placed remotely with a power source.
 * Enabled for European, UK and North American species
 * Not designed for automated biodiversity assessments - recreational use at this point.
 * Adds some meta-data in GUANO format to the recordings
-* Requires either audiomoth 1.2 (very cool open hardware) or wildlife acoustics echo meter touch 2 microphones
+* Requires either audiomoth 1.2 (very cool open hardware) or wildlife acoustics echo meter touch 2 microphones and RaspberryPi 4B.
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
 citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET
