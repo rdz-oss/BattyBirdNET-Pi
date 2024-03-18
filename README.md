@@ -158,7 +158,7 @@ so expect that there is a certain degree of overlap between the species.
 
 ### Echolocation frequency (max energy)
 A quick overview for a first orientation. Bats shift up or downwards depending also on each others presence and 
-the environment.
+the environment. Highest energy is the lightest color in the spectrogram.
 
 Echolocation frequency (max energy) | Common name           | Species         | 
 |-----------------|-----------------------|-----------------|
@@ -182,6 +182,29 @@ Echolocation frequency (max energy) | Common name           | Species         |
 55 kHz | Soprano pipistrelle   | Pipistrellus pygmaeus | 
 80 kHz | Greater Horseshoe     | Rhinolophus ferrumequinum | 
 108 kHz | Lesser Horseshoe      | Rhinolophus hipposideros | 
+
+### Eastern US Species
+Echolocation frequency (max energy) | Common name                  | Species                   | 
+|-----------------|------------------------------|---------------------------|
+21 kHz | Hoary bat                    | Lasiurus cinereus         | 
+28 kHz | Free–tailed bat              | Tadarida  brasiliensis    | 
+29 kHz | Northern yellow bat          | Lasiurus intermedius      | 
+29 kHz | Silver–haired bat            | Lasionycteris noctivagans | 
+30 kHz | Big brown bat                | Eptesicus fuscus          | 
+31 kHz | Townsend’s big–eared bat     | Corynorhinus townsendii   | 
+33 kHz | Rafinesque’s big–eared bat   | Cornorhinus rafinesquii   | 
+40 kHz | Evening bat                  | Nycticeius humeralis      | 
+43 kHz | Seminole bat                 | Lasiurus seminolus        | 
+43 kHz | Little brown bat             | Myotis lucifugus          | 
+44 kHz | Tri-colored bat              | Perimyotis subflavus      | 
+44 kHz | EasternRed Bat               | Lasiurus borealis         | 
+44 kHz | Indiana bat                  | Myotis sodalis            | 
+46 kHz | South-eastern myotis         | Myotis austroriparius     | 
+48 kHz | Gray bat                     | Myotis grisescens         | 
+49 kHz | Eastern small– footed myotis | Myotis leibii             |
+51 kHz | Northern long-eared myotis   | Myotis septentrionalis    | 
+
+
 
 
 ### Install
