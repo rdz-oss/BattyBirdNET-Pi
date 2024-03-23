@@ -20,6 +20,7 @@ on the internet
 * Adds some meta-data in GUANO format to the recordings
 * Requires either audiomoth 1.2 (very cool open hardware) or wildlife acoustics echo meter touch 2 microphones and RaspberryPi 4B.
 * Noise reduction for above microphones available
+* Replay recorded files in audible range
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
 citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET
