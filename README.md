@@ -11,8 +11,10 @@ Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is read
 night-life around you. Can also be placed remotely with a power source.
 
 * Scans ultrasound with 256kHz sampling rate continuously from dusk to dawn (timer function) 
-* Automated bat ID on device using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer.
-* Inherits many great things from BirdNET-Pi - including notifications on detection
+* Automated real-time bat ID on device using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer, recording only the bats and 
+ignores many sources of false triggers (crickets, rain, ...)
+* Inherits many great things from BirdNET-Pi - including notifications on detection and the ability to check status live
+on the internet
 * Enabled for European, UK and North American species
 * Not designed for automated biodiversity assessments but can be used if manually vetted for species identifiable at 256kHz.
 * Adds some meta-data in GUANO format to the recordings
