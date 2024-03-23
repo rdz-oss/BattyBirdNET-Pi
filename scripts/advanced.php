@@ -536,7 +536,7 @@ if (file_exists('./scripts/thisrun.txt')) {
       <select name="noiseprof_prof">
       <option selected="<?php print($newconfig['NOISE_PROF']);?>"><?php print($newconfig['NOISE_PROF']);?></option>
       <?php
-        $formats = array("audiomoth_v12.prof");
+        $formats = array("audiomoth_v12.prof","waem2.prof","waem2pro.prof");
             foreach($formats as $format){
             echo "<option value='$format'>$format</option>";
         }
