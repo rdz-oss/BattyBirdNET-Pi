@@ -29,7 +29,7 @@ citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET
 There are several installations in the US, Germany and the UK that I am aware of. One of my dev stations can be checked out.
 Keep in mind it is a development station - testing things and potentially unstable or unavailable. But likely here:
 
-[Munich Teststation](http://battybirdnet.duckdns.org:6734/)
+[Munich Teststation](http://battybirdnet.duckdns.org)
 
 Bats tend to fly at dusk GER time from 18:30 on. Kuhls Pipistrelle and Nyctalus Noctula likely. Check the weather before e.g at 
 [Munich airport](https://www.dwd.de/DE/wetter/wetterundklima_vorort/bayern/muenchen/_node.html) .
