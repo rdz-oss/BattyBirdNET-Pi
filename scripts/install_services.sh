@@ -36,6 +36,7 @@ update_etc_hosts() {
 }
 
 install_scripts() {
+  chmod +x ${my_dir}/scripts/*.sh
   ln -sf ${my_dir}/scripts/* /usr/local/bin/
 }
 
