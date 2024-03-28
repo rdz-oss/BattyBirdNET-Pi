@@ -50,7 +50,7 @@ def get_data(_conn: Connection):
     df1 = pd.read_sql("SELECT * FROM detections", con=conn)
     return df1
 
-
+st.cache_resource.clear()
 conn = get_connection(URI_SQLITE_DB)
 df = get_data(conn)
 df2 = df.copy()
