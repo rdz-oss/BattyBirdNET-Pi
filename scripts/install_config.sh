@@ -198,12 +198,16 @@ PRIVACY_THRESHOLD=0
 ## RECORDING_LENGTH sets the length of the recording that BirdNET-Lite will
 ## analyze. Set to 15 for birds, 5*sampling_length for bats
 
+## at 256000 kHz sampling rate 3
+## at 384000 kHz  2
 RECORDING_LENGTH=3
 
 ## EXTRACTION_LENGTH sets the length of the audio extractions that will be made
 ## from each BirdNET-Lite detection. An empty value will use the default of 6
 ## seconds. BAts e.g. 1
 
+## at 256000 sampling rate 1.125
+## at 384000 sampling rate 0.75
 EXTRACTION_LENGTH=1.125
 
 ## AUDIOFMT set the audio format that sox should use for the extractions.

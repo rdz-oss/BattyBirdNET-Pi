@@ -61,7 +61,7 @@ if(isset($_GET['threshold'])) {
 }
 
 if(isset($_GET['restart_php']) && $_GET['restart_php'] == "true") {
-  shell_exec("sudo service php7.4-fpm restart");
+  shell_exec("sudo service php*-fpm restart");
   die();
 }
 

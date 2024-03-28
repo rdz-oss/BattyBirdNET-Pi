@@ -18,8 +18,8 @@ install_depends() {
   apt -qqq update && apt -qqy upgrade
   echo "icecast2 icecast2/icecast-setup boolean false" | debconf-set-selections
   apt install -qqy caddy ftpd sqlite3 php-sqlite3 alsa-utils \
-    pulseaudio avahi-utils sox libsox-fmt-mp3 php php-fpm php-curl php-xml \
-    php-zip icecast2 swig ffmpeg wget unzip curl cmake make bc libjpeg-dev \
+    pulseaudio avahi-utils sox libsox-fmt-mp3 php-fpm php-curl php-xml \
+    php-zip php icecast2 swig ffmpeg wget unzip curl cmake make bc libjpeg-dev \
     zlib1g-dev python3-dev python3-pip python3-venv lsof net-tools
 }
 
@@ -173,6 +173,9 @@ set_login() {
   if ! [ -d /etc/lightdm ];then
     systemctl set-default multi-user.target
     ln -fs /lib/systemd/system/getty@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
+    if ! [ -d /etc/systemd/system/getty@tty1.service.d ];then
+      mkdir /etc/systemd/system/getty@tty1.service.d
+    fi
     cat > /etc/systemd/system/getty@tty1.service.d/autologin.conf << EOF
 [Service]
 ExecStart=
@@ -254,7 +257,7 @@ http:// ${BIRDNETPI_URL} {
     birdnet ${HASHWORD}
   }
   reverse_proxy /stream localhost:8000
-  php_fastcgi unix//run/php/php7.4-fpm.sock
+  php_fastcgi unix//run/php/php-fpm.sock
   reverse_proxy /log* localhost:8080
   reverse_proxy /stats* localhost:8501
   reverse_proxy /terminal* localhost:8888
@@ -272,7 +275,7 @@ http:// ${BIRDNETPI_URL} {
     file_server browse
   }
   reverse_proxy /stream localhost:8000
-  php_fastcgi unix//run/php/php7.4-fpm.sock
+  php_fastcgi unix//run/php/php-fpm.sock
   reverse_proxy /log* localhost:8080
   reverse_proxy /stats* localhost:8501
   reverse_proxy /terminal* localhost:8888
@@ -283,6 +286,7 @@ EOF
   systemctl enable caddy
   usermod -aG $USER caddy
   usermod -aG video caddy
+  chmod g+x $HOME
 }
 
 install_avahi_aliases() {
@@ -395,7 +399,7 @@ EOF
 configure_caddy_php() {
   echo "Configuring PHP for Caddy"
   sed -i 's/www-data/caddy/g' /etc/php/*/fpm/pool.d/www.conf
-  systemctl restart php7\*-fpm.service
+  systemctl restart php\*-fpm.service
   echo "Adding Caddy sudoers rule"
   cat << EOF > /etc/sudoers.d/010_caddy-nopasswd
 caddy ALL=(ALL) NOPASSWD: ALL
@@ -417,7 +421,7 @@ config_icecast() {
   for i in "${passwords[@]}";do
   sed -i "s/<${i}password>.*<\/${i}password>/<${i}password>${ICE_PWD}<\/${i}password>/g" /etc/icecast2/icecast.xml
   done
-  sed -i 's|<!-- <bind-address>.*|<bind-address>127.0.0.1</bind-address>|;s|<!-- <shoutcast-mount>.*|<shoutcast-mount>/stream</shoutcast-mount>|'
+  sed -i 's|<!-- <bind-address>.*|<bind-address>127.0.0.1</bind-address>|;s|<!-- <shoutcast-mount>.*|<shoutcast-mount>/stream</shoutcast-mount>|'  /etc/icecast2/icecast.xml
 
   systemctl enable icecast2.service
 }

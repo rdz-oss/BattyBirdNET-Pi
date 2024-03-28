@@ -38,6 +38,10 @@ EOF
   sudo systemctl enable batnet_timer_server.service
 }
 
+if grep -q 'php7.4-' /etc/caddy/Caddyfile &>/dev/null; then
+  sed -i 's/php7.4-/php-/' /etc/caddy/Caddyfile
+fi
+
 if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u$USER echo "BAT_TIMER=\"false\"" >> /etc/birdnet/birdnet.conf
   sudo -u$USER echo "BAT_DUSK=\"18:00\"" >> /etc/birdnet/birdnet.conf
@@ -213,7 +217,7 @@ apprise_version=$($HOME/BirdNET-Pi/birdnet/bin/python3 -c "import apprise; print
 streamlit_version=$($HOME/BirdNET-Pi/birdnet/bin/pip3 show streamlit 2>/dev/null | grep Version | awk '{print $2}')
 
 [[ $apprise_version != "1.6.0" ]] && $HOME/BirdNET-Pi/birdnet/bin/pip3 install apprise==1.6.0
-[[ $streamlit_version != "1.19.0" ]] && $HOME/BirdNET-Pi/birdnet/bin/pip3 install streamlit==1.19.0
+[[ $streamlit_version != "1.31.0" ]] && $HOME/BirdNET-Pi/birdnet/bin/pip3 install streamlit==1.19.0
 
 if ! grep -q 'RuntimeMaxSec=' "$HOME/BirdNET-Pi/templates/birdnet_analysis.service"&>/dev/null; then
     sudo -E sed -i '/\[Service\]/a RuntimeMaxSec=900' "$HOME/BirdNET-Pi/templates/birdnet_analysis.service"
