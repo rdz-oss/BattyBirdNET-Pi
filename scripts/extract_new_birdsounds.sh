@@ -125,20 +125,20 @@ for h in "${SCAN_DIRS[@]}";do
 
 
     # Add guano meta data  "Timestamp: ${DATE}"
-    guano_edit.py "GUANO|Version: 1.0" "Samplerate: 256000" "Loc Position: ${LATITUDE} ${LONGITUDE}" "Species Auto ID: ${SCIENTIFIC_NAME}" "Note: BattyBirdNET-Pi" "${NEWSPECIES_BYDATE}/${NEWFILE}"
+    guano_edit.py "GUANO|Version: 1.0" "Samplerate: ${SAMPLING_RATE}" "Loc Position: ${LATITUDE} ${LONGITUDE}" "Species Auto ID: ${SCIENTIFIC_NAME}" "Note: BattyBirdNET-Pi" "${NEWSPECIES_BYDATE}/${NEWFILE}"
 
     RAW_SPECTROGRAM=${RAW_SPECTROGRAM}
     # Check if RAW_SPECTROGRAM is 1
     if [ "$RAW_SPECTROGRAM" == "1" ]; then
       # If it is, add "-r" as an argument to the SOX command
-      sox -V1 "${NEWSPECIES_BYDATE}/${NEWFILE}" -n remix 1 rate 256k spectrogram \
+      sox -V1 "${NEWSPECIES_BYDATE}/${NEWFILE}" -n remix 1 rate ${SAMPLING_RATE} spectrogram \
         -t "${COMMON_NAME}" \
         -c "${NEWSPECIES_BYDATE//$HOME\/}/${NEWFILE}" \
         -o "${NEWSPECIES_BYDATE}/${NEWFILE}.png" \
         -r
     else
       # If it's not, run the SOX command without the "-r" argument
-      sox -V1 "${NEWSPECIES_BYDATE}/${NEWFILE}" -n remix 1 rate 256k spectrogram \
+      sox -V1 "${NEWSPECIES_BYDATE}/${NEWFILE}" -n remix 1 rate ${SAMPLING_RATE} spectrogram \
         -t "$(echo "${COMMON_NAME}" | iconv -f utf8 -t ascii//TRANSLIT)" \
         -c "${NEWSPECIES_BYDATE//$HOME\/}/${NEWFILE}" \
         -o "${NEWSPECIES_BYDATE}/${NEWFILE}.png"
