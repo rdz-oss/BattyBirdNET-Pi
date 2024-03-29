@@ -4,7 +4,8 @@
 
 ## BattyBirdNET-Pi  Automated real-time bat detection & id
 
-Fully functional and extended fork of BirdNET-Pi for bats.
+Fully functional and extended fork of BirdNET-Pi for bats. 
+Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2. 
 
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
