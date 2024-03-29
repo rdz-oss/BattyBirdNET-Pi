@@ -18,7 +18,7 @@ on the internet
 * Enabled for European, UK and North American species
 * Not designed for automated biodiversity assessments but can be used if manually vetted for species identifiable at 256kHz.
 * Adds some meta-data in GUANO format to the recordings
-* Requires either audiomoth 1.2 (very cool open hardware) or wildlife acoustics echo meter touch 2 microphones and RaspberryPi 4B.
+* Requires either audiomoth 1.2 or wildlife acoustics echo meter touch 2 microphones and RaspberryPi 4B or 5.
 * Noise reduction for above microphones available
 * Replay recorded files in audible range
 
