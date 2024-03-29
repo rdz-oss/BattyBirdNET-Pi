@@ -64,7 +64,7 @@ Including stats and spectrograms to 128 kHz
 
 ### System components
 
-* A RasPi 4B with 4GB or more, currently Pi 5 will not work (similar to BirdNET-PI). Use some form of passive or active cooling!
+* A RasPi 4 or  5 with 4GB or more. Use some form of passive or active cooling!
 * Power supply for the Raspi and an sd card - choose a large one 64 Gb +
 * A USB microphone for ultra sound: tested on audiomoth usb 1.2 and wildlife acoustics echo meter touch 2 (2 and 2 pro)
 * USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
@@ -248,7 +248,7 @@ Echolocation frequency (max energy) | Common name                     | Species 
 </p>
 
 ### Install
-* Install Raspbian OS 64 bit lite on the sd card. **Use the legacy version (Bullseye based)**. Set a system user, name and configure your WIFI. If you have not done this before, 
+* Install Raspbian OS 64 bit lite on the sd card (currently Bookworm based). Set a system user, name and configure your WIFI. If you have not done this before, 
 you can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system ([see here](./README-BirdNET-Pi.md)). 
 * After that you will log in to the RasPi with your username and password via ssh (it should be in your wireless LAN after booting)
 * You call the install script from this repository (i.e.. this is where you deviate from the instructions found for BirdNET-Pi)

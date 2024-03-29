@@ -52,7 +52,7 @@ if(isset($_GET['threshold'])) {
   $user = trim(shell_exec("awk -F: '/1000/{print $1}' /etc/passwd"));
   $home = trim(shell_exec("awk -F: '/1000/{print $6}' /etc/passwd"));
 
-  $command = "sudo -u $user ".$home."/BirdNET-Pi/birdnet/bin/python3 ".$home."/BirdNET-Pi/scripts/species.py --threshold $threshold 2>&1";
+  # $command = "sudo -u $user ".$home."/BirdNET-Pi/birdnet/bin/python3 ".$home."/BirdNET-Pi/scripts/species.py --threshold $threshold 2>&1";
 
   $output = shell_exec($command);
 
