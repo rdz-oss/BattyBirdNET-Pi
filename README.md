@@ -40,6 +40,7 @@ how to interpret the recordings. For US species, you might want to checkout the 
 
 [Murraysville, PA BatNets](https://pixcams.com/bat-listening-stations/)
 
+Why not add yours, too?
 
 ### License
 Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
