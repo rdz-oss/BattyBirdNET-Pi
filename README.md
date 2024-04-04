@@ -36,7 +36,7 @@ But likely here:
 Bats tend to fly at dusk GER time from 18:30 on. Kuhls Pipistrelle and Nyctalus Noctula likely. Check the weather before e.g at 
 [Munich airport](https://www.dwd.de/DE/wetter/wetterundklima_vorort/bayern/muenchen/_node.html) .
 Ideal if warmer than 12C at night and no rain. Rain and environmental noise can trigger the classifier (false detections). More info below on
-how to interpret the recordings. For US species, you might want to checkout the two installations (video and BattyBirdNET-Pi) by PixCams Inc. in Pensylvania:
+how to interpret the recordings. For US species, you might want to checkout the two installations (video and BattyBirdNET-Pi) by PixCams Inc. in Pennsylvania:
 
 [Murraysville, PA BatNets](https://pixcams.com/bat-listening-stations/)
 
