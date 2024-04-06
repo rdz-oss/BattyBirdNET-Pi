@@ -250,7 +250,7 @@ Echolocation frequency (max energy) | Common name                 | Species     
 49 kHz | Eastern small–footed myotis | Myotis leibii             |
 51 kHz | Northern long-eared myotis  | Myotis septentrionalis    | 
 
-### Western US Species+
+### Western US Species
 More information: [Western US](https://www.sonobat.com/download/WesternUS_Acoustic_Table_Mar2011.pdf)
 
 Echolocation frequency (max energy) | Common name                     | Species                   | 
