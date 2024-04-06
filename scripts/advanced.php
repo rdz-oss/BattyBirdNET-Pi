@@ -564,7 +564,8 @@ if (file_exists('./scripts/thisrun.txt')) {
         }
       ?>
       </select>
-      
+      <p> Set sampling frequency.</p>
+
       <label for="bat_sampling_frequency">Sampling frequency</label>
       <select name="bat_sampling_frequency">
       <option selected="<?php print($newconfig['SAMPLING_RATE']);?>"><?php print($newconfig['SAMPLING_RATE']);?></option>
