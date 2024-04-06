@@ -563,8 +563,8 @@ if (file_exists('./scripts/thisrun.txt')) {
             echo "<option value='$format'>$format</option>";
         }
       ?>
-      <br>
       </select>
+      
       <label for="bat_sampling_frequency">Sampling frequency</label>
       <select name="bat_sampling_frequency">
       <option selected="<?php print($newconfig['SAMPLING_RATE']);?>"><?php print($newconfig['SAMPLING_RATE']);?></option>
