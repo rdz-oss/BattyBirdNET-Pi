@@ -11,7 +11,7 @@ Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2.
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
 night-life around you. Can also be placed remotely with a power source.
 
-* Scans ultrasound with 256kHz sampling rate continuously from dusk to dawn (timer function) or 24/7 if you prefer 365 days a year
+* Scans ultrasound with 256kHz or 384kHz sampling rate continuously from dusk to dawn (timer function) or 24/7 if you prefer 365 days a year
 * Automated real-time bat ID on device using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer, recording mostly the bats and 
 ignores many sources of false triggers (crickets, rain, ...)
 * Inherits many great things from BirdNET-Pi - including notifications on detection and the ability to check status live
