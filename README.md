@@ -17,8 +17,8 @@ ignores many sources of false triggers (crickets, rain, ...)
 * Inherits many great things from BirdNET-Pi - including notifications on detection and the ability to check status live
 on the internet
 * Enabled for European, UK and North American species
-* Not designed for automated biodiversity assessments but can be used if manually vetted for species identifiable at 256kHz.
-Now also 384kHz recording is enabled which allows inspection of recordings up to abot 190kHz, e.g. to differentiate myotis species.
+* Not designed for automated biodiversity assessments but can be used if manually vetted.
+Now also 384kHz recording is enabled which allows inspection of recordings up to about 190kHz, e.g. to differentiate myotis species.
 * Adds some meta-data in GUANO format to the recordings
 * Requires either audiomoth 1.2 or wildlife acoustics echo meter touch 2 microphones and RaspberryPi 4B or 5.
 * Noise reduction for above microphones available
