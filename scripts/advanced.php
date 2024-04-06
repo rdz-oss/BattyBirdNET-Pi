@@ -467,6 +467,28 @@ if(isset($_GET['submit'])) {
 	  }
     }
 
+    if(isset($_GET["bat_sampling_frequency"])) {
+      $bat_sampling_frequency = $_GET["bat_sampling_frequency"];
+      if(strcmp($bat_sampling_frequency,$config['SAMPLING_RATE']) !== 0) {
+        $contents = preg_replace("/SAMPLING_RATE=.*/", "SAMPLING_RATE=$bat_sampling_frequency", $contents);
+        $contents2 = preg_replace("/SAMPLING_RATE=.*/", "SAMPLING_RATE=$bat_sampling_frequency", $contents2);
+      # if 384 if 256
+        $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=0.75", $contents);
+        $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=0.75", $contents2);
+        if(strcmp($bat_sampling_frequency,"256000") == 0) {
+          $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents);
+          $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents2);
+        }
+	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
+	    $fh2 = fopen("./scripts/thisrun.txt", "w");
+	    fwrite($fh, $contents);
+	    fwrite($fh2, $contents2);
+	    sleep(1);
+	    exec('restart_services.sh');
+	    # exec('sudo reboot');
+	  }
+    }
+
 $user = trim(shell_exec("awk -F: '/1000/{print $1}' /etc/passwd"));
 $home = trim(shell_exec("awk -F: '/1000/{print $6}' /etc/passwd"));
 
@@ -542,6 +564,17 @@ if (file_exists('./scripts/thisrun.txt')) {
         }
       ?>
       </select>
+      <label for="bat_sampling_frequency">Sampling frequency</label>
+      <select name="bat_sampling_frequency">
+      <option selected="<?php print($newconfig['SAMPLING_RATE']);?>"><?php print($newconfig['SAMPLING_RATE']);?></option>
+      <?php
+        $formats = array("256000","384000");
+            foreach($formats as $format){
+            echo "<option value='$format'>$format</option>";
+        }
+      ?>
+      </select>
+
       <br><br>
 
       <label for="bat_classifier">Bat Classifier</label>
