@@ -11,7 +11,7 @@ Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
 night-life around you. Can also be placed remotely with a power source.
 
-* Scans ultrasound with 256kHz or 384kHz (Pi 5 and audiomoth) sampling rate continuously from dusk to dawn (timer function) or 24/7 if you prefer 365 days a year
+* Scans ultrasound with 256kHz or 384kHz ( on Pi 5) sampling rate continuously from dusk to dawn or 24/7 if you prefer 365 days a year
 * Automated real-time bat ID on device using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer, recording mostly the bats and 
 ignores many sources of false triggers (crickets, rain, ...)
 * Inherits many great things from BirdNET-Pi - including notifications on detection and the ability to check status live
@@ -70,8 +70,8 @@ Including stats and spectrograms to 128 kHz
 
 ### System components
 
-* A RasPi 4 or  5 with 4GB or more. Use some form of passive or active cooling!
-* Power supply for the Raspi and an sd card - choose a large one 64 Gb +
+* A RaspberryPi 4 or  5 with 4GB or more. Use some form of passive or active cooling!
+* Power supply for the Raspi and an sd card - choose a large one 128 Gb +
 * A USB microphone for ultra sound: tested on audiomoth usb 1.2 and wildlife acoustics echo meter touch 2 (2 and 2 pro)
 * USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
 * Optional: You can use a power bank to run the system as long as the power lasts at any location. 
@@ -79,8 +79,8 @@ You might want to add some form of rain protection.
 
 Some hints:
 
-* The echo meter touch 2 pro works for my setup but not for some. Unkown reason at this point.
-* If you use the audiomoth, you will have to set the sampling frequency to 250kHz or the system will overload after a few hours.
+* The echo meter touch 2 pro works for my setup but not for some. Unkown reason at this point, might have to do with firmware version.
+* If you use the audiomoth and a Pi 4, you will have to set the sampling frequency to 250kHz or the system will overload after a few hours.
 * https://www.openacousticdevices.info/audiomoth  (Usb or battery version with usb microphone configuration). 
 You will need a USB A male to micro USB cable to connect this one.
 * https://www.wildlifeacoustics.com/products/echo-meter-touch-2-android-2
