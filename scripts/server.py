@@ -236,11 +236,11 @@ def handle_client(conn, addr):
                 # min_conf = max(0.01, min(args.min_conf, 0.99))
                 myReturn = ''
                 
-                if not "results" in detections:
-                    conn.send(myReturn.encode(FORMAT))
-                    # time.sleep(3)
-                    conn.close()
-                    exit()
+#                if not "results" in detections:
+#                    conn.send(myReturn.encode(FORMAT))
+#                    # time.sleep(3)
+#                    conn.close()
+#                    exit()
 
                 writeResultsToFile(detections["results"],  args.o, min_conf)
                 # writeCSVResultsToFile(detections, args.o)
