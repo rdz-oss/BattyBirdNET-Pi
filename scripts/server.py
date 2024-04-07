@@ -239,6 +239,7 @@ def handle_client(conn, addr):
                     # conn.send(myReturn.encode(FORMAT))
                     # time.sleep(3)
                     conn.close()
+                    exit()
 
                 writeResultsToFile(detections["results"],  args.o, min_conf)
                 # writeCSVResultsToFile(detections, args.o)
