@@ -71,6 +71,7 @@ Including stats and spectrograms to 128 kHz
 ### System components
 
 * A RaspberryPi 4 or  5 with 4GB or more. Use some form of passive or active cooling!
+* If you want to run the system at 384kHz continuously a Pi 5 is required.
 * Power supply for the Raspi and an sd card - choose a large one 128 Gb +
 * A USB microphone for ultra sound: tested on audiomoth usb 1.2 and wildlife acoustics echo meter touch 2 (2 and 2 pro)
 * USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
