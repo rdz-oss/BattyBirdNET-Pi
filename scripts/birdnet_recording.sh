@@ -55,7 +55,7 @@ else
       sleep 1
     done
     if [ -z ${REC_CARD} ];then
-      arecord -f S16_LE -c${CHANNELS} -r${SAMPLING_RATE} -t wav --max-file-time ""${RECORDING_LENGTH}"\
+      arecord -f S16_LE -c${CHANNELS} -r${SAMPLING_RATE} -t wav --max-file-time "${RECORDING_LENGTH}"\
 	      --use-strftime ${RECS_DIR}/%B-%Y/%d-%A/%F-birdnet-%H:%M:%S.wav
     else
       arecord -f S16_LE -c${CHANNELS} -r${SAMPLING_RATE} -t wav --max-file-time "${RECORDING_LENGTH}"\
