@@ -475,6 +475,9 @@ if(isset($_GET['submit'])) {
       # if 384 if 256
         $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=0.75", $contents);
         $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=0.75", $contents2);
+        $contents = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=1.5", $contents);
+        $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=1.5", $contents2);
+
         if(strcmp($bat_sampling_frequency,"256000") == 0) {
           $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents);
           $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents2);
@@ -482,10 +485,15 @@ if(isset($_GET['submit'])) {
         if(strcmp($bat_sampling_frequency,"320000") == 0) {
           $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=0.9", $contents);
           $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=0.9", $contents2);
+          $contents = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=1.8", $contents);
+          $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=1.8", $contents2);
         }
         if(strcmp($bat_sampling_frequency,"288000") == 0) {
           $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1", $contents);
           $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1", $contents2);
+          $contents = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=2", $contents);
+          $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=2", $contents2);
+
         }
 	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
 	    $fh2 = fopen("./scripts/thisrun.txt", "w");
