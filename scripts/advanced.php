@@ -479,6 +479,10 @@ if(isset($_GET['submit'])) {
           $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents);
           $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents2);
         }
+        if(strcmp($bat_sampling_frequency,"320000") == 0) {
+          $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=0.9", $contents);
+          $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=0.9", $contents2);
+        }
 	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
 	    $fh2 = fopen("./scripts/thisrun.txt", "w");
 	    fwrite($fh, $contents);
@@ -570,7 +574,7 @@ if (file_exists('./scripts/thisrun.txt')) {
       <select name="bat_sampling_frequency">
       <option selected="<?php print($newconfig['SAMPLING_RATE']);?>"><?php print($newconfig['SAMPLING_RATE']);?></option>
       <?php
-        $formats = array("256000","384000");
+        $formats = array("256000","320000","384000");
             foreach($formats as $format){
             echo "<option value='$format'>$format</option>";
         }
