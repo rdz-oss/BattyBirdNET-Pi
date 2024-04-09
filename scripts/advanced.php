@@ -481,8 +481,8 @@ if(isset($_GET['submit'])) {
         if(strcmp($bat_sampling_frequency,"256000") == 0) {
           $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents);
           $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents2);
-          $contents = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=3", $contents);
-          $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=3", $contents2);
+          $contents = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=9", $contents);
+          $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=9", $contents2);
 
         }
         if(strcmp($bat_sampling_frequency,"320000") == 0) {
