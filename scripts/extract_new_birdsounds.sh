@@ -9,7 +9,7 @@ set -e
 # Remove temporary file
 trap 'rm -f $TMPFILE' EXIT
 source /etc/birdnet/birdnet.conf
-[ -z ${RECORDING_LENGTH} ] && RECORDING_LENGTH=3
+[ -z "${RECORDING_LENGTH}" ] && RECORDING_LENGTH=3
 
 # Set Variables
 TMPFILE=$(mktemp)
@@ -26,7 +26,7 @@ for h in "${SCAN_DIRS[@]}";do
   #  Field 5: Confidence
 
   # Iterates over each "Analyzed" directory
-  for i in $(find ${h} -name '*csv' 2>/dev/null | sort );do 
+  for i in $(find ${h} -name '*csv' 2>/dev/null | sort );do
     # Iterates over each '.csv' file found in each "Analyzed" directory
     # to create the TMPFILE
     echo "$(basename ${i})" >> ${TMPFILE}
@@ -46,15 +46,15 @@ for h in "${SCAN_DIRS[@]}";do
     if [ -z ${DATE} ];then
       DATE=$(date "+%F")
     fi
-    START="$(echo "${line}" | awk -F\; '!/birdnet/{print $1}')" 
-    END="$(echo "${line}" | awk -F\; '!/birdnet/{print $2}')" 
+    START="$(echo "${line}" | awk -F\; '!/birdnet/{print $1}')"
+    END="$(echo "${line}" | awk -F\; '!/birdnet/{print $2}')"
     COMMON_NAME=""$(echo ${line} \
             | awk -F\; '!/birdnet/{print $4}'|tr -d "'")""
     SCIENTIFIC_NAME=""$(echo ${line} \
             | awk -F\; '!/birdnet/{print $3}')""
     CONFIDENCE=""$(echo ${line} \
 	    | awk -F\; '{print $5}')""
-	    
+
     #CONFIDENCE_SCORE="${CONFIDENCE:0:2}%"
     locale_decimal=$(locale decimal_point)
     if [[ $locale_decimal == "." ]]; then
@@ -87,11 +87,11 @@ for h in "${SCAN_DIRS[@]}";do
    #   echo "20 ${SPECIES}s, already! Removing the oldest by-date and making a new one"
    #   cd ${NEWSPECIES_BYDATE} || exit 1
    #   ls -1t . | tail -n +20 | xargs -r rm -vv
-   # fi   
+   # fi
 
     # If the above tests have passed, then the extraction happens.
-    # After creating the extracted files by-date, and a directory tree 
-    # structured by-species, symbolic links are made to populate the new 
+    # After creating the extracted files by-date, and a directory tree
+    # structured by-species, symbolic links are made to populate the new
     # directory.
 
     # This section sets the SPACER that will be used to pad the audio clip with
@@ -102,17 +102,17 @@ for h in "${SCAN_DIRS[@]}";do
     SPACER=$(echo "scale=4;(${EXTRACTION_LENGTH} - 0.5625 )/2" |bc -l)
     START=$(echo "scale=4;${START} - ${SPACER}"|bc -l)
     END=$(echo "scale=4;${END} + ${SPACER}"|bc -l)
-    
+
     # If the SPACER would have the START value less that 0, start at the
     # beginning of the audio file. If the SPACER would make the END value
     # exceed the end of the audio file, end the extraction at the end of the
     # audio file.
-    if (( $(echo "${START} < 1" | bc -l) ));then START=0;fi
-    if (( $(echo "${END} > ${RECORDING_LENGTH}" | bc -l) ));then END=${RECORDING_LENGTH};fi
+    if (( $(echo ""${START}" < 1" | bc -l) ));then START=0;fi
+    if (( $(echo ""${END}" > "${RECORDING_LENGTH}"" | bc -l) ));then END="${RECORDING_LENGTH}";fi
 
     if [ "${RECORDING_LENGTH}" == "${EXTRACTION_LENGTH}" ];then
       START=0
-      END=${RECORDING_LENGTH}
+      END="${RECORDING_LENGTH}"
     fi
 
     if [[ $NOISERED == true ]];then
