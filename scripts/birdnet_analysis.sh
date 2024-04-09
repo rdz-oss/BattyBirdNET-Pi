@@ -94,7 +94,7 @@ run_analysis() {
   PYTHON_VIRTUAL_ENV="$HOME/BirdNET-Pi/birdnet/bin/python3"
   DIR="$HOME/BirdNET-Pi/scripts"
 
-  sleep .5
+  # sleep .5
 
   ### TESTING NEW WEEK CALCULATION
   WEEK_OF_YEAR="$(echo "($(date +%m)-1) * 4" | bc -l)"
