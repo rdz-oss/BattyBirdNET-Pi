@@ -25,5 +25,8 @@ while true; do
     sox -V1 "${analyzing_now}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
   fi
 
-  sleep $SLEEP_DELAY
+  while [ "$(cat $HOME/BirdNET-Pi/analyzing_now.txt)" == "${analyzing_now}" ]; do
+    sleep 0.2
+  done
+  #sleep $SLEEP_DELAY
 done
