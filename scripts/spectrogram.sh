@@ -26,7 +26,7 @@ while true; do
   fi
 
   while [ "$(cat $HOME/BirdNET-Pi/analyzing_now.txt)" == "${analyzing_now}" ]; do
-    sleep 0.2
+    sleep 0.1
   done
   #sleep $SLEEP_DELAY
 done
