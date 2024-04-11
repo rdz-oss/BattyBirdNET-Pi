@@ -14,7 +14,7 @@ fi
 
 # Time to sleep between generating spectrogram's, default set the recording length
 # To try catch the spectrogram as soon as possible run at a smaller intervals
-SLEEP_DELAY=$(echo ""$RECORDING_LENGTH" / 1" | bc)
+SLEEP_DELAY=$(echo ""$RECORDING_LENGTH" / ("$RECORDING_LENGTH" / 3)" | bc)
 
 # Continuously loop generating a spectrogram every 10 seconds
 while true; do
