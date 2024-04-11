@@ -121,7 +121,7 @@ run_analysis() {
         echo "Maximum number of attempts exceeded. Exiting & restarting service."
         exit
       fi
-      sleep 2
+      sleep 0.1
     done
 
     if ! grep 5050 <(netstat -tulpn 2>&1) &> /dev/null 2>&1;then
@@ -160,6 +160,11 @@ run_analysis() {
 ${INCLUDEPARAM} \
 ${EXCLUDEPARAM} \
 ${BIRDWEATHER_ID_LOG}
+
+    if [[ $NOISERED == true ]];then
+      sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"
+    fi
+
 
     $PYTHON_VIRTUAL_ENV $DIR/analyze.py \
       --i "${1}/${i}" \
