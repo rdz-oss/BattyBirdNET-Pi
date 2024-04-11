@@ -55,6 +55,7 @@ get_files() {
   | head -n 20 \
   | awk -F "/" '{print $NF}' ))
   [ -n "${files[1]}" ] && echo "Files loaded"
+  sleep "$RECORDING_LENGTH"
 }
 
 # denoise the files collected in get_files()
@@ -121,7 +122,7 @@ run_analysis() {
         echo "Maximum number of attempts exceeded. Exiting & restarting service."
         exit
       fi
-      sleep $RECORDING_LENGTH
+      sleep 1
     done
 
     if ! grep 5050 <(netstat -tulpn 2>&1) &> /dev/null 2>&1;then
