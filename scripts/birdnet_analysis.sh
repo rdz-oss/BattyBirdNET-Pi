@@ -12,10 +12,10 @@ if [ -z ${LAST_RUN} ];then LAST_RUN=$my_dir/lastrun.txt;fi
 [ -z ${LATITUDE} ] && echo "LATITUDE not set, exiting 1" && exit 1
 [ -z ${LONGITUDE} ] && echo "LONGITUDE not set, exiting 1" && exit 1
 make_thisrun() {
-  sleep .4
+  #sleep .4
   awk '!/#/ && !/^$/ {print}' /etc/birdnet/birdnet.conf \
     > >(tee "${THIS_RUN}")
-  sleep .5
+  #sleep .5
 }
 make_thisrun &> /dev/null
 if ! diff ${LAST_RUN} ${THIS_RUN};then
