@@ -121,7 +121,7 @@ run_analysis() {
         echo "Maximum number of attempts exceeded. Exiting & restarting service."
         exit
       fi
-      sleep 0.1
+      sleep $RECORDING_LENGTH
     done
 
     if ! grep 5050 <(netstat -tulpn 2>&1) &> /dev/null 2>&1;then
@@ -197,8 +197,9 @@ run_birdnet() {
 #    noisered_files "${1}"
 #  fi
 
-  move_analyzed "${1}"
+
   run_analysis "${1}"
+  move_analyzed "${1}"
 }
 
 until grep 5050 <(netstat -tulpn 2>&1) &> /dev/null 2>&1;do
