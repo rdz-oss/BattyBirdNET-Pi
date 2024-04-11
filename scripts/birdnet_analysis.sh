@@ -164,8 +164,12 @@ ${BIRDWEATHER_ID_LOG}
     if [[ $NOISERED == true ]];then
       sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"
     fi
-    
+
     echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
+
+    spectrogram_png=${EXTRACTED}/spectrogram.png
+    analyzing_now="${1}/${i}"
+    sox -V1 "${1}/${i}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
 
     $PYTHON_VIRTUAL_ENV $DIR/analyze.py \
       --i "${1}/${i}" \
