@@ -111,7 +111,7 @@ run_analysis() {
 
   for i in "${files[@]}";do
     [ ! -f ${1}/${i} ] && continue
-    echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
+    # echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
     [ -z ${RECORDING_LENGTH} ] && RECORDING_LENGTH=3
     echo "RECORDING_LENGTH set to ${RECORDING_LENGTH}"
     itr=0
@@ -164,7 +164,8 @@ ${BIRDWEATHER_ID_LOG}
     if [[ $NOISERED == true ]];then
       sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"
     fi
-
+    
+    echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
 
     $PYTHON_VIRTUAL_ENV $DIR/analyze.py \
       --i "${1}/${i}" \
