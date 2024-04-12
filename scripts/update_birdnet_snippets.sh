@@ -56,6 +56,15 @@ if ! grep NOISERED /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u$USER echo "NOISE_PROF_FACTOR=\"0.22\"" >> /etc/birdnet/birdnet.conf
 fi
 
+if ! grep INPUT_NOISERED /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u$USER echo "INPUT_NOISERED=\"false\"" >> /etc/birdnet/birdnet.conf
+fi
+
+
+if ! grep INPUT_SPECTROGRAM_COLOR /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u$USER echo "INPUT_SPECTROGRAM_COLOR=\"h\"" >> /etc/birdnet/birdnet.conf
+fi
+
 # Create blank sitename as it's optional. First time install will use $HOSTNAME.
 if ! grep SITE_NAME /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u$USER echo "SITE_NAME=\"\"" >> /etc/birdnet/birdnet.conf

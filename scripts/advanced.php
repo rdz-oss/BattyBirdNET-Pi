@@ -498,6 +498,7 @@ if(isset($_GET['submit'])) {
           $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=2", $contents2);
 
         }
+        exec('stop_core_services.sh');
 	    $fh = fopen("/etc/birdnet/birdnet.conf", "w");
 	    $fh2 = fopen("./scripts/thisrun.txt", "w");
 	    fwrite($fh, $contents);

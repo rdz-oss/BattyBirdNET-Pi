@@ -161,15 +161,14 @@ ${INCLUDEPARAM} \
 ${EXCLUDEPARAM} \
 ${BIRDWEATHER_ID_LOG}
 
-    #if [[ $NOISERED == true ]];then
-    #  sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"
-    #fi
+    if [[ $INPUT_NOISERED == true ]];then
+      sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"
+    fi
 
-    echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
-
-    #spectrogram_png=${EXTRACTED}/spectrogram.png
-    #analyzing_now="${1}/${i}"
-    #sox -V1 "${1}/${i}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram -m -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
+    #echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
+    spectrogram_png=${EXTRACTED}/spectrogram.png
+    analyzing_now="${1}/${i}"
+    sox -V1 "${1}/${i}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram -"$INPUT_SPECTROGRAM_COLOR" -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
 
     $PYTHON_VIRTUAL_ENV $DIR/analyze.py \
       --i "${1}/${i}" \
@@ -196,13 +195,7 @@ ${BIRDWEATHER_ID_LOG}
 #   - {DIRECTORY}
 run_birdnet() {
   get_files "${1}"
-  [ -z ${NOISERED} ] && NOISERED=false
-
-#  if [[ $NOISERED == true ]];then
-#    noisered_files "${1}"
-#  fi
-
-
+  [ -z ${INPUT_NOISERED} ] && INPUT_NOISERED=false
   run_analysis "${1}"
   move_analyzed "${1}"
 }

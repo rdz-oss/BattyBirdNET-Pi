@@ -332,7 +332,7 @@ install_spectrogram_service() {
 Description=BirdNET-Pi Spectrogram Viewer
 [Service]
 Restart=always
-RestartSec=10
+RestartSec=1
 Type=simple
 User=${USER}
 ExecStart=/usr/local/bin/spectrogram.sh
