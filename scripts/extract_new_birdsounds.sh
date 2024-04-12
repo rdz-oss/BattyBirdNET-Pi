@@ -115,15 +115,15 @@ for h in "${SCAN_DIRS[@]}";do
       END="${RECORDING_LENGTH}"
     fi
 
-#    if [[ $NOISERED == true ]];then
-#      sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
-#      trim ="${START}" ="${END}" noisered "${HOME}/${NOISE_PROF}" "${NOISE_PROF_FACTOR}"
-#    else
-#      sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
-#      trim ="${START}" ="${END}"
-#    fi
-    sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
+    if [[ $NOISERED == true ]];then
+      sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
+      trim ="${START}" ="${END}" noisered "${HOME}/${NOISE_PROF}" "${NOISE_PROF_FACTOR}"
+    else
+      sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
       trim ="${START}" ="${END}"
+    fi
+#    sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
+#      trim ="${START}" ="${END}"
 
     # Add guano meta data  "Timestamp: ${DATE}"
     guano_edit.py "GUANO|Version: 1.0" "Samplerate: ${SAMPLING_RATE}" "Loc Position: ${LATITUDE} ${LONGITUDE}" "Species Auto ID: ${SCIENTIFIC_NAME}" "Note: BattyBirdNET-Pi" "${NEWSPECIES_BYDATE}/${NEWFILE}"

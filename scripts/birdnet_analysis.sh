@@ -161,9 +161,9 @@ ${INCLUDEPARAM} \
 ${EXCLUDEPARAM} \
 ${BIRDWEATHER_ID_LOG}
 
-    if [[ $NOISERED == true ]];then
-      sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"
-    fi
+    #if [[ $NOISERED == true ]];then
+    #  sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"
+    #fi
 
     echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
 
