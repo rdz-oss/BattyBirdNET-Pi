@@ -168,7 +168,7 @@ ${BIRDWEATHER_ID_LOG}
     #echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
     spectrogram_png=${EXTRACTED}/spectrogram.png
     analyzing_now="${1}/${i}"
-    sox -V1 "${1}/${i}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram -"$INPUT_SPECTROGRAM_COLOR" -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
+    sox -V1 "${1}/${i}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram "$INPUT_SPECTROGRAM_COLOR" -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
 
     $PYTHON_VIRTUAL_ENV $DIR/analyze.py \
       --i "${1}/${i}" \

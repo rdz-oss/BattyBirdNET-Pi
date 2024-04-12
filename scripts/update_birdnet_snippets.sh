@@ -62,7 +62,7 @@ fi
 
 
 if ! grep INPUT_SPECTROGRAM_COLOR /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "INPUT_SPECTROGRAM_COLOR=\"h\"" >> /etc/birdnet/birdnet.conf
+  sudo -u$USER echo "INPUT_SPECTROGRAM_COLOR=\"\"" >> /etc/birdnet/birdnet.conf
 fi
 
 # Create blank sitename as it's optional. First time install will use $HOSTNAME.
