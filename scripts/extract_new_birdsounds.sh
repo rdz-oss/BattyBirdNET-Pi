@@ -99,7 +99,7 @@ for h in "${SCAN_DIRS[@]}";do
     # from that value and divided by 2, so that the 3 seconds of the call are
     # within 3.5 seconds of audio context before and after.
     [ -z ${EXTRACTION_LENGTH} ] && EXTRACTION_LENGTH=1.25
-    SPACER=$(echo "scale=4;(${EXTRACTION_LENGTH} - 0.5625 )/2" |bc -l)
+    SPACER=$(echo "scale=4;(${EXTRACTION_LENGTH})/3" |bc -l)
     START=$(echo "scale=4;${START} - ${SPACER}"|bc -l)
     END=$(echo "scale=4;${END} + ${SPACER}"|bc -l)
 
