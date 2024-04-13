@@ -25,7 +25,8 @@ Now also 384kHz recording is enabled which allows inspection of recordings up to
 * Replay recorded files in audible range (on 'Recordings' pages)
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
-citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET
+citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET, Fledermaus, Fledermausdetektor, Ortungsrufe, 
+Fledermausrufaufnahmen, Fledermausrufe, Rufanalyse
 
 ### Installations around the world
 There are several installations in the US, Germany and the UK that I am aware of. One of my dev stations can be checked out.
@@ -329,7 +330,7 @@ The Pi 4 uses about 70% of its memory (in case of 4GB) and processor power at 38
 ### Making the system available online
 
 * You should activate https by adding an URL with https:// prefix to 'Tools - Settings - Advanced Settings - Custom URL'
-* You can set up a Domain name, if you own one (you need to set the DNS information with your domain provider correctly),
+* You can set up a Domain name, if you own one (you need to point your domain's A/AAAA DNS records at your Pi),
 or use an URL from a DynDNS service. Follow their instructions.
 * Set complex passwords for the Webinterface as well as the underlying Linux system/user
 * Setup a firewall e.g. using ufw, allowing only https and if you want ssh
