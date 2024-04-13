@@ -71,7 +71,7 @@ Including stats and spectrograms to 128 kHz
 ### System components
 
 * A RaspberryPi 4 or  5 with 4GB or more. Use some form of passive or active cooling!
-* If you want to run the system at 384kHz continuously a Pi 5 is required.
+* If you want to run the system at 384kHz continuously consider the 8GB versions.
 * Power supply for the Raspi and an sd card - choose a large one 128 Gb +
 * A USB microphone for ultra sound: tested on audiomoth usb 1.2 and wildlife acoustics echo meter touch 2 (2 and 2 pro)
 * USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
@@ -81,7 +81,6 @@ You might want to add some form of rain protection.
 Some hints:
 
 * The echo meter touch 2 pro works for my setup but not for some. Unkown reason at this point, might have to do with firmware version.
-* If you use the audiomoth and a Pi 4, you will have to set the sampling frequency to 250kHz or the system will overload after a few hours.
 * https://www.openacousticdevices.info/audiomoth  (Usb or battery version with usb microphone configuration). 
 You will need a USB A male to micro USB cable to connect this one.
 * https://www.wildlifeacoustics.com/products/echo-meter-touch-2-android-2
