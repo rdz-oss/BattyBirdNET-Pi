@@ -16,4 +16,5 @@ for i in  "${services[@]}";do
 done
 
 #sudo rm -rf ${PROCESSED}/*
-#sudo rm -rf ${RECS_DIR}/$(date +%B-%Y/%d-%A)/*
+sudo rm -rf ${RECS_DIR}/$(date +%B-%Y/%d-%A)/*
+
