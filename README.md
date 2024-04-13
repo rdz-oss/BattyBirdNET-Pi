@@ -11,7 +11,7 @@ Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
 night-life around you. Can also be placed remotely with a power source.
 
-* Scans ultrasound with 256kHz or 384kHz ( on Pi 5) sampling rate continuously from dusk to dawn or 24/7 if you prefer 365 days a year
+* Scans ultrasound with 256kHz or 384kHz sampling rate continuously from dusk to dawn or 24/7 if you prefer 365 days a year
 * Automated real-time bat ID on device using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer, recording mostly the bats and 
 ignores many sources of false triggers (crickets, rain, ...)
 * Inherits many great things from BirdNET-Pi - including notifications on detection and the ability to check status live
@@ -174,12 +174,13 @@ so expect that there is a certain degree of overlap between the species or two o
   - Owls can be present e.g. with harmonics, also many other birds such as black birds.
   - Frogs/Toads tend to stay below 10kHz.
 
-### Artifacts
+### Artifacts and harmonics
 - Aliasing describes artifacts produced by a sample rate that is too low for some frequencies produced by a bat, i.e. 
 spurious harmonics or mirrored effects. This might happen e.g. for a Myotis call that goes higher than 128 kHz. Lesser horseshoe bat calls should
 still be captured without a mirror effect.
 - Clipping is an issue related to cutoff of frequencies when the gain (loudness) of a microphone is set too high and
 the system cuts off upper and lower frequencies (above the max volume the system can handle). Set e.g. the gain in the Audiomoth to intermediate/medium level.
+- A sound at a certain frequency e.g. 40kHz can appear as a harmonic 'shadow' at 80kHz, 120 kHz etc.
 
 </br></br>
 
@@ -198,12 +199,17 @@ and require a higher sampling rate.
 * There are echo location calls as well as social calls. Social calls can be on very different frequencies (lower, even audible).
 * Feeding buzzes occur when a bat closes in on prey. The number of calls/time increases and the frequency (kHz) goes down in a 'buzz'.
 
+
 ### Echolocation frequency (max energy) of European bats
 A quick overview for a first orientation. Bats shift up or downwards depending also on each others presence and 
 the environment. Highest energy is the lightest color in the spectrogram. More detailed information in German, but many illustrations and tables that are understandable:
 
 - [Nyctalus, Eptesicus, Vespertilio, Pipistrellus, Long eared, Horseshoes and Barbastelle ](https://www.lfu.bayern.de/publikationen/get_pdf.htm?art_nr=lfu_nat_00378)
+ For these species the minimum (or end) frequeny of a call and duration  can be very informative.
 - [Myotis](https://www.lfu.bayern.de/publikationen/get_pdf.htm?art_nr=lfu_nat_00427)
+For myotis species the start (often highest) as well as end (often lowest) frequency as well as the duration are informative.
+There can also be a characteristic 'S' shape in the call. The highest frequencies can require 160kHz or more (extreme 185kHz) 
+resolution, ie 320kHz or 384 kHz settings.
 
 Echolocation frequency (max energy) | Common name           | Species                   | 
 |-----------------|-----------------------|---------------------------|
@@ -299,6 +305,20 @@ This sometimes does not work depending on your router configuration. You can loo
 in your router and call that directly from the browser, e.g. http://192.168.178.XX . Alternatively, tools like Ning (https://f-droid.org/packages/de.csicar.ning/) on your smartphone will
 list all the devices in your network. The BattyBirdNET-Pi should show up.
 
+### Options for the bat classifier
+
+You can set several options under 'Tools - Settings - Advanced Settings' (default user is 'birdnet', no password) including
+* Sampling rate. Choose one that is suitable for your requirements and available from your microphone. Default is 256kHz.
+You can select 256kHz, 288kHz, 320kHz and 384kHz. They work with both Pi4 and Pi 5. 
+The Pi 4 uses about 70% of its memory (in case of 4GB) and processor power at 384kHz settings. The Pi 5 has more resources.
+* If you use an audiomoth, you can set it to 384kHz. BattyBirdNet-Pi will automatically down sample to the chosen setting.
+* The EM 2 can do 256kHz. The Pro version can be used with all settings.
+* You can set a time for dusk and dawn. The system will then be online yet stop recording and classifying during the day.
+* You can choose a noise filter and noise reduction factor. The noise filter is specific for a microphone.
+* It is not recommended to set the reduction factor higher than 0.5 as you loose some information.
+* The sensitivity and confidence settings for the classifier are also on the advanced settings page yet in a different box.
+* Experienced users can consider changing some parameters directly in the file '/etc/birdnet/birdnet.conf'.
+
 ### To use the North American/UK version:
 
 * Install as above, 
@@ -306,6 +326,17 @@ list all the devices in your network. The BattyBirdNET-Pi should show up.
 * Log in as user 'birdnet', leave password empty
 * Settings -> Advanced Settings -> Bat Classifier (use USA or UK)
 * The system will reboot, wait two minutes refresh browser
+
+### Making the system available online
+
+* You should activate https by adding an URL with https:// prefix to 'Tools - Settings - Advanced Settings - Custom URL'
+* You can set up a Domain name, if you own one (you need to set the DNS information with your domain provider correctly),
+or use an URL from a DynDNS service. Follow their instructions.
+* Set complex passwords for the Webinterface as well as the underlying Linux system/user
+* Setup a firewall e.g. using ufw, allowing only https and if you want ssh
+* Update the underlying Raspberry Pi OS frequently to benefit from security fixes 
+* If you are in a home setting, you will need to enable a port forwarding in your router (to the BattyBirdNET-Pi)
+* Update your router firmware frequently (automatically is best) and setup your router firewall
 
 </br></br>
 
