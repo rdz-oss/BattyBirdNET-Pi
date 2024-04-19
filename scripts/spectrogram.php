@@ -11,7 +11,7 @@ if (file_exists('./scripts/thisrun.txt')) {
 if(!empty($config['FREQSHIFT_RECONNECT_DELAY']) && is_numeric($config['FREQSHIFT_RECONNECT_DELAY'])){
     $FREQSHIFT_RECONNECT_DELAY = ($config['FREQSHIFT_RECONNECT_DELAY']);
 }else{
-    $FREQSHIFT_RECONNECT_DELAY = 4000;
+    $FREQSHIFT_RECONNECT_DELAY = 1000;
 }
 
 if(isset($_GET['ajax_csv'])) {
