@@ -538,7 +538,7 @@ if (file_exists('./scripts/thisrun.txt')) {
       <label for="bat_timer">Use the Dusk to Dawn timer: </label>
       <input type="checkbox" name="bat_timer" <?php if($newconfig['BAT_TIMER'] ) { echo "checked"; };?> ><br>
       <p> Stops detection during the day (detects between dusk and dawn).</p>
-      <label for="bat_sun_timer">Use the Dusk to Dawn timer: </label>
+      <label for="bat_sun_timer">Set dusk and dawn automatically from lat/lon </label>
       <input type="checkbox" name="bat_sun_timer" <?php if($newconfig['BAT_SUNTIMER'] ) { echo "checked"; };?> ><br>
       <p> Sets DUSK and Dawn times automatically based on you lat and lon (must set these before on basic settings).</p>
 
