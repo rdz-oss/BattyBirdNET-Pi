@@ -541,6 +541,8 @@ if (file_exists('./scripts/thisrun.txt')) {
       <label for="bat_sun_timer">Set dusk and dawn automatically from lat/lon </label>
       <input type="checkbox" name="bat_sun_timer" <?php if($newconfig['BAT_SUNTIMER'] ) { echo "checked"; };?> ><br>
       <p> Sets DUSK and Dawn times automatically based on you lat and lon (must set these before on basic settings).</p>
+      <br>
+      <p> If not using your lat/long, you can set the values manually.</p>
 
       <label for="bat_dusk">Dusk (HH:MM) </label>
       <input name="bat_dusk" type="text"  value="<?php print($newconfig['BAT_DUSK']);?>" /><br>
