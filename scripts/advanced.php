@@ -360,6 +360,19 @@ if(isset($_GET['submit'])) {
       $contents2 = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=false", $contents2);
     }
 
+    if(isset($_GET["bat_sun_timer"])) {
+      $bat_sun_timer = "true";
+      if(strcmp($bat_sun_timer,$config['BAT_SUNTIMER']) !== 0) {
+        $contents = preg_replace("/BAT_SUNTIMER=.*/", "BAT_SUNTIMER=\"true\"", $contents);
+        $contents2 = preg_replace("/BAT_SUNTIMER=.*/", "BAT_SUNTIMER=\"true\"", $contents2);
+        $contents = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=\"true\"", $contents);
+        $contents2 = preg_replace("/BAT_TIMER=.*/", "BAT_TIMER=\"true\"", $contents2);
+      }
+    } else {
+      $contents = preg_replace("/BAT_SUNTIMER=.*/", "BAT_SUNTIMER=false", $contents);
+      $contents2 = preg_replace("/BAT_SUNTIMER=.*/", "BAT_SUNTIMER=false", $contents2);
+    }
+
     if(isset($_GET["bat_dusk"])) {
       $bat_dusk = $_GET["bat_dusk"];
       if(strcmp($bat_dusk,$config['BAT_DUSK']) !== 0) {
@@ -525,6 +538,9 @@ if (file_exists('./scripts/thisrun.txt')) {
       <label for="bat_timer">Use the Dusk to Dawn timer: </label>
       <input type="checkbox" name="bat_timer" <?php if($newconfig['BAT_TIMER'] ) { echo "checked"; };?> ><br>
       <p> Stops detection during the day (detects between dusk and dawn).</p>
+      <label for="bat_sun_timer">Use the Dusk to Dawn timer: </label>
+      <input type="checkbox" name="bat_sun_timer" <?php if($newconfig['BAT_SUNTIMER'] ) { echo "checked"; };?> ><br>
+      <p> Sets DUSK and Dawn times automatically based on you lat and lon (must set these before on basic settings).</p>
 
       <label for="bat_dusk">Dusk (HH:MM) </label>
       <input name="bat_dusk" type="text"  value="<?php print($newconfig['BAT_DUSK']);?>" /><br>
