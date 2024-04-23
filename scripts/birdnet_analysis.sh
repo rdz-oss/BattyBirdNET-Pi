@@ -12,10 +12,10 @@ if [ -z ${LAST_RUN} ];then LAST_RUN=$my_dir/lastrun.txt;fi
 [ -z ${LATITUDE} ] && echo "LATITUDE not set, exiting 1" && exit 1
 [ -z ${LONGITUDE} ] && echo "LONGITUDE not set, exiting 1" && exit 1
 make_thisrun() {
-  sleep .4
+  #sleep .4
   awk '!/#/ && !/^$/ {print}' /etc/birdnet/birdnet.conf \
     > >(tee "${THIS_RUN}")
-  sleep .5
+  #sleep .5
 }
 make_thisrun &> /dev/null
 if ! diff ${LAST_RUN} ${THIS_RUN};then
@@ -94,7 +94,7 @@ run_analysis() {
   PYTHON_VIRTUAL_ENV="$HOME/BirdNET-Pi/birdnet/bin/python3"
   DIR="$HOME/BirdNET-Pi/scripts"
 
-  sleep .5
+  # sleep .5
 
   ### TESTING NEW WEEK CALCULATION
   WEEK_OF_YEAR="$(echo "($(date +%m)-1) * 4" | bc -l)"
@@ -111,7 +111,7 @@ run_analysis() {
 
   for i in "${files[@]}";do
     [ ! -f ${1}/${i} ] && continue
-    echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
+    # echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
     [ -z ${RECORDING_LENGTH} ] && RECORDING_LENGTH=3
     echo "RECORDING_LENGTH set to ${RECORDING_LENGTH}"
     itr=0
@@ -121,7 +121,7 @@ run_analysis() {
         echo "Maximum number of attempts exceeded. Exiting & restarting service."
         exit
       fi
-      sleep 2
+      sleep 1
     done
 
     if ! grep 5050 <(netstat -tulpn 2>&1) &> /dev/null 2>&1;then
@@ -161,6 +161,15 @@ ${INCLUDEPARAM} \
 ${EXCLUDEPARAM} \
 ${BIRDWEATHER_ID_LOG}
 
+    #echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
+    spectrogram_png=${EXTRACTED}/spectrogram.png
+    analyzing_now="${1}/${i}"
+    sox -V1 "${1}/${i}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
+
+    if [[ $INPUT_NOISERED == true ]];then
+      sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"
+    fi
+
     $PYTHON_VIRTUAL_ENV $DIR/analyze.py \
       --i "${1}/${i}" \
       --o "${1}/${i}.csv" \
@@ -186,14 +195,9 @@ ${BIRDWEATHER_ID_LOG}
 #   - {DIRECTORY}
 run_birdnet() {
   get_files "${1}"
-  [ -z ${NOISERED} ] && NOISERED=false
-
-#  if [[ $NOISERED == true ]];then
-#    noisered_files "${1}"
-#  fi
-
-  move_analyzed "${1}"
+  [ -z ${INPUT_NOISERED} ] && INPUT_NOISERED=false
   run_analysis "${1}"
+  move_analyzed "${1}"
 }
 
 until grep 5050 <(netstat -tulpn 2>&1) &> /dev/null 2>&1;do

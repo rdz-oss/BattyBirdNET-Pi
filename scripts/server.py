@@ -234,6 +234,13 @@ def handle_client(conn, addr):
                 min_conf = args.min_conf
                 # Write detections to output file
                 # min_conf = max(0.01, min(args.min_conf, 0.99))
+                myReturn = ''
+                
+#                if not "results" in detections:
+#                    conn.send(myReturn.encode(FORMAT))
+#                    # time.sleep(3)
+#                    conn.close()
+#                    exit()
 
                 writeResultsToFile(detections["results"],  args.o, min_conf)
                 # writeCSVResultsToFile(detections, args.o)
@@ -242,7 +249,7 @@ def handle_client(conn, addr):
 
                 soundscape_uploaded = False
                 # Write detections to Database
-                myReturn = ''
+
                 for i in detections["results"]:
                     myReturn += str(i) + '-' + str(detections["results"][i][0]) + '\n'
 

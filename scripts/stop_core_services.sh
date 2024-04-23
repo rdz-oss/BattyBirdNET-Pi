@@ -14,4 +14,7 @@ spectrogram_viewer.service)
 for i in  "${services[@]}";do
   sudo systemctl stop  ${i}
 done
+
+#sudo rm -rf ${PROCESSED}/*
 sudo rm -rf ${RECS_DIR}/$(date +%B-%Y/%d-%A)/*
+

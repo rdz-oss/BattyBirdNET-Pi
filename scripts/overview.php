@@ -377,7 +377,7 @@ if (file_exists('./Charts/'.$chart)) {
 
 <h3>Currently Analyzing</h3>
 <?php
-$refresh = $config['RECORDING_LENGTH'];
+$refresh = $config['RECORDING_LENGTH']/3;
 $time = time();
 echo "<img id=\"spectrogramimage\" src=\"/spectrogram.png?nocache=$time\">";
 

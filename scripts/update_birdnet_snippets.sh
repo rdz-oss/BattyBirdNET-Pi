@@ -20,6 +20,8 @@ chmod -R o-w ~/BirdNET-Pi/templates/*
 
 chmod +x ~/BirdNET-Pi/scripts/guano_edit.py
 chmod +x ~/BirdNET-Pi/scripts/batnet_timer.sh
+chmod +x ~/BirdNET-Pi/scripts/sun_info.py
+$HOME/BirdNET-Pi/birdnet/bin/pip3 install python-dateutil datetime
 
 install_batnet_timer_server() {
   cat << EOF > $HOME/BirdNET-Pi/templates/batnet_timer_server.service
@@ -43,26 +45,39 @@ if grep -q 'php7.4-' /etc/caddy/Caddyfile &>/dev/null; then
 fi
 
 if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "BAT_TIMER=\"false\"" >> /etc/birdnet/birdnet.conf
-  sudo -u$USER echo "BAT_DUSK=\"18:00\"" >> /etc/birdnet/birdnet.conf
-  sudo -u$USER echo "BAT_DAWN=\"06:00\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "BAT_TIMER=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "BAT_DUSK=\"18:00\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "BAT_DAWN=\"06:00\"" >> /etc/birdnet/birdnet.conf
   install_batnet_timer_server
   sudo systemctl start batnet_timer_server.service
 fi
 
 if ! grep NOISERED /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "NOISERED=\"false\"" >> /etc/birdnet/birdnet.conf
-  sudo -u$USER echo "NOISE_PROF=\"BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/audiomoth_v12.prof\"" >> /etc/birdnet/birdnet.conf
-  sudo -u$USER echo "NOISE_PROF_FACTOR=\"0.22\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "NOISERED=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "NOISE_PROF=\"BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/audiomoth_v12.prof\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "NOISE_PROF_FACTOR=\"0.22\"" >> /etc/birdnet/birdnet.conf
+fi
+
+if ! grep INPUT_NOISERED /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "INPUT_NOISERED=\"false\"" >> /etc/birdnet/birdnet.conf
+fi
+
+if ! grep BAT_SUNTIMER /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "BAT_SUNTIMER=\"false\"" >> /etc/birdnet/birdnet.conf
+  chmod +x ~/BirdNET-Pi/scripts/sun_info.py
+fi
+
+if ! grep INPUT_SPECTROGRAM_COLOR /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "INPUT_SPECTROGRAM_COLOR=\"\"" >> /etc/birdnet/birdnet.conf
 fi
 
 # Create blank sitename as it's optional. First time install will use $HOSTNAME.
 if ! grep SITE_NAME /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "SITE_NAME=\"\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "SITE_NAME=\"\"" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep PRIVACY_THRESHOLD /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "PRIVACY_THRESHOLD=0" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "PRIVACY_THRESHOLD=0" >> /etc/birdnet/birdnet.conf
   git -C $HOME/BirdNET-Pi rm $my_dir/privacy_server.py
 fi
 if [ -f $my_dir/privacy_server ] || [ -L /usr/local/bin/privacy_server.py ];then
@@ -84,29 +99,29 @@ if grep privacy ~/BirdNET-Pi/templates/birdnet_server.service &>/dev/null;then
   restart_services.sh
 fi
 if ! grep APPRISE_NOTIFICATION_TITLE /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "APPRISE_NOTIFICATION_TITLE=\"New BirdNET-Pi Detection\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "APPRISE_NOTIFICATION_TITLE=\"New BirdNET-Pi Detection\"" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep APPRISE_NOTIFICATION_BODY /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "APPRISE_NOTIFICATION_BODY=\"A \$sciname \$comname was just detected with a confidence of \$confidence\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "APPRISE_NOTIFICATION_BODY=\"A \$sciname \$comname was just detected with a confidence of \$confidence\"" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep APPRISE_NOTIFY_EACH_DETECTION /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "APPRISE_NOTIFY_EACH_DETECTION=0 " >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "APPRISE_NOTIFY_EACH_DETECTION=0 " >> /etc/birdnet/birdnet.conf
 fi
 if ! grep APPRISE_NOTIFY_NEW_SPECIES /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "APPRISE_NOTIFY_NEW_SPECIES=0 " >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "APPRISE_NOTIFY_NEW_SPECIES=0 " >> /etc/birdnet/birdnet.conf
 fi
 if ! grep APPRISE_NOTIFY_NEW_SPECIES_EACH_DAY /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "APPRISE_NOTIFY_NEW_SPECIES_EACH_DAY=0 " >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "APPRISE_NOTIFY_NEW_SPECIES_EACH_DAY=0 " >> /etc/birdnet/birdnet.conf
 fi
 if ! grep APPRISE_MINIMUM_SECONDS_BETWEEN_NOTIFICATIONS_PER_SPECIES /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "APPRISE_MINIMUM_SECONDS_BETWEEN_NOTIFICATIONS_PER_SPECIES=0 " >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "APPRISE_MINIMUM_SECONDS_BETWEEN_NOTIFICATIONS_PER_SPECIES=0 " >> /etc/birdnet/birdnet.conf
 fi
 
 # If the config does not contain the DATABASE_LANG setting, we'll want to add it.
 # Defaults to not-selected, which config.php will know to render as a language option.
 # The user can then select a language in the web interface and update with that.
 if ! grep DATABASE_LANG /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "DATABASE_LANG=not-selected" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "DATABASE_LANG=not-selected" >> /etc/birdnet/birdnet.conf
 fi
 
 apprise_installation_status=$(~/BirdNET-Pi/birdnet/bin/python3 -c 'import pkgutil; print("installed" if pkgutil.find_loader("apprise") else "not installed")')
@@ -119,7 +134,7 @@ if ! which lsof &>/dev/null;then
   sudo apt update && sudo apt -y install lsof
 fi
 if ! grep RTSP_STREAM /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "RTSP_STREAM=" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "RTSP_STREAM=" >> /etc/birdnet/birdnet.conf
 fi
 if grep bash $HOME/BirdNET-Pi/templates/web_terminal.service &>/dev/null;then
   sudo sed -i '/User/d;s/bash/login/g' $HOME/BirdNET-Pi/templates/web_terminal.service
@@ -128,7 +143,7 @@ if grep bash $HOME/BirdNET-Pi/templates/web_terminal.service &>/dev/null;then
 fi
 [ -L ~/BirdSongs/Extracted/static ] || ln -sf ~/BirdNET-Pi/homepage/static ~/BirdSongs/Extracted
 if ! grep FLICKR_API_KEY /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "FLICKR_API_KEY=" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "FLICKR_API_KEY=" >> /etc/birdnet/birdnet.conf
 fi
 if systemctl list-unit-files pushed_notifications.service &>/dev/null;then
   sudo systemctl disable --now pushed_notifications.service
@@ -143,7 +158,7 @@ if [ ! -f $HOME/BirdNET-Pi/model/labels.txt ];then
 fi
 
 if ! grep FLICKR_FILTER_EMAIL /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "FLICKR_FILTER_EMAIL=" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "FLICKR_FILTER_EMAIL=" >> /etc/birdnet/birdnet.conf
 fi
 
 pytest_installation_status=$(~/BirdNET-Pi/birdnet/bin/python3 -c 'import pkgutil; print("installed" if pkgutil.find_loader("pytest") else "not installed")')
@@ -158,11 +173,11 @@ if ! grep weekly_report /etc/crontab &>/dev/null;then
   sed "s/\$USER/$USER/g" $HOME/BirdNET-Pi/templates/weekly_report.cron | sudo tee -a /etc/crontab
 fi
 if ! grep APPRISE_WEEKLY_REPORT /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "APPRISE_WEEKLY_REPORT=1" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "APPRISE_WEEKLY_REPORT=1" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep SILENCE_UPDATE_INDICATOR /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "SILENCE_UPDATE_INDICATOR=0" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "SILENCE_UPDATE_INDICATOR=0" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep '\-\-browser.gatherUsageStats false' $HOME/BirdNET-Pi/templates/birdnet_stats.service &>/dev/null ;then
@@ -174,37 +189,37 @@ fi
 sudo sed -i.bak -e 's|<!-- <bind-address>.*|<bind-address>127.0.0.1</bind-address>|;s|<!-- <shoutcast-mount>.*|<shoutcast-mount>/stream</shoutcast-mount>|' /etc/icecast2/icecast.xml && if [ -s /etc/icecast2/icecast.xml.bak ] && ! sudo diff /etc/icecast2/icecast.xml /etc/icecast2/icecast.xml.bak > /dev/null; then sudo systemctl restart icecast2; fi
 
 if ! grep FREQSHIFT_TOOL /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "FREQSHIFT_TOOL=sox" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "FREQSHIFT_TOOL=sox" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep SOX_SPEED /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "SOX_SPEED=0.1" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "SOX_SPEED=0.1" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep FREQSHIFT_HI /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "FREQSHIFT_HI=6000" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "FREQSHIFT_HI=6000" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep FREQSHIFT_LO /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "FREQSHIFT_LO=3000" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "FREQSHIFT_LO=3000" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep FREQSHIFT_PITCH /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "FREQSHIFT_PITCH=-1500" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "FREQSHIFT_PITCH=-1500" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep ACTIVATE_FREQSHIFT_IN_LIVESTREAM /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"false\"" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep FREQSHIFT_RECONNECT_DELAY /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "FREQSHIFT_RECONNECT_DELAY=4000" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "FREQSHIFT_RECONNECT_DELAY=4000" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep HEARTBEAT_URL /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "HEARTBEAT_URL=" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "HEARTBEAT_URL=" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep MODEL /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "MODEL=BirdNET_6K_GLOBAL_MODEL" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "MODEL=BirdNET_6K_GLOBAL_MODEL" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep SF_THRESH /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "SF_THRESH=0.03" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "SF_THRESH=0.03" >> /etc/birdnet/birdnet.conf
 fi
 sudo chmod +x ~/BirdNET-Pi/scripts/install_language_label_nm.sh
 
@@ -225,25 +240,25 @@ if ! grep -q 'RuntimeMaxSec=' "$HOME/BirdNET-Pi/templates/birdnet_analysis.servi
 fi
 
 if ! grep RAW_SPECTROGRAM /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "RAW_SPECTROGRAM=0" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "RAW_SPECTROGRAM=0" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep CUSTOM_IMAGE /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "CUSTOM_IMAGE=" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "CUSTOM_IMAGE=" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep CUSTOM_IMAGE_TITLE /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "CUSTOM_IMAGE_TITLE=\"\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "CUSTOM_IMAGE_TITLE=\"\"" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep APPRISE_ONLY_NOTIFY_SPECIES_NAMES /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "APPRISE_ONLY_NOTIFY_SPECIES_NAMES=\"\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "APPRISE_ONLY_NOTIFY_SPECIES_NAMES=\"\"" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep APPRISE_ONLY_NOTIFY_SPECIES_NAMES_2 /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "APPRISE_ONLY_NOTIFY_SPECIES_NAMES_2=\"\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "APPRISE_ONLY_NOTIFY_SPECIES_NAMES_2=\"\"" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep RTSP_STREAM_TO_LIVESTREAM /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "RTSP_STREAM_TO_LIVESTREAM=\"0\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "RTSP_STREAM_TO_LIVESTREAM=\"0\"" >> /etc/birdnet/birdnet.conf
 fi
 
 suntime_installation_status=$(~/BirdNET-Pi/birdnet/bin/python3 -c 'import pkgutil; print("installed" if pkgutil.find_loader("suntime") else "not installed")')
@@ -254,15 +269,15 @@ fi
 
 # For new Advanced Setting Logging level options
 if ! grep LogLevel_BirdnetRecordingService /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "LogLevel_BirdnetRecordingService=\"error\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "LogLevel_BirdnetRecordingService=\"error\"" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep LogLevel_LiveAudioStreamService /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "LogLevel_LiveAudioStreamService=\"error\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "LogLevel_LiveAudioStreamService=\"error\"" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep LogLevel_SpectrogramViewerService /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u$USER echo "LogLevel_SpectrogramViewerService=\"error\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "LogLevel_SpectrogramViewerService=\"error\"" >> /etc/birdnet/birdnet.conf
 fi
 
 if grep -q '^MODEL=BirdNET_GLOBAL_3K_V2.3_Model_FP16$' /etc/birdnet/birdnet.conf;then

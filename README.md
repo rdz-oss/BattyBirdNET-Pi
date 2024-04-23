@@ -5,38 +5,44 @@
 ## BattyBirdNET-Pi  Automated real-time bat detection & id
 
 Fully functional and extended fork of BirdNET-Pi for bats. 
-Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2. 
+Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro. 
 
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
 night-life around you. Can also be placed remotely with a power source.
 
-* Scans ultrasound with 256kHz sampling rate continuously from dusk to dawn (timer function) or 24/7 if you prefer 365 days a year
+* Scans ultrasound with 256kHz or 384kHz sampling rate continuously from dusk to dawn or 24/7 if you prefer 365 days a year
 * Automated real-time bat ID on device using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer, recording mostly the bats and 
 ignores many sources of false triggers (crickets, rain, ...)
 * Inherits many great things from BirdNET-Pi - including notifications on detection and the ability to check status live
 on the internet
 * Enabled for European, UK and North American species
-* Not designed for automated biodiversity assessments but can be used if manually vetted for species identifiable at 256kHz.
+* Not designed for automated biodiversity assessments but can be used if manually vetted.
+Now also 384kHz recording is enabled which allows inspection of recordings up to about 190kHz, e.g. to differentiate myotis species.
 * Adds some meta-data in GUANO format to the recordings
 * Requires either audiomoth 1.2 or wildlife acoustics echo meter touch 2 microphones and RaspberryPi 4B or 5.
 * Noise reduction for above microphones available
-* Replay recorded files in audible range
+* Replay recorded files in audible range (on 'Recordings' pages)
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
-citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET
+citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET, Fledermaus, Fledermausdetektor, Ortungsrufe, 
+Fledermausrufaufnahmen, Fledermausrufe, Rufanalyse
 
 ### Installations around the world
 There are several installations in the US, Germany and the UK that I am aware of. One of my dev stations can be checked out.
 Keep in mind it is a development station - testing things and potentially unstable or unavailable. 
 But likely here:
 
-[Munich Teststation](http://battybirdnet.duckdns.org)
+[Munich, BY BatNet](http://battybirdnet.duckdns.org)
 
-The tls certificate is self-signed as it runs in a local network. Your browser might notify you. Bats tend to fly at dusk GER time from 18:30 on. Kuhls Pipistrelle and Nyctalus Noctula likely. Check the weather before e.g at 
+Bats tend to fly at dusk GER time from 18:30 on. Kuhls Pipistrelle and Nyctalus Noctula likely. Check the weather before e.g at 
 [Munich airport](https://www.dwd.de/DE/wetter/wetterundklima_vorort/bayern/muenchen/_node.html) .
 Ideal if warmer than 12C at night and no rain. Rain and environmental noise can trigger the classifier (false detections). More info below on
-how to interpret the recordings.
+how to interpret the recordings. For US species, you might want to checkout the two installations (video and BattyBirdNET-Pi) by PixCams Inc. in Pennsylvania:
+
+[Murraysville, PA BatNets](https://pixcams.com/bat-listening-stations/)
+
+Why not add yours, too?
 
 ### License
 Enjoy! Feel free to use BattyBirdNET-Pi for your acoustic analyses and research. If you do, please cite as:
@@ -65,8 +71,9 @@ Including stats and spectrograms to 128 kHz
 
 ### System components
 
-* A RasPi 4 or  5 with 4GB or more. Use some form of passive or active cooling!
-* Power supply for the Raspi and an sd card - choose a large one 64 Gb +
+* A RaspberryPi 4 or  5 with 4GB or more. Use some form of passive or active cooling!
+* If you want to run the system at 384kHz continuously consider the 8GB versions.
+* Power supply for the Raspi and an sd card - choose a large one 128 Gb +
 * A USB microphone for ultra sound: tested on audiomoth usb 1.2 and wildlife acoustics echo meter touch 2 (2 and 2 pro)
 * USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
 * Optional: You can use a power bank to run the system as long as the power lasts at any location. 
@@ -74,8 +81,7 @@ You might want to add some form of rain protection.
 
 Some hints:
 
-* The echo meter touch 2 pro works for my setup but not for some. Unkown reason at this point.
-* If you use the audiomoth, you will have to set the sampling frequency to 250kHz or the system will overload after a few hours.
+* The echo meter touch 2 pro works for my setup but not for some. Unkown reason at this point, might have to do with firmware version.
 * https://www.openacousticdevices.info/audiomoth  (Usb or battery version with usb microphone configuration). 
 You will need a USB A male to micro USB cable to connect this one.
 * https://www.wildlifeacoustics.com/products/echo-meter-touch-2-android-2
@@ -91,7 +97,11 @@ tend to produce ultra sonic noise. Be aware that the RaspberryPi itself and its 
 2. Place it in the bats flight path (elevated e.g. 3m if you can) or point it to the flight paths.
 3. Place it away from reflective surfaces or other sources of echo. It does work (in Munich) between buildings, 
 but there is an echo effect as well as the bats adapting to the situation (calls shift a bit).
-4. Shield your power converter with acoustic padding or use a long power cable to avoid the ultra sound noise
+4. If you need to deal with either bats or microphone near reflective surfaces (lakes, rivers, windows,..) point the microphone in 
+45 degrees upward away from the surface to minimize effects. Effects include 'shadows' after calls (may appear as a second call or smudge)
+ as well as a 'bubbly' call lines in which the reflected sound waves strengthen or cancel out the original call. Also, try to be 2m above 
+a non-reflective surface to the side of the 'mirror'.
+5. Shield your power converter with acoustic padding or use a long power cable to avoid the ultra sound noise
 in your recordings as well as false detections. Less such issues if run from  a power bank.
 
 #### Use as a station
@@ -140,9 +150,8 @@ There are many sources of such noise:
   - The power plug of the RaspberryPi. This pollutes the recordings and triggers false detections. Take care
   to use noise cancelling foam around it or to get as big a distance between the power plug and the microphone.
   Or use a power bank.
-  - Bush crickets can confuse the classifier. The classifier is trained to ignore them on samples from GER and SE, but not all types.
-  - Cars while operating, parking etc. Also, sometimes they have ultrasound based deterrents for martens.
-  - There are often two or more species flying at the same time. 
+  - Cars while operating, parking, reversing etc. Also, sometimes they have ultrasound based deterrents for martens.
+  - Rain, wind, rustling leaves or grass go into ultrasound.
 
 ### Some bats have near identical calls
 
@@ -155,8 +164,23 @@ Bats in Europe which have similar calls include, but are not limited to:
   - Pipistrellus pipistrellus and Pipistrellus pygmaeus
   - Nyctalus leisleri, Eptisecus serotinus, Vespertilio murinus
   - Plecotus auritus and Plecotus austriacus  are both under Plecotus auritus in the classifier
+  - There are often two or more species flying at the same time. 
 
-so expect that there is a certain degree of overlap between the species. 
+so expect that there is a certain degree of overlap between the species or two or more present in a sample. 
+
+### Other animals 
+  - Bush crickets can confuse the classifier. The classifier is trained to ignore them on samples from GER and SE, but not all types.
+  - Harvest/wood mice can be in 30kHz and even 50kHz range, also brown and other rats and rodents.
+  - Owls can be present e.g. with harmonics, also many other birds such as black birds.
+  - Frogs/Toads tend to stay below 10kHz.
+
+### Artifacts and harmonics
+- Aliasing describes artifacts produced by a sample rate that is too low for some frequencies produced by a bat, i.e. 
+spurious harmonics or mirrored effects. This might happen e.g. for a Myotis call that goes higher than 128 kHz. Lesser horseshoe bat calls should
+still be captured without a mirror effect.
+- Clipping is an issue related to cutoff of frequencies when the gain (loudness) of a microphone is set too high and
+the system cuts off upper and lower frequencies (above the max volume the system can handle). Set e.g. the gain in the Audiomoth to intermediate/medium level.
+- A sound at a certain frequency e.g. 40kHz can appear as a harmonic 'shadow' at 80kHz, 120 kHz etc.
 
 </br></br>
 
@@ -164,41 +188,56 @@ so expect that there is a certain degree of overlap between the species.
   <img src="doc/images/320px-Haeckel_Chiroptera_Plecotus_auritus_2.jpg" width="320" />
 </p>
 
-### Typical call frequencies of European bats
+### Typical call frequencies of bats
 
 * Calls are very variable and affected by the bats surroundings
+* Short, medium and long calls can have different characteristics e.g. in myotis species. Long and very long
+calls of Myotis species should still be visible in the upper end at 256kHz sampling rate. Short and medium sized calls can go to 150kHz and higher
+and require a higher sampling rate.
 * In woodland there are many obstacles to avoid and bat sound become more similar
 * It is not always possible to ID a bat just from echolocation calls
-* There are echo location calls as well as social calls. Social calls can be on very different frequencies.
+* There are echo location calls as well as social calls. Social calls can be on very different frequencies (lower, even audible).
+* Feeding buzzes occur when a bat closes in on prey. The number of calls/time increases and the frequency (kHz) goes down in a 'buzz'.
 
-### Echolocation frequency (max energy)
+
+### Echolocation frequency (max energy) of European bats
 A quick overview for a first orientation. Bats shift up or downwards depending also on each others presence and 
-the environment. Highest energy is the lightest color in the spectrogram.
+the environment. Highest energy is the lightest color in the spectrogram. More detailed information in German, but many illustrations and tables that are understandable:
 
-Echolocation frequency (max energy) | Common name           | Species         | 
-|-----------------|-----------------------|-----------------|
-20-25 kHz | Noctule               | Nyctalus noctula | 
-25 kHz | Leislers              | Nyctalus leisleri | 
-27 kHz | Serotine              | Eptisecus serotinus | 
-28 kHz  | Vespertilio murinus   | Part-coloured bat | 
-32 kHz  | Eptisecus nilssoni    | Northern bat    | 
-32 kHz | Barbastelle           | Barbastella barbastellus | 
-39 kHz | Nathusius pipistrelle | Pipistrellus nathusii | 
-36-40 kHz | Kuhls pipistrelle     | Pioistrellus kuhlii | 
-43-46 kHz | Alcathoe              | Myotis alcathoe | 
+- [Nyctalus, Eptesicus, Vespertilio, Pipistrellus, Long eared, Horseshoes and Barbastelle ](https://www.lfu.bayern.de/publikationen/get_pdf.htm?art_nr=lfu_nat_00378)
+ For these species the minimum (or end) frequeny of a call and duration  can be very informative.
+- [Myotis](https://www.lfu.bayern.de/publikationen/get_pdf.htm?art_nr=lfu_nat_00427)
+For myotis species the start (often highest) as well as end (often lowest) frequency as well as the duration are informative.
+There can also be a characteristic 'S' shape in the call. The highest frequencies can require 160kHz or more (extreme 185kHz) 
+resolution, ie 320kHz or 384 kHz settings.
+
+Echolocation frequency (max energy) | Common name           | Species                   | 
+|-----------------|-----------------------|---------------------------|
+20-25 kHz | Noctule               | Nyctalus noctula          | 
+25 kHz | Leislers              | Nyctalus leisleri         | 
+27 kHz | Serotine              | Eptisecus serotinus       | 
+28 kHz  | Vespertilio murinus   | Part-coloured bat         | 
+32 kHz  | Eptisecus nilssoni    | Northern bat              | 
+32 kHz | Barbastelle           | Barbastella barbastellus  | 
+35kHz | Mouse eared bat       | Myotis myotis             | 
+39 kHz | Nathusius pipistrelle | Pipistrellus nathusii     | 
+36-40 kHz | Kuhls pipistrelle     | Pioistrellus kuhlii       | 
+43-46 kHz | Alcathoe              | Myotis alcathoe           | 
 45 kHz | Common pipistrelle    | Pipistrellus pipistrellus | 
-45 kHz | Whiskered             | Myotis mystacinus | 
-45 kHz | Brandts               | Myotis brandtii | 
-45 kHz | Daubentons            | Myotis daubentonii | 
-45-50 kHz | Brown long-eared      | Plecotus auritus | 
-45-50 kHz | Grey long-eared       | Plecotus austriacus |
-50 kHz | Natterers             | Myotis natteri  | 
-50 kHz | Bechsteins            | Myotis bechsteinii | 
-55 kHz | Soprano pipistrelle   | Pipistrellus pygmaeus | 
+45 kHz | Whiskered             | Myotis mystacinus         | 
+45 kHz | Brandts               | Myotis brandtii           | 
+45 kHz | Daubentons            | Myotis daubentonii        | 
+45-50 kHz | Brown long-eared      | Plecotus auritus          | 
+45-50 kHz | Grey long-eared       | Plecotus austriacus       |
+50 kHz | Natterers             | Myotis natteri            | 
+50 kHz | Bechsteins            | Myotis bechsteinii        | 
+55 kHz | Soprano pipistrelle   | Pipistrellus pygmaeus     | 
 80 kHz | Greater Horseshoe     | Rhinolophus ferrumequinum | 
-108 kHz | Lesser Horseshoe      | Rhinolophus hipposideros | 
+108 kHz | Lesser Horseshoe      | Rhinolophus hipposideros  | 
 
 ### Eastern US Species
+More information: [Eastern US](https://www.sonobat.com/download/EasternUS_Acoustic_Table_Mar2011.pdf)
+
 Echolocation frequency (max energy) | Common name                 | Species                   | 
 |-----------------|-----------------------------|---------------------------|
 21 kHz | Hoary bat                   | Lasiurus cinereus         | 
@@ -220,6 +259,8 @@ Echolocation frequency (max energy) | Common name                 | Species     
 51 kHz | Northern long-eared myotis  | Myotis septentrionalis    | 
 
 ### Western US Species
+More information: [Western US](https://www.sonobat.com/download/WesternUS_Acoustic_Table_Mar2011.pdf)
+
 Echolocation frequency (max energy) | Common name                     | Species                   | 
 |-----------------|---------------------------------|---------------------------|
 12.5 kHz | Spotted bat                     | Euderma maculatum         |
@@ -264,6 +305,20 @@ This sometimes does not work depending on your router configuration. You can loo
 in your router and call that directly from the browser, e.g. http://192.168.178.XX . Alternatively, tools like Ning (https://f-droid.org/packages/de.csicar.ning/) on your smartphone will
 list all the devices in your network. The BattyBirdNET-Pi should show up.
 
+### Options for the bat classifier
+
+You can set several options under 'Tools - Settings - Advanced Settings' (default user is 'birdnet', no password) including
+* Sampling rate. Choose one that is suitable for your requirements and available from your microphone. Default is 256kHz.
+You can select 256kHz, 288kHz, 320kHz and 384kHz. They work with both Pi4 and Pi 5. 
+The Pi 4 uses about 70% of its memory (in case of 4GB) and processor power at 384kHz settings. The Pi 5 has more resources.
+* If you use an audiomoth, you can set it to 384kHz. BattyBirdNet-Pi will automatically down sample to the chosen setting.
+* The EM 2 can do 256kHz. The Pro version can be used with all settings.
+* You can set a time for dusk and dawn. The system will then be online yet stop recording and classifying during the day.
+* You can choose a noise filter and noise reduction factor. The noise filter is specific for a microphone.
+* It is not recommended to set the reduction factor higher than 0.5 as you loose some information.
+* The sensitivity and confidence settings for the classifier are also on the advanced settings page yet in a different box.
+* Experienced users can consider changing some parameters directly in the file '/etc/birdnet/birdnet.conf'.
+
 ### To use the North American/UK version:
 
 * Install as above, 
@@ -271,6 +326,17 @@ list all the devices in your network. The BattyBirdNET-Pi should show up.
 * Log in as user 'birdnet', leave password empty
 * Settings -> Advanced Settings -> Bat Classifier (use USA or UK)
 * The system will reboot, wait two minutes refresh browser
+
+### Making the system available online
+
+* You should activate https by adding an URL with https:// prefix to 'Tools - Settings - Advanced Settings - Custom URL'
+* You can set up a Domain name, if you own one (you need to point your domain's A/AAAA DNS records at your Pi),
+or use an URL from a DynDNS service. Follow their instructions.
+* Set complex passwords for the Webinterface as well as the underlying Linux system/user
+* Setup a firewall e.g. using ufw, allowing only https and if you want ssh
+* Update the underlying Raspberry Pi OS frequently to benefit from security fixes 
+* If you are in a home setting, you will need to enable a port forwarding in your router (to the BattyBirdNET-Pi)
+* Update your router firmware frequently (automatically is best) and setup your router firewall
 
 </br></br>
 
