@@ -588,7 +588,7 @@ if (file_exists('./scripts/thisrun.txt')) {
       <select name="bat_classifier">
       <option selected="<?php print($newconfig['BAT_CLASSIFIER']);?>"><?php print($newconfig['BAT_CLASSIFIER']);?></option>
       <?php
-        $formats = array("Bavaria", "South Wales", "USA", "USA-EAST","USA-WEST","UK");
+        $formats = array("Bavaria", "South-Wales", "USA", "USA-EAST","USA-WEST","UK");
             foreach($formats as $format){
             echo "<option value='$format'>$format</option>";
         }
