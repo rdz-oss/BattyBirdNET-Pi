@@ -121,7 +121,7 @@ run_analysis() {
         echo "Maximum number of attempts exceeded. Exiting & restarting service."
         exit
       fi
-      sleep 1
+      sleep $RECORDING_LENGTH
     done
 
     if ! grep 5050 <(netstat -tulpn 2>&1) &> /dev/null 2>&1;then
