@@ -21,6 +21,7 @@ chmod -R o-w ~/BirdNET-Pi/templates/*
 chmod +x ~/BirdNET-Pi/scripts/guano_edit.py
 chmod +x ~/BirdNET-Pi/scripts/batnet_timer.sh
 chmod +x ~/BirdNET-Pi/scripts/sun_info.py
+chmod +x ~/BirdNET-Pi/scripts/switch_classifier.sh
 $HOME/BirdNET-Pi/birdnet/bin/pip3 install python-dateutil datetime
 
 install_batnet_timer_server() {
@@ -42,6 +43,16 @@ EOF
 
 if grep -q 'php7.4-' /etc/caddy/Caddyfile &>/dev/null; then
   sed -i 's/php7.4-/php-/' /etc/caddy/Caddyfile
+fi
+
+if ! grep SWITCH_TO_BIRD /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "SWITCH_TO_BIRD=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "BIRD_CLASSIFIER=\"BIRDS\"" >> /etc/birdnet/birdnet.conf
+fi
+
+
+if ! grep LAST_BAT_CLASSIFIER /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "LAST_BAT_CLASSIFIER=\"$BAT_CLASSIFIER\"" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then

@@ -421,6 +421,9 @@ if(isset($_GET['submit'])) {
       if(strcmp($bat_classifier,$config['BAT_CLASSIFIER']) !== 0) {
         $contents = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents);
         $contents2 = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents2);
+        $contents = preg_replace("/LAST_BAT_CLASSIFIER=.*/", "LAST_BAT_CLASSIFIER=$bat_classifier", $contents);
+        $contents2 = preg_replace("/LAST_BAT_CLASSIFIER=.*/", "LAST_BAT_CLASSIFIER=$bat_classifier", $contents2);
+
         if(strcmp("BIRDS",$config['BAT_CLASSIFIER']) == 0) {
           # TODO set recording length and extraction length depending on sampling frequency back for bats
           $contents = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=9", $contents);
@@ -437,6 +440,18 @@ if(isset($_GET['submit'])) {
           fwrite($fh2, $contents2);
           exec('stop_core_services.sh');
         }
+
+        if(isset($_GET["bird_day"])) {
+          $bird_day = "true";
+          if(strcmp($bird_day,$config['SWITCH_TO_BIRD']) !== 0) {
+            $contents = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=\"true\"", $contents);
+            $contents2 = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=\"true\"", $contents2);
+          }
+        } else {
+            $contents = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=false", $contents);
+            $contents2 = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=false", $contents2);
+        }
+
         fwrite($fh, $contents);
         fwrite($fh2, $contents2);
         exec('restart_services.sh');
@@ -542,7 +557,6 @@ if (file_exists('./scripts/thisrun.txt')) {
       <input type="checkbox" name="bat_sun_timer" <?php if($newconfig['BAT_SUNTIMER'] ) { echo "checked"; };?> ><br>
       <p> Must set these before on basic settings.</p>
       <p> If not using your lat/long, you can set the values manually.</p>
-
       <label for="bat_dusk">Dusk (HH:MM) </label>
       <input name="bat_dusk" type="text"  value="<?php print($newconfig['BAT_DUSK']);?>" /><br>
       <p>Start detecting at e.g. 18:00 hours (Dusk)</p>
@@ -550,6 +564,10 @@ if (file_exists('./scripts/thisrun.txt')) {
       <label for="bat_dawn">Dawn (HH:MM) </label>
       <input name="bat_dawn" type="text"  value="<?php print($newconfig['BAT_DAWN']);?>" /><br>
       <p>Stop detecting at e.g. 06:00 hours (Dawn)</p>
+
+      <label for="bird_day">Switch to bird detection during the day. </label>
+      <input type="checkbox" name="bird_day" <?php if($newconfig['SWITCH_TO_BIRD'] ) { echo "checked"; };?> ><br>
+      <p> If you check this and activate the timer it will switch to bird detection in the day.</p>
 
       <label for="bat_noisered">Use the microfone noise reducer: </label>
       <input type="checkbox" name="bat_noisered" <?php if($newconfig['NOISERED'] ) { echo "checked"; };?> ><br>
