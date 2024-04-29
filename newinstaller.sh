@@ -33,7 +33,7 @@ if [[ ! -z $PACKAGES_MISSING ]] ; then
 fi
 
 branch=bb
-branch_classifier=main
+branch_classifier=bb
 
 git clone -b $branch --depth=1 https://github.com/rdz-oss/BattyBirdNET-Pi.git ${HOME}/BirdNET-Pi &&
 git clone -b $branch_classifier --depth=1 https://github.com/rdz-oss/BattyBirdNET-Analyzer.git ${HOME}/BattyBirdNET-Analyzer &&
