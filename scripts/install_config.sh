@@ -246,7 +246,7 @@ CUSTOM_IMAGE_TITLE=""
 ## Bat analysis settings in Hz and seconds for recording length as well as area setting for the classifier service
 SAMPLING_RATE=256000
 BAT_CLASSIFIER="Bavaria"
-LAST_BAT_CLASSIFIER="Bavaria"
+LAST_CLASSIFIER="Bavaria"
 BIRD_CLASSIFIER="BIRDS"
 SWITCH_TO_BIRD=false
 BAT_TIMER=false

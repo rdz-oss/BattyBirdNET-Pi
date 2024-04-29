@@ -1,4 +1,14 @@
 <?php
+
+function save_to_cfg($birdnet_conf, $this_run)
+{
+  $fh = fopen('/etc/birdnet/birdnet.conf', "w");
+  $fh2 = fopen("./scripts/thisrun.txt", "w");
+  fwrite($fh, $birdnet_conf);
+  fwrite($fh2, $this_run);
+  fclose($fh);
+  fclose($fh2);
+}
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
@@ -25,19 +35,17 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
   }
 }
 
+
 if(isset($_GET['submit'])) {
   $contents = file_get_contents('/etc/birdnet/birdnet.conf');
   $contents2 = file_get_contents('./scripts/thisrun.txt');
-  $fh = fopen('/etc/birdnet/birdnet.conf', "w");
-  $fh2 = fopen("./scripts/thisrun.txt", "w");
 
   if(isset($_GET["caddy_pwd"])) {
     $caddy_pwd = $_GET["caddy_pwd"];
     if(strcmp($caddy_pwd,$config['CADDY_PWD']) !== 0) {
       $contents = preg_replace("/CADDY_PWD=.*/", "CADDY_PWD=\"$caddy_pwd\"", $contents);
       $contents2 = preg_replace("/CADDY_PWD=.*/", "CADDY_PWD=\"$caddy_pwd\"", $contents2);
-      fwrite($fh, $contents);
-      fwrite($fh2, $contents2);
+      save_to_cfg($contents, $contents2);
       exec('sudo /usr/local/bin/update_caddyfile.sh > /dev/null 2>&1 &');
     }
   }
@@ -57,8 +65,7 @@ if(isset($_GET['submit'])) {
     if(strcmp($birdnetpi_url,$config['BIRDNETPI_URL']) !== 0) {
       $contents = preg_replace("/BIRDNETPI_URL=.*/", "BIRDNETPI_URL=$birdnetpi_url", $contents);
       $contents2 = preg_replace("/BIRDNETPI_URL=.*/", "BIRDNETPI_URL=$birdnetpi_url", $contents2);
-      fwrite($fh, $contents);
-      fwrite($fh2, $contents2);
+      save_to_cfg($contents, $contents2);
       exec('sudo /usr/local/bin/update_caddyfile.sh > /dev/null 2>&1 &');
     }
   }
@@ -68,8 +75,7 @@ if(isset($_GET['submit'])) {
     if(strcmp($rtsp_stream,$config['RTSP_STREAM']) !== 0) {
       $contents = preg_replace("/RTSP_STREAM=.*/", "RTSP_STREAM=\"$rtsp_stream\"", $contents);
       $contents2 = preg_replace("/RTSP_STREAM=.*/", "RTSP_STREAM=\"$rtsp_stream\"", $contents2);
-      fwrite($fh, $contents);
-      fwrite($fh2, $contents2);
+      save_to_cfg($contents, $contents2);
       exec('sudo systemctl restart birdnet_recording.service');
       exec('sudo systemctl restart livestream.service');
     }
@@ -82,8 +88,7 @@ if(isset($_GET['submit'])) {
     if (strcmp($rtsp_stream_selected, $config['RTSP_STREAM_TO_LIVESTREAM']) !== 0) {
       $contents = preg_replace("/RTSP_STREAM_TO_LIVESTREAM=.*/", "RTSP_STREAM_TO_LIVESTREAM=\"$rtsp_stream_selected\"", $contents);
       $contents2 = preg_replace("/RTSP_STREAM_TO_LIVESTREAM=.*/", "RTSP_STREAM_TO_LIVESTREAM=\"$rtsp_stream_selected\"", $contents2);
-      fwrite($fh, $contents);
-      fwrite($fh2, $contents2);
+      save_to_cfg($contents, $contents2);
       exec("sudo systemctl restart livestream.service");
     }
   }
@@ -95,8 +100,7 @@ if(isset($_GET['submit'])) {
     if (strcmp($activate_freqshift_in_livestream, $config['ACTIVATE_FREQSHIFT_IN_LIVESTREAM']) !== 0) {
       $contents = preg_replace("/ACTIVATE_FREQSHIFT_IN_LIVESTREAM=.*/", "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"$activate_freqshift_in_livestream\"", $contents);
       $contents2 = preg_replace("/ACTIVATE_FREQSHIFT_IN_LIVESTREAM=.*/", "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"$activate_freqshift_in_livestream\"", $contents2);
-      fwrite($fh, $contents);
-      fwrite($fh2, $contents2);
+      save_to_cfg($contents, $contents2);
       exec("sudo systemctl restart livestream.service");
     }
   }
@@ -179,6 +183,7 @@ if(isset($_GET['submit'])) {
     if(strcmp($privacy_threshold,$config['PRIVACY_THRESHOLD']) !== 0) {
       $contents = preg_replace("/PRIVACY_THRESHOLD=.*/", "PRIVACY_THRESHOLD=$privacy_threshold", $contents);
       $contents2 = preg_replace("/PRIVACY_THRESHOLD=.*/", "PRIVACY_THRESHOLD=$privacy_threshold", $contents2);
+      save_to_cfg($contents, $contents2);
       exec('restart_services.sh');
     }
   }
@@ -269,14 +274,12 @@ if(isset($_GET['submit'])) {
       if (strcmp($birdnet_recording_service_log_level, $config['LogLevel_BirdnetRecordingService']) !== 0) {
         $contents = preg_replace("/LogLevel_BirdnetRecordingService=.*/", "LogLevel_BirdnetRecordingService=\"$birdnet_recording_service_log_level\"", $contents);
         $contents2 = preg_replace("/LogLevel_BirdnetRecordingService=.*/", "LogLevel_BirdnetRecordingService=\"$birdnet_recording_service_log_level\"", $contents2);
-        fwrite($fh, $contents);
-        fwrite($fh2, $contents2);
+        save_to_cfg($contents, $contents2);
         sleep(1);
         exec("sudo systemctl restart birdnet_recording.service");
       }
 	} else {
-	  fwrite($fh, $contents);
-      fwrite($fh2, $contents2);
+      save_to_cfg($contents, $contents2);
 	  //Create the setting in the setting file - same as what update_birdnet_snippets.sh does but will take the users selected log level as the value
 	  shell_exec('sudo echo "LogLevel_BirdnetRecordingService=\"' . $birdnet_recording_service_log_level . '\"" >> /etc/birdnet/birdnet.conf');
 	  //also update this run txt file
@@ -299,13 +302,11 @@ if(isset($_GET['submit'])) {
 			if (strcmp($spectrogram_viewer_service_log_level, $config['LogLevel_SpectrogramViewerService']) !== 0) {
 				$contents = preg_replace("/LogLevel_SpectrogramViewerService=.*/", "LogLevel_SpectrogramViewerService=\"$spectrogram_viewer_service_log_level\"", $contents);
 				$contents2 = preg_replace("/LogLevel_SpectrogramViewerService=.*/", "LogLevel_SpectrogramViewerService=\"$spectrogram_viewer_service_log_level\"", $contents2);
-				fwrite($fh, $contents);
-				fwrite($fh2, $contents2);
+                save_to_cfg($contents, $contents2);
 				exec("sudo systemctl restart spectrogram_viewer.service");
 			}
 		} else {
-		    fwrite($fh, $contents);
-            fwrite($fh2, $contents2);
+            save_to_cfg($contents, $contents2);
 			//Create the setting in the setting file - same as what update_birdnet_snippets.sh does but will take the users selected log level as the value
 			shell_exec('sudo echo "LogLevel_SpectrogramViewerService=\"' . $spectrogram_viewer_service_log_level . '\"" >> /etc/birdnet/birdnet.conf');
 			//also update this run txt file
@@ -329,13 +330,11 @@ if(isset($_GET['submit'])) {
 				$contents = preg_replace("/LogLevel_LiveAudioStreamService=.*/", "LogLevel_LiveAudioStreamService=\"$livestream_audio_service_log_level\"", $contents);
 				$contents2 = preg_replace("/LogLevel_LiveAudioStreamService=.*/", "LogLevel_LiveAudioStreamService=\"$livestream_audio_service_log_level\"", $contents2);
 				//Write the settings to the config files, so we can restart the relevant services
-				fwrite($fh, $contents);
-				fwrite($fh2, $contents2);
+                save_to_cfg($contents, $contents2);
 				exec("sudo systemctl restart livestream.service && sudo systemctl restart icecast2.service");
 			}
 		} else {
-		    fwrite($fh, $contents);
-            fwrite($fh2, $contents2);
+            save_to_cfg($contents, $contents2);
 			//Create the setting in the setting file - same as what update_birdnet_snippets.sh does but will take the users selected log level as the value
 			shell_exec('sudo echo "LogLevel_LiveAudioStreamService=\"' . $livestream_audio_service_log_level . '\"" >> /etc/birdnet/birdnet.conf');
 			//also update this run txt file
@@ -416,13 +415,15 @@ if(isset($_GET['submit'])) {
       }
     }
 
+
+
     if(isset($_GET["bat_classifier"])) {
       $bat_classifier = $_GET["bat_classifier"];
       if(strcmp($bat_classifier,$config['BAT_CLASSIFIER']) !== 0) {
         $contents = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents);
         $contents2 = preg_replace("/BAT_CLASSIFIER=.*/", "BAT_CLASSIFIER=$bat_classifier", $contents2);
-        $contents = preg_replace("/LAST_BAT_CLASSIFIER=.*/", "LAST_BAT_CLASSIFIER=$bat_classifier", $contents);
-        $contents2 = preg_replace("/LAST_BAT_CLASSIFIER=.*/", "LAST_BAT_CLASSIFIER=$bat_classifier", $contents2);
+        $contents = preg_replace("/LAST_CLASSIFIER=.*/", "LAST_CLASSIFIER=$bat_classifier", $contents);
+        $contents2 = preg_replace("/LAST_CLASSIFIER=.*/", "LAST_CLASSIFIER=$bat_classifier", $contents2);
 
         if(strcmp("BIRDS",$config['BAT_CLASSIFIER']) == 0) {
           # TODO set recording length and extraction length depending on sampling frequency back for bats
@@ -431,31 +432,37 @@ if(isset($_GET['submit'])) {
           $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=9", $contents2);
           $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents2);
         }
+
+        save_to_cfg($contents, $contents2);
+
         if(strcmp("BIRDS", $bat_classifier) == 0) {
           $contents = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=15", $contents);
           $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=3", $contents);
           $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=15", $contents2);
           $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=3", $contents2);
-          fwrite($fh, $contents);
-          fwrite($fh2, $contents2);
+          save_to_cfg($contents, $contents2);
           exec('stop_core_services.sh');
         }
-
-        if(isset($_GET["bird_day"])) {
-          $bird_day = "true";
-          if(strcmp($bird_day,$config['SWITCH_TO_BIRD']) !== 0) {
-            $contents = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=\"true\"", $contents);
-            $contents2 = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=\"true\"", $contents2);
-          }
-        } else {
-            $contents = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=false", $contents);
-            $contents2 = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=false", $contents2);
-        }
-
-        fwrite($fh, $contents);
-        fwrite($fh2, $contents2);
+        save_to_cfg($contents, $contents2);
         exec('restart_services.sh');
       }
+    }
+
+    if(isset($_GET["bird_day"])) {
+       $bird_day = "true";
+       if(strcmp($bird_day,$config['SWITCH_TO_BIRD']) !== 0) {
+         $contents = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=\"true\"", $contents);
+         $contents2 = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=\"true\"", $contents2);
+         save_to_cfg($contents, $contents2);
+         #exec('restart_services.sh');
+         exec('sudo systemctl restart batnet_timer_server.service');
+       }
+    } else {
+      $contents = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=false", $contents);
+      $contents2 = preg_replace("/SWITCH_TO_BIRD=.*/", "SWITCH_TO_BIRD=false", $contents2);
+      save_to_cfg($contents, $contents2);
+      #exec('restart_services.sh');
+      exec('sudo systemctl restart batnet_timer_server.service');
     }
 
     if(isset($_GET["bat_sampling_frequency"])) {
@@ -490,16 +497,14 @@ if(isset($_GET['submit'])) {
 
         }
         exec('stop_core_services.sh');
-	    fwrite($fh, $contents);
-	    fwrite($fh2, $contents2);
+        save_to_cfg($contents, $contents2);
 	    exec('restart_services.sh');
 	  }
     }
 
 	//Finally write the data out. some sections do this themselves in order to have the new settings ready for the services that will be restarted
 	//but will doubly ensure the settings are saved after any modification
-	fwrite($fh, $contents);
-	fwrite($fh2, $contents2);
+    save_to_cfg($contents, $contents2);
 	#fclose($fh)
 	#fclose($fh2)
 	}
@@ -556,6 +561,11 @@ if (file_exists('./scripts/thisrun.txt')) {
       <label for="bat_sun_timer">Set dusk and dawn automatically from lat/lon </label>
       <input type="checkbox" name="bat_sun_timer" <?php if($newconfig['BAT_SUNTIMER'] ) { echo "checked"; };?> ><br>
       <p> Must set these before on basic settings.</p>
+
+      <label for="bird_day">Switch to bird detection during the day. </label>
+      <input type="checkbox" name="bird_day" <?php if($newconfig['SWITCH_TO_BIRD'] ) { echo "checked"; };?> ><br>
+      <p> If you check this and activate the timer it will switch to bird detection in the day.</p>
+
       <p> If not using your lat/long, you can set the values manually.</p>
       <label for="bat_dusk">Dusk (HH:MM) </label>
       <input name="bat_dusk" type="text"  value="<?php print($newconfig['BAT_DUSK']);?>" /><br>
@@ -564,10 +574,6 @@ if (file_exists('./scripts/thisrun.txt')) {
       <label for="bat_dawn">Dawn (HH:MM) </label>
       <input name="bat_dawn" type="text"  value="<?php print($newconfig['BAT_DAWN']);?>" /><br>
       <p>Stop detecting at e.g. 06:00 hours (Dawn)</p>
-
-      <label for="bird_day">Switch to bird detection during the day. </label>
-      <input type="checkbox" name="bird_day" <?php if($newconfig['SWITCH_TO_BIRD'] ) { echo "checked"; };?> ><br>
-      <p> If you check this and activate the timer it will switch to bird detection in the day.</p>
 
       <label for="bat_noisered">Use the microfone noise reducer: </label>
       <input type="checkbox" name="bat_noisered" <?php if($newconfig['NOISERED'] ) { echo "checked"; };?> ><br>

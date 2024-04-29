@@ -325,6 +325,7 @@ if(isset($_GET['view'])){
                        'sudo systemctl restart spectrogram_viewer.service',
                        'sudo systemctl disable --now spectrogram_viewer.service',
                        'sudo systemctl enable --now spectrogram_viewer.service',
+                       'sudo systemctl restart batnet_timer_server.service',
                        'stop_core_services.sh',
                        'restart_services.sh',
                        'sudo reboot',

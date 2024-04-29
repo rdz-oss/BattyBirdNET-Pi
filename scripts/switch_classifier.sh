@@ -19,16 +19,16 @@ done
 
 sudo /usr/local/bin/stop_core_services.sh
 
-if [[ $classifier_t == bird ]];then
-  sed -i "s/BAT_CLASSIFIER=$BAT_CLASSIFIER=/BAT_CLASSIFIER=$classifier/g" /etc/birdnet/birdnet.conf
-  sed -i "s/RECORDING_LENGTH=$RECORDING_LENGTH=/RECORDING_LENGTH=$bird_rec_length/g" /etc/birdnet/birdnet.conf
-  sed -i "s/EXTRACTION_LENGTH=$EXTRACTION_LENGTH=/EXTRACTION_LENGTH=$bird_extraction_length/g" /etc/birdnet/birdnet.conf
+if [[ $classifier_t == "bird" ]];then
+  sudo sed -i "s/BAT_CLASSIFIER=.*/BAT_CLASSIFIER=$classifier/g" /etc/birdnet/birdnet.conf
+  sudo sed -i "s/RECORDING_LENGTH=.*/RECORDING_LENGTH=$bird_rec_length/g" /etc/birdnet/birdnet.conf
+  sudo sed -i "s/EXTRACTION_LENGTH=.*/EXTRACTION_LENGTH=$bird_extraction_length/g" /etc/birdnet/birdnet.conf
 fi
 
-if [[ $classifier_t == bat ]];then
-  sed -i "s/BAT_CLASSIFIER=$BAT_CLASSIFIER=/BAT_CLASSIFIER=$classifier/g" /etc/birdnet/birdnet.conf
-  sed -i "s/RECORDING_LENGTH=$RECORDING_LENGTH=/RECORDING_LENGTH=$bat_rec_length/g" /etc/birdnet/birdnet.conf
-  sed -i "s/EXTRACTION_LENGTH=$EXTRACTION_LENGTH=/EXTRACTION_LENGTH=$bat_extraction_length/g" /etc/birdnet/birdnet.conf
+if [[ $classifier_t == "bat" ]];then
+  sudo sed -i "s/BAT_CLASSIFIER=.*/BAT_CLASSIFIER=$classifier/g" /etc/birdnet/birdnet.conf
+  sudo sed -i "s/RECORDING_LENGTH=.*/RECORDING_LENGTH=$bat_rec_length/g" /etc/birdnet/birdnet.conf
+  sudo sed -i "s/EXTRACTION_LENGTH=.*/EXTRACTION_LENGTH=$bat_extraction_length/g" /etc/birdnet/birdnet.conf
 fi
 
 sudo /usr/local/bin/restart_services.sh
