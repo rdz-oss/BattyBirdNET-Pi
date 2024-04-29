@@ -113,6 +113,22 @@ EOF
   systemctl enable batnet_timer_server.service
 }
 
+install_data_upload_service() {
+  cat << EOF > $HOME/BirdNET-Pi/templates/data_upload_service.service
+[Unit]
+Description=BatNET Data Upload Service
+[Service]
+Restart=always
+Type=simple
+RestartSec=86400
+User=${USER}
+ExecStart=/usr/local/bin/upload_data.sh
+[Install]
+WantedBy=multi-user.target
+EOF
+  ln -sf $HOME/BirdNET-Pi/templates/data_upload_service.service /usr/lib/systemd/system
+  systemctl enable data_upload_service.service
+}
 
 install_extraction_service() {
   cat << EOF > $HOME/BirdNET-Pi/templates/extraction.service
@@ -494,6 +510,7 @@ install_services() {
   install_weekly_cron
   increase_caddy_timeout
   install_batnet_timer_server
+  install_data_upload_service
 
   create_necessary_dirs
   generate_BirdDB

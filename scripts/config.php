@@ -142,7 +142,7 @@ if(isset($_GET["latitude"])){
     $lang_config = parse_ini_file($home.'/BirdNET-Pi/scripts/thisrun.ini');
   }
 
-  if ($model != $lang_config['MODEL'] || $language != $lang_config['DATABASE_LANG']){
+/*   if ($model != $lang_config['MODEL'] || $language != $lang_config['DATABASE_LANG']){
     if(strlen($language) == 2){
       $user = trim(shell_exec("awk -F: '/1000/{print $1}' /etc/passwd"));
       $home = trim(shell_exec("awk -F: '/1000/{print $6}' /etc/passwd"));
@@ -159,7 +159,7 @@ if(isset($_GET["latitude"])){
 
       syslog(LOG_INFO, "Successfully changed language to '$language' and model to '$model'");
     }
-  }
+  } */
 
 
   $contents = file_get_contents("/etc/birdnet/birdnet.conf");
@@ -360,8 +360,9 @@ function sendTestNotification(e) {
     xmlHttp.send(null);
 }
 </script>
+<!--
       <table class="settingstable"><tr><td>
-      <h2>Model</h2>
+       <h2>Model</h2>
 
       <label for="model">Select a Model: </label>
       <select id="modelsel" name="model">
@@ -491,7 +492,7 @@ function runProcess() {
       <dt>[ In-depth technical write-up on the models <a target="_blank" href="https://github.com/mcguirepr89/BirdNET-Pi/wiki/BirdNET-Pi:-some-theory-on-classification-&-some-practical-hints">here</a> ]</dt>
       </dl>
       </td></tr></table><br>
-
+-->
       <table class="settingstable"><tr><td>
       <h2>Location</h2>
       <label for="site_name">Site Name: </label>
