@@ -2,27 +2,35 @@
   <img src="homepage/images/bnp.png" width="320" />
 </p>
 
-## BattyBirdNET-Pi  Automated real-time bat detection & id
+## BattyBirdNET-Pi  Automated real-time bat and bird detection & id
 
-Fully functional and extended fork of BirdNET-Pi for bats. 
+Extended fork of BirdNET-Pi for bats AND birds. 
 Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro. 
 
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
-night-life around you. Can also be placed remotely with a power source.
+night and day life around you. Can also be placed remotely with a power source and set to detect birds during the day.
 
 * Scans ultrasound with 256kHz or 384kHz sampling rate continuously from dusk to dawn or 24/7 if you prefer 365 days a year
 * Automated real-time bat ID on device using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer, recording mostly the bats and 
-ignores many sources of false triggers (crickets, rain, ...)
+ignores many sources of false triggers (crickets, rain, ...). Can be set to use BirdNET vanilla during the day to detect birds. 
+Recordings always include the ultra-sound parts also for birds. 
 * Inherits many great things from BirdNET-Pi - including notifications on detection and the ability to check status live
 on the internet
-* Enabled for European, UK and North American species
+* Enabled for European, UK and North American species. You can make your own fine-tuned classifier for bats, birds or other animals  
+and contribute it via pull request to make it work in this system!
 * Not designed for automated biodiversity assessments but can be used if manually vetted.
 Now also 384kHz recording is enabled which allows inspection of recordings up to about 190kHz, e.g. to differentiate myotis species.
 * Adds some meta-data in GUANO format to the recordings
 * Requires either audiomoth 1.2 or wildlife acoustics echo meter touch 2 microphones and RaspberryPi 4B or 5.
 * Noise reduction for above microphones available
 * Replay recorded files in audible range (on 'Recordings' pages)
+
+Did you know that many animals developed echo location? Bats, swiftlets, toothed whales, tenrecs, oilbird, pygmy doormouse, rats and perhaps
+shrews. Some forms are more basic than others, especially birds do not hear well in ultrasound yet some can do echo location
+in the audible range to avoid obstacles. Bats have used their ability for echo location to detect insects of all sizes 
+in the night, something that is more difficult to do with sight. 
+You can listen to and learn to identify bats and birds in your yard or any other place with this setup!
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
 citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET, Fledermaus, Fledermausdetektor, Ortungsrufe, 
@@ -73,7 +81,7 @@ Including stats and spectrograms to 128 kHz
 
 * A RaspberryPi 4 or  5 with 4GB or more. Use some form of passive or active cooling!
 * If you want to run the system at 384kHz continuously consider the 8GB versions.
-* Power supply for the Raspi and an sd card - choose a large one 128 Gb +
+* Power supply for the Raspi and an sd card - choose a large one 128 Gb or larger
 * A USB microphone for ultra sound: tested on audiomoth usb 1.2 and wildlife acoustics echo meter touch 2 (2 and 2 pro)
 * USB cable (USB C female to USB 3, 1.2m) or a USB 3 to USB 3 cable and a USB to USB C adapter
 * Optional: You can use a power bank to run the system as long as the power lasts at any location. 
@@ -81,7 +89,7 @@ You might want to add some form of rain protection.
 
 Some hints:
 
-* The echo meter touch 2 pro works for my setup but not for some. Unkown reason at this point, might have to do with firmware version.
+* The echo meter touch 2 pro works for my setup but not for some. Unknown reason at this point, might have to do with firmware version.
 * https://www.openacousticdevices.info/audiomoth  (Usb or battery version with usb microphone configuration). 
 You will need a USB A male to micro USB cable to connect this one.
 * https://www.wildlifeacoustics.com/products/echo-meter-touch-2-android-2
@@ -314,18 +322,26 @@ The Pi 4 uses about 70% of its memory (in case of 4GB) and processor power at 38
 * If you use an audiomoth, you can set it to 384kHz. BattyBirdNet-Pi will automatically down sample to the chosen setting.
 * The EM 2 can do 256kHz. The Pro version can be used with all settings.
 * You can set a time for dusk and dawn. The system will then be online yet stop recording and classifying during the day.
+* You can switch to bird recording during the day with vanilla BirdNET v2.4 and record bats at night.
 * You can choose a noise filter and noise reduction factor. The noise filter is specific for a microphone.
 * It is not recommended to set the reduction factor higher than 0.5 as you loose some information.
 * The sensitivity and confidence settings for the classifier are also on the advanced settings page yet in a different box.
-* Experienced users can consider changing some parameters directly in the file '/etc/birdnet/birdnet.conf'.
+* Experienced users can consider changing some parameters directly in the file '/etc/birdnet/birdnet.conf'. You need to set
+* BAT_CLASSIFIER and LAST_BAT_CLASSIFIER together to the same value
+* You can fine tune/cross train your own classifier with your data using https://github.com/rdz-oss/BattyBirdNET-Analyzer and contribute it via 
+pull request (to BattyBirdNET-Analyzer and -Pi). This way, you could e.g. have a fine tuned model for detecting a rare species (bird, bat, insect, mammal, other) 
+for conservation/biomonitoring reasons or to add a classifier for a new/your region.
+
 
 ### To use the North American/UK version:
 
-* Install as above, 
+* Install as above
 * Go to the Tools setting
 * Log in as user 'birdnet', leave password empty
 * Settings -> Advanced Settings -> Bat Classifier (use USA or UK)
-* The system will reboot, wait two minutes refresh browser
+* If you have set your lat/lon before on the basic settings you can activate the 
+automatic sunrise/sunset determination service
+* You can activate the switch to bird detection during the day if you like
 
 ### Making the system available online
 

@@ -32,6 +32,20 @@ start_service() {
     echo "No sun timer set. Default to false!"
   fi
 
+  if [ -z "${BIRD_CLASSIFIER}" ];then
+    BIRD_CLASSIFIER=BIRDS
+    echo "No bird classifier set! Going with BIRDS."
+  fi
+
+  if [ -z "${SWITCH_TO_BIRD}" ];then
+    SWITCH_TO_BIRD=false
+    echo "No SWITCH_TO_BIRD set. Going with false."
+  fi
+  if [ -z "${LAST_CLASSIFIER}" ];then
+    LAST_CLASSIFIER=Bavaria
+    echo "No last bat classifier set! Going with Bavaria."
+  fi
+
   running=true
 
   while :; do
@@ -39,7 +53,8 @@ start_service() {
 
     if [[ $BAT_TIMER == false ]];then
       if [[ $running == false ]];then
-        sudo /usr/local/bin/restart_services.sh
+        #sudo /usr/local/bin/restart_services.sh
+        sudo /usr/local/bin/switch_classifier.sh -c "${LAST_CLASSIFIER}" -t bat
         running=true
       fi
       sleep 60
@@ -55,12 +70,20 @@ start_service() {
 
     if [[ "$currenttime" > "$BAT_DUSK" ]] || [[ "$currenttime" < "$BAT_DAWN" ]];then
       if [[ $running == false ]];then
-        sudo /usr/local/bin/restart_services.sh
+        if [[ $SWITCH_TO_BIRD == true ]];then
+          sudo /usr/local/bin/switch_classifier.sh -c "${LAST_CLASSIFIER}" -t bat
+        else
+          sudo /usr/local/bin/restart_services.sh
+        fi
         running=true
       fi
     else
       if [[ $running == true ]];then
-        sudo /usr/local/bin/stop_core_services.sh
+        if [[ $SWITCH_TO_BIRD == true ]];then
+          sudo /usr/local/bin/switch_classifier.sh -c "${BIRD_CLASSIFIER}" -t bird
+        else
+          sudo /usr/local/bin/stop_core_services.sh
+        fi
         running=false
       fi
     fi
