@@ -313,6 +313,25 @@ This sometimes does not work depending on your router configuration. You can loo
 in your router and call that directly from the browser, e.g. http://192.168.178.XX . Alternatively, tools like Ning (https://f-droid.org/packages/de.csicar.ning/) on your smartphone will
 list all the devices in your network. The BattyBirdNET-Pi should show up.
 
+#### Update
+Via UI: "Tools" > "System Controls" > "Update".
+On commandline
+```sh
+/usr/local/bin/update_birdnet.sh
+```
+
+#### Uninstall
+```sh
+/usr/local/bin/uninstall.sh && cd ~ && rm -drf BirdNET-Pi
+```
+Should you want to change the branch you are on (default is 'main') you can use
+```sh
+git fetch
+git pull origin 'branchname'
+```
+There are two systems installed BattyBirdNET-Pi and BattyBirdNET-Analyzer.
+You can set a preferred branch for each individually.
+
 ### Options for the bat classifier
 
 You can set several options under 'Tools - Settings - Advanced Settings' (default user is 'birdnet', no password) including
@@ -354,6 +373,24 @@ or use an URL from a DynDNS service. Follow their instructions.
 * If you are in a home setting, you will need to enable a port forwarding in your router (to the BattyBirdNET-Pi)
 * Update your router firmware frequently (automatically is best) and setup your router firewall
 
+### Debugging
+Some useful commands to check if services are up and their status
+```sh
+ss -nltp
+journalctl -eu birdnet_analysis -u birdnet_server -u batnet_server | sudo tee -a /var/log/syslog
+cat /var/log/syslog  | grep error
+/usr/local/bin/print_diagnostic_info.sh
+```
+Audio 
+```sh
+cat /proc/asound/cards
+```
+Check if settings are correct in /etc/asound.conf with above info 
+and change defaults.pcm.card 
+defaults.ctl.card to the correct values if necessary:
+```sh
+sudo nano /etc/asound.conf
+```
 </br></br>
 
 <p align="center">
