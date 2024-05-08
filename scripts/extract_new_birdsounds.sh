@@ -125,8 +125,14 @@ for h in "${SCAN_DIRS[@]}";do
 #    sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
 #      trim ="${START}" ="${END}"
 
+    # Get RPi and Microphone details
+    #microphone_model="$(pactl get-default-source)"
+    microphone_model="$(arecord -l | grep -Po '\[\K[^]]*(?=])' | head -n 1)"
+    rpi_make="$(cat /proc/device-tree/model)"
+
     # Add guano meta data  "Timestamp: ${DATE}"
-    guano_edit.py "GUANO|Version: 1.0" "Samplerate: ${SAMPLING_RATE}" "Loc Position: ${LATITUDE} ${LONGITUDE}" "Species Auto ID: ${SCIENTIFIC_NAME}" "Note: BattyBirdNET-Pi" "${NEWSPECIES_BYDATE}/${NEWFILE}"
+    # guano_edit.py "GUANO|Version: 1.0" "Samplerate: ${SAMPLING_RATE}" "Loc Position: ${LATITUDE} ${LONGITUDE}" "Species Auto ID: ${SCIENTIFIC_NAME}" "Note: BattyBirdNET-Pi" "${NEWSPECIES_BYDATE}/${NEWFILE}"
+    guano_edit.py "GUANO|Version: 1.0" "Samplerate: ${SAMPLING_RATE}" "Loc Position: ${LATITUDE} ${LONGITUDE}" "Species Auto ID: ${SCIENTIFIC_NAME}" "Make: ${rpi_make}" "Model: ${microphone_model}" "Note: BattyBirdNET-Pi" "${NEWSPECIES_BYDATE}/${NEWFILE}"
 
     RAW_SPECTROGRAM=${RAW_SPECTROGRAM}
     # Check if RAW_SPECTROGRAM is 1
