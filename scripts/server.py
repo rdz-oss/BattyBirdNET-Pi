@@ -363,12 +363,13 @@ def handle_client(conn, addr):
                                             print("Soundscape POST Response Status - ", response.status_code)
                                             sdata = response.json()
                                             soundscape_id = sdata['soundscape']['id']
+                                            print("Soundscape Response - ", sdata)
                                             soundscape_uploaded = True
 
                                         # POST detection to server
                                         detection_url = "https://app.birdweather.com/api/v1/stations/" + birdweather_id + "/detections"
-                                        start_time = d.split(';')[0]
-                                        end_time = d.split(';')[1]
+                                        start_time = d.split('-')[0]
+                                        end_time = d.split('-')[1]
                                         post_begin = "{ "
                                         now_p_start = now + datetime.timedelta(seconds=float(start_time))
                                         current_iso8601 = now_p_start.astimezone(get_localzone()).isoformat()
@@ -395,6 +396,7 @@ def handle_client(conn, addr):
                                         print(post_json)
                                         response = requests.post(detection_url, json=json.loads(post_json))
                                         print("Detection POST Response Status - ", response.status_code)
+                                        print("Detection Response - ", sdata)
                                     except BaseException:
                                         print("Cannot POST right now")
                 # # Write detections to Database
