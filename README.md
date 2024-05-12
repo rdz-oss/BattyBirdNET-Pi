@@ -26,7 +26,7 @@ Now also 384kHz recording is enabled which allows inspection of recordings up to
 * Noise reduction for above microphones available
 * Replay recorded files in audible range (on 'Recordings' pages)
 
-Did you know that many animals developed echo location? Bats, swiftlets, toothed whales, tenrecs, oilbird, pygmy doormouse, rats and perhaps
+Many animals developed echo location: bats, swiftlets, toothed whales, tenrecs, oilbird, pygmy doormouse, rats and perhaps
 shrews. Some forms are more basic than others, especially birds do not hear well in ultrasound yet some can do echo location
 in the audible range to avoid obstacles. Bats have used their ability for echo location to detect insects of all sizes 
 in the night, something that is more difficult to do with sight. 
