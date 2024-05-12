@@ -39,7 +39,7 @@ Fledermausrufaufnahmen, Fledermausrufe, Rufanalyse
 ### Installations around the world
 There are several installations in the US, Germany and the UK that I am aware of. Some might be online here:
 
-[Munich, BY BatNet](http://battybirdnet.duckdns.org/)
+[Munich, BY BatNet](https://battybirdnet.duckdns.org/)
 
 [Frankfurt, HE BatNet](https://bathoechst.duckdns.org:8000/)
 
