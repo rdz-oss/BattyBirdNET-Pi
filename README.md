@@ -37,16 +37,13 @@ citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET,
 Fledermausrufaufnahmen, Fledermausrufe, Rufanalyse
 
 ### Installations around the world
-There are several installations in the US, Germany and the UK that I am aware of. One of my dev stations can be checked out.
-Keep in mind it is a development station - testing things and potentially unstable or unavailable. 
-But likely here:
+There are several installations in the US, Germany and the UK that I am aware of. Some might be online here:
 
 [Munich, BY BatNet](http://battybirdnet.duckdns.org)
 
-Bats tend to fly at dusk GER time from 18:30 on. Kuhls Pipistrelle and Nyctalus Noctula likely. Check the weather before e.g at 
-[Munich airport](https://www.dwd.de/DE/wetter/wetterundklima_vorort/bayern/muenchen/_node.html) .
-Ideal if warmer than 12C at night and no rain. Rain and environmental noise can trigger the classifier (false detections). More info below on
-how to interpret the recordings. For US species, you might want to checkout the two installations (video and BattyBirdNET-Pi) by PixCams Inc. in Pennsylvania:
+[Frankfurt, HE BatNet](https://bathoechst.duckdns.org:8000/)
+
+[Öringe, Tyresö](https://batnetpi.svardsten.se/) 
 
 [Murraysville, PA BatNets](https://pixcams.com/bat-listening-stations/)
 
