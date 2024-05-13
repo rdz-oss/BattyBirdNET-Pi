@@ -37,7 +37,10 @@ citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET,
 Fledermausrufaufnahmen, Fledermausrufe, Rufanalyse
 
 ### Installations around the world
-There are several installations in the US, Germany and the UK that I am aware of. Some might be online here:
+There are several installations in the US, Germany and the UK that I am aware of. People may take them on and of the network,
+but here in general:
+
+Germany
 
 [Munich, BY BatNet](https://battybirdnet.duckdns.org/)
 
@@ -45,7 +48,11 @@ There are several installations in the US, Germany and the UK that I am aware of
 
 [St Goar, RLP BatNet](https://stgoarbat.duckdns.org:8000/)
 
+Sweden
+
 [Öringe, Tyresö](https://batnetpi.svardsten.se/) 
+
+USA
 
 [Murraysville, PA BatNets](https://pixcams.com/bat-listening-stations/)
 
