@@ -46,7 +46,7 @@ if grep -q 'php7.4-' /etc/caddy/Caddyfile &>/dev/null; then
 fi
 
 if ! grep SWITCH_TO_BIRD /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u $USER echo "SWITCH_TO_BIRD=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "SWITCH_TO_BIRD=false" >> /etc/birdnet/birdnet.conf
   sudo -u $USER echo "BIRD_CLASSIFIER=\"BIRDS\"" >> /etc/birdnet/birdnet.conf
 fi
 
@@ -56,7 +56,7 @@ if ! grep LAST_CLASSIFIER /etc/birdnet/birdnet.conf &>/dev/null;then
 fi
 
 if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u $USER echo "BAT_TIMER=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "BAT_TIMER=false" >> /etc/birdnet/birdnet.conf
   sudo -u $USER echo "BAT_DUSK=\"18:00\"" >> /etc/birdnet/birdnet.conf
   sudo -u $USER echo "BAT_DAWN=\"06:00\"" >> /etc/birdnet/birdnet.conf
   install_batnet_timer_server
@@ -64,17 +64,17 @@ if ! grep BAT_TIMER /etc/birdnet/birdnet.conf &>/dev/null;then
 fi
 
 if ! grep NOISERED /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u $USER echo "NOISERED=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "NOISERED=false" >> /etc/birdnet/birdnet.conf
   sudo -u $USER echo "NOISE_PROF=\"BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/audiomoth_v12.prof\"" >> /etc/birdnet/birdnet.conf
   sudo -u $USER echo "NOISE_PROF_FACTOR=\"0.22\"" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep INPUT_NOISERED /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u $USER echo "INPUT_NOISERED=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "INPUT_NOISERED=false" >> /etc/birdnet/birdnet.conf
 fi
 
 if ! grep BAT_SUNTIMER /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u $USER echo "BAT_SUNTIMER=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "BAT_SUNTIMER=false" >> /etc/birdnet/birdnet.conf
   chmod +x ~/BirdNET-Pi/scripts/sun_info.py
 fi
 
@@ -217,7 +217,7 @@ if ! grep FREQSHIFT_PITCH /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u $USER echo "FREQSHIFT_PITCH=-1500" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep ACTIVATE_FREQSHIFT_IN_LIVESTREAM /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u $USER echo "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"false\"" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=false" >> /etc/birdnet/birdnet.conf
 fi
 if ! grep FREQSHIFT_RECONNECT_DELAY /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u $USER echo "FREQSHIFT_RECONNECT_DELAY=4000" >> /etc/birdnet/birdnet.conf

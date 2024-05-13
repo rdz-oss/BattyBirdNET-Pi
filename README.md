@@ -43,6 +43,8 @@ There are several installations in the US, Germany and the UK that I am aware of
 
 [Frankfurt, HE BatNet](https://bathoechst.duckdns.org:8000/)
 
+[St Goar, RLP BatNet](https://stgoarbat.duckdns.org:8000/)
+
 [Öringe, Tyresö](https://batnetpi.svardsten.se/) 
 
 [Murraysville, PA BatNets](https://pixcams.com/bat-listening-stations/)
