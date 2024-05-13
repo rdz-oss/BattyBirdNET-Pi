@@ -43,7 +43,7 @@ now = datetime.now()
 df_plt_today = df_plt[df_plt['Date'] == now.strftime("%Y-%m-%d")]
 
 # Set number of species to report
-readings = 10
+readings = 15
 
 plt_top10_today = (df_plt_today['Com_Name'].value_counts()[:readings])
 df_plt_top10_today = df_plt_today[df_plt_today.Com_Name.isin(plt_top10_today.index)]
@@ -55,7 +55,7 @@ if df_plt_top10_today.empty:
 pal = "Greens"
 
 # Set up plot axes and titles
-f, axs = plt.subplots(1, 2, figsize=(10, 4), gridspec_kw=dict(width_ratios=[3, 6]), facecolor='#77C487')
+f, axs = plt.subplots(1, 2, figsize=(10, 8), gridspec_kw=dict(width_ratios=[3, 6]), facecolor='#77C487')
 plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0, hspace=0)
 
 # generate y-axis order for all figures based on frequency
@@ -147,7 +147,7 @@ pal = "Reds"
 
 # Set up plot axes and titles
 
-f, axs = plt.subplots(1, 2, figsize=(10, 4), gridspec_kw=dict(width_ratios=[3, 6]), facecolor='#77C487')
+f, axs = plt.subplots(1, 2, figsize=(10, 8), gridspec_kw=dict(width_ratios=[3, 6]), facecolor='#77C487')
 plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0, hspace=0)
 
 # generate y-axis order for all figures based on frequency
