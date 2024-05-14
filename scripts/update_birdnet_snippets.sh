@@ -7,8 +7,8 @@ HOME=$(awk -F: '/1000/ {print $6}' /etc/passwd)
 my_dir=$HOME/BirdNET-Pi/scripts
 
 # Sets proper permissions and ownership
-#sudo -E chown -R $USER:$USER $HOME/*
-#sudo chmod -R g+wr $HOME/*
+sudo -E chown -R $USER:$USER $HOME/*
+sudo chmod -R g+wr $HOME/*
 find $HOME/Bird* -type f ! -perm -g+wr -exec chmod g+wr {} + 2>/dev/null
 find $HOME/Bird* -not -user $USER -execdir sudo -E chown $USER:$USER {} \+
 chmod 666 ~/BirdNET-Pi/scripts/*.txt
