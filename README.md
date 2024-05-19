@@ -1,11 +1,13 @@
 <p align="center">
   <img src="homepage/images/bnp.png" width="320" />
 </p>
+<h3 style="text-align: center;">BattyBirdNET-Pi</h3>
+  
+## Automated real-time bat & bird detection and identification
 
-## BattyBirdNET-Pi  Automated real-time bat and bird detection & id
-
-Extended fork of BirdNET-Pi for bats AND birds. 
+Extended and enhanced fork of BirdNET-Pi for bats AND birds. 
 Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro. 
+**'Easy' - no Linux skill required - installation option coming soon.**
 
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
@@ -382,9 +384,9 @@ or use an URL from a DynDNS service. Follow their instructions.
 ### Debugging
 Some useful commands to check if services are up and their status
 ```sh
-ss -nltp
 journalctl -eu birdnet_analysis -u birdnet_server -u batnet_server | sudo tee -a /var/log/syslog
 cat /var/log/syslog  | grep error
+ss -nltp
 /usr/local/bin/print_diagnostic_info.sh
 ```
 Audio 
