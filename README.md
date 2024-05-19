@@ -1,7 +1,7 @@
 <p align="center">
   <img src="homepage/images/bnp.png" width="320" />
 </p>
-<h3 style="text-align: center;">BattyBirdNET-Pi</h3>
+<h3 align="center">BattyBirdNET-Pi</h3>
   
 ## Automated real-time bat & bird detection and identification
 
