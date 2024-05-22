@@ -19,8 +19,7 @@ ignores many sources of false triggers (crickets, rain, ...). Can be set to use 
 Recordings always include the ultra-sound parts also for birds. 
 * Inherits many great things from BirdNET-Pi - including notifications on detection and the ability to check status live
 on the internet
-* Enabled for European, UK and North American species. You can make your own fine-tuned classifier for bats, birds or other animals  
-and contribute it via pull request to make it work in this system!
+* Enabled for European, UK and North American species. You can make your own fine-tuned classifier for bats, birds or other animals.
 * Not designed for automated biodiversity assessments but can be used if manually vetted.
 Now also 384kHz recording is enabled which allows inspection of recordings up to about 190kHz, e.g. to differentiate myotis species.
 * Adds some meta-data in GUANO format to the recordings
@@ -28,7 +27,7 @@ Now also 384kHz recording is enabled which allows inspection of recordings up to
 * Noise reduction for above microphones available
 * Replay recorded files in audible range (on 'Recordings' pages)
 
-Many animals developed echo location: bats, swiftlets, toothed whales, tenrecs, oilbird, pygmy doormouse, rats and perhaps
+Many animals developed echo location: bats, swiftlets, toothed whales, tenrecs, oilbirds, pygmy doormouse, rats and perhaps
 shrews. Some forms are more basic than others, especially birds do not hear well in ultrasound yet some can do echo location
 in the audible range to avoid obstacles. Bats have used their ability for echo location to detect insects of all sizes 
 in the night, something that is more difficult to do with sight. 
