@@ -7,7 +7,7 @@
 
 Extended and enhanced fork of BirdNET-Pi for bats AND birds. 
 Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro. 
-**'Easy' - no Linux skill required - installation option coming soon.**
+**'Easy' - no Linux skill required - installation option now available.**
 
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
