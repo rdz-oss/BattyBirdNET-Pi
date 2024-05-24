@@ -305,6 +305,13 @@ Echolocation frequency (max energy) | Common name                     | Species 
 </p>
 
 ### Install
+
+An 'easy' install method is described here ( no Linux know-how required): [Installation.md](https://github.com/rdz-oss/BattyBirdNET/blob/main/Installation.md).
+You will need to download an image with pre-installed BattyBirdNET-Pi: [Latest image](https://cloud.h2887844.stratoserver.net/s/BBjYnSZZPdaacYw/download/BattyBirdNET-bookworm-arm64-lite-latest.img.xz)
+
+
+If you like you can alternatively use the 'regular' method:
+
 * Install Raspbian OS 64 bit lite on the sd card (currently Bookworm based). Set a system user, name and configure your WIFI. If you have not done this before, 
 you can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system ([see here](./README-BirdNET-Pi.md)). 
 * After that you will log in to the RasPi with your username and password via ssh (it should be in your wireless LAN after booting)
