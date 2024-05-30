@@ -5,7 +5,7 @@
   
 ## Automated real-time bat & bird detection and identification
 
-Extended and enhanced fork of BirdNET-Pi for bats AND birds. 
+Extended and enhanced fork of BirdNET-Pi for bats, birds or your own fine-tuned classifier. 
 Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro. 
 **'Easy' - no Linux skill required - installation option now available.**
 
