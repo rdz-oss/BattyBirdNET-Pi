@@ -5,33 +5,28 @@
   
 ## Automated real-time bat & bird detection and identification
 
-Extended and enhanced fork of BirdNET-Pi for bats, birds or your own fine-tuned classifier. 
+Extended and enhanced fork of BirdNET-Pi for bats, birds or your own fine-tuned classifier (insects, mammals, amphibians, ...). 
 Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro. 
-**'Easy' - no Linux skill required - installation option now available.**
+**'Easy' - no Linux skill required - installation option available.**
 
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
-night and day life around you. Can also be placed remotely with a power source and set to detect birds during the day.
+night and day life around you. Can also be placed remotely with a power source and set to detect birds.
 
 * Scans ultrasound with 256kHz or 384kHz sampling rate continuously from dusk to dawn or 24/7 if you prefer 365 days a year
 * Automated real-time bat ID on device using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer, recording mostly the bats and 
-ignores many sources of false triggers (crickets, rain, ...). Can be set to use BirdNET vanilla during the day to detect birds. 
-Recordings always include the ultra-sound parts also for birds. 
+ignores many sources of false triggers (crickets, rain, ...). Can be set to use BirdNET vanilla to detect birds.
 * Inherits many great things from BirdNET-Pi - including notifications on detection and the ability to check status live
 on the internet
 * Enabled for European, UK and North American species. You can make your own fine-tuned classifier for bats, birds or other animals.
-* Not designed for automated biodiversity assessments but can be used if manually vetted.
-Now also 384kHz recording is enabled which allows inspection of recordings up to about 190kHz, e.g. to differentiate myotis species.
-* Adds some meta-data in GUANO format to the recordings
+* Not designed for automated biodiversity assessments but can be used if manually vetted (signals up to 190kHz).
+* Adds meta-data in GUANO format to the recordings and that can be used by other analysis software.
+* Replay recorded files in audible range (on 'Recordings' pages)
 * Requires either audiomoth 1.2 or wildlife acoustics echo meter touch 2 microphones and RaspberryPi 4B or 5.
 * Noise reduction for above microphones available
-* Replay recorded files in audible range (on 'Recordings' pages)
 
-Many animals developed echo location: bats, swiftlets, toothed whales, tenrecs, oilbirds, pygmy doormouse, rats and perhaps
-shrews. Some forms are more basic than others, especially birds do not hear well in ultrasound yet some can do echo location
-in the audible range to avoid obstacles. Bats have used their ability for echo location to detect insects of all sizes 
-in the night, something that is more difficult to do with sight. 
-You can listen to and learn to identify bats and birds in your yard or any other place with this setup!
+You can listen to and learn to identify bats & birds in your yard or any other place with this setup! Or make your own fine-tuned version
+for enjoyment or for monitoring of an endangered species.
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
 citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET, Fledermaus, Fledermausdetektor, Ortungsrufe, 
