@@ -1,52 +1,54 @@
 <p align="center">
   <img src="homepage/images/bnp.png" width="320" />
 </p>
+<h3 align="center">BattyBirdNET-Pi</h3>
+  
+## Automated real-time bat & bird detection and identification
 
-## BattyBirdNET-Pi  Automated real-time bat and bird detection & id
-
-Extended fork of BirdNET-Pi for bats AND birds. 
+Extended and enhanced fork of BirdNET-Pi for bats, birds or your own fine-tuned classifier (insects, mammals, amphibians, ...). 
 Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro. 
+**'Easy' - no Linux skill required - installation option available.**
 
 ### Purpose
 Ever wondered which bat is flying in your yard and when? BattyBirdNET-Pi is readily assembled and will help you getting to know the 
-night and day life around you. Can also be placed remotely with a power source and set to detect birds during the day.
+night and day life around you. Can also be placed remotely with a power source and set to detect birds.
 
 * Scans ultrasound with 256kHz or 384kHz sampling rate continuously from dusk to dawn or 24/7 if you prefer 365 days a year
 * Automated real-time bat ID on device using the companion https://github.com/rdz-oss/BattyBirdNET-Analyzer, recording mostly the bats and 
-ignores many sources of false triggers (crickets, rain, ...). Can be set to use BirdNET vanilla during the day to detect birds. 
-Recordings always include the ultra-sound parts also for birds. 
+ignores many sources of false triggers (crickets, rain, ...). Can be set to use BirdNET vanilla to detect birds.
 * Inherits many great things from BirdNET-Pi - including notifications on detection and the ability to check status live
 on the internet
-* Enabled for European, UK and North American species. You can make your own fine-tuned classifier for bats, birds or other animals  
-and contribute it via pull request to make it work in this system!
-* Not designed for automated biodiversity assessments but can be used if manually vetted.
-Now also 384kHz recording is enabled which allows inspection of recordings up to about 190kHz, e.g. to differentiate myotis species.
-* Adds some meta-data in GUANO format to the recordings
+* Enabled for European, UK and North American species. You can make your own fine-tuned classifier for bats, birds or other animals.
+* Not designed for automated biodiversity assessments but can be used if manually vetted (signals up to 190kHz).
+* Adds meta-data in GUANO format to the recordings and that can be used by other analysis software.
+* Replay recorded files in audible range (on 'Recordings' pages)
 * Requires either audiomoth 1.2 or wildlife acoustics echo meter touch 2 microphones and RaspberryPi 4B or 5.
 * Noise reduction for above microphones available
-* Replay recorded files in audible range (on 'Recordings' pages)
 
-Did you know that many animals developed echo location? Bats, swiftlets, toothed whales, tenrecs, oilbird, pygmy doormouse, rats and perhaps
-shrews. Some forms are more basic than others, especially birds do not hear well in ultrasound yet some can do echo location
-in the audible range to avoid obstacles. Bats have used their ability for echo location to detect insects of all sizes 
-in the night, something that is more difficult to do with sight. 
-You can listen to and learn to identify bats and birds in your yard or any other place with this setup!
+You can listen to and learn to identify bats & birds in your yard or any other place with this setup! Or make your own fine-tuned version
+for enjoyment or for monitoring of an endangered species.
 
 Keywords: bat detection, automated bat identification, deep learning, machine learning at the edge, raspberry pi, transfer learning,
 citizen science, acoustic biomonitoring, audiomoth, BirdNET-Pi for bats, BatNET, Fledermaus, Fledermausdetektor, Ortungsrufe, 
 Fledermausrufaufnahmen, Fledermausrufe, Rufanalyse
 
 ### Installations around the world
-There are several installations in the US, Germany and the UK that I am aware of. One of my dev stations can be checked out.
-Keep in mind it is a development station - testing things and potentially unstable or unavailable. 
-But likely here:
+There are several installations in the US, Germany and the UK that I am aware of. People may take them on and of the network,
+but here in general:
 
-[Munich, BY BatNet](http://battybirdnet.duckdns.org)
+Germany
 
-Bats tend to fly at dusk GER time from 18:30 on. Kuhls Pipistrelle and Nyctalus Noctula likely. Check the weather before e.g at 
-[Munich airport](https://www.dwd.de/DE/wetter/wetterundklima_vorort/bayern/muenchen/_node.html) .
-Ideal if warmer than 12C at night and no rain. Rain and environmental noise can trigger the classifier (false detections). More info below on
-how to interpret the recordings. For US species, you might want to checkout the two installations (video and BattyBirdNET-Pi) by PixCams Inc. in Pennsylvania:
+[Munich, BY BatNet](https://battybirdnet.duckdns.org/)
+
+[Frankfurt, HE BatNet](https://bathoechst.duckdns.org:8000/)
+
+[St Goar, RLP BatNet](https://stgoarbat.duckdns.org:8000/)
+
+Sweden
+
+[Öringe, Tyresö](https://batnetpi.svardsten.se/) 
+
+USA
 
 [Murraysville, PA BatNets](https://pixcams.com/bat-listening-stations/)
 
@@ -298,6 +300,13 @@ Echolocation frequency (max energy) | Common name                     | Species 
 </p>
 
 ### Install
+
+An 'easy' install method is described here ( no Linux know-how required): [Installation.md](https://github.com/rdz-oss/BattyBirdNET/blob/main/Installation.md).
+You will need to download an image with pre-installed BattyBirdNET-Pi: [Latest image](https://cloud.h2887844.stratoserver.net/s/BBjYnSZZPdaacYw/download/BattyBirdNET-bookworm-arm64-lite-latest.img.xz)
+
+
+If you like you can alternatively use the 'regular' method:
+
 * Install Raspbian OS 64 bit lite on the sd card (currently Bookworm based). Set a system user, name and configure your WIFI. If you have not done this before, 
 you can follow the instructions for installing BirdNET-Pi to the point of flashing the sd card with the operating system ([see here](./README-BirdNET-Pi.md)). 
 * After that you will log in to the RasPi with your username and password via ssh (it should be in your wireless LAN after booting)
@@ -376,9 +385,9 @@ or use an URL from a DynDNS service. Follow their instructions.
 ### Debugging
 Some useful commands to check if services are up and their status
 ```sh
-ss -nltp
 journalctl -eu birdnet_analysis -u birdnet_server -u batnet_server | sudo tee -a /var/log/syslog
 cat /var/log/syslog  | grep error
+ss -nltp
 /usr/local/bin/print_diagnostic_info.sh
 ```
 Audio 

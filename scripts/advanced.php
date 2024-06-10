@@ -432,10 +432,24 @@ if(isset($_GET['submit'])) {
           $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=9", $contents2);
           $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents2);
         }
-
+        if(strcmp("CUSTOM_BIRD",$config['BAT_CLASSIFIER']) == 0) {
+          # TODO set recording length and extraction length depending on sampling frequency back for bats
+          $contents = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=9", $contents);
+          $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents);
+          $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=9", $contents2);
+          $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=1.125", $contents2);
+        }
         save_to_cfg($contents, $contents2);
 
         if(strcmp("BIRDS", $bat_classifier) == 0) {
+          $contents = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=15", $contents);
+          $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=3", $contents);
+          $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=15", $contents2);
+          $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=3", $contents2);
+          save_to_cfg($contents, $contents2);
+          exec('stop_core_services.sh');
+        }
+        if(strcmp("CUSTOM_BIRD", $bat_classifier) == 0) {
           $contents = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=15", $contents);
           $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=3", $contents);
           $contents2 = preg_replace("/RECORDING_LENGTH=.*/", "RECORDING_LENGTH=15", $contents2);
@@ -612,7 +626,7 @@ if (file_exists('./scripts/thisrun.txt')) {
       <select name="bat_classifier">
       <option selected="<?php print($newconfig['BAT_CLASSIFIER']);?>"><?php print($newconfig['BAT_CLASSIFIER']);?></option>
       <?php
-        $formats = array("Bavaria", "South-Wales", "USA", "USA-EAST","USA-WEST","UK","BIRDS");
+        $formats = array("Bavaria", "South-Wales", "USA", "USA-EAST","USA-WEST","UK","BIRDS","CUSTOM_BAT","CUSTOM_BIRD");
             foreach($formats as $format){
             echo "<option value='$format'>$format</option>";
         }
