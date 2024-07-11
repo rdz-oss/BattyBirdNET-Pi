@@ -52,6 +52,11 @@ USA
 
 [Murraysville, PA BatNets](https://pixcams.com/bat-listening-stations/)
 
+France
+
+[Toulouse, Occitanie]
+(https://bird.thibautrey.fr)
+
 Why not add yours, too?
 
 ### License
