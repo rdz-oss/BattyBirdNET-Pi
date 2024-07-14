@@ -100,6 +100,7 @@ Some hints:
 * https://www.openacousticdevices.info/audiomoth  (Usb or battery version with usb microphone configuration). 
 You will need a USB A male to micro USB cable to connect this one.
 * https://www.wildlifeacoustics.com/products/echo-meter-touch-2-android-2
+* You can check the [FAQ](https://github.com/rdz-oss/BattyBirdNET/blob/main/FAQ.md).
 
 It is easily assembled
 <p align="center">
