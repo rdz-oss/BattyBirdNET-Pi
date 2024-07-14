@@ -445,3 +445,12 @@ https://www.sciencebase.gov/catalog/item/627ed4b2d34e3bef0c9a2f30
 https://github.com/kahst/BirdNET-Analyzer
 
 https://github.com/mcguirepr89/BirdNET-Pi
+
+### Other projects you might be interested in
+
+https://github.com/cloudedbats/cloudedbats_wurb_2024
+
+https://github.com/Taslim-M/Bat2Web
+
+
+
