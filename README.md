@@ -52,6 +52,11 @@ USA
 
 [Murraysville, PA BatNets](https://pixcams.com/bat-listening-stations/)
 
+France
+
+[Toulouse, Occitanie]
+(https://bird.thibautrey.fr)
+
 Why not add yours, too?
 
 ### License
@@ -95,6 +100,7 @@ Some hints:
 * https://www.openacousticdevices.info/audiomoth  (Usb or battery version with usb microphone configuration). 
 You will need a USB A male to micro USB cable to connect this one.
 * https://www.wildlifeacoustics.com/products/echo-meter-touch-2-android-2
+* You can check the [FAQ](https://github.com/rdz-oss/BattyBirdNET/blob/main/FAQ.md).
 
 It is easily assembled
 <p align="center">
@@ -439,3 +445,16 @@ https://www.sciencebase.gov/catalog/item/627ed4b2d34e3bef0c9a2f30
 https://github.com/kahst/BirdNET-Analyzer
 
 https://github.com/mcguirepr89/BirdNET-Pi
+
+### Other projects you might be interested in
+
+https://github.com/cloudedbats/cloudedbats_wurb_2024
+
+https://github.com/Taslim-M/Bat2Web
+
+http://www.bat-pi.eu/
+
+https://www.bto.org/our-science/products-and-technologies/bto-acoustic-pipeline
+
+
+
