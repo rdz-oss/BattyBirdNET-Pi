@@ -390,7 +390,7 @@ or use an URL from a DynDNS service. Follow their instructions.
 
 ### Saving your data
 If you are comfortable with using the command line you can setup rsync to either push data from the Pi to a NAS or cloud storage ( e.g. S3) or to remotely log into the Pi and pull the data to a computer or NAS.
-For example, pulling the data from the Pi onto your computer (you can change the ssh pot number as needed)
+For example, pulling the data from the Pi onto your computer (you can change the ssh port number as needed)
 ```sh
 ### Save the detections database
 sshpass -p your_passwd rsync -a -P -e "ssh -p 22" bat_user@byour_pis_ip_or_url:/home/bat/BirdNET-Pi/scripts/birds.db /your/local/storage/path
