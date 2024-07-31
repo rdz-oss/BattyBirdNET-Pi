@@ -441,11 +441,14 @@ This will make some 'Best recordings' unavailable. The system can be set to auto
 * Do not delete the database 'birds.db'!
 
 ### Debugging
-Some useful commands to check if services are up and their status
+The system consists of several systemd services that use/call each other, python scripts as well as an squlite database and a web UI (php/java script). Some useful commands to check if services are up and their status. 
 ```sh
+# Get the logs fro some systemd services 
 journalctl -eu birdnet_analysis -u birdnet_server -u batnet_server | sudo tee -a /var/log/syslog
 cat /var/log/syslog  | grep error
+# Are the APIs up?
 ss -nltp
+# A script with comprehensive information
 /usr/local/bin/print_diagnostic_info.sh
 ```
 Audio 
