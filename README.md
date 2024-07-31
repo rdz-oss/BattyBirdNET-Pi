@@ -432,13 +432,13 @@ You can also automate a push to an S3 bucket from the Pi. For that, you need an 
 
 
 ### Freeing space on the device
-After saving the data (see above), you can delete folders form the past e.g. via the Tools - File Manager. 
+After saving the data (see above), you can delete folders form the past e.g. via the 'Tools - File Manager'. 
 ```sh
-### SExtreacted calls by date are here
+### Extreacted calls by date are here
 /home/bat/BirdSongs/Extracted/By_Date/ 
 ```
 This will make some 'Best recordings' unavailable. The system can be set to automatically delete old data when the disk runs full (Tools-Settings), yet I have found that to be buggy.
-* Do not dlete the databse 'birds.db'!
+* Do not delete the databse 'birds.db'!
 
 ### Debugging
 Some useful commands to check if services are up and their status
