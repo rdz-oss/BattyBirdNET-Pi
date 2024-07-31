@@ -401,6 +401,12 @@ sudo apt-get update && sudo apt-get upgrade -y
 * Update your router firmware frequently (automatically is best) and setup your router firewall
 
 ### Saving your data
+If you are not comfortable on the command line you can use the Webinterfce (Tools- File Manager) and navigate to the folders
+```sh
+### Save the detections database and extracted calls
+/home/bat/BirdNET-Pi/scripts/birds.db
+/home/bat/BirdSongs/Extracted/By_Date/ 
+```
 If you are comfortable with using the command line you can setup rsync to either push data from the Pi to a NAS or cloud storage ( e.g. S3) or to remotely log into the Pi and pull the data to a computer or NAS.
 For example, pulling the data from the Pi onto your computer (you can change the ssh port number as needed)
 ```sh
