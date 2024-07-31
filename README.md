@@ -388,6 +388,30 @@ or use an URL from a DynDNS service. Follow their instructions.
 * If you are in a home setting, you will need to enable a port forwarding in your router (to the BattyBirdNET-Pi)
 * Update your router firmware frequently (automatically is best) and setup your router firewall
 
+### Saving your data
+If you are comfortable with using the command line you can setup rsync to either push data from the Pi to a NAS or cloud storage ( e.g. S3) or to remotely log into the Pi and pull the data to a computer or NAS.
+For example, pulling the data from the Pi onto your computer
+```sh
+### Save the detections database
+sshpass -p your_passwd rsync -a -P -e "ssh -p 22" bat_user@byour_pis_ip_or_url:/home/bat/BirdNET-Pi/scripts/birds.db /your/local/storage/path
+### Save the extracted calls data
+sshpass -p your_passwd rsync -a -P -e "ssh -p 2222" at_user@byour_pis_ip_or_url:/home/bat/BirdSongs/Extracted/By_Date/ /your/local/storage/path/recordings
+
+```
+The simplest way to automate this procedure is via cron. Make your backup script executable and add a line to the crontab 
+```sh
+#! /bin/bash
+### Save the detections database
+sshpass -p your_passwd rsync -a -P -e "ssh -p 22" bat_user@byour_pis_ip_or_url:/home/bat/BirdNET-Pi/scripts/birds.db /your/local/storage/path
+### Save the extracted calls data
+sshpass -p your_passwd rsync -a -P -e "ssh -p 2222" at_user@byour_pis_ip_or_url:/home/bat/BirdSongs/Extracted/By_Date/ /your/local/storage/path/recordings
+```
+use 'chmod +x your_backup_script.sh' and the 'crontab -e' to add your job. For example, if it should back up at 2:30am, that line (add with crontab -e) would be
+```sh
+30 2 * * * /path/to/your_backup_script.sh
+```
+You can also automate a push to an S3 bucket from the Pi. For that, you need an S3 bucket from some cloud provider and a configuration of rsync that points to that bucket.
+
 ### Debugging
 Some useful commands to check if services are up and their status
 ```sh
@@ -406,6 +430,12 @@ defaults.ctl.card to the correct values if necessary:
 ```sh
 sudo nano /etc/asound.conf
 ```
+add the defaults (replace '1' by the number you found for your card):
+```sh
+defaults.pcm.card 1
+defaults.ctl.card 1
+```
+
 </br></br>
 
 <p align="center">
@@ -456,5 +486,5 @@ http://www.bat-pi.eu/
 
 https://www.bto.org/our-science/products-and-technologies/bto-acoustic-pipeline
 
-
+https://www.wsl.ch/de/services-produkte/batscope/
 
