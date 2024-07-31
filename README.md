@@ -381,11 +381,23 @@ automatic sunrise/sunset determination service
 
 * You should activate https by adding an URL with https:// prefix to 'Tools - Settings - Advanced Settings - Custom URL'
 * You can set up a Domain name, if you own one (you need to point your domain's A/AAAA DNS records at your Pi),
-or use an URL from a DynDNS service. Follow their instructions.
+or use an URL from a DynDNS service. Follow their instructions, e.g. https://www.duckdns.org/ 
 * Set complex passwords for the Webinterface as well as the underlying Linux system/user
+```sh
+sudo passwd
+```
 * Setup a firewall e.g. using ufw, allowing only https and if you want ssh
+```sh
+sudo apt-get install ufw
+sudo ufw allow ssh
+sudo ufw allop https
+sudo ufw enable
+```
 * Update the underlying Raspberry Pi OS frequently to benefit from security fixes 
-* If you are in a home setting, you will need to enable a port forwarding in your router (to the BattyBirdNET-Pi)
+```sh
+sudo apt-get update && sudo apt-get upgrade -y
+```
+* If you are in a home setting, you will need to enable a port forwarding in your router (to the BattyBirdNET-Pi and respective ports ( usually ssh on 22, https on 43, http on 80))
 * Update your router firmware frequently (automatically is best) and setup your router firewall
 
 ### Saving your data
