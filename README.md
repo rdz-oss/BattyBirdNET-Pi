@@ -390,12 +390,12 @@ or use an URL from a DynDNS service. Follow their instructions.
 
 ### Saving your data
 If you are comfortable with using the command line you can setup rsync to either push data from the Pi to a NAS or cloud storage ( e.g. S3) or to remotely log into the Pi and pull the data to a computer or NAS.
-For example, pulling the data from the Pi onto your computer
+For example, pulling the data from the Pi onto your computer (you can change the ssh pot number as needed)
 ```sh
 ### Save the detections database
 sshpass -p your_passwd rsync -a -P -e "ssh -p 22" bat_user@byour_pis_ip_or_url:/home/bat/BirdNET-Pi/scripts/birds.db /your/local/storage/path
 ### Save the extracted calls data
-sshpass -p your_passwd rsync -a -P -e "ssh -p 2222" at_user@byour_pis_ip_or_url:/home/bat/BirdSongs/Extracted/By_Date/ /your/local/storage/path/recordings
+sshpass -p your_passwd rsync -a -P -e "ssh -p 22" at_user@byour_pis_ip_or_url:/home/bat/BirdSongs/Extracted/By_Date/ /your/local/storage/path/recordings
 
 ```
 The simplest way to automate this procedure is via cron. Make your backup script executable and add a line to the crontab 
@@ -404,7 +404,7 @@ The simplest way to automate this procedure is via cron. Make your backup script
 ### Save the detections database
 sshpass -p your_passwd rsync -a -P -e "ssh -p 22" bat_user@byour_pis_ip_or_url:/home/bat/BirdNET-Pi/scripts/birds.db /your/local/storage/path
 ### Save the extracted calls data
-sshpass -p your_passwd rsync -a -P -e "ssh -p 2222" at_user@byour_pis_ip_or_url:/home/bat/BirdSongs/Extracted/By_Date/ /your/local/storage/path/recordings
+sshpass -p your_passwd rsync -a -P -e "ssh -p 22" at_user@byour_pis_ip_or_url:/home/bat/BirdSongs/Extracted/By_Date/ /your/local/storage/path/recordings
 ```
 use 'chmod +x your_backup_script.sh' and the 'crontab -e' to add your job. For example, if it should back up at 2:30am, that line (add with crontab -e) would be
 ```sh
