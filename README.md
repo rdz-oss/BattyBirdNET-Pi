@@ -430,6 +430,10 @@ If you are not comfortable with cleartext passwords, you can write it in a file 
 ```
 You can also automate a push to an S3 bucket from the Pi. For that, you need an S3 bucket from some cloud provider and a configuration of rsync that points to that bucket. Examples of rsync use can be found on the internet, e.g. https://linuxhandbook.com/rsync-command-examples/ .
 
+
+### Freeing space on the device
+After saving the data (see above), you can delete folders form the past e.g. via the Tools - File Manager. This will make some 'Best recordings' unavailable. The syetm can be set to automatically delete old data when the disk runs full (Tools-Settings), yet I have found that to be buggy.
+
 ### Debugging
 Some useful commands to check if services are up and their status
 ```sh
