@@ -424,7 +424,7 @@ sshpass -p your_passwd rsync -a -P -e "ssh -p 22" bat_user@byour_pis_ip_or_url:/
 ### Save the extracted calls data
 sshpass -p your_passwd rsync -a -P -e "ssh -p 22" at_user@byour_pis_ip_or_url:/home/bat/BirdSongs/Extracted/By_Date/ /your/local/storage/path/recordings
 ```
-If you are not comfortable with cleartext passwords, you can write it in a file (set it to chmod 0400) and use 'sshpass -f pwd_file ...'' . For automation, 'chmod +x your_backup_script.sh' and use 'crontab -e' to add your job. For example, if it should back up at 2:30am every day, that line (add with crontab -e) would be
+If you are not comfortable with cleartext passwords, you can write it in a file (set it to chmod 0400 pass_file) and use 'sshpass -f pass_file ...'' . For automation, 'chmod +x your_backup_script.sh' and use 'crontab -e' to add your job. For example, if it should back up at 2:30am every day, that line (add with crontab -e) would be
 ```sh
 30 2 * * * /path/to/your_backup_script.sh
 ```
