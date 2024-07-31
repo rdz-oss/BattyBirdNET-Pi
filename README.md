@@ -38,7 +38,7 @@ but here in general:
 
 Germany
 
-Munich, BY BatNet: Currently used to track Lesser Horseshoe bats (LBV Banzerhaus) in a roost not yet available publicly!
+Munich, BY BatNet: Currently used to track Lesser Horseshoe bats (LBV Banzerhaus) in a roost - not yet available publicly!
 
 [Frankfurt, HE BatNet](https://bathoechst.duckdns.org:8000/)
 
@@ -397,7 +397,7 @@ sudo ufw enable
 ```sh
 sudo apt-get update && sudo apt-get upgrade -y
 ```
-* If you are in a home setting, you will need to enable a port forwarding in your router (to the BattyBirdNET-Pi and respective ports ( usually ssh on 22, https on 43, http on 80))
+* If you are in a home setting, you will need to enable a port forwarding in your router (to the BattyBirdNET-Pi and respective ports ( usually ssh on 22, https on 443, http on 80))
 * Update your router firmware frequently (automatically is best) and setup your router firewall
 
 ### Saving your data
