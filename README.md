@@ -38,7 +38,7 @@ but here in general:
 
 Germany
 
-[Munich, BY BatNet](https://battybirdnet.duckdns.org/)
+Munich, BY BatNet: Currently used to track Lesser Horseshoe bats (LBV Banzerhaus) in a roost not yet available publicly!
 
 [Frankfurt, HE BatNet](https://bathoechst.duckdns.org:8000/)
 
