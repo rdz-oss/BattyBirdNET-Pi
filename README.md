@@ -401,7 +401,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 * Update your router firmware frequently (automatically is best) and setup your router firewall
 
 ### Saving your data
-If you are not comfortable on the command line you can use the Webinterfce (Tools- File Manager) and navigate to the folders
+If you are not comfortable on the command line you can use the Webinterface (Tools- File Manager) and navigate to the folders
 ```sh
 ### Save the detections database and extracted calls
 /home/bat/BirdNET-Pi/scripts/birds.db
@@ -428,7 +428,7 @@ use 'chmod +x your_backup_script.sh' and the 'crontab -e' to add your job. For e
 ```sh
 30 2 * * * /path/to/your_backup_script.sh
 ```
-You can also automate a push to an S3 bucket from the Pi. For that, you need an S3 bucket from some cloud provider and a configuration of rsync that points to that bucket.
+You can also automate a push to an S3 bucket from the Pi. For that, you need an S3 bucket from some cloud provider and a configuration of rsync that points to that bucket. Examples of rsync use can be found on the internet, e.g. https://linuxhandbook.com/rsync-command-examples/ .
 
 ### Debugging
 Some useful commands to check if services are up and their status
