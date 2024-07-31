@@ -382,7 +382,7 @@ automatic sunrise/sunset determination service
 * You should activate https by adding an URL with https:// prefix to 'Tools - Settings - Advanced Settings - Custom URL'
 * You can set up a Domain name, if you own one (you need to point your domain's A/AAAA DNS records at your Pi),
 or use an URL from a DynDNS service. Follow their instructions, e.g. https://www.duckdns.org/ 
-* Set complex passwords for the Webinterface as well as the underlying Linux system/user
+* Set complex passwords for the Webinterface (Tools-Settings) as well as the underlying Linux system/user on the command line
 ```sh
 sudo passwd
 ```
@@ -390,7 +390,7 @@ sudo passwd
 ```sh
 sudo apt-get install ufw
 sudo ufw allow ssh
-sudo ufw allop https
+sudo ufw allow https
 sudo ufw enable
 ```
 * Update the underlying Raspberry Pi OS frequently to benefit from security fixes 
