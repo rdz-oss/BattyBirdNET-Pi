@@ -430,6 +430,36 @@ If you are not comfortable with cleartext passwords, you can write it in a file 
 ```
 You can also automate a push to an S3 bucket from the Pi. For that, you need an S3 bucket from some cloud provider and a configuration of rsync that points to that bucket. Examples of rsync use can be found on the internet, e.g. https://linuxhandbook.com/rsync-command-examples/ .
 
+You can also copy your data to an S3 object store bucket in the public cloud, i.e. your Pi pushes the data at regular intervals to cloud storage. To do this you first need to make an account with a cloud provider and configure an S3 bucket together with an S3 user that has the rights to read and write to this bucket. There are many such cloud providers, European ones include the French OVH cloud and German IONOS clouds.
+Then, install the tool 'rclone' on your Pi
+```sh
+sudo apt-get install rclone
+```
+now congigure it with your cloud provider, S3 bucket and user details
+```sh
+rclone config
+```
+You can use the following script to backup both your database as well as call data. Put it in the directory '/home/bat/cronjob'
+```sh
+mkdir /home/bat/cronjob
+cd /home/bat/cronjob
+echo "  #! /bin/bash
+
+echo "Start" >> /home/bat/cronjob/log.txt
+date >>  /home/bat/cronjob/log.txt
+rclone copy /home/bat/BirdNET-Pi/scripts/birds.db BackupStorageS3:your_bucket_name/db/
+echo "Saved db ..." >> /home/bat/cronjob/log.txt
+rclone copy /home/bat/BirdSongs/Extracted/By_Date/ BackupStorageS3:your_bucket_name/data/ --log-file=/home/bat/cronjob/rclone-log.txt
+echo "Saved call data ..." >> /home/bat/cronjob/log.txt
+date >>  /home/bat/cronjob/log.txt " > backup.sh
+chmod +x backup.sh
+```
+You can call this script manually 
+```sh
+/home/bat/cronjob/backup.sh
+```
+or add it to be run automatically by cron (see above rsync example).
+
 
 ### Freeing space on the device
 After saving the data (see above), you can delete folders form the past e.g. via the 'Tools - File Manager'. 
