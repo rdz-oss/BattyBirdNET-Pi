@@ -428,7 +428,6 @@ If you are not comfortable with cleartext passwords, you can write it in a file 
 ```sh
 30 2 * * * /path/to/your_backup_script.sh
 ```
-You can also automate a push to an S3 bucket from the Pi. For that, you need an S3 bucket from some cloud provider and a configuration of rsync that points to that bucket. Examples of rsync use can be found on the internet, e.g. https://linuxhandbook.com/rsync-command-examples/ .
 
 You can also copy your data to an S3 object store bucket in the public cloud, i.e. your Pi pushes the data at regular intervals to cloud storage. To do this you first need to make an account with a cloud provider and configure an S3 bucket together with an S3 user that has the rights to read and write to this bucket. There are many such cloud providers, European ones include the French OVH cloud and German IONOS clouds.
 Then, install the tool 'rclone' on your Pi
