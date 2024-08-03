@@ -434,23 +434,25 @@ Then, install the tool 'rclone' on your Pi
 ```sh
 sudo apt-get install rclone
 ```
-now congigure it with your cloud provider, S3 bucket and user details
+now configure it with your cloud provider, S3 bucket and user details
 ```sh
 rclone config
 ```
-You can use the following script to backup both your database as well as call data. Put it in the directory '/home/bat/cronjob'
+You can use the following script to backup both your database as well as call data. 
 ```sh
-mkdir /home/bat/cronjob
-cd /home/bat/cronjob
-echo "  #! /bin/bash
-
+#! /bin/bash
 echo "Start" >> /home/bat/cronjob/log.txt
 date >>  /home/bat/cronjob/log.txt
 rclone copy /home/bat/BirdNET-Pi/scripts/birds.db BackupStorageS3:your_bucket_name/db/
 echo "Saved db ..." >> /home/bat/cronjob/log.txt
 rclone copy /home/bat/BirdSongs/Extracted/By_Date/ BackupStorageS3:your_bucket_name/data/ --log-file=/home/bat/cronjob/rclone-log.txt
 echo "Saved call data ..." >> /home/bat/cronjob/log.txt
-date >>  /home/bat/cronjob/log.txt " > backup.sh
+```
+Put it in the directory '/home/bat/cronjob'
+```sh
+mkdir /home/bat/cronjob
+cd /home/bat/cronjob
+# put the backup script here and name it backup.sh
 chmod +x backup.sh
 ```
 You can call this script manually 
