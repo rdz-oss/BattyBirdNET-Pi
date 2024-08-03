@@ -347,7 +347,7 @@ git pull origin 'branchname'
 There are two systems installed BattyBirdNET-Pi and BattyBirdNET-Analyzer.
 You can set a preferred branch for each individually.
 
-### Options for the bat classifier
+#### Options for the bat classifier
 
 You can set several options under 'Tools - Settings - Advanced Settings' (default user is 'birdnet', no password) including
 * Sampling rate. Choose one that is suitable for your requirements and available from your microphone. Default is 256kHz.
@@ -367,7 +367,7 @@ pull request (to BattyBirdNET-Analyzer and -Pi). This way, you could e.g. have a
 for conservation/biomonitoring reasons or to add a classifier for a new/your region.
 
 
-### To use the North American/UK version:
+#### To use the North American/UK version:
 
 * Install as above
 * Go to the Tools setting
@@ -377,7 +377,7 @@ for conservation/biomonitoring reasons or to add a classifier for a new/your reg
 automatic sunrise/sunset determination service
 * You can activate the switch to bird detection during the day if you like
 
-### Making the system available online
+#### Making the system available online
 
 * You should activate https by adding an URL with https:// prefix to 'Tools - Settings - Advanced Settings - Custom URL'
 * You can set up a Domain name, if you own one (you need to point your domain's A/AAAA DNS records at your Pi),
@@ -462,7 +462,7 @@ You can call this script manually
 or add it to be run automatically by cron (see above rsync example).
 
 
-### Freeing space on the device
+#### Freeing space on the device
 After saving the data (see above), you can delete folders form the past e.g. via the 'Tools - File Manager'. 
 ```sh
 ### Extreacted calls by date are here
@@ -471,7 +471,7 @@ After saving the data (see above), you can delete folders form the past e.g. via
 This will make some 'Best recordings' unavailable. The system can be set to automatically delete old data when the disk runs full (Tools-Settings), yet I have found that to be buggy.
 * Do not delete the database 'birds.db'!
 
-### Debugging
+#### Debugging
 The system consists of several systemd services that use/call each other, python scripts as well as an squlite database and a web UI (php/java script). Some useful commands to check if services are up and their status. 
 ```sh
 # Get the logs fro some systemd services 
