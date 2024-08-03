@@ -150,7 +150,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
     $soxopt = "-q";
     $soxpitch = $config['FREQSHIFT_PITCH'];
     $soxspeed = $config['SOX_SPEED'];
-    $cmd = "sudo /usr/bin/nohup /usr/bin/sox ".escapeshellarg($pi.$filename)." ".escapeshellarg($shifted_path.$filename)." speed ".$soxspeed;
+    $cmd = "sudo /usr/bin/nohup /usr/bin/sox ".escapeshellarg($pi.$filename)." ".escapeshellarg($shifted_path.$filename)." speed ".$soxspeed" rate 44100";
     # $cmd = "sudo /usr/bin/nohup /usr/bin/sox ".escapeshellarg($pi.$filename)." ".escapeshellarg($shifted_path.$filename)." pitch ".$soxopt." ".$soxpitch;
    shell_exec("sudo mkdir -p ".$shifted_path.$dir." && ".$cmd);
   }
