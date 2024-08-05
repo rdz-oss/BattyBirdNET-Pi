@@ -38,7 +38,9 @@ but here in general:
 
 Germany
 
-Munich, BY BatNet: Currently used to track Lesser Horseshoe bats (LBV Banzerhaus) in a roost - not yet available publicly!
+Munich, BY BatNet Pi 5: Currently used to track Lesser Horseshoe bats (LBV Banzerhaus) in a roost - not yet available publicly!
+
+[Munich, BY BatNet (Pi 4)](https://munichbat.duckdns.org/)
 
 [Frankfurt, HE BatNet](https://bathoechst.duckdns.org:8000/)
 
