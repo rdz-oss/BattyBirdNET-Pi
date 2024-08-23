@@ -42,7 +42,7 @@ Munich, BY BatNet Pi 5: Currently used to track Lesser Horseshoe bats (LBV Banze
 
 [Munich, BY BatNet (Pi 4)](https://munichbat.duckdns.org/)
 
-[Frankfurt, HE BatNet](https://bathoechst.duckdns.org:8000/)
+[Frankfurt, HE BatNet](https://hoechstbat.duckdns.org/)
 
 [St Goar, RLP BatNet](https://stgoarbat.duckdns.org:8000/)
 
