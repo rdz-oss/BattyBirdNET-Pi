@@ -1,4 +1,5 @@
 # this should only contain functions and assignments, ie source install.sh should not have side effects.
+# Code from Nachtzuster https://github.com/Nachtzuster/BirdNET-Pi/blob/main/scripts/install_helpers.sh
 
 get_tf_whl () {
   BASE_URL=https://github.com/Nachtzuster/BirdNET-Pi/releases/download/v0.1/
