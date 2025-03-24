@@ -12,6 +12,13 @@ but would need to be aarch64."
   exit 1
 fi
 
+# we require passwordless sudo
+ sudo -K
+ if ! sudo -n true; then
+     echo "Passwordless sudo is not working. Aborting"
+     exit
+ fi
+ 
 # Simple new installer
 HOME=$HOME
 USER=$USER
