@@ -8,13 +8,14 @@ my_dir=$HOME/BirdNET-Pi
 export my_dir=$my_dir
 
 cd $my_dir/scripts || exit 1
+git log -n 1 --pretty=oneline --no-color --decorate
 
-if [ "$(uname -m)" != "aarch64" ];then
+source install_helpers.sh
+
+if [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "x86_64" ];then
   echo "BirdNET-Pi requires a 64-bit OS.
 It looks like your operating system is using $(uname -m),
-but would need to be aarch64.
-Please take a look at https://birdnetwiki.pmcgui.xyz for more
-information"
+but would need to be aarch64."
   exit 1
 fi
 
@@ -29,7 +30,8 @@ install_birdnet() {
   python3 -m venv birdnet
   source ./birdnet/bin/activate
   pip3 install wheel
-  pip3 install -U -r $HOME/BirdNET-Pi/requirements.txt
+  get_tf_whl
+  pip3 install -U -r ./requirements_custom.txt
 }
 
 [ -d ${RECS_DIR} ] || mkdir -p ${RECS_DIR} &> /dev/null
