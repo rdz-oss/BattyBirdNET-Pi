@@ -6,7 +6,7 @@
 ## Automated real-time bat & bird detection and identification
 
 Extended and enhanced fork of BirdNET-Pi for bats, birds or your own fine-tuned classifier (insects, mammals, amphibians, ...).
-Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro. Other hardware options may work (aarch64 and amd64). Has been ported to work on [home assistant](https://github.com/alexbelgium/hassio-addons/tree/master/battybirdnet-pi).
+Use with Raspberry Pi 4 or 5 and an Audiomoth or Echo Meter Touch 2 basic or Pro. Other hardware options may work (aarch64 and amd64). Has been ported to work on [home assistant or docker](https://github.com/alexbelgium/hassio-addons/tree/master/battybirdnet-pi).
 **'Easy' - no Linux skill required - installation option available.**
 
 ### Purpose
