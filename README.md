@@ -304,7 +304,7 @@ Echolocation frequency (max energy) | Common name                     | Species 
 ### Install
 
 An 'easy' install method is described here ( no Linux know-how required): [Installation.md](https://github.com/rdz-oss/BattyBirdNET/blob/main/Installation.md).
-You will need to download an image with pre-installed BattyBirdNET-Pi: [Latest image](https://cloud.h2887844.stratoserver.net/s/BBjYnSZZPdaacYw/download/BattyBirdNET-bookworm-arm64-lite-latest.img.xz)
+You will need to download an image with pre-installed BattyBirdNET-Pi: [Latest image](https://cloud.h2887844.stratoserver.net/s/5PCsAmT7dfs8wP9)
 
 
 If you like you can alternatively use the 'regular' method:
