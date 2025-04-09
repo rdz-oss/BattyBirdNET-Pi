@@ -50,6 +50,9 @@ if ! grep SWITCH_TO_BIRD /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u $USER echo "BIRD_CLASSIFIER=\"BIRDS\"" >> /etc/birdnet/birdnet.conf
 fi
 
+if ! grep DOUBLE_CLASSIFIER /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "DOUBLE_CLASSIFIER=false" >> /etc/birdnet/birdnet.conf
+fi
 
 if ! grep LAST_CLASSIFIER /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u $USER echo "LAST_CLASSIFIER=\"$BAT_CLASSIFIER\"" >> /etc/birdnet/birdnet.conf

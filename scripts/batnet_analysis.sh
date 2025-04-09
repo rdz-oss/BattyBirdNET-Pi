@@ -17,6 +17,17 @@ start_service() {
   echo $PYTHON_VIRTUAL_ENV "$DIR/server.py --area ${BAT_CLASSIFIER}"
   $PYTHON_VIRTUAL_ENV $DIR/server.py --area $BAT_CLASSIFIER
   echo "Started BattyBirdNET-Analyzer service."
+
+  # start second APi here with --port and the same classifier
+  if [ -z ${DOUBLE_CLASSIFIER} ];then
+    DOUBLE_CLASSIFIER=false
+  fi
+  if [ "$DOUBLE_CLASSIFIER" = true ] ; then
+    echo $PYTHON_VIRTUAL_ENV "$DIR/server.py --no_noise on --area ${BAT_CLASSIFIER} --port 7668"
+    $PYTHON_VIRTUAL_ENV $DIR/server.py --port 7668 --no_noise on --area $BAT_CLASSIFIER
+    echo "Started BattyBirdNET-Analyzer high accuracy service."
+  fi
+
 }
 
 start_service
