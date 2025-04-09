@@ -130,6 +130,44 @@ for h in "${SCAN_DIRS[@]}";do
     microphone_model="$(arecord -l | grep -Po '\[\K[^]]*(?=])' | head -n 1)"
     rpi_make="$(tr -d '\0' </proc/device-tree/model)"
 
+    #
+    # Add a second opinion on the id of the extracted files ?
+    #
+    if [ "$DOUBLE_CLASSIFIER" = true ] && [ "${BAT_CLASSIFIER}" != "BIRDS" ] ; then
+      analyzer_dir=$HOME/BattyBirdNET-Analyzer
+      second_opinion="$(python "$analyzer_dir"/client.py --port 7668 --i "${NEWSPECIES_BYDATE}"/"${NEWFILE}" | jq .results[][0])"
+      # check if this worked or not!
+      if [ $? -eq 0 ]; then
+        second_species="$(jq .[0] <<< "$second_opinion")"
+        second_species_latin="$(cut -d'_' -f1 <<<"$second_species")"
+        second_species_common="$(cut -d'_' -f2 <<<"$second_species")"
+        second_conf="$(jq .[1] <<< "$second_opinion")"
+        # finish adaption
+        SECOND_NEWFILE="${second_species_common// /_}-${second_conf}-${OLDFILE//.wav/.${AUDIOFMT}}"
+        SECOND_NEWSPECIES_BYDATE="${EXTRACTED}/By_Date/${DATE}/${second_species_common// /_}"
+
+        [[ -d "${SECOND_NEWSPECIES_BYDATE}" ]] || mkdir -p "${SECOND_NEWSPECIES_BYDATE}"
+        # If the extracted file already exists, move on
+        if [[ -f "${SECOND_NEWSPECIES_BYDATE}/${SECOND_NEWFILE}" ]];then
+          echo "Extraction exists. Moving on"
+          continue
+        fi
+        # set the variables to the second ones if they differ
+        if [ "$COMMON_NAME" != "$second_species_common" ] ; then
+          COMMON_NAME=$second_species_common
+        fi
+        if [ "$NEWSPECIES_BYDATE" != "$SECOND_NEWSPECIES_BYDATE" ] ; then
+          NEWSPECIES_BYDATE=$SECOND_NEWSPECIES_BYDATE
+        fi
+        if [ "$NEWFILE" != "$SECOND_NEWFILE" ] ; then
+          NEWFILE=$SECOND_NEWFILE
+        fi
+      else
+        echo "ERROR: Request to second classifier failed"
+      fi
+    fi
+
+
     # Add guano meta data  "Timestamp: ${DATE}"
     # guano_edit.py "GUANO|Version: 1.0" "Samplerate: ${SAMPLING_RATE}" "Loc Position: ${LATITUDE} ${LONGITUDE}" "Species Auto ID: ${SCIENTIFIC_NAME}" "Note: BattyBirdNET-Pi" "${NEWSPECIES_BYDATE}/${NEWFILE}"
     guano_edit.py "GUANO|Version: 1.0" "Samplerate: ${SAMPLING_RATE}" "Loc Position: ${LATITUDE} ${LONGITUDE}" "Species Auto ID: ${SCIENTIFIC_NAME}" "Make: ${rpi_make}" "Model: ${microphone_model}" "Note: BattyBirdNET-Pi" "${NEWSPECIES_BYDATE}/${NEWFILE}"
