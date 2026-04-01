@@ -545,3 +545,13 @@ http://www.bat-pi.eu/
 https://www.bto.org/our-science/products-and-technologies/bto-acoustic-pipeline
 
 https://www.wsl.ch/de/services-produkte/batscope/
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=rdz-oss%2FBattyBirdNET-Pi&type=date&logscale=&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=rdz-oss/BattyBirdNET-Pi&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=rdz-oss/BattyBirdNET-Pi&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/image?repos=rdz-oss/BattyBirdNET-Pi&type=date&legend=top-left" />
+ </picture>
+</a>
