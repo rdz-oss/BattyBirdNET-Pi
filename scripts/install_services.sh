@@ -105,8 +105,8 @@ install_birdnet_analysis() {
   cat << EOF > $HOME/BirdNET-Pi/templates/birdnet_analysis.service
 [Unit]
 Description=BirdNET Analysis
-After=birdnet_server.service
-Requires=birdnet_server.service
+After=birdnet_server.service batnet_server.service
+Requires=birdnet_server.service batnet_server.service
 [Service]
 RuntimeMaxSec=900
 Restart=always
