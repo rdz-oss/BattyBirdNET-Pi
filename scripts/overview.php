@@ -28,6 +28,7 @@ $statement2 = $db->prepare('SELECT COUNT(*) FROM detections WHERE Date == DATE(\
 if($statement2 == False) {
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result2 = $statement2->execute();
 $todaycount = $result2->fetchArray(SQLITE3_ASSOC);

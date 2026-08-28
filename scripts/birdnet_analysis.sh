@@ -124,9 +124,9 @@ run_analysis() {
       sleep $RECORDING_LENGTH
     done
 
-    if ! grep 5050 <(netstat -tulpn 2>&1) &> /dev/null 2>&1;then
+    if ! grep 5050 <(ss -tulpn 2>&1) &> /dev/null 2>&1;then
       echo "Waiting for socket"
-      until grep 5050 <(netstat -tulpn 2>&1) &> /dev/null 2>&1;do
+      until grep 5050 <(ss -tulpn 2>&1) &> /dev/null 2>&1;do
         sleep 1
       done
     fi
@@ -200,7 +200,7 @@ run_birdnet() {
   move_analyzed "${1}"
 }
 
-until grep 5050 <(netstat -tulpn 2>&1) &> /dev/null 2>&1;do
+until grep 5050 <(ss -tulpn 2>&1) &> /dev/null 2>&1;do
   sleep 1
 done
 
