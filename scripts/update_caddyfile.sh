@@ -6,10 +6,14 @@ set -x
 if [ -f /etc/caddy/Caddyfile ];then
   cp /etc/caddy/Caddyfile{,.original}
 fi
+
+# Use :80 if BIRDNETPI_URL is not set
+CADDY_HOST="${BIRDNETPI_URL:-:80}"
+
 if ! [ -z ${CADDY_PWD} ];then
 HASHWORD=$(caddy hash-password --plaintext ${CADDY_PWD})
 cat << EOF > /etc/caddy/Caddyfile
-http:// ${BIRDNETPI_URL} {
+${CADDY_HOST} {
   root * ${EXTRACTED}
   file_server browse
   handle /By_Date/* {
@@ -45,7 +49,7 @@ http:// ${BIRDNETPI_URL} {
 EOF
 else
   cat << EOF > /etc/caddy/Caddyfile
-http:// ${BIRDNETPI_URL} {
+${CADDY_HOST} {
   root * ${EXTRACTED}
   file_server browse
   handle /By_Date/* {
