@@ -365,6 +365,10 @@ EOF
   usermod -aG video caddy
   chmod g+x $HOME
   chmod -R o+rX "$HOME/BirdNET-Pi" "$HOME/BirdSongs"
+
+  # Allow www-data to restart services via the web UI
+  echo 'www-data ALL=(ALL) NOPASSWD: /usr/bin/systemctl' | sudo tee /etc/sudoers.d/www-data-systemctl >/dev/null
+  sudo chmod 440 /etc/sudoers.d/www-data-systemctl
 }
 
 install_avahi_aliases() {
