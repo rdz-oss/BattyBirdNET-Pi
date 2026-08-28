@@ -105,7 +105,7 @@ install_birdnet_analysis() {
   cat << EOF > $HOME/BirdNET-Pi/templates/birdnet_analysis.service
 [Unit]
 Description=BirdNET Analysis
-After=birdnet_server.service batnet_server.service
+After=multi-user.target birdnet_server.service batnet_server.service
 Requires=birdnet_server.service batnet_server.service
 [Service]
 RuntimeMaxSec=900
@@ -125,6 +125,7 @@ install_batnet_server() {
   cat << EOF > $HOME/BirdNET-Pi/templates/batnet_server.service
 [Unit]
 Description=BatNET Server
+After=multi-user.target
 Before=birdnet_server.service
 [Service]
 Restart=always
@@ -143,6 +144,7 @@ install_birdnet_server() {
   cat << EOF > $HOME/BirdNET-Pi/templates/birdnet_server.service
 [Unit]
 Description=BirdNET Analysis Server
+After=multi-user.target batnet_server.service
 Before=birdnet_analysis.service
 [Service]
 Restart=always
@@ -161,6 +163,7 @@ install_batnet_timer_server() {
   cat << EOF > $HOME/BirdNET-Pi/templates/batnet_timer_server.service
 [Unit]
 Description=BatNET Dusk/Dawn Starter Server
+After=multi-user.target
 [Service]
 Restart=always
 Type=simple
@@ -179,6 +182,7 @@ install_extraction_service() {
   cat << EOF > $HOME/BirdNET-Pi/templates/extraction.service
 [Unit]
 Description=BirdNET BirdSound Extraction
+After=multi-user.target
 [Service]
 Restart=on-failure
 RestartSec=3
@@ -251,6 +255,7 @@ install_recording_service() {
   cat << EOF > $HOME/BirdNET-Pi/templates/birdnet_recording.service
 [Unit]
 Description=BirdNET Recording
+After=multi-user.target
 [Service]
 Environment=XDG_RUNTIME_DIR=/run/user/1000
 Restart=always
@@ -382,6 +387,7 @@ install_birdnet_stats_service() {
   cat << EOF > $HOME/BirdNET-Pi/templates/birdnet_stats.service
 [Unit]
 Description=BirdNET Stats
+After=multi-user.target
 [Service]
 Restart=on-failure
 RestartSec=5
@@ -399,7 +405,8 @@ EOF
 install_spectrogram_service() {
   cat << EOF > $HOME/BirdNET-Pi/templates/spectrogram_viewer.service
 [Unit]
-Description=BirdNET-Pi Spectrogram Viewer
+Description=BirdNET Spectrogram Viewer
+After=multi-user.target
 [Service]
 Restart=always
 RestartSec=1
@@ -439,6 +446,7 @@ install_gotty_logs() {
   cat << EOF > $HOME/BirdNET-Pi/templates/birdnet_log.service
 [Unit]
 Description=BirdNET Analysis Log
+After=multi-user.target
 [Service]
 Restart=on-failure
 RestartSec=3
@@ -454,6 +462,7 @@ EOF
   cat << EOF > $HOME/BirdNET-Pi/templates/web_terminal.service
 [Unit]
 Description=BirdNET-Pi Web Terminal
+After=multi-user.target
 [Service]
 Restart=on-failure
 RestartSec=3
