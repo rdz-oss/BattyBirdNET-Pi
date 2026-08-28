@@ -364,6 +364,7 @@ EOF
   usermod -aG $USER caddy
   usermod -aG video caddy
   chmod g+x $HOME
+  chmod -R o+rX "$HOME/BirdNET-Pi" "$HOME/BirdSongs"
 }
 
 install_avahi_aliases() {
