@@ -547,6 +547,7 @@ install_services() {
   set_login
 
   install_depends
+  install_caddy_manually
   install_scripts
   install_Caddyfile
   install_avahi_aliases
