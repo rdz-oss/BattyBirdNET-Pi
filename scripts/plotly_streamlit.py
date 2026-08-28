@@ -57,6 +57,10 @@ df2 = df.copy()
 df2['DateTime'] = pd.to_datetime(df2['Date'] + " " + df2['Time'])
 df2 = df2.set_index('DateTime')
 
+if df2.empty:
+    st.info("No detections yet. The charts will appear once audio has been analyzed.")
+    st.stop()
+
 daily = st.sidebar.checkbox('Single Day View', help='Select if you want single day view, unselect for multi-day views')
 
 if daily:
