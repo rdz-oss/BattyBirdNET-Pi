@@ -15,7 +15,6 @@ HASHWORD=$(caddy hash-password --plaintext ${CADDY_PWD})
 cat << EOF > /etc/caddy/Caddyfile
 ${CADDY_HOST} {
   root * ${EXTRACTED}
-  try_files {path} /index.php
   file_server browse
   handle /By_Date/* {
     file_server browse
@@ -52,7 +51,6 @@ else
   cat << EOF > /etc/caddy/Caddyfile
 ${CADDY_HOST} {
   root * ${EXTRACTED}
-  try_files {path} /index.php
   file_server browse
   handle /By_Date/* {
     file_server browse

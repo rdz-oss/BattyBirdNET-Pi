@@ -201,17 +201,17 @@ create_necessary_dirs() {
 
   sudo -u ${USER} ln -fs $my_dir/exclude_species_list.txt $my_dir/scripts
   sudo -u ${USER} ln -fs $my_dir/include_species_list.txt $my_dir/scripts
-  sudo -u ${USER} cp -r $my_dir/homepage/* ${EXTRACTED}
-  sudo -u ${USER} cp $my_dir/model/labels.txt ${my_dir}/scripts
-  sudo -u ${USER} cp -r $my_dir/scripts ${EXTRACTED}
-  sudo -u ${USER} cp $my_dir/scripts/play.php ${EXTRACTED}
-  sudo -u ${USER} cp $my_dir/scripts/spectrogram.php ${EXTRACTED}
-  sudo -u ${USER} cp $my_dir/scripts/overview.php ${EXTRACTED}
-  sudo -u ${USER} cp $my_dir/scripts/stats.php ${EXTRACTED}
-  sudo -u ${USER} cp $my_dir/scripts/todays_detections.php ${EXTRACTED}
-  sudo -u ${USER} cp $my_dir/scripts/history.php ${EXTRACTED}
-  sudo -u ${USER} cp $my_dir/scripts/weekly_report.php ${EXTRACTED}
-  sudo -u ${USER} cp $my_dir/homepage/images/favicon.ico ${EXTRACTED}
+  sudo -u ${USER} ln -fs $my_dir/homepage/* ${EXTRACTED}
+  sudo -u ${USER} ln -fs $my_dir/model/labels.txt ${my_dir}/scripts
+  sudo -u ${USER} ln -fs $my_dir/scripts ${EXTRACTED}
+  sudo -u ${USER} ln -fs $my_dir/scripts/play.php ${EXTRACTED}
+  sudo -u ${USER} ln -fs $my_dir/scripts/spectrogram.php ${EXTRACTED}
+  sudo -u ${USER} ln -fs $my_dir/scripts/overview.php ${EXTRACTED}
+  sudo -u ${USER} ln -fs $my_dir/scripts/stats.php ${EXTRACTED}
+  sudo -u ${USER} ln -fs $my_dir/scripts/todays_detections.php ${EXTRACTED}
+  sudo -u ${USER} ln -fs $my_dir/scripts/history.php ${EXTRACTED}
+  sudo -u ${USER} ln -fs $my_dir/scripts/weekly_report.php ${EXTRACTED}
+  sudo -u ${USER} ln -fs $my_dir/homepage/images/favicon.ico ${EXTRACTED}
   sudo -u ${USER} ln -fs ${HOME}/phpsysinfo ${EXTRACTED}
   sudo -u ${USER} ln -fs $my_dir/templates/phpsysinfo.ini ${HOME}/phpsysinfo/
   sudo -u ${USER} ln -fs $my_dir/templates/green_bootstrap.css ${HOME}/phpsysinfo/templates/
@@ -297,7 +297,6 @@ install_Caddyfile() {
   cat << EOF > /etc/caddy/Caddyfile
 ${CADDY_HOST} {
   root * ${EXTRACTED}
-  try_files {path} /index.php
   file_server browse
   handle /By_Date/* {
     file_server browse
@@ -334,7 +333,6 @@ EOF
     cat << EOF > /etc/caddy/Caddyfile
 ${CADDY_HOST} {
   root * ${EXTRACTED}
-  try_files {path} /index.php
   file_server browse
   handle /By_Date/* {
     file_server browse
