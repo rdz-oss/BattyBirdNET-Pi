@@ -72,11 +72,11 @@ install_caddy_manually() {
   # minimal Caddyfile (will be overwritten later by install_Caddyfile())
   if [ ! -f /etc/caddy/Caddyfile ]; then
     sudo tee /etc/caddy/Caddyfile >/dev/null <<'EOF'
-+:80 {
-+    root * /var/www/html
-+    file_server browse
-+}
-+EOF
+:80 {
+    root * /var/www/html
+    file_server browse
+}
+EOF
   fi
 
   # systemd unit (mirrors the official package’s unit)
