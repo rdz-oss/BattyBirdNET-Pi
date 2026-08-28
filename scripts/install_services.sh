@@ -19,28 +19,20 @@ install_depends() {
   echo "deb [signed-by=/usr/share/keyrings/caddy-stable-archive-keyring.gpg] https://dl.cloudsmith.io/public/caddy/stable/debian.deb any main" \
        | sudo tee /etc/apt/sources.list.d/caddy-stable.list >/dev/null
 
-  # Update the package list – if the repo returns 404 this will exit with >0
-  if apt -qq update; then
-    # Repo is alive – install everything via apt (including caddy)
-    apt -qqy upgrade
-    echo "icecast2 icecast2/icecast-setup boolean false" | debconf-set-selections
-    apt install -qqy caddy ftpd sqlite3 php-sqlite3 alsa-utils \
-      pulseaudio avahi-utils sox libsox-fmt-mp3 php-fpm php-curl php-xml \
-      php-zip php icecast2 swig ffmpeg wget unzip curl cmake make bc libjpeg-dev \
-      zlib1g-dev python3-dev python3-pip python3-venv lsof net-tools
-    return 0
-  fi
+  apt -qq update
+  apt -qqy upgrade
 
-  # ----- FALL BACK TO MANUAL CADDY INSTALL ---------------------------------
-  echo "Caddy apt repository unavailable – installing Caddy manually from GitHub"
-  install_caddy_manually
-
-  # Install the rest of the dependencies (everything except caddy)
   echo "icecast2 icecast2/icecast-setup boolean false" | debconf-set-selections
-  apt install -qqy ftpd sqlite3 php-sqlite3 alsa-utils \
+  apt install -qqy caddy ftpd sqlite3 php-sqlite3 alsa-utils \
     pulseaudio avahi-utils sox libsox-fmt-mp3 php-fpm php-curl php-xml \
     php-zip php icecast2 swig ffmpeg wget unzip curl cmake make bc libjpeg-dev \
     zlib1g-dev python3-dev python3-pip python3-venv lsof net-tools
+
+  # ----- VERIFY CADDY WAS INSTALLED -----------------------------------------
+  if ! command -v caddy >/dev/null 2>&1; then
+    echo "Caddy was not installed via apt – falling back to manual download from GitHub"
+    install_caddy_manually
+  fi
 }
 
 # ----------------------------------------------------------------------
