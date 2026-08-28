@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # This installs the services that have been selected
+set -e # Exit immediately if any command fails
 set -x # Uncomment to enable debugging
 trap 'rm -f ${tmpfile}' EXIT
 trap 'exit 1' SIGINT SIGHUP
