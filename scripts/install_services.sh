@@ -73,22 +73,22 @@ EOF
 
   # systemd unit (mirrors the official package’s unit)
   sudo tee /etc/systemd/system/caddy.service >/dev/null <<'EOF'
-+[Unit]
-+Description=Caddy web server
-+After=network-online.target
-+Wants=network-online.target
-+
-+[Service]
-+User=caddy
-+Group=caddy
-+ExecStart=/usr/local/bin/caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
-+ExecReload=/usr/local/bin/caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
-+Restart=on-failure
-+LimitNOFILE=1048576
-+
-+[Install]
-+WantedBy=multi-user.target
-+EOF
+[Unit]
+Description=Caddy web server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=caddy
+Group=caddy
+ExecStart=/usr/local/bin/caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+ExecReload=/usr/local/bin/caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
+Restart=on-failure
+LimitNOFILE=1048576
+
+[Install]
+WantedBy=multi-user.target
+EOF
 
   sudo systemctl daemon-reload
   sudo systemctl enable --now caddy
