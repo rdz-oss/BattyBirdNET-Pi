@@ -51,7 +51,7 @@ else
   if pgrep arecord &> /dev/null ;then
     echo "Recording"
   else
-    until grep 5050 <(netstat -tulpn 2>&1);do
+    until grep 5050 <(ss -tulpn 2>&1);do
       sleep 1
     done
     if [ -z ${REC_CARD} ];then

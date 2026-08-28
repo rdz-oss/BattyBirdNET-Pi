@@ -30,7 +30,7 @@ sleep 5
 for i in {1..5}; do
   # We want to loop here (5*5seconds) until the batnet server is running and listening on its port
   systemctl is-active --quiet batnet_server.service \
-	  && grep 7667 <(netstat -tulpn 2>&1) \
+	  && grep 7667 <(ss -tulpn 2>&1) \
 	  && logger "[$0] batnet_server.service is running" \
 	  && break
 
@@ -43,7 +43,7 @@ sleep 5
 for i in {1..5}; do
   # We want to loop here (5*5seconds) until the server is running and listening on its port
   systemctl is-active --quiet birdnet_server.service \
-	  && grep 5050 <(netstat -tulpn 2>&1) \
+	  && grep 5050 <(ss -tulpn 2>&1) \
 	  && logger "[$0] birdnet_server.service is running" \
 	  && break
 
@@ -53,13 +53,13 @@ done
 
 
 # Let's check a final time to ensure the batnet server is running
-systemctl is-active --quiet batnet_server.service && grep 7667 <(netstat -tulpn 2>&1)
+systemctl is-active --quiet batnet_server.service && grep 7667 <(ss -tulpn 2>&1)
 status=$?
 
 if (( status != 0 )); then
   logger "[$0] Unable to start batdnet_server.service... Looping until it start properly"
 
-  until grep 7667 <(netstat -tulpn 2>&1);do
+  until grep 7667 <(ss -tulpn 2>&1);do
     sudo systemctl restart batnet_server.service
     sleep 45
   done
@@ -67,13 +67,13 @@ fi
 
 
 # Let's check a final time to ensure the birdnet server is running
-systemctl is-active --quiet birdnet_server.service && grep 5050 <(netstat -tulpn 2>&1)
+systemctl is-active --quiet birdnet_server.service && grep 5050 <(ss -tulpn 2>&1)
 status=$?
 
 if (( status != 0 )); then
   logger "[$0] Unable to start birdnet_server.service... Looping until it start properly"
 
-  until grep 5050 <(netstat -tulpn 2>&1);do
+  until grep 5050 <(ss -tulpn 2>&1);do
     sudo systemctl restart birdnet_server.service
     sleep 45
   done
