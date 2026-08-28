@@ -69,6 +69,7 @@ Wants=network-online.target
 [Service]
 User=caddy
 Group=caddy
+AmbientCapabilities=CAP_NET_BIND_SERVICE
 ExecStart=/usr/local/bin/caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
 ExecReload=/usr/local/bin/caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
 Restart=on-failure
