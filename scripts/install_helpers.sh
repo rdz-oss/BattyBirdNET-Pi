@@ -17,22 +17,30 @@ get_tf_whl () {
       WHL=tflite_runtime-2.11.0-cp311-cp311-linux_aarch64.whl
       ;;
     aarch64-312)
-      WHL=tflite_runtime-2.11.0-cp312-cp312-linux_aarch64.whl
-      ;;
+        WHL=tflite_runtime-2.11.0-cp312-cp312-linux_aarch64.whl
+        ;;
+    aarch64-313)
+        # Python 3.13 is not directly supported yet; reuse the 3.12 wheel which works on 3.13 as well
+        WHL=tflite_runtime-2.11.0-cp312-cp312-linux_aarch64.whl
+        ;;
     x86_64-39)
-      WHL=tflite_runtime-2.11.0-cp39-cp39-linux_x86_64.whl
-      ;;
+        WHL=tflite_runtime-2.11.0-cp39-cp39-linux_x86_64.whl
+        ;;
     x86_64-311)
-      WHL=tflite_runtime-2.11.0-cp311-cp311-linux_x86_64.whl
-      ;;
+        WHL=tflite_runtime-2.11.0-cp311-cp311-linux_x86_64.whl
+        ;;
     x86_64-312)
-      WHL=tflite_runtime-2.11.0-cp312-cp312-linux_x86_64.whl
-      ;;
+        WHL=tflite_runtime-2.11.0-cp312-cp312-linux_x86_64.whl
+        ;;
+    x86_64-313)
+        # Reuse the 3.12 wheel for Python 3.13 on x86_64
+        WHL=tflite_runtime-2.11.0-cp312-cp312-linux_x86_64.whl
+        ;;
     *)
-      echo "No tflite version found for ${ARCH}-${PY_VERSION}"
-      WHL=''
-      ;;
-  esac
+        echo "No tflite version found for ${ARCH}-${PY_VERSION}"
+        WHL=''
+        ;;
+    esac
   if [ -n "$WHL" ]; then
     {
       curl -L -o $HOME/BirdNET-Pi/$WHL $BASE_URL$WHL
