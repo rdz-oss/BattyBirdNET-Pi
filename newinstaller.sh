@@ -12,12 +12,19 @@ but would need to be aarch64."
   exit 1
 fi
 
-# we require passwordless sudo
- sudo -K
- if ! sudo -n true; then
-     echo "Passwordless sudo is not working. Aborting"
-     exit
- fi
+# Set up passwordless sudo for the current user
+if ! sudo -n true 2>/dev/null; then
+  echo "Setting up passwordless sudo for user '$USER'..."
+  echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/batnet-installer >/dev/null
+  sudo chmod 440 /etc/sudoers.d/batnet-installer
+fi
+
+# Verify it works
+sudo -K
+if ! sudo -n true; then
+  echo "Passwordless sudo is not working. Aborting"
+  exit
+fi
  
 # Simple new installer
 HOME=$HOME
