@@ -324,3 +324,126 @@ fi
 sudo systemctl daemon-reload
 restart_services.sh
 sudo systemctl restart batnet_timer_server.service
+
+# ===== Trixie / Python 3.13 fixes =====
+
+# Remove broken Cloudsmith Caddy repo if present
+if [ -f /etc/apt/sources.list.d/caddy-stable.list ]; then
+  sudo rm -f /etc/apt/sources.list.d/caddy-stable.list
+  sudo apt-get update -qq
+fi
+
+# Install missing packages that may have been skipped due to apt failures
+for pkg in ffmpeg icecast2 sox libsox-fmt-mp3 lsof bc; do
+  if ! dpkg -l "$pkg" &>/dev/null | grep -q "^ii"; then
+    sudo apt update -qq && sudo apt install -y "$pkg"
+  fi
+done
+sudo systemctl enable --now icecast2 2>/dev/null
+
+# Replace netstat with ss in scripts (netstat removed in Trixie)
+for f in $my_dir/birdnet_analysis.sh $my_dir/birdnet_recording.sh $my_dir/restart_services.sh /usr/local/bin/birdnet_analysis.sh /usr/local/bin/birdnet_recording.sh /usr/local/bin/restart_services.sh; do
+  if [ -f "$f" ] && grep -q 'netstat' "$f"; then
+    sudo sed -i 's/netstat -tulpn/ss -tulpn/g' "$f"
+  fi
+done
+
+# Add CAP_NET_BIND_SERVICE to Caddy systemd unit
+if [ -f /etc/systemd/system/caddy.service ]; then
+  if ! grep -q 'CAP_NET_BIND_SERVICE' /etc/systemd/system/caddy.service; then
+    sudo sed -i '/^Group=caddy$/a AmbientCapabilities=CAP_NET_BIND_SERVICE' /etc/systemd/system/caddy.service
+    sudo systemctl daemon-reload && sudo systemctl restart caddy
+  fi
+fi
+
+# Fix php-fpm socket path in Caddyfile for PHP 8.4
+if [ -f /etc/caddy/Caddyfile ]; then
+  if grep -q 'php_fastcgi unix//run/php/php-fpm.sock' /etc/caddy/Caddyfile; then
+    sudo sed -i 's|php_fastcgi unix//run/php/php-fpm.sock|php_fastcgi unix//run/php/php8.4-fpm.sock|' /etc/caddy/Caddyfile
+    sudo systemctl restart caddy 2>/dev/null
+  fi
+fi
+
+# Add www-data passwordless sudo for web UI service restarts
+if [ ! -f /etc/sudoers.d/www-data-systemctl ]; then
+  echo 'www-data ALL=(ALL) NOPASSWD: /usr/bin/systemctl' | sudo tee /etc/sudoers.d/www-data-systemctl >/dev/null
+  sudo chmod 440 /etc/sudoers.d/www-data-systemctl
+fi
+
+# Add o+rX permissions so Caddy can follow symlinks
+if [ -d $HOME/BirdNET-Pi ]; then
+  chmod -R o+rX "$HOME/BirdNET-Pi"
+fi
+if [ -d $HOME/BirdSongs ]; then
+  chmod -R o+rX "$HOME/BirdSongs"
+fi
+
+# Fix overview.php: add exit after "Database is busy"
+for f in $my_dir/overview.php $my_dir/todays_detections.php $my_dir/history.php $my_dir/weekly_report.php $my_dir/play.php; do
+  if [ -f "$f" ]; then
+    sudo sed -i '/header("refresh: 0;");/{n;/exit/!a\  exit;
+}' "$f"
+  fi
+done
+
+# Add After=multi-user.target to systemd service units
+for svc in birdnet_server batnet_server birdnet_analysis birdnet_recording birdnet_stats extraction spectrogram_viewer chart_viewer birdnet_log web_terminal batnet_timer_server; do
+  tmpl="$HOME/BirdNET-Pi/templates/${svc}.service"
+  if [ -f "$tmpl" ]; then
+    if ! grep -q 'After=multi-user.target' "$tmpl"; then
+      sed -i '/^\[Unit\]/a After=multi-user.target' "$tmpl"
+    fi
+  fi
+done
+
+# Add batnet_server dependency to birdnet_analysis
+tmpl="$HOME/BirdNET-Pi/templates/birdnet_analysis.service"
+if [ -f "$tmpl" ]; then
+  if ! grep -q 'batnet_server' "$tmpl"; then
+    sed -i 's/After=birdnet_server.service/After=birdnet_server.service batnet_server.service/' "$tmpl"
+    sed -i 's/Requires=birdnet_server.service/Requires=birdnet_server.service batnet_server.service/' "$tmpl"
+  fi
+fi
+
+# Fix livestream service: add PATH and wait for icecast2
+tmpl="$HOME/BirdNET-Pi/templates/livestream.service"
+if [ -f "$tmpl" ]; then
+  if ! grep -q 'PATH=' "$tmpl"; then
+    sed -i '/^\[Service\]/a Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' "$tmpl"
+  fi
+  if ! grep -q 'icecast2.service' "$tmpl"; then
+    sed -i 's/After=network-online.target/After=multi-user.target icecast2.service/' "$tmpl"
+    sed -i 's/Requires=network-online.target/Requires=icecast2.service/' "$tmpl"
+  fi
+fi
+
+# Fix plotly_streamlit.py: use .loc for "All" species count
+if [ -f $my_dir/plotly_streamlit.py ]; then
+  if grep -q "hourly\[hourly.index == specie\]\['All'\]" $my_dir/plotly_streamlit.py; then
+    sed -i "s/hourly\[hourly.index == specie\]\['All'\]/hourly.loc[specie, 'All']/" $my_dir/plotly_streamlit.py
+  fi
+fi
+
+# Wait for batnet_server (port 7667) in birdnet_analysis.sh
+if [ -f $my_dir/birdnet_analysis.sh ]; then
+  if ! grep -q 'grep 7667' $my_dir/birdnet_analysis.sh; then
+    sed -i '/grep 5050.*ss -tulpn/,/^done$/{/^done$/a\
+\
+# Wait for batnet_server (port 7667) to be ready\
+until grep 7667 <(ss -tulpn 2>\&1) \&> \/dev\/null 2>\&1;do\
+  sleep 1\
+done
+}' $my_dir/birdnet_analysis.sh
+  fi
+fi
+
+# Add set -e to install_services.sh if not present
+if [ -f $my_dir/install_services.sh ]; then
+  if ! grep -q '^set -e' $my_dir/install_services.sh; then
+    sed -i '/^set -x/i set -e # Exit immediately if any command fails' $my_dir/install_services.sh
+  fi
+fi
+
+# Restart services to apply all changes
+sudo systemctl daemon-reload
+restart_services.sh
