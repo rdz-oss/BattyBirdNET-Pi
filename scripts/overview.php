@@ -12,6 +12,7 @@ $db = new SQLite3('./scripts/birds.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READW
 if($db == False) {
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 
 if (file_exists('./scripts/thisrun.txt')) {
@@ -87,6 +88,7 @@ if(isset($_GET['ajax_detections']) && $_GET['ajax_detections'] == "true" && isse
   if($statement4 == False) {
     echo "Database is busy";
     header("refresh: 0;");
+  exit;
   }
   $result4 = $statement4->execute();
   if(!isset($_SESSION['images'])) {
@@ -240,6 +242,7 @@ $statement = $db->prepare('SELECT COUNT(*) FROM detections');
 if($statement == False) {
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result = $statement->execute();
 $totalcount = $result->fetchArray(SQLITE3_ASSOC);
@@ -248,6 +251,7 @@ $statement3 = $db->prepare('SELECT COUNT(*) FROM detections WHERE Date == Date(\
 if($statement3 == False) {
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result3 = $statement3->execute();
 $hourcount = $result3->fetchArray(SQLITE3_ASSOC);
@@ -256,6 +260,7 @@ $statement5 = $db->prepare('SELECT COUNT(DISTINCT(Com_Name)) FROM detections WHE
 if($statement5 == False) {
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result5 = $statement5->execute();
 $speciestally = $result5->fetchArray(SQLITE3_ASSOC);
@@ -264,6 +269,7 @@ $statement6 = $db->prepare('SELECT COUNT(DISTINCT(Com_Name)) FROM detections');
 if($statement6 == False) {
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result6 = $statement6->execute();
 $totalspeciestally = $result6->fetchArray(SQLITE3_ASSOC);

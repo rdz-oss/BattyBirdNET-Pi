@@ -14,12 +14,14 @@ if(isset($_GET['ascii'])) {
 	if($db == False){
 	  echo "Database is busy";
 	  header("refresh: 0;");
+  exit;
 	}
 
 	$statement1 = $db->prepare('SELECT DISTINCT(Com_Name), COUNT(*) FROM detections WHERE Date BETWEEN "'.date("Y-m-d",$startdate).'" AND "'.date("Y-m-d",$enddate).'" GROUP By Com_Name ORDER BY COUNT(*) DESC');
 	if($statement1 == False){
 	  echo "Database is busy";
 	  header("refresh: 0;");
+  exit;
 	}
 	$result1 = $statement1->execute();
 
@@ -27,6 +29,7 @@ if(isset($_GET['ascii'])) {
 	if($statement4 == False){
 	  echo "Database is busy";
 	  header("refresh: 0;");
+  exit;
 	}
 	$result4 = $statement4->execute();
 	$totalcount = $result4->fetchArray(SQLITE3_ASSOC)['COUNT(*)'];
@@ -35,6 +38,7 @@ if(isset($_GET['ascii'])) {
 	if($statement5 == False){
 	  echo "Database is busy";
 	  header("refresh: 0;");
+  exit;
 	}
 	$result5 = $statement5->execute();
 	$priortotalcount = $result5->fetchArray(SQLITE3_ASSOC)['COUNT(*)'];
@@ -43,6 +47,7 @@ if(isset($_GET['ascii'])) {
 	if($statement6 == False){
 	  echo "Database is busy";
 	  header("refresh: 0;");
+  exit;
 	}
 	$result6 = $statement6->execute();
 	$totalspeciestally = $result6->fetchArray(SQLITE3_ASSOC)['COUNT(DISTINCT(Com_Name))'];
@@ -51,6 +56,7 @@ if(isset($_GET['ascii'])) {
 	if($statement7 == False){
 	  echo "Database is busy";
 	  header("refresh: 0;");
+  exit;
 	}
 	$result7= $statement7->execute();
 	$priortotalspeciestally = $result7->fetchArray(SQLITE3_ASSOC)['COUNT(DISTINCT(Com_Name))'];
@@ -94,6 +100,7 @@ if(isset($_GET['ascii'])) {
 			if($statement2 == False){
 			  echo "Database is busy";
 			  header("refresh: 0;");
+  exit;
 			}
 			$result2 = $statement2->execute();
 			$totalcount = $result2->fetchArray(SQLITE3_ASSOC);
@@ -125,6 +132,7 @@ if(isset($_GET['ascii'])) {
 		if($statement3 == False){
 		  echo "Database is busy";
 		  header("refresh: 0;");
+  exit;
 		}
 		$result3 = $statement3->execute();
 		$totalcount = $result3->fetchArray(SQLITE3_ASSOC);
@@ -157,6 +165,7 @@ $db = new SQLite3('./scripts/birds.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READW
 if($db == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 
 if($debug == false){
@@ -167,6 +176,7 @@ $statement1 = $db->prepare('SELECT DISTINCT(Com_Name), COUNT(*) FROM detections 
 if($statement1 == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result1 = $statement1->execute();
 
@@ -205,6 +215,7 @@ while($detection=$result1->fetchArray(SQLITE3_ASSOC))
 			if($statement2 == False){
 			  echo "Database is busy";
 			  header("refresh: 0;");
+  exit;
 			}
 			$result2 = $statement2->execute();
 			$totalcount = $result2->fetchArray(SQLITE3_ASSOC);
@@ -246,6 +257,7 @@ while($detection=$result1->fetchArray(SQLITE3_ASSOC))
 		if($statement3 == False){
 		  echo "Database is busy";
 		  header("refresh: 0;");
+  exit;
 		}
 		$result3 = $statement3->execute();
 		$totalcount = $result3->fetchArray(SQLITE3_ASSOC);
