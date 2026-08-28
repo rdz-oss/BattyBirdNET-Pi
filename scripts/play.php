@@ -11,6 +11,7 @@ $db = new SQLite3('./scripts/birds.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READW
 if($db == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 
 if (file_exists('./scripts/thisrun.txt')) {
@@ -33,6 +34,7 @@ if(isset($_GET['deletefile'])) {
       if($statement1 == False){
         echo "Error";
         header("refresh: 0;");
+  exit;
       } else {
         $file_pointer = $home."/BirdSongs/Extracted/By_Date/".$_GET['deletefile'];
         if (!exec("sudo rm $file_pointer && sudo rm $file_pointer.png")) {
@@ -168,6 +170,7 @@ if(isset($_GET['bydate'])){
   if($statement == False){
     echo "Database is busy";
     header("refresh: 0;");
+  exit;
   }
   $result = $statement->execute();
   $view = "bydate";
@@ -185,6 +188,7 @@ if(isset($_GET['bydate'])){
   if($statement == False){
     echo "Database is busy";
     header("refresh: 0;");
+  exit;
   }
   $result = $statement->execute();
   $view = "date";
@@ -200,6 +204,7 @@ if(isset($_GET['bydate'])){
   if($statement == False){
     echo "Database is busy";
     header("refresh: 0;");
+  exit;
   }
   $result = $statement->execute();
   $view = "byspecies";
@@ -214,6 +219,7 @@ if(isset($_GET['bydate'])){
   if($statement == False || $statement3 == False){
     echo "Database is busy";
     header("refresh: 0;");
+  exit;
   }
   $result = $statement->execute();
   $result3 = $statement3->execute();
@@ -487,6 +493,7 @@ if(isset($_SESSION['date'])) {
 if($statement2 == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result2 = $statement2->execute();
 $num_rows = 0;
@@ -577,6 +584,7 @@ echo "<table>
     if($statement2 == False){
       echo "Database is busy";
       header("refresh: 0;");
+  exit;
     }
     $result2 = $statement2->execute();
     echo "<table>

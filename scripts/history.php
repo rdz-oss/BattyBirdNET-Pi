@@ -55,6 +55,7 @@ if(isset($_GET['blocation']) ) {
 		if($statement1 == False){
 		  echo "Database is busy";
 		  header("refresh: 0;");
+  exit;
 		}
 		$result1 = $statement1->execute();
 

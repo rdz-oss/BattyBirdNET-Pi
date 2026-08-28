@@ -32,12 +32,14 @@ $db = new SQLite3('./scripts/birds.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READW
 if($db == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 
 $statement1 = $db->prepare('SELECT COUNT(*) FROM detections');
 if($statement1 == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result1 = $statement1->execute();
 $totalcount = $result1->fetchArray(SQLITE3_ASSOC);
@@ -46,6 +48,7 @@ $statement2 = $db->prepare('SELECT COUNT(*) FROM detections WHERE Date == DATE(\
 if($statement2 == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result2 = $statement2->execute();
 $todaycount = $result2->fetchArray(SQLITE3_ASSOC);
@@ -54,6 +57,7 @@ $statement3 = $db->prepare('SELECT COUNT(*) FROM detections WHERE Date == Date(\
 if($statement3 == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result3 = $statement3->execute();
 $hourcount = $result3->fetchArray(SQLITE3_ASSOC);
@@ -62,6 +66,7 @@ $statement4 = $db->prepare('SELECT Com_Name, Sci_Name, Time, Confidence FROM det
 if($statement4 == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result4 = $statement4->execute();
 $mostrecent = $result4->fetchArray(SQLITE3_ASSOC);
@@ -70,6 +75,7 @@ $statement5 = $db->prepare('SELECT COUNT(DISTINCT(Com_Name)) FROM detections WHE
 if($statement5 == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result5 = $statement5->execute();
 $todayspeciestally = $result5->fetchArray(SQLITE3_ASSOC);
@@ -78,6 +84,7 @@ $statement6 = $db->prepare('SELECT COUNT(DISTINCT(Com_Name)) FROM detections');
 if($statement6 == False){
   echo "Database is busy";
   header("refresh: 0;");
+  exit;
 }
 $result6 = $statement6->execute();
 $totalspeciestally = $result6->fetchArray(SQLITE3_ASSOC);
@@ -208,6 +215,7 @@ if(isset($_GET['ajax_detections']) && $_GET['ajax_detections'] == "true"  ) {
   if($statement0 == False){
     echo "Database is busy";
     header("refresh: 0;");
+  exit;
   }
   $result0 = $statement0->execute();
 
