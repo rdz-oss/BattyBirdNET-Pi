@@ -32,7 +32,15 @@ install_birdnet() {
   pip3 install wheel
   get_tf_whl
     if [ -f ./requirements_custom.txt ]; then
+        # Try installing the custom requirements (tflite wheel). If it fails, fall back to TensorFlow.
+        set +e
         pip3 install -U -r ./requirements_custom.txt
+        result=$?
+        set -e
+        if [ $result -ne 0 ]; then
+            echo "tflite wheel install failed – installing TensorFlow as fallback"
+            pip3 install -U tensorflow
+        fi
     else
         echo "requirements_custom.txt not found – falling back to requirements.txt"
         pip3 install -U -r ./requirements.txt
