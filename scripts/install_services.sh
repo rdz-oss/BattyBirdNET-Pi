@@ -510,13 +510,14 @@ install_livestream_service() {
   cat << EOF > $HOME/BirdNET-Pi/templates/livestream.service
 [Unit]
 Description=BirdNET-Pi Live Stream
-After=network-online.target
-Requires=network-online.target
+After=multi-user.target icecast2.service
+Requires=icecast2.service
 [Service]
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=XDG_RUNTIME_DIR=/run/user/1000
 Restart=always
+RestartSec=5
 Type=simple
-RestartSec=3
 User=${USER}
 ExecStart=/usr/local/bin/livestream.sh
 [Install]
