@@ -1,4 +1,4 @@
-tflite_runtime-2.6.0-cp39-none-linux_aarch64.whl
+tensorflow
 altair<5
 apprise==1.6.0
 bottle==0.12.25
