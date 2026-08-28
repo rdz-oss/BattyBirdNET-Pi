@@ -204,6 +204,11 @@ until grep 5050 <(ss -tulpn 2>&1) &> /dev/null 2>&1;do
   sleep 1
 done
 
+# Wait for batnet_server (port 7667) to be ready
+until grep 7667 <(ss -tulpn 2>&1) &> /dev/null 2>&1;do
+  sleep 1
+done
+
 if [ $(find ${RECS_DIR}/StreamData -maxdepth 1 -name '*wav' 2>/dev/null| wc -l) -gt 0 ];then
   find $RECS_DIR -maxdepth 1 -name '*wav' -type f -size 0 -delete
   run_birdnet "${RECS_DIR}/StreamData"
