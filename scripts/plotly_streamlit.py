@@ -247,7 +247,7 @@ if daily is False:
 
     # filt = df2['Com_Name'] == specie
         if specie == 'All':
-            df_counts = int(hourly[hourly.index == specie]['All'])
+            df_counts = int(hourly.loc[specie, 'All'])
             fig = make_subplots(
                 rows=3, cols=2,
                 specs=[[{"type": "xy", "rowspan": 3}, {"type": "polar", "rowspan": 2}],
