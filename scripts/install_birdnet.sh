@@ -31,7 +31,12 @@ install_birdnet() {
   source ./birdnet/bin/activate
   pip3 install wheel
   get_tf_whl
-  pip3 install -U -r ./requirements_custom.txt
+    if [ -f ./requirements_custom.txt ]; then
+        pip3 install -U -r ./requirements_custom.txt
+    else
+        echo "requirements_custom.txt not found – falling back to requirements.txt"
+        pip3 install -U -r ./requirements.txt
+    fi
 }
 
 [ -d ${RECS_DIR} ] || mkdir -p ${RECS_DIR} &> /dev/null
