@@ -27,6 +27,7 @@ source /etc/birdnet/birdnet.conf
 install_birdnet() {
   cd ~/BirdNET-Pi || exit 1
   echo "Establishing a python virtual environment"
+  sudo apt install -y python3-dev
   python3 -m venv birdnet
   source ./birdnet/bin/activate
   pip3 install wheel

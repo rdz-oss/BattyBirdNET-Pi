@@ -9,7 +9,7 @@ gradio==3.41.0
 inotify
 librosa
 matplotlib
-numpy
+numpy>=2.1.0
 paho-mqtt<2.0.0
 pandas
 pip
