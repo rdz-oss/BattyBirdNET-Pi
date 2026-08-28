@@ -152,7 +152,7 @@ if grep bash $HOME/BirdNET-Pi/templates/web_terminal.service &>/dev/null;then
   sudo systemctl daemon-reload
   sudo systemctl restart web_terminal.service
 fi
-[ -d ~/BirdSongs/Extracted/static ] || cp -r ~/BirdNET-Pi/homepage/static ~/BirdSongs/Extracted
+[ -L ~/BirdSongs/Extracted/static ] || ln -sf ~/BirdNET-Pi/homepage/static ~/BirdSongs/Extracted
 if ! grep FLICKR_API_KEY /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u $USER echo "FLICKR_API_KEY=" >> /etc/birdnet/birdnet.conf
 fi
