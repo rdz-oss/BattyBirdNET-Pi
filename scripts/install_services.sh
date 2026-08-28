@@ -297,6 +297,7 @@ install_Caddyfile() {
   cat << EOF > /etc/caddy/Caddyfile
 ${CADDY_HOST} {
   root * ${EXTRACTED}
+  try_files {path} /index.php
   file_server browse
   handle /By_Date/* {
     file_server browse
@@ -333,6 +334,7 @@ EOF
     cat << EOF > /etc/caddy/Caddyfile
 ${CADDY_HOST} {
   root * ${EXTRACTED}
+  try_files {path} /index.php
   file_server browse
   handle /By_Date/* {
     file_server browse
