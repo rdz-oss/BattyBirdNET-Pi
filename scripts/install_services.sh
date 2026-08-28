@@ -12,16 +12,96 @@ export HOME=$HOME
 export PYTHON_VIRTUAL_ENV="$HOME/BirdNET-Pi/birdnet/bin/python3"
 
 install_depends() {
+  # ----- TRY APT REPO FIRST -------------------------------------------------
   apt install -y debian-keyring debian-archive-keyring apt-transport-https
-  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
-  apt -qqq update && apt -qqy upgrade
+  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' \
+       | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+  echo "deb [signed-by=/usr/share/keyrings/caddy-stable-archive-keyring.gpg] https://dl.cloudsmith.io/public/caddy/stable/debian.deb any main" \
+       | sudo tee /etc/apt/sources.list.d/caddy-stable.list >/dev/null
+
+  # Update the package list – if the repo returns 404 this will exit with >0
+  if apt -qq update; then
+    # Repo is alive – install everything via apt (including caddy)
+    apt -qqy upgrade
+    echo "icecast2 icecast2/icecast-setup boolean false" | debconf-set-selections
+    apt install -qqy caddy ftpd sqlite3 php-sqlite3 alsa-utils \
+      pulseaudio avahi-utils sox libsox-fmt-mp3 php-fpm php-curl php-xml \
+      php-zip php icecast2 swig ffmpeg wget unzip curl cmake make bc libjpeg-dev \
+      zlib1g-dev python3-dev python3-pip python3-venv lsof net-tools
+    return 0
+  fi
+
+  # ----- FALL BACK TO MANUAL CADDY INSTALL ---------------------------------
+  echo "Caddy apt repository unavailable – installing Caddy manually from GitHub"
+  install_caddy_manually
+
+  # Install the rest of the dependencies (everything except caddy)
   echo "icecast2 icecast2/icecast-setup boolean false" | debconf-set-selections
-  apt install -qqy caddy ftpd sqlite3 php-sqlite3 alsa-utils \
+  apt install -qqy ftpd sqlite3 php-sqlite3 alsa-utils \
     pulseaudio avahi-utils sox libsox-fmt-mp3 php-fpm php-curl php-xml \
     php-zip php icecast2 swig ffmpeg wget unzip curl cmake make bc libjpeg-dev \
     zlib1g-dev python3-dev python3-pip python3-venv lsof net-tools
 }
+
+# ----------------------------------------------------------------------
+# install_caddy_manually – download the official Caddy tarball, place the
+# binary in /usr/local/bin, create a minimal systemd unit and enable it.
+# ----------------------------------------------------------------------
+install_caddy_manually() {
+  ARCH=$(uname -m)
+  case "$ARCH" in
+    aarch64) CADDY_URL="https://github.com/caddyserver/caddy/releases/download/v2.8.4/caddy_2.8.4_linux_arm64.tar.gz" ;;
+    x86_64) CADDY_URL="https://github.com/caddyserver/caddy/releases/download/v2.8.4/caddy_2.8.4_linux_amd64.tar.gz" ;;
+    *) echo "Unsupported architecture $ARCH for manual Caddy install" ; return 1 ;;
+  esac
+
+  echo "Downloading Caddy from $CADDY_URL ..."
+  curl -L -o /tmp/caddy.tar.gz "$CADDY_URL"
+  sudo tar -xzf /tmp/caddy.tar.gz -C /usr/local/bin caddy
+  sudo chmod +x /usr/local/bin/caddy
+
+  # create a system user if it does not exist
+  if ! id -u caddy >/dev/null 2>&1; then
+    sudo useradd --system --no-create-home --shell /usr/sbin/nologin caddy
+  fi
+
+  # create required dirs and set ownership
+  sudo mkdir -p /etc/caddy /var/lib/caddy
+  sudo chown -R caddy:caddy /etc/caddy /var/lib/caddy
+
+  # minimal Caddyfile (will be overwritten later by install_Caddyfile())
+  if [ ! -f /etc/caddy/Caddyfile ]; then
+    sudo tee /etc/caddy/Caddyfile >/dev/null <<'EOF'
++:80 {
++    root * /var/www/html
++    file_server browse
++}
++EOF
+  fi
+
+  # systemd unit (mirrors the official package’s unit)
+  sudo tee /etc/systemd/system/caddy.service >/dev/null <<'EOF'
++[Unit]
++Description=Caddy web server
++After=network-online.target
++Wants=network-online.target
++
++[Service]
++User=caddy
++Group=caddy
++ExecStart=/usr/local/bin/caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
++ExecReload=/usr/local/bin/caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
++Restart=on-failure
++LimitNOFILE=1048576
++
++[Install]
++WantedBy=multi-user.target
++EOF
+
+  sudo systemctl daemon-reload
+  sudo systemctl enable --now caddy
+}
+
 
 
 set_hostname() {
