@@ -44,3 +44,23 @@ exclude_species_list.txt
 firstrun.ini
 HUMAN.txt
 include_species_list.txt
+
+# Local dev & AI assistant files
+.opencode/
+deploy
+docs_archive/
+tests/hardware/
+
+# Local session logs & notes
+DEPLOYMENT_FIXES_SUMMARY.md
+DEPLOYMENT_SUCCESS_*.md
+HARDWARE_TESTING_SUMMARY_*.md
+INSTALLER_PASSWORDLESS_SUDO_NOTE.md
+README_DEPLOYMENT.md
+REFACTORING_GUIDE.md
+TROUBLESHOOTING.md
+installation-*.txt
+
+# Local install scripts (kept locally but not committed)
+scripts/install_on_pi.sh
+scripts/simple_install.sh
