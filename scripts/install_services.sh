@@ -13,12 +13,15 @@ export HOME=$HOME
 export PYTHON_VIRTUAL_ENV="$HOME/BirdNET-Pi/birdnet/bin/python3"
 
 install_depends() {
+  # Ensure any stray 'ftpd' package from previous attempts is removed to avoid install failures
+  sudo apt -qqy purge ftpd || true
+  sudo apt -qqy autoremove -y ftpd || true
   apt install -y debian-keyring debian-archive-keyring apt-transport-https
   apt -qq update
   apt -qqy upgrade
 
   echo "icecast2 icecast2/icecast-setup boolean false" | debconf-set-selections
-  apt install -qqy ftpd sqlite3 php-sqlite3 alsa-utils \
+  apt install -qqy sqlite3 php-sqlite3 alsa-utils \
     pulseaudio avahi-utils sox libsox-fmt-mp3 php-fpm php-curl php-xml \
     php-zip php icecast2 swig ffmpeg wget unzip curl cmake make bc libjpeg-dev \
     zlib1g-dev python3-dev python3-pip python3-venv lsof net-tools build-essential
