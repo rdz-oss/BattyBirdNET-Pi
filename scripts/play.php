@@ -663,9 +663,9 @@ if(file_exists($shifted_path.$filename_formatted)) {
       echo "<tr>
   <td class=\"relative\">
 
-<img style='cursor:pointer;right:90px' src='images/delete.svg' onclick='deleteDetection(\"".$filename_formatted."\")' class=\"copyimage\" width=25 title='Delete Detection'>
-<img style='cursor:pointer;right:45px' onclick='toggleLock(\"".$filename_formatted."\",\"".$type."\", this)' class=\"copyimage\" width=25 title=\"".$title."\" src=\"".$imageicon."\">
-<img style='cursor:pointer' onclick='toggleBatShift(\"".$filename_formatted."\",\"".$batshiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$batshiftTitle."\" src=\"".$batshiftImageIcon."\">
+<img style='cursor:pointer;right:125px' src='images/delete.svg' onclick='deleteDetection(\"".$filename_formatted."\")' class=\"copyimage\" width=25 title='Delete Detection'>
+<img style='cursor:pointer;right:90px' onclick='toggleLock(\"".$filename_formatted."\",\"".$type."\", this)' class=\"copyimage\" width=25 title=\"".$title."\" src=\"".$imageicon."\">
+<img style='cursor:pointer;right:45px' onclick='toggleBatShift(\"".$filename_formatted."\",\"".$batshiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$batshiftTitle."\" src=\"".$batshiftImageIcon."\">
 <img style='cursor:pointer' onclick='toggleShiftFreq(\"".$filename_formatted."\",\"".$shiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$shiftTitle."\" src=\"".$shiftImageIcon."\"> $date $time<br>$confidence<br>
 
         ".$imageelem."
@@ -750,9 +750,9 @@ if(file_exists($shifted_path.$filename_formatted)) {
           echo "<tr>
       <td class=\"relative\">
 
-<img style='cursor:pointer;right:90px' src='images/delete.svg' onclick='deleteDetection(\"".$filename_formatted."\", true)' class=\"copyimage\" width=25 title='Delete Detection'>
-<img style='cursor:pointer;right:45px' onclick='toggleLock(\"".$filename_formatted."\",\"".$type."\", this)' class=\"copyimage\" width=25 title=\"".$title."\" src=\"".$imageicon."\">
-<img style='cursor:pointer' onclick='toggleBatShift(\"".$filename_formatted."\",\"".$batshiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$batshiftTitle."\" src=\"".$batshiftImageIcon."\">
+<img style='cursor:pointer;right:125px' src='images/delete.svg' onclick='deleteDetection(\"".$filename_formatted."\", true)' class=\"copyimage\" width=25 title='Delete Detection'>
+<img style='cursor:pointer;right:90px' onclick='toggleLock(\"".$filename_formatted."\",\"".$type."\", this)' class=\"copyimage\" width=25 title=\"".$title."\" src=\"".$imageicon."\">
+<img style='cursor:pointer;right:45px' onclick='toggleBatShift(\"".$filename_formatted."\",\"".$batshiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$batshiftTitle."\" src=\"".$batshiftImageIcon."\">
 <img style='cursor:pointer' onclick='toggleShiftFreq(\"".$filename_formatted."\",\"".$shiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$shiftTitle."\" src=\"".$shiftImageIcon."\">$date $time<br>$confidence<br>
 
 <video onplay='setLiveStreamVolume(0)' onended='setLiveStreamVolume(1)' onpause='setLiveStreamVolume(1)' controls poster=\"$filename_png\" preload=\"none\" title=\"$filename\"><source src=\"$filename\"></video></td>
