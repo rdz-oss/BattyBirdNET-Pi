@@ -525,6 +525,76 @@ if(isset($_GET['submit'])) {
       }
     }
 
+    // S3 Backup Settings
+    if(isset($_GET["s3_backup_enabled"])) {
+      $s3_backup_enabled = "true";
+      if(strcmp($s3_backup_enabled,$config['S3_BACKUP_ENABLED']) !== 0) {
+        $contents = preg_replace("/S3_BACKUP_ENABLED=.*/", "S3_BACKUP_ENABLED=true", $contents);
+        $contents2 = preg_replace("/S3_BACKUP_ENABLED=.*/", "S3_BACKUP_ENABLED=true", $contents2);
+      }
+    } else {
+      $contents = preg_replace("/S3_BACKUP_ENABLED=.*/", "S3_BACKUP_ENABLED=false", $contents);
+      $contents2 = preg_replace("/S3_BACKUP_ENABLED=.*/", "S3_BACKUP_ENABLED=false", $contents2);
+    }
+
+    if(isset($_GET["rclone_remote"])) {
+      $rclone_remote = $_GET["rclone_remote"];
+      if(strcmp($rclone_remote,$config['RCLONE_REMOTE']) !== 0) {
+        $contents = preg_replace("/RCLONE_REMOTE=.*/", "RCLONE_REMOTE=\"$rclone_remote\"", $contents);
+        $contents2 = preg_replace("/RCLONE_REMOTE=.*/", "RCLONE_REMOTE=\"$rclone_remote\"", $contents2);
+        save_to_cfg($contents, $contents2);
+      }
+    }
+
+    if(isset($_GET["rclone_bucket"])) {
+      $rclone_bucket = $_GET["rclone_bucket"];
+      if(strcmp($rclone_bucket,$config['RCLONE_BUCKET']) !== 0) {
+        $contents = preg_replace("/RCLONE_BUCKET=.*/", "RCLONE_BUCKET=\"$rclone_bucket\"", $contents);
+        $contents2 = preg_replace("/RCLONE_BUCKET=.*/", "RCLONE_BUCKET=\"$rclone_bucket\"", $contents2);
+        save_to_cfg($contents, $contents2);
+      }
+    }
+
+    if(isset($_GET["rclone_path"])) {
+      $rclone_path = $_GET["rclone_path"];
+      if(strcmp($rclone_path,$config['RCLONE_PATH']) !== 0) {
+        $contents = preg_replace("/RCLONE_PATH=.*/", "RCLONE_PATH=\"$rclone_path\"", $contents);
+        $contents2 = preg_replace("/RCLONE_PATH=.*/", "RCLONE_PATH=\"$rclone_path\"", $contents2);
+        save_to_cfg($contents, $contents2);
+      }
+    }
+
+    if(isset($_GET["s3_backup_time"])) {
+      $s3_backup_time = $_GET["s3_backup_time"];
+      if(strcmp($s3_backup_time,$config['S3_BACKUP_TIME']) !== 0) {
+        $contents = preg_replace("/S3_BACKUP_TIME=.*/", "S3_BACKUP_TIME=\"$s3_backup_time\"", $contents);
+        $contents2 = preg_replace("/S3_BACKUP_TIME=.*/", "S3_BACKUP_TIME=\"$s3_backup_time\"", $contents2);
+        save_to_cfg($contents, $contents2);
+        // Update systemd timers via sudoers helper
+        exec('sudo /usr/local/bin/update_backup_timer.sh > /dev/null 2>&1 &');
+      }
+    }
+
+    if(isset($_GET["s3_backup_watchdog_interval"])) {
+      $s3_backup_watchdog_interval = $_GET["s3_backup_watchdog_interval"];
+      if(strcmp($s3_backup_watchdog_interval,$config['S3_BACKUP_WATCHDOG_INTERVAL']) !== 0) {
+        $contents = preg_replace("/S3_BACKUP_WATCHDOG_INTERVAL=.*/", "S3_BACKUP_WATCHDOG_INTERVAL=\"$s3_backup_watchdog_interval\"", $contents);
+        $contents2 = preg_replace("/S3_BACKUP_WATCHDOG_INTERVAL=.*/", "S3_BACKUP_WATCHDOG_INTERVAL=\"$s3_backup_watchdog_interval\"", $contents2);
+        save_to_cfg($contents, $contents2);
+        // Update systemd timers via sudoers helper
+        exec('sudo /usr/local/bin/update_backup_timer.sh > /dev/null 2>&1 &');
+      }
+    }
+
+    if(isset($_GET["s3_backup_ping_host"])) {
+      $s3_backup_ping_host = $_GET["s3_backup_ping_host"];
+      if(strcmp($s3_backup_ping_host,$config['S3_BACKUP_PING_HOST']) !== 0) {
+        $contents = preg_replace("/S3_BACKUP_PING_HOST=.*/", "S3_BACKUP_PING_HOST=\"$s3_backup_ping_host\"", $contents);
+        $contents2 = preg_replace("/S3_BACKUP_PING_HOST=.*/", "S3_BACKUP_PING_HOST=\"$s3_backup_ping_host\"", $contents2);
+        save_to_cfg($contents, $contents2);
+      }
+    }
+
 	//Finally write the data out. some sections do this themselves in order to have the new settings ready for the services that will be restarted
 	//but will doubly ensure the settings are saved after any modification
     save_to_cfg($contents, $contents2);
@@ -645,13 +715,48 @@ if (file_exists('./scripts/thisrun.txt')) {
             echo "<option value='$format'>$format</option>";
         }
       ?>
-      </select>
-      <br><br>
+</select>
+       <br><br>
 
-      </td></tr></table><br>
+       </td></tr></table><br>
 
-      <table class="settingstable"><tr><td>
-      <h2>Full Disk Behaviour</h2>
+       <table class="settingstable"><tr><td>
+       <h2>S3 Backup Settings</h2>
+       <p>Automatically backup the detections database to an S3-compatible cloud storage (e.g., OVH, IONOS) using rclone.</p>
+       <p><strong>Note:</strong> You must first configure rclone manually via SSH: <code>rclone config</code></p>
+
+       <label for="s3_backup_enabled">Enable S3 Backup: </label>
+       <input type="checkbox" name="s3_backup_enabled" <?php if($newconfig['S3_BACKUP_ENABLED'] == "true" || $newconfig['S3_BACKUP_ENABLED'] == true) { echo "checked"; };?> ><br>
+       <p>When enabled, the system will back up the detections database daily and when connectivity is restored after being offline.</p>
+
+       <label for="rclone_remote">Rclone Remote Name: </label>
+       <input name="rclone_remote" type="text" value="<?php print($newconfig['RCLONE_REMOTE']);?>" /><br>
+       <p>The name of the remote configured in <code>rclone config</code> (e.g., "OVHBucket").</p>
+
+       <label for="rclone_bucket">S3 Bucket Name: </label>
+       <input name="rclone_bucket" type="text" value="<?php print($newconfig['RCLONE_BUCKET']);?>" /><br>
+       <p>The name of the S3 bucket to store backups in.</p>
+
+       <label for="rclone_path">Bucket Path: </label>
+       <input name="rclone_path" type="text" value="<?php print($newconfig['RCLONE_PATH']);?>" /><br>
+       <p>Subdirectory within the bucket (e.g., "db/" or "backups/").</p>
+
+       <label for="s3_backup_time">Daily Backup Time (24h): </label>
+       <input name="s3_backup_time" type="text" value="<?php print($newconfig['S3_BACKUP_TIME']);?>" /><br>
+       <p>Time to run the daily backup (e.g., "02:00").</p>
+
+       <label for="s3_backup_watchdog_interval">Watchdog Interval: </label>
+       <input name="s3_backup_watchdog_interval" type="text" value="<?php print($newconfig['S3_BACKUP_WATCHDOG_INTERVAL']);?>" /><br>
+       <p>How often to check for internet connectivity when offline (e.g., "30min").</p>
+
+       <label for="s3_backup_ping_host">Ping Host: </label>
+       <input name="s3_backup_ping_host" type="text" value="<?php print($newconfig['S3_BACKUP_PING_HOST']);?>" /><br>
+       <p>Host to ping to verify internet connectivity (e.g., "8.8.8.8").</p>
+
+       </td></tr></table><br>
+
+       <table class="settingstable"><tr><td>
+       <h2>Full Disk Behaviour</h2>
       <label for="purge">
       <input name="full_disk" type="radio" id="purge" value="purge" <?php if (strcmp($newconfig['FULL_DISK'], "purge") == 0) { echo "checked"; }?>>Purge</label>
       <label for="keep">

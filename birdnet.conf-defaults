@@ -229,3 +229,26 @@ BAT_CLASSIFIER="Bavaria"
 ## This filter is automatically applied only when the system is in Bat Mode (SAMPLING_RATE > 100000).
 ## Set to 0 or leave empty to disable. Default: 10000 Hz.
 BAT_HIGHPASS_FREQ=10000
+
+## S3 Backup Configuration (using rclone)
+## Set S3_BACKUP_ENABLED to true to enable daily backups of the detections database.
+## You must first run 'rclone config' manually to set up your S3 provider (OVH, IONOS, etc.).
+S3_BACKUP_ENABLED=false
+
+## The name of the rclone remote you configured (e.g., "OVHBucket" or "IONOSBackup")
+RCLONE_REMOTE=
+
+## The name of the S3 bucket to store backups in
+RCLONE_BUCKET=
+
+## The subdirectory within the bucket (e.g., "db/" or "backups/")
+RCLONE_PATH="db/"
+
+## Daily backup time (24h format, e.g., "02:00")
+S3_BACKUP_TIME="02:00"
+
+## Watchdog interval: how often to check for internet connectivity when offline
+S3_BACKUP_WATCHDOG_INTERVAL="30min"
+
+## Host to ping to verify internet connectivity
+S3_BACKUP_PING_HOST="8.8.8.8"

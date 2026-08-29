@@ -1,0 +1,12 @@
+[Unit]
+Description=BattyBirdNET-Pi S3 Backup Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=%i
+ExecStart=/home/%i/BirdNET-Pi/scripts/backup_detections.sh
+
+[Install]
+WantedBy=multi-user.target

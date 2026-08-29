@@ -425,37 +425,35 @@ If you are not comfortable with cleartext passwords, you can write it in a file 
 30 2 * * * /path/to/your_backup_script.sh
 ```
 
-You can also copy your data to an S3 object store bucket in the public cloud, i.e. your Pi pushes the data at regular intervals to cloud storage. To do this you first need to make an account with a cloud provider and configure an S3 bucket together with an S3 user that has the rights to read and write to this bucket. There are many such cloud providers, European ones include the French OVH cloud and German IONOS clouds.
-Then, install the tool 'rclone' on your Pi
+You can also copy your data to an S3 object store bucket in the public cloud, i.e. your Pi pushes the data at regular intervals to cloud storage. BattyBirdNET-Pi now includes an **automated S3 backup** feature using `rclone`.
+
+#### Automated S3 Backup
+
+This feature automatically backs up your detections database to an S3-compatible provider (e.g., OVH, IONOS) on a daily schedule. It also includes a "watchdog" service that checks for internet connectivity; if your Pi was offline for a while, it will trigger a backup as soon as it reconnects.
+
+**1. One-time setup (SSH):**
+First, install `rclone` and configure your cloud provider.
 ```sh
 sudo apt-get install rclone
-```
-now configure it with your cloud provider, S3 bucket and user details
-```sh
 rclone config
 ```
-You can use the following script to backup both your database as well as call data.
+Follow the prompts to add your S3 provider (e.g., OVH or IONOS). Note the **Remote Name** you use during this setup (e.g., `OVHBucket`).
+
+**2. Configure in Web UI:**
+1. Go to **Tools** → **Advanced Settings**.
+2. Scroll to the **S3 Backup Settings** section.
+3. Check **Enable S3 Backup**.
+4. Enter your **Rclone Remote Name** (from step 1).
+5. Enter your **S3 Bucket Name** and desired **Bucket Path** (e.g., `db/`).
+6. Set your preferred **Daily Backup Time** (e.g., `02:00`).
+7. Click **Save**.
+
+The system will automatically set up the necessary systemd timers. You can test the backup without uploading by running:
 ```sh
-#! /bin/bash
-echo "Start" >> /home/bat/cronjob/log.txt
-date >>  /home/bat/cronjob/log.txt
-rclone copy /home/bat/BirdNET-Pi/scripts/birds.db BackupStorageS3:your_bucket_name/db/
-echo "Saved db ..." >> /home/bat/cronjob/log.txt
-rclone copy /home/bat/BirdSongs/Extracted/By_Date/ BackupStorageS3:your_bucket_name/data/ --log-file=/home/bat/cronjob/rclone-log.txt
-echo "Saved call data ..." >> /home/bat/cronjob/log.txt
+sudo ~/BirdNET-Pi/scripts/backup_detections.sh --dry-run
 ```
-Put it in the directory '/home/bat/cronjob'
-```sh
-mkdir /home/bat/cronjob
-cd /home/bat/cronjob
-# put the backup script here and name it backup.sh
-chmod +x backup.sh
-```
-You can call this script manually
-```sh
-/home/bat/cronjob/backup.sh
-```
-or add it to be run automatically by cron (see above rsync example).
+
+**Note:** If you change the backup time or watchdog interval in the UI, the system will automatically update the schedule.
 
 
 #### Freeing space on the device

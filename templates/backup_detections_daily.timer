@@ -1,0 +1,10 @@
+[Unit]
+Description=BattyBirdNET-Pi S3 Backup Daily Timer
+
+[Timer]
+OnCalendar=*-*-* ${S3_BACKUP_TIME}
+Persistent=true
+Unit=backup_detections.service
+
+[Install]
+WantedBy=timers.target
