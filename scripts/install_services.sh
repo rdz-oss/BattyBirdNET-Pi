@@ -547,7 +547,8 @@ chown_things() {
 }
 
 increase_caddy_timeout() {
-  mkdir /etc/systemd/system/caddy.service.d
+  # Ensure the directory for Caddy overrides exists (no error if already present)
+mkdir -p /etc/systemd/system/caddy.service.d
   cat << EOF > /etc/systemd/system/caddy.service.d/override.conf
 [Service]
 TimeoutSec=300s
