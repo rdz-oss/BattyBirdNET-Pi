@@ -202,10 +202,12 @@ EOF
 
 create_necessary_dirs() {
   echo "Creating necessary directories"
-  [ -d ${EXTRACTED} ] || sudo -u ${USER} mkdir -p ${EXTRACTED}
-  [ -d ${EXTRACTED}/By_Date ] || sudo -u ${USER} mkdir -p ${EXTRACTED}/By_Date
-  [ -d ${EXTRACTED}/Charts ] || sudo -u ${USER} mkdir -p ${EXTRACTED}/Charts
-  [ -d ${PROCESSED} ] || sudo -u ${USER} mkdir -p ${PROCESSED}
+  mkdir -p ${EXTRACTED}
+  mkdir -p ${EXTRACTED}/By_Date
+  mkdir -p ${EXTRACTED}/Charts
+  mkdir -p ${PROCESSED}
+  # Ensure the user owns these directories (running as root)
+  chown -R "$USER:$USER" "$HOME/BirdSongs"
 
   sudo -u ${USER} ln -fs $my_dir/exclude_species_list.txt $my_dir/scripts
   sudo -u ${USER} ln -fs $my_dir/include_species_list.txt $my_dir/scripts
@@ -362,9 +364,10 @@ EOF
   usermod -aG $USER caddy
   usermod -aG video caddy
   chmod g+x $HOME
-  # Ensure the BirdSongs directory exists before adjusting permissions
-mkdir -p "$HOME/BirdSongs"
-chmod -R o+rX "$HOME/BirdNET-Pi" "$HOME/BirdSongs"
+# Ensure the BirdSongs directory exists before adjusting permissions
+  mkdir -p "$HOME/BirdSongs"
+  chown -R "$USER:$USER" "$HOME/BirdSongs"
+  chmod -R o+rX "$HOME/BirdNET-Pi" "$HOME/BirdSongs"
 
   # Allow www-data to restart services via the web UI
   echo 'www-data ALL=(ALL) NOPASSWD: /usr/bin/systemctl' | sudo tee /etc/sudoers.d/www-data-systemctl >/dev/null
