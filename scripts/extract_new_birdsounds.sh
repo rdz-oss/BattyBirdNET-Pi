@@ -115,12 +115,22 @@ for h in "${SCAN_DIRS[@]}";do
       END="${RECORDING_LENGTH}"
     fi
 
+    # Determine if we should apply a high-pass filter for bat calls
+    # Logic: If SAMPLING_RATE is high (>100kHz, indicating bat mode) AND BAT_HIGHPASS_FREQ is set > 0
+    SOX_FILTER=""
+    if [ -n "${BAT_HIGHPASS_FREQ}" ] && [ "${BAT_HIGHPASS_FREQ}" -gt 0 ] 2>/dev/null; then
+      if (( $(echo "${SAMPLING_RATE} > 100000" | bc -l) )); then
+        SOX_FILTER="highpass ${BAT_HIGHPASS_FREQ}"
+        echo "Applying high-pass filter at ${BAT_HIGHPASS_FREQ} Hz for bat mode"
+      fi
+    fi
+
     if [[ $NOISERED == true ]];then
       sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
-      trim ="${START}" ="${END}" noisered "${HOME}/${NOISE_PROF}" "${NOISE_PROF_FACTOR}"
+      trim ="${START}" ="${END}" ${SOX_FILTER} noisered "${HOME}/${NOISE_PROF}" "${NOISE_PROF_FACTOR}"
     else
       sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
-      trim ="${START}" ="${END}"
+      trim ="${START}" ="${END}" ${SOX_FILTER}
     fi
 #    sox -V1 "${h}/${OLDFILE}" "${NEWSPECIES_BYDATE}/${NEWFILE}" \
 #      trim ="${START}" ="${END}"

@@ -224,3 +224,8 @@ IDFILE=$HOME/BirdNET-Pi/IdentifiedSoFar.txt
 
 ## Region for bat classifier to set in USA, EU
 BAT_CLASSIFIER="Bavaria"
+
+## BAT_HIGHPASS_FREQ sets the high-pass filter frequency (in Hz) for bat extractions.
+## This filter is automatically applied only when the system is in Bat Mode (SAMPLING_RATE > 100000).
+## Set to 0 or leave empty to disable. Default: 10000 Hz.
+BAT_HIGHPASS_FREQ=10000
