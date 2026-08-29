@@ -105,6 +105,50 @@ if(isset($_GET['excludefile'])) {
 }
 
 $shifted_path = $home."/BirdSongs/Extracted/By_Date/shifted/";
+$batshifted_path = $home."/BirdSongs/Extracted/By_Date/batshifted/";
+
+if(isset($_GET['batshiftfile'])) {
+  if (file_exists('./scripts/thisrun.txt')) {
+    $config = parse_ini_file('./scripts/thisrun.txt');
+  } elseif (file_exists('./scripts/firstrun.ini')) {
+    $config = parse_ini_file('./scripts/firstrun.ini');
+  }
+  $user = shell_exec("awk -F: '/1000/{print $1}' /etc/passwd");
+  $home = shell_exec("awk -F: '/1000/{print $6}' /etc/passwd");
+  $home = trim($home);
+  $caddypwd = $config['CADDY_PWD'];
+  if (!isset($_SERVER['PHP_AUTH_USER'])) {
+    header('WWW-Authenticate: Basic realm="My Realm"');
+    header('HTTP/1.0 401 Unauthorized');
+    echo '<table><tr><td>You cannot bat-shift files for this installation</td></tr></table>';
+    exit;
+  } else {
+    $submittedpwd = $_SERVER['PHP_AUTH_PW'];
+    $submitteduser = $_SERVER['PHP_AUTH_USER'];
+    if($submittedpwd !== $caddypwd || $submitteduser !== 'birdnet'){
+      header('WWW-Authenticate: Basic realm="My Realm"');
+      header('HTTP/1.0 401 Unauthorized');
+      echo '<table><tr><td>You cannot bat-shift files for this installation</td></tr></table>';
+      exit;
+    }
+  }
+
+  $filename = $_GET['batshiftfile'];
+  $pp = pathinfo($filename);
+  $dir = $pp['dirname'];
+  $pi = $home."/BirdSongs/Extracted/By_Date/";
+
+  if(isset($_GET['dobatshift'])) {
+    $cmd = "sudo /usr/bin/nohup /usr/bin/sox ".escapeshellarg($pi.$filename)." ".escapeshellarg($batshifted_path.$filename)." speed 0.1 rate 48000";
+    shell_exec("sudo mkdir -p ".$batshifted_path.$dir." && ".$cmd);
+  } else {
+    $cmd = "sudo rm -f " . escapeshellarg($batshifted_path.$filename);
+    shell_exec($cmd);
+  }
+
+  echo "OK";
+  die();
+}
 
 if(isset($_GET['shiftfile'])) {
 
@@ -330,6 +374,54 @@ function toggleShiftFreq(filename, shiftAction, elem) {
   xhttp.send();
   elem.setAttribute("src","images/spinner.gif");
 }
+
+function toggleBatShift(filename, batshiftAction, elem) {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    if(this.responseText == "OK"){
+      if(batshiftAction == "batshift") {
+        elem.setAttribute("src","images/unbatshift.svg");
+        elem.setAttribute("title", "This file has been bat-shifted (speed 0.1, 48kHz).");
+        elem.setAttribute("onclick", elem.getAttribute("onclick").replace("batshift","unbatshift"));
+        console.log("bat-shifted " + filename);
+        video=elem.parentNode.getElementsByTagName("video");
+        if (video.length > 0) {
+          video[0].setAttribute("title", video[0].getAttribute("title").replace("/By_Date/","/By_Date/batshifted/"));
+          source = video[0].getElementsByTagName("source")[0];
+          source.setAttribute("src", source.getAttribute("src").replace("/By_Date/","/By_Date/batshifted/"));
+          video[0].load();
+        } else {
+          atag=elem.parentNode.getElementsByTagName("a")[0];
+          atag.setAttribute("href", atag.getAttribute("href").replace("/By_Date/","/By_Date/batshifted/"));
+        }
+      } else {
+        elem.setAttribute("src","images/batshift.svg");
+        elem.setAttribute("title", "Shift bat call to audible frequencies.");
+        elem.setAttribute("onclick", elem.getAttribute("onclick").replace("unbatshift","batshift"));
+        console.log("un-bat-shifted " + filename);
+        video=elem.parentNode.getElementsByTagName("video");
+        if (video.length > 0) {
+          video[0].setAttribute("title", video[0].getAttribute("title").replace("/By_Date/batshifted/","/By_Date/"));
+          source = video[0].getElementsByTagName("source")[0];
+          source.setAttribute("src", source.getAttribute("src").replace("/By_Date/batshifted/","/By_Date/"));
+          video[0].load();
+        } else {
+          atag=elem.parentNode.getElementsByTagName("a")[0];
+          atag.setAttribute("href", atag.getAttribute("href").replace("/By_Date/batshifted/","/By_Date/"));
+        }
+      }
+    }
+  }
+  if(batshiftAction == "batshift") {
+    console.log("bat-shifting " + filename);
+    xhttp.open("GET", "play.php?batshiftfile="+filename+"&dobatshift=true", true);
+  } else {
+    console.log("un-bat-shifting " + filename);
+    xhttp.open("GET", "play.php?batshiftfile="+filename, true);
+  }
+  xhttp.send();
+  elem.setAttribute("src","images/spinner.gif");
+}
 </script>
 
 <?php
@@ -547,22 +639,33 @@ echo "<table>
         $type = "del";
       }
 
-      if(file_exists($shifted_path.$filename_formatted)) {
+if(file_exists($shifted_path.$filename_formatted)) {
         $shiftImageIcon = "images/unshift.svg";
-        $shiftTitle = "This file has been shifted down in frequency."; 
+        $shiftTitle = "This file has been shifted down in frequency.";
         $shiftAction = "unshift";
-  $filename = $filename_shifted;
+    $filename = $filename_shifted;
       } else {
         $shiftImageIcon = "images/shift.svg";
         $shiftTitle = "This file is not shifted in frequency.";
         $shiftAction = "shift";
       }
 
-      echo "<tr>
-  <td class=\"relative\"> 
+      if(file_exists($batshifted_path.$filename_formatted)) {
+        $batshiftImageIcon = "images/unbatshift.svg";
+        $batshiftTitle = "This file has been bat-shifted (speed 0.1, 48kHz).";
+        $batshiftAction = "unbatshift";
+      } else {
+        $batshiftImageIcon = "images/batshift.svg";
+        $batshiftTitle = "Shift bat call to audible frequencies.";
+        $batshiftAction = "batshift";
+      }
 
-<img style='cursor:pointer;right:90px' src='images/delete.svg' onclick='deleteDetection(\"".$filename_formatted."\")' class=\"copyimage\" width=25 title='Delete Detection'> 
-<img style='cursor:pointer;right:45px' onclick='toggleLock(\"".$filename_formatted."\",\"".$type."\", this)' class=\"copyimage\" width=25 title=\"".$title."\" src=\"".$imageicon."\"> 
+      echo "<tr>
+  <td class=\"relative\">
+
+<img style='cursor:pointer;right:90px' src='images/delete.svg' onclick='deleteDetection(\"".$filename_formatted."\")' class=\"copyimage\" width=25 title='Delete Detection'>
+<img style='cursor:pointer;right:45px' onclick='toggleLock(\"".$filename_formatted."\",\"".$type."\", this)' class=\"copyimage\" width=25 title=\"".$title."\" src=\"".$imageicon."\">
+<img style='cursor:pointer' onclick='toggleBatShift(\"".$filename_formatted."\",\"".$batshiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$batshiftTitle."\" src=\"".$batshiftImageIcon."\">
 <img style='cursor:pointer' onclick='toggleShiftFreq(\"".$filename_formatted."\",\"".$shiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$shiftTitle."\" src=\"".$shiftImageIcon."\"> $date $time<br>$confidence<br>
 
         ".$imageelem."
@@ -623,22 +726,33 @@ echo "<table>
             $type = "del";
           }
 
-      if(file_exists($shifted_path.$filename_formatted)) {
+if(file_exists($shifted_path.$filename_formatted)) {
         $shiftImageIcon = "images/unshift.svg";
-        $shiftTitle = "This file has been shifted down in frequency."; 
+        $shiftTitle = "This file has been shifted down in frequency.";
         $shiftAction = "unshift";
-  $filename = $filename_shifted;
+    $filename = $filename_shifted;
       } else {
         $shiftImageIcon = "images/shift.svg";
         $shiftTitle = "This file is not shifted in frequency.";
         $shiftAction = "shift";
       }
 
-          echo "<tr>
-      <td class=\"relative\"> 
+      if(file_exists($batshifted_path.$filename_formatted)) {
+        $batshiftImageIcon = "images/unbatshift.svg";
+        $batshiftTitle = "This file has been bat-shifted (speed 0.1, 48kHz).";
+        $batshiftAction = "unbatshift";
+      } else {
+        $batshiftImageIcon = "images/batshift.svg";
+        $batshiftTitle = "Shift bat call to audible frequencies.";
+        $batshiftAction = "batshift";
+      }
 
-<img style='cursor:pointer;right:90px' src='images/delete.svg' onclick='deleteDetection(\"".$filename_formatted."\", true)' class=\"copyimage\" width=25 title='Delete Detection'> 
-<img style='cursor:pointer;right:45px' onclick='toggleLock(\"".$filename_formatted."\",\"".$type."\", this)' class=\"copyimage\" width=25 title=\"".$title."\" src=\"".$imageicon."\"> 
+          echo "<tr>
+      <td class=\"relative\">
+
+<img style='cursor:pointer;right:90px' src='images/delete.svg' onclick='deleteDetection(\"".$filename_formatted."\", true)' class=\"copyimage\" width=25 title='Delete Detection'>
+<img style='cursor:pointer;right:45px' onclick='toggleLock(\"".$filename_formatted."\",\"".$type."\", this)' class=\"copyimage\" width=25 title=\"".$title."\" src=\"".$imageicon."\">
+<img style='cursor:pointer' onclick='toggleBatShift(\"".$filename_formatted."\",\"".$batshiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$batshiftTitle."\" src=\"".$batshiftImageIcon."\">
 <img style='cursor:pointer' onclick='toggleShiftFreq(\"".$filename_formatted."\",\"".$shiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$shiftTitle."\" src=\"".$shiftImageIcon."\">$date $time<br>$confidence<br>
 
 <video onplay='setLiveStreamVolume(0)' onended='setLiveStreamVolume(1)' onpause='setLiveStreamVolume(1)' controls poster=\"$filename_png\" preload=\"none\" title=\"$filename\"><source src=\"$filename\"></video></td>
