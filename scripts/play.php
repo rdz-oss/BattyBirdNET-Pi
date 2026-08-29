@@ -139,7 +139,7 @@ if(isset($_GET['batshiftfile'])) {
   $pi = $home."/BirdSongs/Extracted/By_Date/";
 
   if(isset($_GET['dobatshift'])) {
-    $cmd = "sudo /usr/bin/nohup /usr/bin/sox ".escapeshellarg($pi.$filename)." ".escapeshellarg($batshifted_path.$filename)." speed 0.1 rate 48000";
+    $cmd = "sudo /usr/bin/sox ".escapeshellarg($pi.$filename)." ".escapeshellarg($batshifted_path.$filename)." speed 0.1 rate 48000";
     shell_exec("sudo mkdir -p ".$batshifted_path.$dir." && ".$cmd);
   } else {
     $cmd = "sudo rm -f " . escapeshellarg($batshifted_path.$filename);
@@ -188,7 +188,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
   $freqshift_tool = $config['FREQSHIFT_TOOL'];
 
   if ($freqshift_tool == "ffmpeg") {
-    $cmd = "sudo /usr/bin/nohup /usr/bin/ffmpeg -y -i ".escapeshellarg($pi.$filename)." -af \"rubberband=pitch=".$config['FREQSHIFT_LO']."/".$config['FREQSHIFT_HI']."\" ".escapeshellarg($shifted_path.$filename)."";
+    $cmd = "sudo /usr/bin/ffmpeg -y -i ".escapeshellarg($pi.$filename)." -af \"rubberband=pitch=".$config['FREQSHIFT_LO']."/".$config['FREQSHIFT_HI']."\" ".escapeshellarg($shifted_path.$filename)."";
     shell_exec("sudo mkdir -p ".$shifted_path.$dir." && ".$cmd);
 
   } else if ($freqshift_tool == "sox") {
