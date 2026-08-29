@@ -560,6 +560,7 @@ install_s3_backup_services() {
   systemctl enable backup_watchdog.timer 2>/dev/null || true
 
   # Install sudoers helper for timer updates
+  rm -f /usr/local/bin/update_backup_timer.sh
   cp $HOME/BirdNET-Pi/scripts/update_backup_timer.sh /usr/local/bin/update_backup_timer.sh
   chmod +x /usr/local/bin/update_backup_timer.sh
 
