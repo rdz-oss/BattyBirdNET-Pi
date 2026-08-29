@@ -51,6 +51,27 @@ remove_icecast() {
   fi
 }
 
+remove_caddy() {
+  echo "Removing Caddy web server..."
+  sudo systemctl disable --now caddy 2>/dev/null || true
+  sudo rm -rf /etc/caddy /etc/systemd/system/caddy.service /etc/systemd/system/caddy.service.d
+  # Remove the caddy system user if it exists
+  sudo deluser caddy 2>/dev/null || true
+  echo "Caddy removed."
+}
+
+remove_sudoers() {
+  echo "Removing Web UI sudoers rule..."
+  sudo rm -f /etc/sudoers.d/www-data-systemctl
+  echo "Sudoers rule removed."
+}
+
+remove_data_dirs() {
+  echo "Removing data directories (BirdSongs, BattyBirdNET-Analyzer)..."
+  rm -rf ~/BirdSongs ~/BattyBirdNET-Analyzer
+  echo "Data directories removed."
+}
+
 remove_scripts() {
   for i in "${SCRIPTS[@]}";do
     if [ -L "/usr/local/bin/${i}" ];then
@@ -63,6 +84,10 @@ backup_database
 
 remove_services
 remove_scripts
+remove_caddy
+remove_sudoers
+remove_data_dirs
+
 if [ -d /etc/birdnet ];then sudo rm -drf /etc/birdnet;fi
 if [ -f ${HOME}/BirdNET-Pi/birdnet.conf ];then sudo rm -f ${HOME}/BirdNET-Pi/birdnet.conf;fi
-echo "Uninstall finished. Remove this directory with 'rm -drfv' to finish."
+echo "Uninstall finished. Remove the BirdNET-Pi directory with 'rm -drfv ~/BirdNET-Pi' to finish."
