@@ -8,6 +8,18 @@ SCRIPTS=($(ls -1 ${my_dir}) ${HOME}/.gotty)
 set -x
 services=($(awk '/service/ && /systemctl/ && !/php/ {print $3}' ${my_dir}/install_services.sh | sort) custom_recording.service avahi-alias@.service)
 
+backup_database() {
+  DB_FILE="$HOME/BirdNET-Pi/scripts/birds.db"
+  if [ -f "$DB_FILE" ]; then
+    BACKUP_NAME="$HOME/BirdNET-Pi-backup-$(date +%F).db"
+    echo "Backing up detections database to $BACKUP_NAME ..."
+    cp "$DB_FILE" "$BACKUP_NAME"
+    echo "Backup complete."
+  else
+    echo "No database found at $DB_FILE. Skipping backup."
+  fi
+}
+
 remove_services() {
   for i in "${services[@]}"; do
     if [ -L /etc/systemd/system/multi-user.target.wants/"${i}" ];then
@@ -46,6 +58,8 @@ remove_scripts() {
     fi
   done
 }
+
+backup_database
 
 remove_services
 remove_scripts
