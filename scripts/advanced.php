@@ -516,6 +516,15 @@ if(isset($_GET['submit'])) {
 	  }
     }
 
+    if(isset($_GET["bat_highpass_freq"])) {
+      $bat_highpass_freq = $_GET["bat_highpass_freq"];
+      if(strcmp($bat_highpass_freq,$config['BAT_HIGHPASS_FREQ']) !== 0) {
+        $contents = preg_replace("/BAT_HIGHPASS_FREQ=.*/", "BAT_HIGHPASS_FREQ=$bat_highpass_freq", $contents);
+        $contents2 = preg_replace("/BAT_HIGHPASS_FREQ=.*/", "BAT_HIGHPASS_FREQ=$bat_highpass_freq", $contents2);
+        save_to_cfg($contents, $contents2);
+      }
+    }
+
 	//Finally write the data out. some sections do this themselves in order to have the new settings ready for the services that will be restarted
 	//but will doubly ensure the settings are saved after any modification
     save_to_cfg($contents, $contents2);
@@ -618,11 +627,16 @@ if (file_exists('./scripts/thisrun.txt')) {
             echo "<option value='$format'>$format</option>";
         }
       ?>
-      </select>
+</select>
 
-      <br><br>
+       <br><br>
 
-      <label for="bat_classifier">Bat Classifier</label>
+       <label for="bat_highpass_freq">Bat High-Pass Filter (Hz)</label>
+       <input name="bat_highpass_freq" type="number" min="0" max="100000" step="1000" value="<?php print($newconfig['BAT_HIGHPASS_FREQ']);?>" /><br>
+       <p>Frequency cutoff for bat extractions. Set to 0 to disable. Only active in Bat Mode (sampling rate > 100kHz). Default: 10000 Hz.</p>
+       <br><br>
+
+       <label for="bat_classifier">Bat Classifier</label>
       <select name="bat_classifier">
       <option selected="<?php print($newconfig['BAT_CLASSIFIER']);?>"><?php print($newconfig['BAT_CLASSIFIER']);?></option>
       <?php
