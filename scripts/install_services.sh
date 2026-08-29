@@ -497,8 +497,13 @@ EOF
 }
 
 install_phpsysinfo() {
-  sudo -u ${USER} git clone https://github.com/phpsysinfo/phpsysinfo.git \
-    ${HOME}/phpsysinfo
+  if [ -d "${HOME}/phpsysinfo/.git" ]; then
+    sudo -u ${USER} git -C ${HOME}/phpsysinfo pull
+  else
+    rm -rf ${HOME}/phpsysinfo
+    sudo -u ${USER} git clone https://github.com/phpsysinfo/phpsysinfo.git \
+      ${HOME}/phpsysinfo
+  fi
 }
 
 config_icecast() {
