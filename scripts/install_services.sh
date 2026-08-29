@@ -24,7 +24,7 @@ install_depends() {
   apt install -qqy sqlite3 php-sqlite3 alsa-utils \
     pulseaudio avahi-utils sox libsox-fmt-mp3 php-fpm php-curl php-xml \
     php-zip php icecast2 swig ffmpeg wget unzip curl cmake make bc libjpeg-dev \
-    zlib1g-dev python3-dev python3-pip python3-venv lsof net-tools build-essential
+    zlib1g-dev python3-dev python3-pip python3-venv lsof net-tools build-essential rclone
 }
 
 # ----------------------------------------------------------------------
@@ -536,6 +536,37 @@ EOF
   systemctl enable livestream.service
 }
 
+install_s3_backup_services() {
+  echo "Installing S3 Backup services..."
+  # Source config to get default values for timer placeholders
+  source /etc/birdnet/birdnet.conf
+
+  # Create systemd service files from templates
+  cp $HOME/BirdNET-Pi/templates/backup_detections.service /etc/systemd/system/backup_detections.service
+  cp $HOME/BirdNET-Pi/templates/backup_watchdog.service /etc/systemd/system/backup_watchdog.service
+
+  # Create timer files from templates, replacing placeholders with config values
+  sed "s/\${S3_BACKUP_TIME}/$S3_BACKUP_TIME/g" $HOME/BirdNET-Pi/templates/backup_detections_daily.timer > /etc/systemd/system/backup_detections_daily.timer
+  sed "s/\${S3_BACKUP_WATCHDOG_INTERVAL}/$S3_BACKUP_WATCHDOG_INTERVAL/g" $HOME/BirdNET-Pi/templates/backup_watchdog.timer > /etc/systemd/system/backup_watchdog.timer
+
+  # Reload systemd and enable timers
+  systemctl daemon-reload
+  systemctl enable backup_detections_daily.timer 2>/dev/null || true
+  systemctl enable backup_watchdog.timer 2>/dev/null || true
+
+  # Install sudoers helper for timer updates
+  cp $HOME/BirdNET-Pi/scripts/update_backup_timer.sh /usr/local/bin/update_backup_timer.sh
+  chmod +x /usr/local/bin/update_backup_timer.sh
+
+  # Add sudoers rule for www-data to run the helper (if not already present)
+  if [ ! -f /etc/sudoers.d/www-data-update-backup-timer ]; then
+    echo 'www-data ALL=(ALL) NOPASSWD: /usr/local/bin/update_backup_timer.sh' | sudo tee /etc/sudoers.d/www-data-update-backup-timer >/dev/null
+    sudo chmod 440 /etc/sudoers.d/www-data-update-backup-timer
+  fi
+
+  echo "S3 Backup services installed."
+}
+
 install_cleanup_cron() {
   sed "s/\$USER/$USER/g" $my_dir/templates/cleanup.cron >> /etc/crontab
 }
@@ -581,6 +612,7 @@ install_services() {
   install_gotty_logs
   install_phpsysinfo
   install_livestream_service
+  install_s3_backup_services
   install_cleanup_cron
   install_weekly_cron
   increase_caddy_timeout

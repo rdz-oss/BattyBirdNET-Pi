@@ -1,0 +1,10 @@
+[Unit]
+Description=BattyBirdNET-Pi S3 Backup Watchdog Timer
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=${S3_BACKUP_WATCHDOG_INTERVAL}
+Unit=backup_watchdog.service
+
+[Install]
+WantedBy=timers.target

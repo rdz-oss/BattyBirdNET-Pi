@@ -329,7 +329,68 @@ sudo systemctl daemon-reload
 restart_services.sh
 sudo systemctl restart batnet_timer_server.service
 
-# ===== Trixie / Python 3.13 fixes =====
+# ===== S3 Backup Migration =====
+
+# Add missing S3 backup config variables
+if ! grep S3_BACKUP_ENABLED /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "S3_BACKUP_ENABLED=false" >> /etc/birdnet/birdnet.conf
+fi
+if ! grep RCLONE_REMOTE /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "RCLONE_REMOTE=" >> /etc/birdnet/birdnet.conf
+fi
+if ! grep RCLONE_BUCKET /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "RCLONE_BUCKET=" >> /etc/birdnet/birdnet.conf
+fi
+if ! grep RCLONE_PATH /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "RCLONE_PATH=\"db/\"" >> /etc/birdnet/birdnet.conf
+fi
+if ! grep S3_BACKUP_TIME /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "S3_BACKUP_TIME=\"02:00\"" >> /etc/birdnet/birdnet.conf
+fi
+if ! grep S3_BACKUP_WATCHDOG_INTERVAL /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "S3_BACKUP_WATCHDOG_INTERVAL=\"30min\"" >> /etc/birdnet/birdnet.conf
+fi
+if ! grep S3_BACKUP_PING_HOST /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "S3_BACKUP_PING_HOST=\"8.8.8.8\"" >> /etc/birdnet/birdnet.conf
+fi
+
+# Install rclone if not present
+if ! command -v rclone &> /dev/null; then
+  echo "Installing rclone..."
+  sudo apt update -qq && sudo apt install -y rclone
+fi
+
+# Install S3 Backup systemd services and timers if not present
+if [ ! -f /etc/systemd/system/backup_detections.service ]; then
+  echo "Installing S3 Backup services..."
+  
+  # Source config for placeholders
+  source /etc/birdnet/birdnet.conf
+
+  # Copy services
+  sudo cp $HOME/BirdNET-Pi/templates/backup_detections.service /etc/systemd/system/backup_detections.service
+  sudo cp $HOME/BirdNET-Pi/templates/backup_watchdog.service /etc/systemd/system/backup_watchdog.service
+
+  # Generate timers from templates
+  sudo sed "s/\${S3_BACKUP_TIME}/$S3_BACKUP_TIME/g" $HOME/BirdNET-Pi/templates/backup_detections_daily.timer > /etc/systemd/system/backup_detections_daily.timer
+  sudo sed "s/\${S3_BACKUP_WATCHDOG_INTERVAL}/$S3_BACKUP_WATCHDOG_INTERVAL/g" $HOME/BirdNET-Pi/templates/backup_watchdog.timer > /etc/systemd/system/backup_watchdog.timer
+
+  # Install sudoers helper
+  sudo cp $HOME/BirdNET-Pi/scripts/update_backup_timer.sh /usr/local/bin/update_backup_timer.sh
+  sudo chmod +x /usr/local/bin/update_backup_timer.sh
+
+  # Add sudoers rule
+  if [ ! -f /etc/sudoers.d/www-data-update-backup-timer ]; then
+    echo 'www-data ALL=(ALL) NOPASSWD: /usr/local/bin/update_backup_timer.sh' | sudo tee /etc/sudoers.d/www-data-update-backup-timer >/dev/null
+    sudo chmod 440 /etc/sudoers.d/www-data-update-backup-timer
+  fi
+
+  sudo systemctl daemon-reload
+  sudo systemctl enable backup_detections_daily.timer 2>/dev/null || true
+  sudo systemctl enable backup_watchdog.timer 2>/dev/null || true
+  
+  echo "S3 Backup services installed."
+fi
 
 # Remove broken Cloudsmith Caddy repo if present
 if [ -f /etc/apt/sources.list.d/caddy-stable.list ]; then
