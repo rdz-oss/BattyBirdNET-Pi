@@ -1,0 +1,12 @@
+#!/bin/bash
+# Wrapper script for deploy_to_pi.py
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEPLOY_SCRIPT="$SCRIPT_DIR/tests/hardware/deploy_to_pi.py"
+
+if [ ! -f "$DEPLOY_SCRIPT" ]; then
+    echo "Error: deploy_to_pi.py not found"
+    exit 1
+fi
+
+python3 "$DEPLOY_SCRIPT" "$@"

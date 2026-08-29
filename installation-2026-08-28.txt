@@ -1,0 +1,7 @@
++ set -e
++ my_dir=/Users/batfish/BirdNET-Pi
++ export my_dir=/Users/batfish/BirdNET-Pi
++ my_dir=/Users/batfish/BirdNET-Pi
++ cd /Users/batfish/BirdNET-Pi/scripts
++ git log -n 1 --pretty=oneline --no-color --decorate
+fatal: not a git repository (or any of the parent directories): .git

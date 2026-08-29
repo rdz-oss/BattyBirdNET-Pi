@@ -1,0 +1,10 @@
+{
+  "hostname": "birdnetpi.local",
+  "username": "pi",
+  "password": null,
+  "key_file": "~/.ssh/id_rsa",
+  "port": 22,
+  "timeout": 30,
+  "install_path": "/home/pi/BattyBirdNET-Pi",
+  "config_path": "/etc/birdnet/birdnet.conf"
+}
