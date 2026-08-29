@@ -243,11 +243,16 @@ CREATE INDEX IF NOT EXISTS "detections_Com_Name" ON "detections" ("Com_Name");
 CREATE INDEX IF NOT EXISTS "detections_Date_Time" ON "detections" ("Date" DESC, "Time" DESC);
 EOF
 
-apprise_version=$($HOME/BirdNET-Pi/birdnet/bin/python3 -c "import apprise; print(apprise.__version__)")
-streamlit_version=$($HOME/BirdNET-Pi/birdnet/bin/pip3 show streamlit 2>/dev/null | grep Version | awk '{print $2}')
+apprise_version=$($HOME/BirdNET-Pi/birdnet/bin/python3 -c "import apprise; print(apprise.__version__)" 2>/dev/null || echo "0")
+streamlit_version=$($HOME/BirdNET-Pi/birdnet/bin/pip3 show streamlit 2>/dev/null | grep Version | awk '{print $2}' || echo "0")
 
-[[ $apprise_version != "1.6.0" ]] && $HOME/BirdNET-Pi/birdnet/bin/pip3 install apprise==1.6.0
-[[ $streamlit_version != "1.31.0" ]] && $HOME/BirdNET-Pi/birdnet/bin/pip3 install streamlit==1.19.0
+# Python 3.13+ is incompatible with old streamlit (imghdr removed) and
+# pip install of old apprise can downgrade protobuf, breaking TensorFlow.
+python_major=$($HOME/BirdNET-Pi/birdnet/bin/python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
+if (( $(echo "$python_major < 3.13" | bc -l) )); then
+  [[ $apprise_version != "1.6.0" ]] && $HOME/BirdNET-Pi/birdnet/bin/pip3 install apprise==1.6.0
+  [[ $streamlit_version != "1.31.0" ]] && $HOME/BirdNET-Pi/birdnet/bin/pip3 install streamlit==1.19.0
+fi
 
 if ! grep -q 'RuntimeMaxSec=' "$HOME/BirdNET-Pi/templates/birdnet_analysis.service"&>/dev/null; then
     sudo -E sed -i '/\[Service\]/a RuntimeMaxSec=900' "$HOME/BirdNET-Pi/templates/birdnet_analysis.service"
