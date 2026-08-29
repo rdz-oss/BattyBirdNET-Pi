@@ -78,6 +78,10 @@ if ! grep BAT_SUNTIMER /etc/birdnet/birdnet.conf &>/dev/null;then
   chmod +x ~/BirdNET-Pi/scripts/sun_info.py
 fi
 
+if ! grep BAT_HIGHPASS_FREQ /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "BAT_HIGHPASS_FREQ=10000" >> /etc/birdnet/birdnet.conf
+fi
+
 if ! grep INPUT_SPECTROGRAM_COLOR /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u $USER echo "INPUT_SPECTROGRAM_COLOR=\"\"" >> /etc/birdnet/birdnet.conf
 fi
