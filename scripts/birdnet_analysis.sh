@@ -164,7 +164,20 @@ ${BIRDWEATHER_ID_LOG}
     #echo "${1}/${i}" > $HOME/BirdNET-Pi/analyzing_now.txt
     spectrogram_png=${EXTRACTED}/spectrogram.png
     analyzing_now="${1}/${i}"
-    sox -V1 "${1}/${i}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
+
+    # Determine if we should apply a high-pass filter for the live spectrogram in bat mode
+    SPECTROGRAM_FILTER=""
+    if [ -n "${BAT_HIGHPASS_FREQ}" ] && [ "${BAT_HIGHPASS_FREQ}" -gt 0 ] 2>/dev/null; then
+      if (( $(echo "${SAMPLING_RATE} > 100000" | bc -l) )); then
+        SPECTROGRAM_FILTER="highpass -2 ${BAT_HIGHPASS_FREQ}"
+      fi
+    fi
+
+    if [ -n "${SPECTROGRAM_FILTER}" ]; then
+      sox -V1 "${1}/${i}" -n ${SPECTROGRAM_FILTER} remix 1 rate "${SAMPLING_RATE}" spectrogram -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
+    else
+      sox -V1 "${1}/${i}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
+    fi
 
     if [[ $INPUT_NOISERED == true ]];then
       sox "${1}/${i}" "${1}/${i}.out.wav" noisered "${HOME}/${NOISE_PROF}" ${NOISE_PROF_FACTOR} && mv "${1}/${i}.out.wav" "${1}/${i}"

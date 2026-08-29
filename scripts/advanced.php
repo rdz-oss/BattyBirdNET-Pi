@@ -519,8 +519,13 @@ if(isset($_GET['submit'])) {
     if(isset($_GET["bat_highpass_freq"])) {
       $bat_highpass_freq = $_GET["bat_highpass_freq"];
       if(strcmp($bat_highpass_freq,$config['BAT_HIGHPASS_FREQ']) !== 0) {
-        $contents = preg_replace("/BAT_HIGHPASS_FREQ=.*/", "BAT_HIGHPASS_FREQ=$bat_highpass_freq", $contents);
-        $contents2 = preg_replace("/BAT_HIGHPASS_FREQ=.*/", "BAT_HIGHPASS_FREQ=$bat_highpass_freq", $contents2);
+        if (strpos($contents, "BAT_HIGHPASS_FREQ=") !== false) {
+          $contents = preg_replace("/BAT_HIGHPASS_FREQ=.*/", "BAT_HIGHPASS_FREQ=$bat_highpass_freq", $contents);
+          $contents2 = preg_replace("/BAT_HIGHPASS_FREQ=.*/", "BAT_HIGHPASS_FREQ=$bat_highpass_freq", $contents2);
+        } else {
+          $contents .= "BAT_HIGHPASS_FREQ=$bat_highpass_freq\n";
+          $contents2 .= "BAT_HIGHPASS_FREQ=$bat_highpass_freq\n";
+        }
         save_to_cfg($contents, $contents2);
       }
     }

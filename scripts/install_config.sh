@@ -258,6 +258,7 @@ NOISE_PROF="BattyBirdNET-Analyzer/checkpoints/bats/mic-noise/audiomoth_v12.prof"
 NOISE_PROF_FACTOR=0.22
 INPUT_NOISERED=false
 INPUT_SPECTROGRAM_COLOR=""
+BAT_HIGHPASS_FREQ=10000
 SPEC_SAMPLE_RATE=256000
 
 ## RAW_SPECTROGRAM is for removing the axes and labels of the spectrograms

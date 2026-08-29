@@ -120,7 +120,7 @@ for h in "${SCAN_DIRS[@]}";do
     SOX_FILTER=""
     if [ -n "${BAT_HIGHPASS_FREQ}" ] && [ "${BAT_HIGHPASS_FREQ}" -gt 0 ] 2>/dev/null; then
       if (( $(echo "${SAMPLING_RATE} > 100000" | bc -l) )); then
-        SOX_FILTER="highpass ${BAT_HIGHPASS_FREQ}"
+        SOX_FILTER="highpass -2 ${BAT_HIGHPASS_FREQ}"
         echo "Applying high-pass filter at ${BAT_HIGHPASS_FREQ} Hz for bat mode"
       fi
     fi
