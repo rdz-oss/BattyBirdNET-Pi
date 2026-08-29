@@ -148,6 +148,9 @@ fi
 if ! which lsof &>/dev/null;then
   sudo apt update && sudo apt -y install lsof
 fi
+if ! dpkg -l librubberband2 &>/dev/null;then
+  sudo apt update && sudo apt -y install librubberband2
+fi
 if ! grep RTSP_STREAM /etc/birdnet/birdnet.conf &>/dev/null;then
   sudo -u $USER echo "RTSP_STREAM=" >> /etc/birdnet/birdnet.conf
 fi
