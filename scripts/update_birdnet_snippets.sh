@@ -376,6 +376,7 @@ if [ ! -f /etc/systemd/system/backup_detections.service ]; then
   sudo sed "s/\${S3_BACKUP_WATCHDOG_INTERVAL}/$S3_BACKUP_WATCHDOG_INTERVAL/g" $HOME/BirdNET-Pi/templates/backup_watchdog.timer > /etc/systemd/system/backup_watchdog.timer
 
   # Install sudoers helper
+  sudo rm -f /usr/local/bin/update_backup_timer.sh
   sudo cp $HOME/BirdNET-Pi/scripts/update_backup_timer.sh /usr/local/bin/update_backup_timer.sh
   sudo chmod +x /usr/local/bin/update_backup_timer.sh
 
