@@ -98,8 +98,13 @@ if(isset($_GET['submit'])) {
 
     //Setting exists already, see if the value changed
     if (strcmp($activate_freqshift_in_livestream, $config['ACTIVATE_FREQSHIFT_IN_LIVESTREAM']) !== 0) {
-      $contents = preg_replace("/ACTIVATE_FREQSHIFT_IN_LIVESTREAM=.*/", "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"$activate_freqshift_in_livestream\"", $contents);
-      $contents2 = preg_replace("/ACTIVATE_FREQSHIFT_IN_LIVESTREAM=.*/", "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"$activate_freqshift_in_livestream\"", $contents2);
+      if (strpos($contents, "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=") !== false) {
+        $contents = preg_replace("/ACTIVATE_FREQSHIFT_IN_LIVESTREAM=.*/", "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"$activate_freqshift_in_livestream\"", $contents);
+        $contents2 = preg_replace("/ACTIVATE_FREQSHIFT_IN_LIVESTREAM=.*/", "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"$activate_freqshift_in_livestream\"", $contents2);
+      } else {
+        $contents .= "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"$activate_freqshift_in_livestream\"\n";
+        $contents2 .= "ACTIVATE_FREQSHIFT_IN_LIVESTREAM=\"$activate_freqshift_in_livestream\"\n";
+      }
       save_to_cfg($contents, $contents2);
       exec("sudo systemctl restart livestream.service");
     }
