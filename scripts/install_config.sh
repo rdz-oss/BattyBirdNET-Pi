@@ -175,6 +175,9 @@ FREQSHIFT_RECONNECT_DELAY=4000
 ## FREQSHIFT_PITCH
 FREQSHIFT_PITCH=-1500
 
+## ACTIVATE_FREQSHIFT_IN_LIVESTREAM enables frequency shifting in the livestream
+ACTIVATE_FREQSHIFT_IN_LIVESTREAM=false
+
 ## CHANNELS holds the variable that corresponds to the number of channels the
 ## sound card supports.
 
