@@ -31,7 +31,14 @@ install_birdnet() {
   python3 -m venv birdnet
   source ./birdnet/bin/activate
   pip3 install wheel
-  pip3 install -U -r ./requirements.txt
+  # Install the appropriate tflite_runtime wheel if available
+get_tf_whl
+# Use the custom requirements if it was generated, otherwise fall back to the default
+REQ_FILE="./requirements.txt"
+if [ -f "requirements_custom.txt" ]; then
+  REQ_FILE="requirements_custom.txt"
+fi
+pip3 install -U -r $REQ_FILE
 }
 
 [ -d ${RECS_DIR} ] || mkdir -p ${RECS_DIR} &> /dev/null
