@@ -337,6 +337,16 @@ sudo systemctl daemon-reload
 restart_services.sh
 sudo systemctl restart batnet_timer_server.service
 
+# Add BIRD_SAMPLING_RATE and BAT_SAMPLING_RATE for mode switching
+if ! grep BIRD_SAMPLING_RATE /etc/birdnet/birdnet.conf &>/dev/null;then
+  sudo -u $USER echo "BIRD_SAMPLING_RATE=48000" >> /etc/birdnet/birdnet.conf
+fi
+
+if ! grep BAT_SAMPLING_RATE /etc/birdnet/birdnet.conf &>/dev/null;then
+  current_rate=$(grep -oP "^SAMPLING_RATE\s*=\s*\K.*" /etc/birdnet/birdnet.conf || echo "256000")
+  sudo -u $USER echo "BAT_SAMPLING_RATE=$current_rate" >> /etc/birdnet/birdnet.conf
+fi
+
 # ===== S3 Backup Migration =====
 
 # Add missing S3 backup config variables

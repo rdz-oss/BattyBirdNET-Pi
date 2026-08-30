@@ -489,6 +489,8 @@ if(isset($_GET['submit'])) {
       if(strcmp($bat_sampling_frequency,$config['SAMPLING_RATE']) !== 0) {
         $contents = preg_replace("/SAMPLING_RATE=.*/", "SAMPLING_RATE=$bat_sampling_frequency", $contents);
         $contents2 = preg_replace("/SAMPLING_RATE=.*/", "SAMPLING_RATE=$bat_sampling_frequency", $contents2);
+        $contents = preg_replace("/BAT_SAMPLING_RATE=.*/", "BAT_SAMPLING_RATE=$bat_sampling_frequency", $contents);
+        $contents2 = preg_replace("/BAT_SAMPLING_RATE=.*/", "BAT_SAMPLING_RATE=$bat_sampling_frequency", $contents2);
       # if 384 if 256
         $contents = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=0.75", $contents);
         $contents2 = preg_replace("/EXTRACTION_LENGTH=.*/", "EXTRACTION_LENGTH=0.75", $contents2);
@@ -519,6 +521,20 @@ if(isset($_GET['submit'])) {
         save_to_cfg($contents, $contents2);
 	    exec('restart_services.sh');
 	  }
+    }
+
+    if(isset($_GET["bird_sampling_rate"])) {
+      $bird_sampling_rate = $_GET["bird_sampling_rate"];
+      if(strcmp($bird_sampling_rate,$config['BIRD_SAMPLING_RATE']) !== 0) {
+        if (strpos($contents, "BIRD_SAMPLING_RATE=") !== false) {
+          $contents = preg_replace("/BIRD_SAMPLING_RATE=.*/", "BIRD_SAMPLING_RATE=$bird_sampling_rate", $contents);
+          $contents2 = preg_replace("/BIRD_SAMPLING_RATE=.*/", "BIRD_SAMPLING_RATE=$bird_sampling_rate", $contents2);
+        } else {
+          $contents .= "BIRD_SAMPLING_RATE=$bird_sampling_rate\n";
+          $contents2 .= "BIRD_SAMPLING_RATE=$bird_sampling_rate\n";
+        }
+        save_to_cfg($contents, $contents2);
+      }
     }
 
     if(isset($_GET["bat_highpass_freq"])) {
@@ -698,18 +714,32 @@ if (file_exists('./scripts/thisrun.txt')) {
       </select>
       <p> Set sampling frequency.</p>
 
-      <label for="bat_sampling_frequency">Sampling frequency</label>
-      <select name="bat_sampling_frequency">
-      <option selected="<?php print($newconfig['SAMPLING_RATE']);?>"><?php print($newconfig['SAMPLING_RATE']);?></option>
-      <?php
-        $formats = array("256000","288000","320000","384000");
-            foreach($formats as $format){
-            echo "<option value='$format'>$format</option>";
-        }
-      ?>
+<label for="bat_sampling_frequency">Bat Sampling Frequency</label>
+       <select name="bat_sampling_frequency">
+       <option selected="<?php print($newconfig['SAMPLING_RATE']);?>"><?php print($newconfig['SAMPLING_RATE']);?></option>
+       <?php
+         $formats = array("256000","288000","320000","384000");
+             foreach($formats as $format){
+             echo "<option value='$format'>$format</option>";
+         }
+       ?>
 </select>
 
-       <br><br>
+        <br><br>
+
+        <label for="bird_sampling_rate">Bird Sampling Rate (Hz)</label>
+        <select name="bird_sampling_rate">
+        <option selected="<?php print($newconfig['BIRD_SAMPLING_RATE'] ?: '48000');?>"><?php print($newconfig['BIRD_SAMPLING_RATE'] ?: '48000');?></option>
+        <?php
+          $bird_rates = array("48000","96000","192000");
+              foreach($bird_rates as $rate){
+              echo "<option value='$rate'>$rate</option>";
+          }
+        ?>
+</select>
+        <p>Sampling rate used when switching to bird mode. Lower rates save disk space.</p>
+
+        <br><br>
 
        <label for="bat_highpass_freq">Bat High-Pass Filter (Hz)</label>
        <input name="bat_highpass_freq" type="number" min="0" max="100000" step="1000" value="<?php print($newconfig['BAT_HIGHPASS_FREQ']);?>" /><br>
