@@ -174,9 +174,9 @@ ${BIRDWEATHER_ID_LOG}
     fi
 
     if [ -n "${SPECTROGRAM_FILTER}" ]; then
-      sox -V1 "${1}/${i}" -n ${SPECTROGRAM_FILTER} remix 1 rate "${SAMPLING_RATE}" spectrogram -x "${SAMPLING_RATE}" -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
+      sox -V1 "${1}/${i}" -n ${SPECTROGRAM_FILTER} remix 1 rate "${SAMPLING_RATE}" spectrogram -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
     else
-      sox -V1 "${1}/${i}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram -x "${SAMPLING_RATE}" -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
+      sox -V1 "${1}/${i}" -n remix 1 rate "${SAMPLING_RATE}" spectrogram -c "${analyzing_now//$HOME\//}" -o "${spectrogram_png}"
     fi
 
     if [[ $INPUT_NOISERED == true ]];then

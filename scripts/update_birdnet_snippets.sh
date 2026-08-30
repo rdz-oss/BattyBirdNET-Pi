@@ -354,8 +354,7 @@ if ! grep BIRD_SAMPLING_RATE /etc/birdnet/birdnet.conf &>/dev/null;then
 fi
 
 if ! grep BAT_SAMPLING_RATE /etc/birdnet/birdnet.conf &>/dev/null;then
-  current_rate=$(grep -oP "^SAMPLING_RATE\s*=\s*\K.*" /etc/birdnet/birdnet.conf || echo "256000")
-  sudo -u $USER echo "BAT_SAMPLING_RATE=$current_rate" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "BAT_SAMPLING_RATE=256000" >> /etc/birdnet/birdnet.conf
 fi
 
 # ===== S3 Backup Migration =====
