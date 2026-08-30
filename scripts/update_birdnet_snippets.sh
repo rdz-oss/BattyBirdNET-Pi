@@ -368,37 +368,34 @@ if ! command -v rclone &> /dev/null; then
   sudo apt update -qq && sudo apt install -y rclone
 fi
 
-# Install S3 Backup systemd services and timers if not present
-if [ ! -f /etc/systemd/system/backup_detections.service ]; then
-  echo "Installing S3 Backup services..."
-  
-  # Source config for placeholders
-  source /etc/birdnet/birdnet.conf
+# Regenerate S3 Backup systemd services and timers from templates
+echo "Updating S3 Backup services..."
 
-  # Copy services, replacing user placeholder
-  sed "s/%i/$USER/g" $HOME/BirdNET-Pi/templates/backup_detections.service | sudo tee /etc/systemd/system/backup_detections.service >/dev/null
-  sed "s/%i/$USER/g" $HOME/BirdNET-Pi/templates/backup_watchdog.service | sudo tee /etc/systemd/system/backup_watchdog.service >/dev/null
+# Source config for placeholders
+source /etc/birdnet/birdnet.conf
 
-  # Generate timers from templates with defaults if unset
-  sed "s/\${S3_BACKUP_TIME}/${S3_BACKUP_TIME:-02:00}/g; s/\${S3_BACKUP_WATCHDOG_INTERVAL}/${S3_BACKUP_WATCHDOG_INTERVAL:-30min}/g" "$HOME/BirdNET-Pi/templates/backup_detections_daily.timer" | sudo tee /etc/systemd/system/backup_detections_daily.timer >/dev/null
-  sed "s/\${S3_BACKUP_TIME}/${S3_BACKUP_TIME:-02:00}/g; s/\${S3_BACKUP_WATCHDOG_INTERVAL}/${S3_BACKUP_WATCHDOG_INTERVAL:-30min}/g" "$HOME/BirdNET-Pi/templates/backup_watchdog.timer" | sudo tee /etc/systemd/system/backup_watchdog.timer >/dev/null
+# Replace user placeholder and timer variables in all units
+sed "s/%i/$USER/g" $HOME/BirdNET-Pi/templates/backup_detections.service | sudo tee /etc/systemd/system/backup_detections.service >/dev/null
+sed "s/%i/$USER/g" $HOME/BirdNET-Pi/templates/backup_watchdog.service | sudo tee /etc/systemd/system/backup_watchdog.service >/dev/null
 
-  # Install sudoers helper
-  sudo cp $HOME/BirdNET-Pi/scripts/update_backup_timer.sh /usr/local/bin/update_backup_timer.sh
-  sudo chmod +x /usr/local/bin/update_backup_timer.sh
+sed "s/\${S3_BACKUP_TIME}/${S3_BACKUP_TIME:-02:00}/g; s/\${S3_BACKUP_WATCHDOG_INTERVAL}/${S3_BACKUP_WATCHDOG_INTERVAL:-30min}/g" "$HOME/BirdNET-Pi/templates/backup_detections_daily.timer" | sudo tee /etc/systemd/system/backup_detections_daily.timer >/dev/null
+sed "s/\${S3_BACKUP_TIME}/${S3_BACKUP_TIME:-02:00}/g; s/\${S3_BACKUP_WATCHDOG_INTERVAL}/${S3_BACKUP_WATCHDOG_INTERVAL:-30min}/g" "$HOME/BirdNET-Pi/templates/backup_watchdog.timer" | sudo tee /etc/systemd/system/backup_watchdog.timer >/dev/null
 
-  # Add sudoers rule
-  if [ ! -f /etc/sudoers.d/www-data-update-backup-timer ]; then
-    echo 'www-data ALL=(ALL) NOPASSWD: /usr/local/bin/update_backup_timer.sh' | sudo tee /etc/sudoers.d/www-data-update-backup-timer >/dev/null
-    sudo chmod 440 /etc/sudoers.d/www-data-update-backup-timer
-  fi
+# Install sudoers helper
+sudo cp $HOME/BirdNET-Pi/scripts/update_backup_timer.sh /usr/local/bin/update_backup_timer.sh
+sudo chmod +x /usr/local/bin/update_backup_timer.sh
 
-  sudo systemctl daemon-reload
-  sudo systemctl enable backup_detections_daily.timer 2>/dev/null || true
-  sudo systemctl enable backup_watchdog.timer 2>/dev/null || true
-  
-  echo "S3 Backup services installed."
+# Add sudoers rule if missing
+if [ ! -f /etc/sudoers.d/www-data-update-backup-timer ]; then
+  echo 'www-data ALL=(ALL) NOPASSWD: /usr/local/bin/update_backup_timer.sh' | sudo tee /etc/sudoers.d/www-data-update-backup-timer >/dev/null
+  sudo chmod 440 /etc/sudoers.d/www-data-update-backup-timer
 fi
+
+sudo systemctl daemon-reload
+sudo systemctl enable backup_detections_daily.timer 2>/dev/null || true
+sudo systemctl enable backup_watchdog.timer 2>/dev/null || true
+
+echo "S3 Backup services updated."
 
 # Remove broken Cloudsmith Caddy repo if present
 if [ -f /etc/apt/sources.list.d/caddy-stable.list ]; then
