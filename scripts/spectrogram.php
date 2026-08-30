@@ -136,6 +136,8 @@ var legacy = true
 <?php 
 if(isset($_GET['legacy']) && $_GET['legacy'] == "true") {
   echo "var legacy = true;";
+} elseif (isset($config['SAMPLING_RATE']) && $config['SAMPLING_RATE'] > 100000) {
+  echo "var legacy = true;";
 } else {
   echo "var legacy = false;";
 }
