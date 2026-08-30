@@ -426,11 +426,28 @@ if [ -f /etc/systemd/system/caddy.service ]; then
   fi
 fi
 
-# Fix php-fpm socket path in Caddyfile for PHP 8.4
+# Fix php-fpm socket path in Caddyfile — detect actual PHP version
 if [ -f /etc/caddy/Caddyfile ]; then
-  if grep -q 'php_fastcgi unix//run/php/php-fpm.sock' /etc/caddy/Caddyfile; then
-    sudo sed -i 's|php_fastcgi unix//run/php/php-fpm.sock|php_fastcgi unix//run/php/php8.4-fpm.sock|' /etc/caddy/Caddyfile
-    sudo systemctl restart caddy 2>/dev/null
+  # Find the installed php-fpm service name
+  fpm_svc=$(ls /lib/systemd/system/php*-fpm.service /etc/systemd/system/php*-fpm.service 2>/dev/null | head -1 | grep -oP 'php\K[0-9]+\.[0-9]+-fpm' || true)
+  if [ -n "$fpm_svc" ]; then
+    php_ver=$(echo "$fpm_svc" | grep -oP '[0-9]+\.[0-9]+')
+    target_sock="php_fastcgi unix//run/php/php${php_ver}-fpm.sock"
+
+    # Fix generic placeholder
+    if grep -q 'php_fastcgi unix//run/php/php-fpm.sock' /etc/caddy/Caddyfile; then
+      sudo sed -i "s|php_fastcgi unix//run/php/php-fpm.sock|${target_sock}|" /etc/caddy/Caddyfile
+    fi
+
+    # Fix hardcoded php8.4-fpm.sock (was the only replacement before)
+    if grep -q 'php_fastcgi unix//run/php/php8.4-fpm.sock' /etc/caddy/Caddyfile; then
+      sudo sed -i "s|php_fastcgi unix//run/php/php8.4-fpm.sock|${target_sock}|" /etc/caddy/Caddyfile
+    fi
+
+    # Only restart caddy if something actually changed
+    if grep -q "${target_sock}" /etc/caddy/Caddyfile; then
+      sudo systemctl restart caddy 2>/dev/null
+    fi
   fi
 fi
 
