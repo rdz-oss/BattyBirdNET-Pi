@@ -132,11 +132,14 @@ if ! grep APPRISE_MINIMUM_SECONDS_BETWEEN_NOTIFICATIONS_PER_SPECIES /etc/birdnet
   sudo -u $USER echo "APPRISE_MINIMUM_SECONDS_BETWEEN_NOTIFICATIONS_PER_SPECIES=0 " >> /etc/birdnet/birdnet.conf
 fi
 
-# If the config does not contain the DATABASE_LANG setting, we'll want to add it.
-# Defaults to not-selected, which config.php will know to render as a language option.
-# The user can then select a language in the web interface and update with that.
+# If the config does not contain the DATABASE_LANG setting, default to English.
 if ! grep DATABASE_LANG /etc/birdnet/birdnet.conf &>/dev/null;then
-  sudo -u $USER echo "DATABASE_LANG=not-selected" >> /etc/birdnet/birdnet.conf
+  sudo -u $USER echo "DATABASE_LANG=en" >> /etc/birdnet/birdnet.conf
+fi
+
+# Fix existing installs stuck with DATABASE_LANG=not-selected
+if grep -q "DATABASE_LANG=not-selected" /etc/birdnet/birdnet.conf; then
+  sudo sed -i 's/DATABASE_LANG=not-selected/DATABASE_LANG=en/' /etc/birdnet/birdnet.conf
 fi
 
 apprise_installation_status=$(~/BirdNET-Pi/birdnet/bin/python3 -c 'import pkgutil; print("installed" if pkgutil.find_loader("apprise") else "not installed")')
