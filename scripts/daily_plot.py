@@ -71,7 +71,7 @@ norm = plt.Normalize(confmax.values.min(), confmax.values.max())
 colors = plt.cm.Greens(norm(confmax))
 
 # Generate frequency plot
-plot = sns.countplot(y='Com_Name', data=df_plt_top10_today, palette=colors, order=freq_order, ax=axs[0])
+plot = sns.countplot(y='Com_Name', hue='Com_Name', data=df_plt_top10_today, palette=colors.tolist(), order=freq_order, ax=axs[0], legend=False)
 
 
 # Try plot grid lines between bars - problem at the moment plots grid lines on bars - want between bars
@@ -163,7 +163,7 @@ norm = plt.Normalize(confmax.values.min(), confmax.values.max())
 colors = plt.cm.Reds(norm(confmax))
 
 # Generate frequency plot
-plot = sns.countplot(y='Com_Name', data=df_plt_Bot10_today, palette=colors, order=freq_order, ax=axs[0])
+plot = sns.countplot(y='Com_Name', hue='Com_Name', data=df_plt_Bot10_today, palette=colors.tolist(), order=freq_order, ax=axs[0], legend=False)
 
 
 # Try plot grid lines between bars - problem at the moment plots grid lines on bars - want between bars
