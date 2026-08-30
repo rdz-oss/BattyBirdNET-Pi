@@ -91,11 +91,7 @@ else
     tests/test_mode_switching_sampling_rate.sh
     tests/test_translation_fix.sh
     tests/test_watchdog_logic.sh
-    tests/test_s3_backup_phase1.sh
-    tests/test_s3_backup_phase2.sh
-    tests/test_s3_backup_phase3.sh
-    tests/test_s3_backup_phase4.sh
-    tests/test_s3_backup_phase5.sh
+    tests/test_s3_backup.sh
   )
 
   pi_only_tests="test_backup_functional test_helper_integration test_watchdog_logic"
