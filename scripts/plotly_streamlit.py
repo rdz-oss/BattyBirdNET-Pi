@@ -362,7 +362,7 @@ if daily is False:
                 daily = pd.crosstab(df5, df5.index.date, dropna=True, margins=True)
                 fig.add_trace(go.Bar(x=daily.columns[:-1].tolist(), y=daily.loc[specie][:-1].tolist(), marker_color='seagreen'), row=3, col=1)
                 st.plotly_chart(fig, use_container_width=True)  # , config=config)
-                df_counts = int(hourly[hourly.index == specie]['All'])
+                df_counts = int(hourly.loc[specie, 'All'])
                 st.subheader('Total Detect:' + str('{:,}'.format(df_counts))
                              + '   Confidence Max:' +
                              str('{:.2f}%'.format(max(df2[df2['Com_Name'] == specie]['Confidence']) * 100))
@@ -414,7 +414,7 @@ if daily is False:
 
     # filt = df2[df2['Com_Name'] == specie]
 
-        df_counts = int(hourly[hourly.index == specie]['All'])
+        df_counts = int(hourly.loc[specie, 'All'])
         # fig = st.container()
         fig = make_subplots(rows=1, cols=1)
     #                     specs= [[{"type":"xy","rowspan":1},{"type":"heatmap","rowspan":1}]],
