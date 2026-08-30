@@ -133,77 +133,98 @@ if(isset($_GET['ajax_detections']) && $_GET['ajax_detections'] == "true" && isse
 
       if (!empty($config["FLICKR_API_KEY"])) {
 
-        if(!empty($config["FLICKR_FILTER_EMAIL"])) {
-          if(!isset($_SESSION["FLICKR_FILTER_EMAIL"])) {
-            unset($_SESSION['images']);
-            $_SESSION['FLICKR_FILTER_EMAIL'] = json_decode(file_get_contents("https://www.flickr.com/services/rest/?method=flickr.people.findByEmail&api_key=".$config["FLICKR_API_KEY"]."&find_email=".$config["FLICKR_FILTER_EMAIL"]."&format=json&nojsoncallback=1"), true)["user"]["nsid"];
-          }
-          $args = "&user_id=".$_SESSION['FLICKR_FILTER_EMAIL'];
-          $comnameprefix = "";
-        } else {
-          if(isset($_SESSION["FLICKR_FILTER_EMAIL"])) {
-            unset($_SESSION["FLICKR_FILTER_EMAIL"]);
-            unset($_SESSION['images']);
-          }
-        }
-   
-
-        // if we already searched flickr for this species before, use the previous image rather than doing an unneccesary api call
-        $key = array_search($comname, array_column($_SESSION['images'], 0));
-        if($key !== false) {
-          $image = $_SESSION['images'][$key];
-        } else {
-          // Get license information if we haven't already
-          if (empty($licenses_urls)) {
-            $licenses_url = "https://api.flickr.com/services/rest/?method=flickr.photos.licenses.getInfo&api_key=".$config["FLICKR_API_KEY"]."&format=json&nojsoncallback=1";
-            $licenses_response = file_get_contents($licenses_url);
-            $licenses_data = json_decode($licenses_response, true)["licenses"]["license"];
-            foreach ($licenses_data as $license) {
-              $license_id = $license["id"];
-              $license_name = $license["name"];
-              $license_url = $license["url"];
-              $licenses_urls[$license_id] = $license_url;
-            }
-          }
-
-          // only open the file once per script execution
-          if(!isset($lines)) {
-            $lines = file($home."/BirdNET-Pi/model/labels_flickr.txt");
-          }
-          // convert sci name to English name
-          foreach($lines as $line){ 
-            if(strpos($line, $mostrecent['Sci_Name']) !== false){
-              $engname = trim(explode("_", $line)[1]);
-              break;
-            }
-          }
-
-           // Read the blacklisted image ids from the file into an array
-          $blacklisted_ids = array_map('trim', file($home."/BirdNET-Pi/scripts/blacklisted_images.txt"));
-
-          // Make the API call
-          $flickrjson = json_decode(file_get_contents("https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=".$config["FLICKR_API_KEY"]."&text=".str_replace(" ", "%20", $engname).$comnameprefix."&sort=relevance".$args."&per_page=5&media=photos&format=json&nojsoncallback=1"), true)["photos"]["photo"];
-
-          // Find the first photo that is not blacklisted or is not the specific blacklisted id
-          $photo = null;
-          foreach ($flickrjson as $flickrphoto) {
-              if ($flickrphoto["id"] !== "4892923285" && !in_array($flickrphoto["id"], $blacklisted_ids)) {
-                  $photo = $flickrphoto;
-                  break;
+$image = null;
+          if(!empty($config["FLICKR_FILTER_EMAIL"])) {
+            if(!isset($_SESSION["FLICKR_FILTER_EMAIL"])) {
+              unset($_SESSION['images']);
+              $nsid_raw = @file_get_contents("https://www.flickr.com/services/rest/?method=flickr.people.findByEmail&api_key=".$config["FLICKR_API_KEY"]."&find_email=".$config["FLICKR_FILTER_EMAIL"]."&format=json&nojsoncallback=1");
+              $nsid_data = $nsid_raw ? json_decode($nsid_raw, true) : null;
+              if (is_array($nsid_data) && isset($nsid_data["user"]["nsid"])) {
+                $_SESSION['FLICKR_FILTER_EMAIL'] = $nsid_data["user"]["nsid"];
+              } else {
+                $image = false;
               }
+            }
+            if ($image !== false) {
+              $args = "&user_id=".$_SESSION['FLICKR_FILTER_EMAIL'];
+              $comnameprefix = "";
+            }
+          } else {
+            if(isset($_SESSION["FLICKR_FILTER_EMAIL"])) {
+              unset($_SESSION["FLICKR_FILTER_EMAIL"]);
+              unset($_SESSION['images']);
+            }
           }
 
-          $license_url = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=".$config["FLICKR_API_KEY"]."&photo_id=".$photo["id"]."&format=json&nojsoncallback=1";
-          $license_response = file_get_contents($license_url);
-          $license_info = json_decode($license_response, true)["photo"]["license"];
-          $license_url = $licenses_urls[$license_info];
+          if ($image !== false) {
+            $key = isset($_SESSION['images']) ? array_search($comname, array_column($_SESSION['images'], 0)) : false;
+            if($key !== false) {
+              $image = $_SESSION['images'][$key];
+            } else {
+              $image = null;
+              if (empty($licenses_urls)) {
+                $licenses_response = @file_get_contents("https://api.flickr.com/services/rest/?method=flickr.photos.licenses.getInfo&api_key=".$config["FLICKR_API_KEY"]."&format=json&nojsoncallback=1");
+                $licenses_data = $licenses_response ? json_decode($licenses_response, true) : null;
+                if (is_array($licenses_data) && isset($licenses_data["licenses"]["license"])) {
+                  foreach ($licenses_data["licenses"]["license"] as $license) {
+                    $licenses_urls[$license["id"]] = $license["url"];
+                  }
+                }
+              }
 
-          $modaltext = "https://flickr.com/photos/".$photo["owner"]."/".$photo["id"];
-          $authorlink = "https://flickr.com/people/".$photo["owner"];
-          $imageurl = 'https://farm' .$photo["farm"]. '.static.flickr.com/' .$photo["server"]. '/' .$photo["id"]. '_'  .$photo["secret"].  '.jpg';
-          array_push($_SESSION['images'], array($comname,$imageurl,$photo["title"], $modaltext, $authorlink, $license_url));
-          $image = $_SESSION['images'][count($_SESSION['images'])-1];
-        }
+              if(!isset($lines) && file_exists($home."/BirdNET-Pi/model/labels_flickr.txt")) {
+                $lines = file($home."/BirdNET-Pi/model/labels_flickr.txt");
+              }
+              if(isset($lines)) {
+                foreach($lines as $line){
+                  if(strpos($line, $mostrecent['Sci_Name']) !== false){
+                    $engname = trim(explode("_", $line)[1]);
+                    break;
+                  }
+                }
+              } else {
+                $image = false;
+              }
+
+              if($image !== false && file_exists($home."/BirdNET-Pi/scripts/blacklisted_images.txt")) {
+                $blacklisted_ids = array_map('trim', file($home."/BirdNET-Pi/scripts/blacklisted_images.txt"));
+              } else {
+                $blacklisted_ids = [];
+              }
+
+              if($image !== false) {
+                $flickr_raw = @file_get_contents("https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=".$config["FLICKR_API_KEY"]."&text=".str_replace(" ", "%20", $engname).$comnameprefix."&sort=relevance".$args."&per_page=5&media=photos&format=json&nojsoncallback=1");
+                $flickr_data = $flickr_raw ? json_decode($flickr_raw, true) : null;
+                $flickrjson = is_array($flickr_data) && isset($flickr_data["photos"]["photo"]) ? $flickr_data["photos"]["photo"] : [];
+
+                $photo = null;
+                if (is_array($flickrjson)) {
+                  foreach ($flickrjson as $flickrphoto) {
+                      if (isset($flickrphoto["id"]) && $flickrphoto["id"] !== "4892923285" && !in_array($flickrphoto["id"], $blacklisted_ids)) {
+                          $photo = $flickrphoto;
+                          break;
+                      }
+                  }
+                }
+
+                if($photo !== null) {
+                  $license_raw = @file_get_contents("https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=".$config["FLICKR_API_KEY"]."&photo_id=".$photo["id"]."&format=json&nojsoncallback=1");
+                  $license_data = $license_raw ? json_decode($license_raw, true) : null;
+                  if (is_array($license_data) && isset($license_data["photo"]["license"]) && isset($licenses_urls[$license_data["photo"]["license"]])) {
+                    $license_url = $licenses_urls[$license_data["photo"]["license"]];
+                  } else {
+                    $license_url = "";
+                  }
+
+                  $modaltext = "https://flickr.com/photos/".$photo["owner"]."/".$photo["id"];
+                  $authorlink = "https://flickr.com/people/".$photo["owner"];
+                  $imageurl = 'https://farm' .$photo["farm"]. '.static.flickr.com/' .$photo["server"]. '/' .$photo["id"]. '_'  .$photo["secret"].  '.jpg';
+                  array_push($_SESSION['images'], array($comname,$imageurl,$photo["title"], $modaltext, $authorlink, $license_url));
+                  $image = $_SESSION['images'][count($_SESSION['images'])-1];
+                }
+              }
+            }
+          }
       }
 
       ?>
@@ -230,7 +251,7 @@ if(isset($_GET['ajax_detections']) && $_GET['ajax_detections'] == "true" && isse
           <tr>
             <td class="relative"><a target="_blank" href="index.php?filename=<?php echo $mostrecent['File_Name']; ?>"><img class="copyimage" title="Open in new tab" width="25" height="25" src="images/copy.png"></a>
             <div class="centered_image_container" style="margin-bottom: 0px !important;">
-              <?php if(!empty($config["FLICKR_API_KEY"]) && strlen($image[2]) > 0) { ?>
+              <?php if(!empty($config["FLICKR_API_KEY"]) && is_array($image) && isset($image[2]) && strlen($image[2]) > 0) { ?>
                 <img onclick='setModalText(<?php echo $iterations; ?>,"<?php echo urlencode($image[2]); ?>", "<?php echo $image[3]; ?>", "<?php echo $image[4]; ?>", "<?php echo $image[1]; ?>", "<?php echo $image[5]; ?>")' src="<?php echo $image[1]; ?>" class="img1">
               <?php } ?>
               <form action="" method="GET">
