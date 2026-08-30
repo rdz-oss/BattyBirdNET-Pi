@@ -6,6 +6,14 @@ USER=$(awk -F: '/1000/ {print $1}' /etc/passwd)
 HOME=$(awk -F: '/1000/ {print $6}' /etc/passwd)
 my_dir=$HOME/BirdNET-Pi/scripts
 
+# Ensure caddy user has a home directory to prevent restart hangs
+# On some Pi OS installs, the caddy system user is created without a home dir,
+# causing mkdir /home/caddy to fail and blocking systemctl restart caddy.
+if [ ! -d "/home/caddy/.config/caddy" ]; then
+  sudo mkdir -p /home/caddy/.config/caddy
+  sudo chown -R caddy:caddy /home/caddy 2>/dev/null || true
+fi
+
 # Sets proper permissions and ownership
 sudo -E chown -R $USER:$USER $HOME/*
 chmod -R g+wr $HOME
