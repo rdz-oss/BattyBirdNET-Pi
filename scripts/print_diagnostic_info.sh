@@ -56,3 +56,11 @@ echo "========= Date and Time =========="
 date
 
 echo "==========================================="
+
+echo "========== Caddy Config Validation =========="
+sudo caddy validate --config /etc/caddy/Caddyfile 2>&1
+echo ""
+
+echo "========== PHP-FPM Status =========="
+sudo service php*-fpm status 2>&1 | cat
+echo ""
