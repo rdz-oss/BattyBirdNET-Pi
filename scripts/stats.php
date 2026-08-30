@@ -215,27 +215,30 @@ while($results=$result3->fetchArray(SQLITE3_ASSOC)){
     $config = parse_ini_file('./scripts/firstrun.ini');
   }
   if (! empty($config["FLICKR_API_KEY"])) {
-    // only open the file once per script execution
-    if(!isset($lines)) {
+    if(!isset($lines) && file_exists($home."/BirdNET-Pi/model/labels_flickr.txt")) {
       $lines = file($home."/BirdNET-Pi/model/labels_flickr.txt");
     }
-    // convert sci name to English name
-    foreach($lines as $line){ 
-      if(strpos($line, $results['Sci_Name']) !== false){
-        $engname = trim(explode("_", $line)[1]);
-        break;
+    if(isset($lines)) {
+      foreach($lines as $line){
+        if(strpos($line, $results['Sci_Name']) !== false){
+          $engname = trim(explode("_", $line)[1]);
+          break;
+        }
       }
-    }
 
-    $flickrjson = json_decode(file_get_contents("https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=".$config["FLICKR_API_KEY"]."&text=\"".str_replace(' ', '%20', $engname)."\"&license=2%2C3%2C4%2C5%2C6%2C9&sort=relevance&per_page=15&format=json&nojsoncallback=1"), true)["photos"]["photo"];
+      $flickr_raw = @file_get_contents("https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=".$config["FLICKR_API_KEY"]."&text=\"".str_replace(' ', '%20', $engname)."\"&license=2%2C3%2C4%2C5%2C6%2C9&sort=relevance&per_page=15&format=json&nojsoncallback=1");
+      $flickr_data = $flickr_raw ? json_decode($flickr_raw, true) : null;
+      $flickrjson = is_array($flickr_data) && isset($flickr_data["photos"]["photo"]) ? $flickr_data["photos"]["photo"] : [];
 
-    foreach ($flickrjson as $val) {
-
-      $iter++;
-      $modaltext = "https://flickr.com/photos/".$val["owner"]."/".$val["id"];
-      $authorlink = "https://flickr.com/people/".$val["owner"];
-      $imageurl = 'https://farm' .$val["farm"]. '.static.flickr.com/' .$val["server"]. '/' .$val["id"]. '_'  .$val["secret"].  '.jpg';
-      echo "<span style='cursor:pointer;' onclick='setModalText(".$iter.",\"".$val["title"]."\",\"".$modaltext."\", \"".$authorlink."\")'><img style='vertical-align:top' src=\"$imageurl\"></span>";
+      if (is_array($flickrjson)) {
+        foreach ($flickrjson as $val) {
+          $iter++;
+          $modaltext = "https://flickr.com/photos/".$val["owner"]."/".$val["id"];
+          $authorlink = "https://flickr.com/people/".$val["owner"];
+          $imageurl = 'https://farm' .$val["farm"]. '.static.flickr.com/' .$val["server"]. '/' .$val["id"]. '_'  .$val["secret"].  '.jpg';
+          echo "<span style='cursor:pointer;' onclick='setModalText(".$iter.",\"".$val["title"]."\",\"".$modaltext."\", \"".$authorlink."\")'><img style='vertical-align:top' src=\"$imageurl\"></span>";
+        }
+      }
     }
   }
 }
