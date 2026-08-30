@@ -59,7 +59,7 @@ f, axs = plt.subplots(1, 2, figsize=(10, 8), gridspec_kw=dict(width_ratios=[3, 6
 plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0, hspace=0)
 
 # generate y-axis order for all figures based on frequency
-freq_order = pd.value_counts(df_plt_top10_today['Com_Name']).iloc[:readings].index
+freq_order = df_plt_top10_today['Com_Name'].value_counts().iloc[:readings].index
 
 # make color for max confidence --> this groups by name and calculates max conf
 confmax = df_plt_top10_today.groupby('Com_Name')['Confidence'].max()
@@ -133,6 +133,7 @@ plt.suptitle("Top 10 Last Updated: " + str(now.strftime("%Y-%m-%d %H:%M")))
 # Save combined plot
 userDir = os.path.expanduser('~')
 savename = userDir + '/BirdSongs/Extracted/Charts/Combo-' + str(now.strftime("%Y-%m-%d")) + '.png'
+os.makedirs(os.path.dirname(savename), exist_ok=True)
 plt.savefig(savename)
 plt.show()
 plt.close()
@@ -151,7 +152,7 @@ f, axs = plt.subplots(1, 2, figsize=(10, 8), gridspec_kw=dict(width_ratios=[3, 6
 plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0, hspace=0)
 
 # generate y-axis order for all figures based on frequency
-freq_order = pd.value_counts(df_plt_Bot10_today['Com_Name']).iloc[-readings:].index
+freq_order = df_plt_Bot10_today['Com_Name'].value_counts().iloc[-readings:].index
 
 # make color for max confidence --> this groups by name and calculates max conf
 confmax = df_plt_Bot10_today.groupby('Com_Name')['Confidence'].max()
@@ -212,6 +213,7 @@ plt.suptitle("Bottom 10 Last Updated: " + str(now.strftime("%Y-%m-%d %H:%M")))
 
 # Save combined plot
 savename = userDir + '/BirdSongs/Extracted/Charts/Combo2-' + str(now.strftime("%Y-%m-%d")) + '.png'
+os.makedirs(os.path.dirname(savename), exist_ok=True)
 plt.savefig(savename)
 plt.show()
 plt.close()
