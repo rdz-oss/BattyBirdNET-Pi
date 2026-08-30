@@ -623,7 +623,7 @@ echo "<table>
     $iter++;
 
     if($num_rows < 100){
-      $imageelem = "<video onplay='setLiveStreamVolume(0)' onended='setLiveStreamVolume(1)' onpause='setLiveStreamVolume(1)' controls poster=\"$filename_png\" preload=\"none\" title=\"$filename\"><source src=\"$filename\"></video>";
+      $imageelem = "<video onplay='setLiveStreamVolume(0)' onended='setLiveStreamVolume(1)' onpause='setLiveStreamVolume(1)' controls poster=\"$filename_png\" preload=\"none\" title=\"$filename\"><source src=\"$filename\" type=\"$audioType\"></video>";
     } else {
       $imageelem = "<a href=\"$filename\"><img src=\"$filename_png\"></a>";
     }
@@ -700,7 +700,8 @@ if(file_exists($shifted_path.$filename_formatted)) {
         $comname = preg_replace('/ /', '_', $results['Com_Name']);
         $comname = preg_replace('/\'/', '', $comname);
         $date = $results['Date'];
-        $filename = "/By_Date/".$date."/".$comname."/".$results['File_Name'];
+$filename = "/By_Date/".$date."/".$comname."/".$results['File_Name'];
+        $audioType = pathinfo($filename, PATHINFO_EXTENSION) === 'mp3' ? 'audio/mpeg' : 'audio/wav';
         $filename_shifted = "/By_Date/shifted/".$date."/".$comname."/".$results['File_Name'];
         $filename_png = $filename . ".png";
         $sciname = preg_replace('/ /', '_', $results['Sci_Name']);
@@ -755,13 +756,13 @@ if(file_exists($shifted_path.$filename_formatted)) {
 <img style='cursor:pointer;right:45px' onclick='toggleBatShift(\"".$filename_formatted."\",\"".$batshiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$batshiftTitle."\" src=\"".$batshiftImageIcon."\">
 <img style='cursor:pointer' onclick='toggleShiftFreq(\"".$filename_formatted."\",\"".$shiftAction."\", this)' class=\"copyimage\" width=25 title=\"".$shiftTitle."\" src=\"".$shiftImageIcon."\">$date $time<br>$confidence<br>
 
-<video onplay='setLiveStreamVolume(0)' onended='setLiveStreamVolume(1)' onpause='setLiveStreamVolume(1)' controls poster=\"$filename_png\" preload=\"none\" title=\"$filename\"><source src=\"$filename\"></video></td>
+<video onplay='setLiveStreamVolume(0)' onended='setLiveStreamVolume(1)' onpause='setLiveStreamVolume(1)' controls poster=\"$filename_png\" preload=\"none\" title=\"$filename\"><source src=\"$filename\" type=\"$audioType\"></video></td>
             </tr>";
-        } else {
+} else {
           echo "<tr>
-      <td class=\"relative\">$date $time<br>$confidence
+       <td class=\"relative\">$date $time<br>$confidence
 <img style='cursor:pointer' src='images/delete.svg' onclick='deleteDetection(\"".$filename_formatted."\", true)' class=\"copyimage\" width=25 title='Delete Detection'><br>
-            <video onplay='setLiveStreamVolume(0)' onended='setLiveStreamVolume(1)' onpause='setLiveStreamVolume(1)' controls poster=\"$filename_png\" preload=\"none\" title=\"$filename\"><source src=\"$filename\"></video></td>
+            <video onplay='setLiveStreamVolume(0)' onended='setLiveStreamVolume(1)' onpause='setLiveStreamVolume(1)' controls poster=\"$filename_png\" preload=\"none\" title=\"$filename\"><source src=\"$filename\" type=\"$audioType\"></video></td>
             </tr>";
         }
 
