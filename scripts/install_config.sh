@@ -246,8 +246,15 @@ SILENCE_UPDATE_INDICATOR=0
 CUSTOM_IMAGE=
 CUSTOM_IMAGE_TITLE=""
 
+## Bird analysis settings
+## BIRD_SAMPLING_RATE sets the recording sampling rate when in Bird Mode.
+## When SWITCH_TO_BIRD is enabled, the system will switch to this rate during the day.
+BIRD_SAMPLING_RATE=48000
+
 ## Bat analysis settings in Hz and seconds for recording length as well as area setting for the classifier service
+## SAMPLING_RATE is the currently active rate. BAT_SAMPLING_RATE stores the bat rate for mode switching.
 SAMPLING_RATE=256000
+BAT_SAMPLING_RATE=256000
 BAT_CLASSIFIER="Bavaria"
 LAST_CLASSIFIER="Bavaria"
 BIRD_CLASSIFIER="BIRDS"

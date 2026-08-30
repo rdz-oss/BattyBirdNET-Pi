@@ -20,15 +20,21 @@ done
 sudo /usr/local/bin/stop_core_services.sh
 
 if [[ $classifier_t == "bird" ]];then
+  bird_sampling_rate="${BIRD_SAMPLING_RATE:-48000}"
+
   sudo sed -i "s/BAT_CLASSIFIER=.*/BAT_CLASSIFIER=$classifier/g" /etc/birdnet/birdnet.conf
   sudo sed -i "s/RECORDING_LENGTH=.*/RECORDING_LENGTH=$bird_rec_length/g" /etc/birdnet/birdnet.conf
   sudo sed -i "s/EXTRACTION_LENGTH=.*/EXTRACTION_LENGTH=$bird_extraction_length/g" /etc/birdnet/birdnet.conf
+  sudo sed -i "s/SAMPLING_RATE=.*/SAMPLING_RATE=$bird_sampling_rate/g" /etc/birdnet/birdnet.conf
 fi
 
 if [[ $classifier_t == "bat" ]];then
+  bat_sampling_rate="${BAT_SAMPLING_RATE:-256000}"
+
   sudo sed -i "s/BAT_CLASSIFIER=.*/BAT_CLASSIFIER=$classifier/g" /etc/birdnet/birdnet.conf
   sudo sed -i "s/RECORDING_LENGTH=.*/RECORDING_LENGTH=$bat_rec_length/g" /etc/birdnet/birdnet.conf
   sudo sed -i "s/EXTRACTION_LENGTH=.*/EXTRACTION_LENGTH=$bat_extraction_length/g" /etc/birdnet/birdnet.conf
+  sudo sed -i "s/SAMPLING_RATE=.*/SAMPLING_RATE=$bat_sampling_rate/g" /etc/birdnet/birdnet.conf
 fi
 
 sudo /usr/local/bin/restart_services.sh
