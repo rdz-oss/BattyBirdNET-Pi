@@ -13,14 +13,14 @@ source "$CONFIG_FILE"
 
 # Update Daily Timer
 if [ -f "$TEMPLATES_DIR/backup_detections_daily.timer" ]; then
-  sed "s/\${S3_BACKUP_TIME}/$S3_BACKUP_TIME/g" "$TEMPLATES_DIR/backup_detections_daily.timer" > "$SYSTEMD_DIR/backup_detections_daily.timer"
-  echo "Updated daily timer to $S3_BACKUP_TIME"
+  sed "s/\${S3_BACKUP_TIME}/${S3_BACKUP_TIME:-02:00}/g" "$TEMPLATES_DIR/backup_detections_daily.timer" > "$SYSTEMD_DIR/backup_detections_daily.timer"
+  echo "Updated daily timer to ${S3_BACKUP_TIME:-02:00}"
 fi
 
 # Update Watchdog Timer
 if [ -f "$TEMPLATES_DIR/backup_watchdog.timer" ]; then
-  sed "s/\${S3_BACKUP_WATCHDOG_INTERVAL}/$S3_BACKUP_WATCHDOG_INTERVAL/g" "$TEMPLATES_DIR/backup_watchdog.timer" > "$SYSTEMD_DIR/backup_watchdog.timer"
-  echo "Updated watchdog interval to $S3_BACKUP_WATCHDOG_INTERVAL"
+  sed "s/\${S3_BACKUP_WATCHDOG_INTERVAL}/${S3_BACKUP_WATCHDOG_INTERVAL:-30min}/g" "$TEMPLATES_DIR/backup_watchdog.timer" > "$SYSTEMD_DIR/backup_watchdog.timer"
+  echo "Updated watchdog interval to ${S3_BACKUP_WATCHDOG_INTERVAL:-30min}"
 fi
 
 # Reload and restart timers
