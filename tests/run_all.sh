@@ -84,6 +84,7 @@ else
 
   test_scripts=(
     tests/test_bat_privacy_highpass.sh
+    tests/test_disk_check.sh
     tests/test_backup_functional.sh
     tests/test_helper_integration.sh
     tests/test_install_integration.sh
