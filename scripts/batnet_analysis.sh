@@ -14,6 +14,7 @@ start_service() {
     BAT_CLASSIFIER="Bavaria"
     echo "No classifier for bats set. Using default Bavaria classifier!"
   fi
+  [ "${DATABASE_LANG}" = "not-selected" ] && DATABASE_LANG=en
   echo $PYTHON_VIRTUAL_ENV "$DIR/server.py --area ${BAT_CLASSIFIER} --locale ${DATABASE_LANG:-en}"
   $PYTHON_VIRTUAL_ENV $DIR/server.py --area $BAT_CLASSIFIER --locale "${DATABASE_LANG:-en}"
   echo "Started BattyBirdNET-Analyzer service."

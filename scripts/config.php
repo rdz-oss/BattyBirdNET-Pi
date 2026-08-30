@@ -161,6 +161,10 @@ if(isset($_GET["latitude"])){
     }
   }
 
+  // Guard: treat 'not-selected' as English to prevent passing invalid locale to analyzer
+  if ($language === 'not-selected') {
+    $language = 'en';
+  }
 
   $contents = file_get_contents("/etc/birdnet/birdnet.conf");
   $contents = preg_replace("/SITE_NAME=.*/", "SITE_NAME=\"$site_name\"", $contents);
