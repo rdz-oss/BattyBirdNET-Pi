@@ -428,8 +428,8 @@ fi
 
 # Fix php-fpm socket path in Caddyfile — detect actual PHP version
 if [ -f /etc/caddy/Caddyfile ]; then
-  # Find the installed php-fpm service name
-  fpm_svc=$(ls /lib/systemd/system/php*-fpm.service /etc/systemd/system/php*-fpm.service 2>/dev/null | head -1 | grep -oP 'php\K[0-9]+\.[0-9]+-fpm' || true)
+  # Find all installed php-fpm service names and pick the latest version
+  fpm_svc=$(ls /lib/systemd/system/php*-fpm.service /etc/systemd/system/php*-fpm.service 2>/dev/null | grep -oP 'php\K[0-9]+\.[0-9]+-fpm' | sort -V | tail -1 || true)
   if [ -n "$fpm_svc" ]; then
     php_ver=$(echo "$fpm_svc" | grep -oP '[0-9]+\.[0-9]+')
     target_sock="php_fastcgi unix//run/php/php${php_ver}-fpm.sock"
