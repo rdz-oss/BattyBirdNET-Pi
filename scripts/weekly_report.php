@@ -61,19 +61,26 @@ if(isset($_GET['ascii'])) {
 	$result7= $statement7->execute();
 	$priortotalspeciestally = $result7->fetchArray(SQLITE3_ASSOC)['COUNT(DISTINCT(Com_Name))'];
 
-	$percentagedifftotal = round( (($totalcount - $priortotalcount) / $priortotalcount) * 100  );
-
-	if($percentagedifftotal > 0) {
-		$percentagedifftotal = "<span style='color:green;font-size:small'>+".$percentagedifftotal."%</span>";
+	if ($priortotalcount > 0) {
+		$percentagedifftotal = round( (($totalcount - $priortotalcount) / $priortotalcount) * 100  );
+		if($percentagedifftotal > 0) {
+			$percentagedifftotal = "<span style='color:green;font-size:small'>+".$percentagedifftotal."%</span>";
+		} else {
+			$percentagedifftotal = "<span style='color:red;font-size:small'>-".abs($percentagedifftotal)."%</span>";
+		}
 	} else {
-		$percentagedifftotal = "<span style='color:red;font-size:small'>-".abs($percentagedifftotal)."%</span>";
+		$percentagedifftotal = "<span style='color:grey;font-size:small'>N/A</span>";
 	}
 
-	$percentagedifftotaldistinctspecies = round( (($totalspeciestally - $priortotalspeciestally) / $priortotalspeciestally) * 100  );
-	if($percentagedifftotaldistinctspecies > 0) {
-		$percentagedifftotaldistinctspecies = "<span style='color:green;font-size:small'>+".$percentagedifftotaldistinctspecies."%</span>";
+	if ($priortotalspeciestally > 0) {
+		$percentagedifftotaldistinctspecies = round( (($totalspeciestally - $priortotalspeciestally) / $priortotalspeciestally) * 100  );
+		if($percentagedifftotaldistinctspecies > 0) {
+			$percentagedifftotaldistinctspecies = "<span style='color:green;font-size:small'>+".$percentagedifftotaldistinctspecies."%</span>";
+		} else {
+			$percentagedifftotaldistinctspecies = "<span style='color:red;font-size:small'>-".abs($percentagedifftotaldistinctspecies)."%</span>";
+		}
 	} else {
-		$percentagedifftotaldistinctspecies = "<span style='color:red;font-size:small'>-".abs($percentagedifftotaldistinctspecies)."%</span>";
+		$percentagedifftotaldistinctspecies = "<span style='color:grey;font-size:small'>N/A</span>";
 	}
 
 	$detections = [];
