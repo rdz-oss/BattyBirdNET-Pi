@@ -5,6 +5,24 @@ ini_set('session.gc_maxlifetime', 7200);
 ini_set('user_agent', 'PHP_Flickr/1.0');
 session_set_cookie_params(7200);
 session_start();
+
+$sys_timezone = "";
+if (file_exists('/etc/timezone')) {
+    $tz_data = file_get_contents('/etc/timezone');
+    if ($tz_data !== false) {
+        $sys_timezone = trim($tz_data);
+    }
+} else {
+    $tz_data = shell_exec('timedatectl show');
+    $tz_data_array = parse_ini_string($tz_data);
+    if (is_array($tz_data_array) && array_key_exists('Timezone', $tz_data_array)) {
+        $sys_timezone = $tz_data_array['Timezone'];
+    }
+}
+if ($sys_timezone !== "") {
+    date_default_timezone_set($sys_timezone);
+}
+
 $myDate = date('Y-m-d');
 $chart = "Combo-$myDate.png";
 
