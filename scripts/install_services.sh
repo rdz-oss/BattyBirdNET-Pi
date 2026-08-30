@@ -546,13 +546,13 @@ install_s3_backup_services() {
   # Source config to get default values for timer placeholders
   source /etc/birdnet/birdnet.conf
 
-  # Create systemd service files from templates
-  cp $HOME/BirdNET-Pi/templates/backup_detections.service /etc/systemd/system/backup_detections.service
-  cp $HOME/BirdNET-Pi/templates/backup_watchdog.service /etc/systemd/system/backup_watchdog.service
+  # Create systemd service files from templates, replacing user placeholder
+  sed "s/%i/$USER/g" $HOME/BirdNET-Pi/templates/backup_detections.service > /etc/systemd/system/backup_detections.service
+  sed "s/%i/$USER/g" $HOME/BirdNET-Pi/templates/backup_watchdog.service > /etc/systemd/system/backup_watchdog.service
 
-  # Create timer files from templates, replacing placeholders with config values
-  sed "s/\${S3_BACKUP_TIME}/$S3_BACKUP_TIME/g" $HOME/BirdNET-Pi/templates/backup_detections_daily.timer > /etc/systemd/system/backup_detections_daily.timer
-  sed "s/\${S3_BACKUP_WATCHDOG_INTERVAL}/$S3_BACKUP_WATCHDOG_INTERVAL/g" $HOME/BirdNET-Pi/templates/backup_watchdog.timer > /etc/systemd/system/backup_watchdog.timer
+  # Create timer files from templates, replacing placeholders with config values (with defaults if unset)
+  sed "s/\${S3_BACKUP_TIME}/${S3_BACKUP_TIME:-02:00}/g" $HOME/BirdNET-Pi/templates/backup_detections_daily.timer > /etc/systemd/system/backup_detections_daily.timer
+  sed "s/\${S3_BACKUP_WATCHDOG_INTERVAL}/${S3_BACKUP_WATCHDOG_INTERVAL:-30min}/g" $HOME/BirdNET-Pi/templates/backup_watchdog.timer > /etc/systemd/system/backup_watchdog.timer
 
   # Reload systemd and enable timers
   systemctl daemon-reload
