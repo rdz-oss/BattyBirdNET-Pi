@@ -89,10 +89,10 @@ echo "Results: $PASS passed, $FAIL failed"
 |------|----------|-------|
 | Mode switching (SAMPLING_RATE) | Tested | 19 assertions |
 | Translations (not-selected guard) | Tested | 16 assertions |
-| S3 backup config & systemd | Tested | 28 assertions across 5 phases |
+| S3 backup (consolidated) | Tested | 33 assertions |
+| Disk check | Tested | 11 assertions |
 | Bat high-pass filter | Tested | 13 assertions (grep-based) |
 | Config parsing | Tested | 3 assertions |
-| Disk check / cleanup | **Not tested** | Gap |
-| Analyze.py (ML pipeline) | **Not tested** | Gap |
+| Analyze.py (ML pipeline) | **Not tested** | External repo (BattyBirdNET-Analyzer) |
 | Recording scripts | **Not tested** | Gap |
 | PHP logic (beyond lint) | **Not tested** | Gap |
